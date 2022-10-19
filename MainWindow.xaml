@@ -1,0 +1,32 @@
+﻿<Window x:Class="PIS8_2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PIS8_2"
+        mc:Ignorable="d"
+        Title="Реестр" Height="450" Width="1110" Loaded="Window_Loaded">
+    <Grid>
+        <DataGrid x:Name="dgReestr" SelectionChanged="dgReestr_SelectionChanged" Loaded="dgReestr_Loaded" AutoGenerateColumns="False" Margin="0,31,0,0">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Binding="{Binding Path=Check}" IsReadOnly="False"/>
+                <DataGridTextColumn Binding="{Binding Path=NumMK}" IsReadOnly="False" Header="Номер МК"/>
+                <DataGridTextColumn Binding="{Binding Path=DataMK}" IsReadOnly="False" Header="Дата МК"/>
+                <DataGridTextColumn Binding="{Binding Path=Munic}" IsReadOnly="False" Header="Мун. обр."/>
+                <DataGridTextColumn Binding="{Binding Path=OMSU}" IsReadOnly="False" Header="ОМСУ"/>
+                <DataGridTextColumn Binding="{Binding Path=ExecMK}" IsReadOnly="False" Header="Исполнитель МК"/>
+                <DataGridTextColumn Binding="{Binding Path=NumOrder}" IsReadOnly="False" Header="Номер заказ-наряда"/>
+                <DataGridTextColumn Binding="{Binding Path=Locality}" IsReadOnly="False" Header="Населённый пункт"/>
+                <DataGridTextColumn Binding="{Binding Path=DataOrder}" IsReadOnly="False" Header="Дата заказ-наряда"/>
+                <DataGridTextColumn Binding="{Binding Path=DataCapture}" IsReadOnly="False" Header="Дата отлова"/>
+                <DataGridTextColumn Binding="{Binding Path=PurposeCapture}" IsReadOnly="False" Header="Цель отлова"/>
+                <DataGridTextColumn Binding="{Binding Path=CaptureOrder}" IsReadOnly="False" Header="Отлов по заявке или план-графику"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Добавить" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Редактировать" HorizontalAlignment="Left" Margin="111,7,0,0" VerticalAlignment="Top" Width="93"/>
+        <Button Content="Экспорт Excel" HorizontalAlignment="Left" Margin="225,7,0,0" VerticalAlignment="Top" Width="93"/>
+        <Button Content="Экспорт Word" HorizontalAlignment="Left" Margin="336,7,0,0" VerticalAlignment="Top" Width="93"/>
+
+    </Grid>
+</Window>

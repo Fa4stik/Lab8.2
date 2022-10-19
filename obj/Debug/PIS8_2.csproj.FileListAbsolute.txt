@@ -1,0 +1,15 @@
+D:\C# [Porject]\PIS8_2\bin\Debug\PIS8_2.exe.config
+D:\C# [Porject]\PIS8_2\bin\Debug\PIS8_2.exe
+D:\C# [Porject]\PIS8_2\bin\Debug\PIS8_2.pdb
+D:\C# [Porject]\PIS8_2\obj\Debug\PIS8_2.csprojAssemblyReference.cache
+D:\C# [Porject]\PIS8_2\obj\Debug\MainWindow.g.cs
+D:\C# [Porject]\PIS8_2\obj\Debug\App.g.cs
+D:\C# [Porject]\PIS8_2\obj\Debug\PIS8_2_MarkupCompile.cache
+D:\C# [Porject]\PIS8_2\obj\Debug\PIS8_2_MarkupCompile.lref
+D:\C# [Porject]\PIS8_2\obj\Debug\MainWindow.baml
+D:\C# [Porject]\PIS8_2\obj\Debug\PIS8_2.g.resources
+D:\C# [Porject]\PIS8_2\obj\Debug\PIS8_2.Properties.Resources.resources
+D:\C# [Porject]\PIS8_2\obj\Debug\PIS8_2.csproj.GenerateResource.cache
+D:\C# [Porject]\PIS8_2\obj\Debug\PIS8_2.csproj.CoreCompileInputs.cache
+D:\C# [Porject]\PIS8_2\obj\Debug\PIS8_2.exe
+D:\C# [Porject]\PIS8_2\obj\Debug\PIS8_2.pdb
