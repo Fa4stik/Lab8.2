@@ -15,20 +15,13 @@ using System.Windows.Shapes;
 namespace PIS8_2
 {
     /// <summary>
-    /// Логика взаимодействия для Authorization.xaml
+    /// Логика взаимодействия для OrderTypeSelection.xaml
     /// </summary>
-    public partial class Authorization : Window
+    public partial class OrderTypeSelection : Window
     {
-        public Authorization()
+        public OrderTypeSelection()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var reest = new MainWindow();
-            reest.Show();
-            
         }
     }
 }

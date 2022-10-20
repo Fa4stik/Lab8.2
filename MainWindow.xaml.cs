@@ -62,5 +62,11 @@ namespace PIS8_2
             };
             dgReestr.ItemsSource = _reestrInfo;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var add = new OrderTypeSelection();
+            add.Show();
+        }
     }
 }
