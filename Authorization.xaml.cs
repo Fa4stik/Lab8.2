@@ -24,11 +24,9 @@ namespace PIS8_2
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Логин_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var reest = new MainWindow();
-            reest.Show();
-            
+
         }
     }
 }

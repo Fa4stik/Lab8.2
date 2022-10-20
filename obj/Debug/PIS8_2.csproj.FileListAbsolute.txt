@@ -31,5 +31,3 @@ C:\Users\Enemy\source\repos\Fa4stik\Lab8.2\obj\Debug\PIS8_2.csproj.GenerateResou
 C:\Users\Enemy\source\repos\Fa4stik\Lab8.2\obj\Debug\PIS8_2.csproj.CoreCompileInputs.cache
 C:\Users\Enemy\source\repos\Fa4stik\Lab8.2\obj\Debug\PIS8_2.exe
 C:\Users\Enemy\source\repos\Fa4stik\Lab8.2\obj\Debug\PIS8_2.pdb
-C:\Users\Enemy\source\repos\Fa4stik\Lab8.2\obj\Debug\OrderTypeSelection.g.cs
-C:\Users\Enemy\source\repos\Fa4stik\Lab8.2\obj\Debug\OrderTypeSelection.baml
