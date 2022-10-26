@@ -36,10 +36,10 @@ namespace PIS8_2
         public string CaptureOrder { get; set; } // заявка на отлов или план-график
 
     }
-    public partial class MainWindow : Window
+    public partial class Reestr : Window
     {
         private BindingList<ReestrInfo> _reestrInfo;
-        public MainWindow()
+        public Reestr()
         {
             InitializeComponent();
         }
@@ -61,6 +61,11 @@ namespace PIS8_2
                 new ReestrInfo{ Check = true, NumMK = 12, DataMK = DateTime.Now, Munic = "Организация", OMSU = "ОМСУ", ExecMK = "Исполнитель", NumOrder=2341, Locality="Тюмень", DataOrder=DateTime.Now, DataCapture=DateTime.Now, PurposeCapture = "Цель отлова", CaptureOrder="План-график"}
             };
             dgReestr.ItemsSource = _reestrInfo;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new SelectTypeOrder().Show();
         }
     }
 }
