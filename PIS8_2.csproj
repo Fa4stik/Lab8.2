@@ -55,17 +55,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+<<<<<<< HEAD
     <Compile Include="RequestType.xaml.cs">
       <DependentUpon>RequestType.xaml</DependentUpon>
     </Compile>
     <Compile Include="SelectTypeOrder.xaml.cs">
       <DependentUpon>SelectTypeOrder.xaml</DependentUpon>
     </Compile>
+=======
+>>>>>>> 8039b361744b74c73899dfc2f3ca8609916c99a4
     <Page Include="Authorization.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+<<<<<<< HEAD
     <Page Include="Reestr.xaml">
+=======
+    <Page Include="MainWindow.xaml">
+>>>>>>> 8039b361744b74c73899dfc2f3ca8609916c99a4
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -76,8 +83,13 @@
     <Compile Include="Authorization.xaml.cs">
       <DependentUpon>Authorization.xaml</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Reestr.xaml.cs">
       <DependentUpon>Reestr.xaml</DependentUpon>
+=======
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+>>>>>>> 8039b361744b74c73899dfc2f3ca8609916c99a4
       <SubType>Code</SubType>
     </Compile>
     <Page Include="RequestType.xaml">

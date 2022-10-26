@@ -4,17 +4,26 @@
 winexe
 C#
 .cs
-D:\C# [Porject]\PIS8_2\obj\Debug\
+C:\Users\Enemy\source\repos\Fa4stik\Lab8.2\obj\Debug\
 PIS8_2
 none
 false
 DEBUG;TRACE
+<<<<<<< HEAD
 D:\C# [Porject]\PIS8_2\App.xaml
 4-1341661144
 
 81515313967
 13-1505183044
 Authorization.xaml;Reestr.xaml;RequestType.xaml;SelectTypeOrder.xaml;
+=======
+C:\Users\Enemy\source\repos\Fa4stik\Lab8.2\App.xaml
+22136173978
+
+6-1361989276
+13-1310406943
+Authorization.xaml;MainWindow.xaml;
+>>>>>>> 8039b361744b74c73899dfc2f3ca8609916c99a4
 
 False
 

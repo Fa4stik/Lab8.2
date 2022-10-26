@@ -28,11 +28,14 @@ namespace PIS8_2
         {
 
         }
+<<<<<<< HEAD
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             new Reestr().Show();
             // Hide(); -- скрытие
         }
+=======
+>>>>>>> 8039b361744b74c73899dfc2f3ca8609916c99a4
     }
 }
