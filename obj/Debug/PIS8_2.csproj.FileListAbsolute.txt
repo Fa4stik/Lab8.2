@@ -41,3 +41,13 @@ C:\Users\Enemy\source\repos\Fa4stik\Lab8.2\obj\Debug\PIS8_2.csproj.CoreCompileIn
 C:\Users\Enemy\source\repos\Fa4stik\Lab8.2\obj\Debug\PIS8_2.exe
 C:\Users\Enemy\source\repos\Fa4stik\Lab8.2\obj\Debug\PIS8_2.pdb
 >>>>>>> 8039b361744b74c73899dfc2f3ca8609916c99a4
+C:\Users\Enemy\source\repos\Fa4stik\Lab8.2\obj\Debug\Reestr.g.cs
+C:\Users\Enemy\source\repos\Fa4stik\Lab8.2\obj\Debug\RequestType.g.cs
+C:\Users\Enemy\source\repos\Fa4stik\Lab8.2\obj\Debug\SelectTypeOrder.g.cs
+C:\Users\Enemy\source\repos\Fa4stik\Lab8.2\obj\Debug\App.baml
+C:\Users\Enemy\source\repos\Fa4stik\Lab8.2\obj\Debug\Reestr.baml
+C:\Users\Enemy\source\repos\Fa4stik\Lab8.2\obj\Debug\RequestType.baml
+C:\Users\Enemy\source\repos\Fa4stik\Lab8.2\obj\Debug\SelectTypeOrder.baml
+C:\Users\Enemy\source\repos\Fa4stik\Lab8.2\obj\Debug\ScheduleType.g.cs
+C:\Users\Enemy\source\repos\Fa4stik\Lab8.2\obj\Debug\ScheduleType.baml
+C:\Users\Enemy\source\repos\Fa4stik\Lab8.2\obj\Debug\PIS8_2_Content.g.cs

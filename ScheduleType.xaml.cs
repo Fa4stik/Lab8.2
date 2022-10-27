@@ -15,13 +15,24 @@ using System.Windows.Shapes;
 namespace PIS8_2
 {
     /// <summary>
-    /// Логика взаимодействия для OrderTypeSelection.xaml
+    /// Логика взаимодействия для ScheduleType.xaml
     /// </summary>
-    public partial class OrderTypeSelection : Window
+    public partial class ScheduleType : Window
     {
-        public OrderTypeSelection()
+        public ScheduleType()
         {
             InitializeComponent();
+        }
+
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

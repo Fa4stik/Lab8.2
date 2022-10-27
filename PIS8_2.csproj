@@ -58,6 +58,9 @@
     <Compile Include="RequestType.xaml.cs">
       <DependentUpon>RequestType.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ScheduleType.xaml.cs">
+      <DependentUpon>ScheduleType.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SelectTypeOrder.xaml.cs">
       <DependentUpon>SelectTypeOrder.xaml</DependentUpon>
     </Compile>
@@ -81,6 +84,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="RequestType.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScheduleType.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -115,5 +122,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\import.png" />
+    <Resource Include="icons\open-document.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
