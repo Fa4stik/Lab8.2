@@ -28,5 +28,10 @@ namespace PIS8_2
         {
             new RequestType().Show();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            new ScheduleType().Show();
+        }
     }
 }

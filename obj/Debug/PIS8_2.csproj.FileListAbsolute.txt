@@ -51,3 +51,5 @@ C:\Users\Enemy\source\repos\Fa4stik\Lab8.2\obj\Debug\SelectTypeOrder.baml
 C:\Users\Enemy\source\repos\Fa4stik\Lab8.2\obj\Debug\ScheduleType.g.cs
 C:\Users\Enemy\source\repos\Fa4stik\Lab8.2\obj\Debug\ScheduleType.baml
 C:\Users\Enemy\source\repos\Fa4stik\Lab8.2\obj\Debug\PIS8_2_Content.g.cs
+D:\C# [Porject]\PIS8_2\obj\Debug\ScheduleType.g.cs
+D:\C# [Porject]\PIS8_2\obj\Debug\ScheduleType.baml
