@@ -23,12 +23,14 @@
                 <DataGridTextColumn Binding="{Binding Path=CaptureOrder}" IsReadOnly="True" Header="Отлов по заявке или план-графику"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Добавить" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="13" Height="31" Width="90" Click="Button_Click"/>
-        <Button Content="Редактировать" HorizontalAlignment="Left" Margin="90,0,0,0" VerticalAlignment="Top" Width="114" FontSize="13" Height="31"/>
-        <Button Content="Экспорт Excel" HorizontalAlignment="Left" Margin="209,0,0,0" VerticalAlignment="Top" Width="109" FontSize="13" Height="31"/>
+        <Button Content="Добавить" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="13" Height="31" Width="90" Click="Button_Click" Margin="97,0,0,0"/>
+        <Button Content="Редактировать" HorizontalAlignment="Left" Margin="192,0,0,0" VerticalAlignment="Top" Width="114" FontSize="13" Height="31"/>
+        <Button Content="Экспорт Excel" HorizontalAlignment="Left" Margin="425,0,0,0" VerticalAlignment="Top" Width="109" FontSize="13" Height="31"/>
         <Rectangle Height="50" Width="1900" VerticalAlignment="Top" Fill="#007DFF" Panel.ZIndex="-1">
         </Rectangle>
-        <Button Content="Фильтр" HorizontalAlignment="Left" Margin="323,0,0,0" VerticalAlignment="Top" Width="109" FontSize="13" Height="31"/>
-        <Button x:Name="OpenButton" Content="Открыть" HorizontalAlignment="Left" Margin="432,0,0,0" VerticalAlignment="Top" Width="109" FontSize="13" Height="31" Click="OpenButton_Click"/>
+        <Button Content="Фильтр" HorizontalAlignment="Left" Margin="534,0,0,0" VerticalAlignment="Top" Width="109" FontSize="13" Height="31"/>
+        <Button x:Name="OpenButton" Content="Открыть" HorizontalAlignment="Left" VerticalAlignment="Top" Width="109" FontSize="13" Height="31" Click="OpenButton_Click"/>
+        <Button Content="Удалить" HorizontalAlignment="Left" Margin="311,0,0,0" VerticalAlignment="Top" Width="109" FontSize="13" Height="31" Click="DelButton_Click"/>
+        <Button Content="Сортировка" HorizontalAlignment="Left" Margin="648,0,0,0" VerticalAlignment="Top" Width="109" FontSize="13" Height="31" Click="OpenButton_Click"/>
     </Grid>
 </Window>

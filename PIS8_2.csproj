@@ -114,6 +114,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="bin\Debug\PIS8_2.exe.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -131,6 +132,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icons\cancel1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\PIS8_2.exe" />
+    <Content Include="bin\Debug\PIS8_2.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

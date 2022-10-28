@@ -59,7 +59,9 @@ namespace PIS8_2
             _reestrInfo = new BindingList<ReestrInfo>()
             {
                 new ReestrInfo{ Check = true, NumMK = 12, DataMK = DateTime.Now, Munic = "Организация", OMSU = "ОМСУ", ExecMK = "Исполнитель", NumOrder=2341, Locality="Тюмень", DataOrder=DateTime.Now, DataCapture=DateTime.Now, PurposeCapture = "Цель отлова", CaptureOrder="План-график"},
-                new ReestrInfo{ Check = true, NumMK = 1, DataMK = DateTime.Now, Munic = "Организация2", OMSU = "ОМСУ2", ExecMK = "Исполнитель2", NumOrder=3, Locality="Тюмень2", DataOrder=DateTime.Now, DataCapture=DateTime.Now, PurposeCapture = "Цель отлова2", CaptureOrder="Заказ-наряд"}
+                new ReestrInfo{ Check = true, NumMK = 1, DataMK = DateTime.Now, Munic = "Организация2", OMSU = "ОМСУ2", ExecMK = "Исполнитель2", NumOrder=3, Locality="Тюмень2", DataOrder=DateTime.Now, DataCapture=DateTime.Now, PurposeCapture = "Цель отлова2", CaptureOrder="Заказ-наряд"},
+                new ReestrInfo{ Check = true, NumMK = 1, DataMK = DateTime.Now, Munic = "Организация3", OMSU = "ОМСУ3", ExecMK = "Исполнитель3", NumOrder=323, Locality="Тюмень3", DataOrder=DateTime.Now, DataCapture=DateTime.Now, PurposeCapture = "Цель отлова3", CaptureOrder="План-график"},
+                new ReestrInfo{ Check = true, NumMK = 1, DataMK = DateTime.Now, Munic = "Организация4", OMSU = "ОМСУ4", ExecMK = "Исполнитель4", NumOrder=551, Locality="Тюмень4", DataOrder=DateTime.Now, DataCapture=DateTime.Now, PurposeCapture = "Цель отлова4", CaptureOrder="Заказ-наряд"}
             };
             dgReestr.ItemsSource = _reestrInfo;
         }
@@ -76,6 +78,13 @@ namespace PIS8_2
                 new ScheduleType().Show();
             else
                 new RequestType().Show();
+        }
+
+        private void DelButton_Click(object sender, RoutedEventArgs e)
+        {
+            int index = dgReestr.SelectedIndex;
+            _reestrInfo.RemoveAt(index);
+            dgReestr.ItemsSource = _reestrInfo;
         }
     }
 }
