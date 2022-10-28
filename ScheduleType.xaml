@@ -95,6 +95,9 @@
                 <Button Canvas.Left="270" Canvas.Top="0" Width="30" Height="30" Style="{StaticResource btn1}">
                     <Image Height="23" Width="23" Source="icons\open-document.png"/>
                 </Button>
+                <Button Canvas.Left="300" Canvas.Top="0" Width="30" Height="30" Style="{StaticResource btn1}">
+                    <Image Height="23" Width="23" Source="icons\cancel.png"/>
+                </Button>
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="left" Margin="0,50">

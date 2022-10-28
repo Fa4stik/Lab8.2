@@ -126,6 +126,11 @@
     <Resource Include="icons\import.png" />
     <Resource Include="icons\open-document.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="icons\cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\cancel1.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

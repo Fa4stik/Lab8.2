@@ -58,7 +58,8 @@ namespace PIS8_2
         {
             _reestrInfo = new BindingList<ReestrInfo>()
             {
-                new ReestrInfo{ Check = true, NumMK = 12, DataMK = DateTime.Now, Munic = "Организация", OMSU = "ОМСУ", ExecMK = "Исполнитель", NumOrder=2341, Locality="Тюмень", DataOrder=DateTime.Now, DataCapture=DateTime.Now, PurposeCapture = "Цель отлова", CaptureOrder="План-график"}
+                new ReestrInfo{ Check = true, NumMK = 12, DataMK = DateTime.Now, Munic = "Организация", OMSU = "ОМСУ", ExecMK = "Исполнитель", NumOrder=2341, Locality="Тюмень", DataOrder=DateTime.Now, DataCapture=DateTime.Now, PurposeCapture = "Цель отлова", CaptureOrder="План-график"},
+                new ReestrInfo{ Check = true, NumMK = 1, DataMK = DateTime.Now, Munic = "Организация2", OMSU = "ОМСУ2", ExecMK = "Исполнитель2", NumOrder=3, Locality="Тюмень2", DataOrder=DateTime.Now, DataCapture=DateTime.Now, PurposeCapture = "Цель отлова2", CaptureOrder="Заказ-наряд"}
             };
             dgReestr.ItemsSource = _reestrInfo;
         }
@@ -66,6 +67,15 @@ namespace PIS8_2
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             new SelectTypeOrder().Show();
+        }
+
+        private void OpenButton_Click(object sender, RoutedEventArgs e)
+        {
+            ReestrInfo rsInfo = dgReestr.SelectedItem as ReestrInfo;
+            if (rsInfo.CaptureOrder == "План-график")
+                new ScheduleType().Show();
+            else
+                new RequestType().Show();
         }
     }
 }

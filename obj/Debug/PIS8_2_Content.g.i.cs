@@ -8,7 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("obj/debug/pis8_2.exe")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("obj/debug/pis8_2.pdb")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icons/cancel1.png")]
 
 

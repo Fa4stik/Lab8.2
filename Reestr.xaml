@@ -10,17 +10,17 @@
         <DataGrid x:Name="dgReestr" SelectionChanged="dgReestr_SelectionChanged" Loaded="dgReestr_Loaded" AutoGenerateColumns="False" Margin="0,31,0,0">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Binding="{Binding Path=Check}" IsReadOnly="False"/>
-                <DataGridTextColumn Binding="{Binding Path=NumMK}" IsReadOnly="False" Header="Номер МК"/>
-                <DataGridTextColumn Binding="{Binding Path=DataMK}" IsReadOnly="False" Header="Дата МК"/>
-                <DataGridTextColumn Binding="{Binding Path=Munic}" IsReadOnly="False" Header="Мун. обр."/>
-                <DataGridTextColumn Binding="{Binding Path=OMSU}" IsReadOnly="False" Header="ОМСУ"/>
-                <DataGridTextColumn Binding="{Binding Path=ExecMK}" IsReadOnly="False" Header="Исполнитель МК"/>
-                <DataGridTextColumn Binding="{Binding Path=NumOrder}" IsReadOnly="False" Header="Номер заказ-наряда"/>
-                <DataGridTextColumn Binding="{Binding Path=Locality}" IsReadOnly="False" Header="Населённый пункт"/>
-                <DataGridTextColumn Binding="{Binding Path=DataOrder}" IsReadOnly="False" Header="Дата заказ-наряда"/>
-                <DataGridTextColumn Binding="{Binding Path=DataCapture}" IsReadOnly="False" Header="Дата отлова"/>
-                <DataGridTextColumn Binding="{Binding Path=PurposeCapture}" IsReadOnly="False" Header="Цель отлова"/>
-                <DataGridTextColumn Binding="{Binding Path=CaptureOrder}" IsReadOnly="False" Header="Отлов по заявке или план-графику"/>
+                <DataGridTextColumn Binding="{Binding Path=NumMK}" IsReadOnly="True" Header="Номер МК"/>
+                <DataGridTextColumn Binding="{Binding Path=DataMK}" IsReadOnly="True" Header="Дата МК"/>
+                <DataGridTextColumn Binding="{Binding Path=Munic}" IsReadOnly="True" Header="Мун. обр."/>
+                <DataGridTextColumn Binding="{Binding Path=OMSU}" IsReadOnly="True" Header="ОМСУ"/>
+                <DataGridTextColumn Binding="{Binding Path=ExecMK}" IsReadOnly="True" Header="Исполнитель МК"/>
+                <DataGridTextColumn Binding="{Binding Path=NumOrder}" IsReadOnly="True" Header="Номер заказ-наряда"/>
+                <DataGridTextColumn Binding="{Binding Path=Locality}" IsReadOnly="True" Header="Населённый пункт"/>
+                <DataGridTextColumn Binding="{Binding Path=DataOrder}" IsReadOnly="True" Header="Дата заказ-наряда"/>
+                <DataGridTextColumn Binding="{Binding Path=DataCapture}" IsReadOnly="True" Header="Дата отлова"/>
+                <DataGridTextColumn Binding="{Binding Path=PurposeCapture}" IsReadOnly="True" Header="Цель отлова"/>
+                <DataGridTextColumn Binding="{Binding Path=CaptureOrder}" IsReadOnly="True" Header="Отлов по заявке или план-графику"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Добавить" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="13" Height="31" Width="90" Click="Button_Click"/>
@@ -29,5 +29,6 @@
         <Rectangle Height="50" Width="1900" VerticalAlignment="Top" Fill="#007DFF" Panel.ZIndex="-1">
         </Rectangle>
         <Button Content="Фильтр" HorizontalAlignment="Left" Margin="323,0,0,0" VerticalAlignment="Top" Width="109" FontSize="13" Height="31"/>
+        <Button x:Name="OpenButton" Content="Открыть" HorizontalAlignment="Left" Margin="432,0,0,0" VerticalAlignment="Top" Width="109" FontSize="13" Height="31" Click="OpenButton_Click"/>
     </Grid>
 </Window>
