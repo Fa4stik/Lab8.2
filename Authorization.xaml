@@ -13,7 +13,7 @@
                 <StackPanel HorizontalAlignment="Center">
                     <TextBlock Text="Логин" />
                     <TextBox x:Name="Login" BorderBrush="DodgerBlue" Width="250" MaxLength="50"
-                         TextChanged="Логин_TextChanged" />
+                         TextChanged="Login_TextChanged" />
                     <TextBlock Text="Пароль" />
                     <PasswordBox x:Name="Password" Width="250" BorderBrush="DodgerBlue" MaxLength="50" />
 
