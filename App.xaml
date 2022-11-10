@@ -29,6 +29,7 @@
         <Style x:Key="btn1">
             <Setter Property="Control.Background" Value="#FF9A9898"/>
             <Setter Property="Control.Foreground" Value="White"/>
+            <Setter Property="ItemsControl.Cursor" Value="Hand"/>
             <Setter Property="Control.Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">

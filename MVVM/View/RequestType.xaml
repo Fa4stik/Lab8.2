@@ -5,10 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PIS8_2"
         mc:Ignorable="d"
-        Title="Карточка заказ-наряда" Height="1076" Width="1920" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Visible" ResizeMode="NoResize" WindowState="Maximized" WindowStartupLocation="CenterScreen">
+        Title="Карточка заказ-наряда" Height="1076" Width="1920" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" WindowState="Maximized" WindowStartupLocation="CenterScreen">
     <ScrollViewer Margin="0,0,0,13">
         <Grid ScrollViewer.CanContentScroll="True" Height="1055">
-            
             <Menu>
                 <MenuItem Header="Экспорт" Cursor="Hand"/>
                 <MenuItem Header="Редактировать"></MenuItem>
