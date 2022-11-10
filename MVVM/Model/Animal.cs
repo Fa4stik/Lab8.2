@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PIS8_2.Model
+namespace PIS8_2.MVVM.Model
 {
     public partial class Animal
     {
