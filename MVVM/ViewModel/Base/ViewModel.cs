@@ -24,6 +24,5 @@ namespace PIS8_2.MVVM.ViewModel.Base
             OnPropertyChanged(propertyName);
             return true;
         }
-        //123123123
     }
 }
