@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PIS8_2
+namespace PIS8_2.Model
 {
     public partial class Card
     {
