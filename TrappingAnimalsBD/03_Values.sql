@@ -1,9 +1,9 @@
 INSERT INTO Animal (animalType, kingColor, size, hair, ears, tail, description)
 VALUES 
-('Собака', 'Белая', 143, 'Кудрявые', 'Маленькие', 'Пушистый', NULL),
-('Кошка', 'Рыжая', 67, 'Прямые', 'Короткий', NULL, NULL),
-('Обезьяна', 'Корничевая', 121, 'Нет', NULL, NULL, NULL),
-('Орёл', 'Светло-корничевый', 102, 'Шерстянные', 'Маленькие', NULL, NULL);
+('Собака', 'Белая', 'Большой', 'Короткошёрстная', 'Длинные', 'Пушистый', NULL),
+('Кошка', 'Рыжая', 'Средний', 'Кудрявая', 'Короткие', NULL, NULL),
+('Щенок', 'Корничевая', 'Большой', 'Жесткошёрстная', NULL, NULL, NULL),
+('Котёнок', 'Светло-корничевый', 'Маленький', 'Длинношёрстная', 'Мохнатые', NULL, NULL);
 
 INSERT INTO Organisation (nameOrg, firstNameDir, surNameDir, patronymicDir, adress, phoneNumber)
 VALUES
