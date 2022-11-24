@@ -5,10 +5,15 @@ VALUES
 ('Обезьяна', 'Корничевая', 121, 'Нет', NULL, NULL, NULL),
 ('Орёл', 'Светло-корничевый', 102, 'Шерстянные', 'Маленькие', NULL, NULL);
 
-INSERT INTO Organisation (name)
+INSERT INTO Organisation (nameOrg, firstNameDir, surNameDir, patronymicDir, adress, phoneNumber)
 VALUES
-('ООО Отлов'),
-('МирЖивотным');
+('ООО Отлов', 'Смирнов', 'Иван', 'Андреевич', 'Ленина 38', '892373849582'),
+('МирЖивотным', 'Ратыков', 'Илья', 'Сергеевич', 'Перекопская 15а', '892373843582');
+
+INSERT INTO OMSU (nameOMSU, munFormation)
+VALUES
+('Калиннский административный район', 'Калинский муниципальный район'),
+('Центральный административный район', 'Центральный мениципальный район');
 
 -- Запустить в новом запросе
 INSERT INTO TUser (role, id_org, login, passwordHash)
