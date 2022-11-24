@@ -11,10 +11,7 @@ namespace PIS8_2.MVVM.Model
         }
 
         public int Id { get; set; }
-        public string Animaltype { get; set; }
         public string Kingcolor { get; set; }
-        public int? Size { get; set; }
-        public string Hair { get; set; }
         public string Ears { get; set; }
         public string Tail { get; set; }
         public string Description { get; set; }

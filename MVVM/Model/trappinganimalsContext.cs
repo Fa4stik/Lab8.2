@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using PIS8_2.MVVM.Model;
 
-namespace PIS8_2
+namespace PIS8_2.MVVM.Model
 {
     public partial class trappinganimalsContext : DbContext
     {
@@ -20,6 +19,7 @@ namespace PIS8_2
         public virtual DbSet<Animal> Animals { get; set; }
         public virtual DbSet<Card> Cards { get; set; }
         public virtual DbSet<Log> Logs { get; set; }
+        public virtual DbSet<Omsu> Omsus { get; set; }
         public virtual DbSet<Organisation> Organisations { get; set; }
         public virtual DbSet<Tuser> Tusers { get; set; }
 
@@ -34,7 +34,11 @@ namespace PIS8_2
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasPostgresEnum("operation", new[] { "Удаление карточки из реестра", "Добавление карточки в реестр", "Изменение карточки", "Удаление файла" })
+            modelBuilder.HasPostgresEnum("animal_hair", new[] { "Короткошёрстная", "Длинношёрстная", "Жесткошёрстная", "Кудрявая" })
+                .HasPostgresEnum("animal_size", new[] { "Большой", "Средний", "Маленький" })
+                .HasPostgresEnum("animal_type", new[] { "Кошка", "Котёнок", "Собака", "Щенок" })
+                .HasPostgresEnum("applicant_type", new[] { "Физическое лицо", "Юридическое лицо" })
+                .HasPostgresEnum("operation", new[] { "Удаление карточки из реестра", "Добавление карточки в реестр", "Изменение карточки", "Удаление файла" })
                 .HasPostgresEnum("order_type", new[] { "План-график", "Заказ-наряд" })
                 .HasPostgresEnum("role_type", new[] { "Оператор по отлову", "Куратор ВетСлужбы", "Куратор ОМСУ", "Куратор по отлову", "Оператор ВетСлужбы", "Оператор ОМСУ", "Подписант ВетСлужбы", "Подписант ОМСУ", "Подписант по отлову" });
 
@@ -44,10 +48,6 @@ namespace PIS8_2
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Animaltype)
-                    .HasMaxLength(50)
-                    .HasColumnName("animaltype");
-
                 entity.Property(e => e.Description)
                     .HasMaxLength(50)
                     .HasColumnName("description");
@@ -56,15 +56,9 @@ namespace PIS8_2
                     .HasMaxLength(50)
                     .HasColumnName("ears");
 
-                entity.Property(e => e.Hair)
-                    .HasMaxLength(50)
-                    .HasColumnName("hair");
-
                 entity.Property(e => e.Kingcolor)
                     .HasMaxLength(50)
                     .HasColumnName("kingcolor");
-
-                entity.Property(e => e.Size).HasColumnName("size");
 
                 entity.Property(e => e.Tail)
                     .HasMaxLength(50)
@@ -77,16 +71,33 @@ namespace PIS8_2
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
+                entity.Property(e => e.Adressappl)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnName("adressappl");
+
+                entity.Property(e => e.Adresstrapping)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("adresstrapping");
+
                 entity.Property(e => e.Animalid).HasColumnName("animalid");
 
                 entity.Property(e => e.Datemk).HasColumnName("datemk");
 
+                entity.Property(e => e.Datetrapping).HasColumnName("datetrapping");
+
                 entity.Property(e => e.Dateworkorder).HasColumnName("dateworkorder");
 
-                entity.Property(e => e.Executormk)
+                entity.Property(e => e.Firstnameappl)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .HasColumnName("executormk");
+                    .HasColumnName("firstnameappl");
+
+                entity.Property(e => e.Firstnameexecuter)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("firstnameexecuter");
 
                 entity.Property(e => e.IdOrg).HasColumnName("id_org");
 
@@ -99,10 +110,36 @@ namespace PIS8_2
 
                 entity.Property(e => e.Numworkorder).HasColumnName("numworkorder");
 
-                entity.Property(e => e.Omsu)
+                entity.Property(e => e.Omsu).HasColumnName("omsu");
+
+                entity.Property(e => e.Patronymicappl)
+                    .HasMaxLength(50)
+                    .HasColumnName("patronymicappl");
+
+                entity.Property(e => e.Patronymicexecuter)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .HasColumnName("omsu");
+                    .HasColumnName("patronymicexecuter");
+
+                entity.Property(e => e.Phonenumberappl)
+                    .IsRequired()
+                    .HasMaxLength(11)
+                    .HasColumnName("phonenumberappl");
+
+                entity.Property(e => e.Phonenumberexecuter)
+                    .IsRequired()
+                    .HasMaxLength(11)
+                    .HasColumnName("phonenumberexecuter");
+
+                entity.Property(e => e.Surnameappl)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("surnameappl");
+
+                entity.Property(e => e.Surnameexecuter)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("surnameexecuter");
 
                 entity.Property(e => e.Targetorder)
                     .IsRequired()
@@ -119,6 +156,12 @@ namespace PIS8_2
                     .HasForeignKey(d => d.IdOrg)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("card_id_org_fkey");
+
+                entity.HasOne(d => d.OmsuNavigation)
+                    .WithMany(p => p.Cards)
+                    .HasForeignKey(d => d.Omsu)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("card_omsu_fkey");
             });
 
             modelBuilder.Entity<Log>(entity =>
@@ -146,16 +189,57 @@ namespace PIS8_2
                     .HasConstraintName("log_userid_fkey");
             });
 
+            modelBuilder.Entity<Omsu>(entity =>
+            {
+                entity.ToTable("omsu");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Munformation)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("munformation");
+
+                entity.Property(e => e.Nameomsu)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("nameomsu");
+            });
+
             modelBuilder.Entity<Organisation>(entity =>
             {
                 entity.ToTable("organisation");
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Name)
+                entity.Property(e => e.Adress)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnName("adress");
+
+                entity.Property(e => e.Firstnamedir)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .HasColumnName("name");
+                    .HasColumnName("firstnamedir");
+
+                entity.Property(e => e.Nameorg)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("nameorg");
+
+                entity.Property(e => e.Patronymicdir)
+                    .HasMaxLength(50)
+                    .HasColumnName("patronymicdir");
+
+                entity.Property(e => e.Phonenumber)
+                    .IsRequired()
+                    .HasMaxLength(11)
+                    .HasColumnName("phonenumber");
+
+                entity.Property(e => e.Surnamedir)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("surnamedir");
             });
 
             modelBuilder.Entity<Tuser>(entity =>
@@ -166,6 +250,8 @@ namespace PIS8_2
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.IdOmsu).HasColumnName("id_omsu");
 
                 entity.Property(e => e.IdOrg).HasColumnName("id_org");
 
@@ -178,10 +264,14 @@ namespace PIS8_2
                     .HasMaxLength(66)
                     .HasColumnName("passwordhash");
 
+                entity.HasOne(d => d.IdOmsuNavigation)
+                    .WithMany(p => p.Tusers)
+                    .HasForeignKey(d => d.IdOmsu)
+                    .HasConstraintName("tuser_id_omsu_fkey");
+
                 entity.HasOne(d => d.IdOrgNavigation)
                     .WithMany(p => p.Tusers)
                     .HasForeignKey(d => d.IdOrg)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("tuser_id_org_fkey");
             });
 

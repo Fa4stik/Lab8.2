@@ -65,26 +65,26 @@ CREATE TABLE TUser
 CREATE TABLE Card
 (
 	id SERIAL PRIMARY KEY,
-	numMK INT NOT NULL, -- номер МК
-	dateMK date NOT NULL, -- дата МК
-	OMSU INT NOT NULL, -- орган местного самоуправления
-	adressTrapping VARCHAR(50) NOT NULL, -- адрес отлова
-	numWorkOrder INT NOT NULL, -- номер заказ-наряда
-	locality VARCHAR(50) NOT NULL, -- Населённый пункт
-	dateWorkOrder date NOT NULL, -- дата заказ-наряда
-	dateTrapping date NOT NULL, -- дата отлова
-	targetOrder VARCHAR(50) NOT NULL, -- цель отлова
-	typeOrder ORDER_TYPE NOT NULL, -- тип заказ-наряда
-	firstNameExecuter VARCHAR(50) NOT NULL, -- Имя исполнителя
-	surNameExecuter VARCHAR(50) NOT NULL, -- фамилия исполнителя
-	patronymicExecuter VARCHAR(50) NOT NULL, -- отчество исполнителя
-	phoneNumberExecuter VARCHAR(11) NOT NULL, -- номер исполнителя
-	typeApplicant APPLICANT_TYPE NOT NULL, -- тип заявителя
-	firstNameAppl VARCHAR(50) NOT NULL, -- имя заявителя
-	surNameAppl VARCHAR(50) NOT NULL, -- фамилия заявителя
-	patronymicAppl VARCHAR(50), -- отчество заявителя
-	adressAppl VARCHAR(100) NOT NULL, -- адрес заявителя
-	phoneNumberAppl VARCHAR(11) NOT NULL, -- номер заявителя
+	numMK INT NOT NULL, -- номер МК 
+	dateMK date NOT NULL, -- дата МК 
+	OMSU INT NOT NULL, -- орган местного самоуправления 
+	adressTrapping VARCHAR(50) NOT NULL, -- адрес отлова 
+	numWorkOrder INT NOT NULL, -- номер заказ-наряда 
+	locality VARCHAR(50) NOT NULL, -- Населённый пункт 
+	dateWorkOrder date NOT NULL, -- дата заказ-наряда 
+	dateTrapping date NOT NULL, -- дата отлова 
+	targetOrder VARCHAR(50) NOT NULL, -- цель отлова 
+	typeOrder ORDER_TYPE NOT NULL, -- тип заказ-наряда 
+	firstNameExecuter VARCHAR(50) NOT NULL, -- Имя исполнителя 
+	surNameExecuter VARCHAR(50) NOT NULL, -- фамилия исполнителя 
+	patronymicExecuter VARCHAR(50) NOT NULL, -- отчество исполнителя 
+	phoneNumberExecuter VARCHAR(11) NOT NULL, -- номер исполнителя 
+	typeApplicant APPLICANT_TYPE NOT NULL, -- тип заявителя 
+	firstNameAppl VARCHAR(50) NOT NULL, -- имя заявителя 
+	surNameAppl VARCHAR(50) NOT NULL, -- фамилия заявителя 
+	patronymicAppl VARCHAR(50), -- отчество заявителя 
+	adressAppl VARCHAR(100) NOT NULL, -- адрес заявителя 
+	phoneNumberAppl VARCHAR(11) NOT NULL, -- номер заявителя 
 	id_org INT NOT NULL, 
 	accessRoles ROLE_TYPE[],
 	animalId INT,
