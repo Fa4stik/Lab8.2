@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore;
+using PIS8_2.MVVM.Model;
 
 namespace PIS8_2
 {

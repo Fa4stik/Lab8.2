@@ -9,18 +9,30 @@
     <Grid>
         <DataGrid x:Name="dgReestr" SelectionChanged="dgReestr_SelectionChanged" Loaded="dgReestr_Loaded" AutoGenerateColumns="False" Margin="0,31,0,0">
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn Binding="{Binding Path=Check}" IsReadOnly="False"/>
-                <DataGridTextColumn Binding="{Binding Path=NumMK}" IsReadOnly="True" Header="Номер МК"/>
-                <DataGridTextColumn Binding="{Binding Path=DataMK}" IsReadOnly="True" Header="Дата МК"/>
-                <DataGridTextColumn Binding="{Binding Path=Munic}" IsReadOnly="True" Header="Мун. обр."/>
-                <DataGridTextColumn Binding="{Binding Path=OMSU}" IsReadOnly="True" Header="ОМСУ"/>
-                <DataGridTextColumn Binding="{Binding Path=ExecMK}" IsReadOnly="True" Header="Исполнитель МК"/>
-                <DataGridTextColumn Binding="{Binding Path=NumOrder}" IsReadOnly="True" Header="Номер заказ-наряда"/>
+                <!--<DataGridCheckBoxColumn Binding="{Binding Path=Check}" IsReadOnly="False"/>-->
+                <DataGridTextColumn Binding="{Binding Path=Nummk}" IsReadOnly="True" Header="Номер МК"/>
+                <DataGridTextColumn Binding="{Binding Path=Datemk}" IsReadOnly="True" Header="Дата МК"/>
+                <DataGridTextColumn Binding="{Binding Path=Omsu}" IsReadOnly="True" Header="ОМСУ"/>
+                <DataGridTextColumn Binding="{Binding Path=Adresstrapping}" IsReadOnly="True" Header="Адрес отлова"/>
+                <DataGridTextColumn Binding="{Binding Path=Numworkorder}" IsReadOnly="True" Header="Номер заказ-наряда"/>
                 <DataGridTextColumn Binding="{Binding Path=Locality}" IsReadOnly="True" Header="Населённый пункт"/>
-                <DataGridTextColumn Binding="{Binding Path=DataOrder}" IsReadOnly="True" Header="Дата заказ-наряда"/>
-                <DataGridTextColumn Binding="{Binding Path=DataCapture}" IsReadOnly="True" Header="Дата отлова"/>
-                <DataGridTextColumn Binding="{Binding Path=PurposeCapture}" IsReadOnly="True" Header="Цель отлова"/>
-                <DataGridTextColumn Binding="{Binding Path=CaptureOrder}" IsReadOnly="True" Header="Отлов по заявке или план-графику"/>
+                <DataGridTextColumn Binding="{Binding Path=Dateworkorder}" IsReadOnly="True" Header="Дата заказ-наряда"/>
+                <DataGridTextColumn Binding="{Binding Path=Datetrapping}" IsReadOnly="True" Header="Дата отлова"/>
+                <DataGridTextColumn Binding="{Binding Path=Targetorder}" IsReadOnly="True" Header="Цель отлова"/>
+                <DataGridTextColumn Binding="{Binding Path=typeOrder}" IsReadOnly="True" Header="Тип заказа" Width="100"/>
+                <DataGridTextColumn Binding="{Binding Path=Firstnameexecuter}" IsReadOnly="True" Header="Имя исполн." Width="80"/>
+                <DataGridTextColumn Binding="{Binding Path=Surnameexecuter}" IsReadOnly="True" Header="Фамилия исполн."/>
+                <DataGridTextColumn Binding="{Binding Path=Patronymicexecuter}" IsReadOnly="True" Header="Отчество исполн."/>
+                <DataGridTextColumn Binding="{Binding Path=Phonenumberexecuter}" IsReadOnly="True" Header="Номер тел. исполн."/>
+                <DataGridTextColumn Binding="{Binding Path=typeApplicant}" IsReadOnly="True" Header="Тип заяв."/>
+                <DataGridTextColumn Binding="{Binding Path=Firstnameappl}" IsReadOnly="True" Header="Имя заяв."/>
+                <DataGridTextColumn Binding="{Binding Path=Surnameappl}" IsReadOnly="True" Header="Фамилия заяв."/>
+                <DataGridTextColumn Binding="{Binding Path=Patronymicappl}" IsReadOnly="True" Header="Отчество заяв."/>
+                <DataGridTextColumn Binding="{Binding Path=Adressappl}" IsReadOnly="True" Header="Адрес заяв."/>
+                <DataGridTextColumn Binding="{Binding Path=Phonenumberappl}" IsReadOnly="True" Header="Номер тел. заяв."/>
+                <DataGridTextColumn Binding="{Binding Path=IdOrg}" IsReadOnly="True" Header="Код орг."/>
+                <DataGridTextColumn Binding="{Binding Path=accessRoles}" IsReadOnly="True" Header="Доступ просмотра"/>
+                <DataGridTextColumn Binding="{Binding Path=Animalid}" IsReadOnly="True" Header="Код животного"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Добавить" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="13" Height="31" Width="90" Click="Button_Click" Margin="97,0,0,0"/>
