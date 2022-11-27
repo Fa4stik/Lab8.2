@@ -10,12 +10,17 @@ VALUES
 ('ООО Отлов', 'Смирнов', 'Иван', 'Андреевич', 'Ленина 38', '89237384958'),
 ('МирЖивотным', 'Ратыков', 'Илья', 'Сергеевич', 'Перекопская 15а', '89237384358');
 
-INSERT INTO OMSU (nameOMSU, munFormation)
+INSERT INTO Municip (nameMunicip)
 VALUES
-('Калиннский административный район', 'Калинский муниципальный район'),
-('Центральный административный район', 'Центральный мениципальный район');
+('Калинский муниципальный район'),
+('Центральный мениципальный район');
 
 -- Запустить в новом запросе
+INSERT INTO OMSU (nameOMSU, id_municip)
+VALUES
+('Калиннский административный район', 1),
+('Центральный административный район', 2);
+
 INSERT INTO TUser (role, id_org, login, passwordHash)
 VALUES
 ('Оператор по отлову', 1, 'operOtl', 'f1e30885d8bfb15d355c24006f6c03af21331b0c976e1efda12a50921026af96'),
@@ -28,7 +33,8 @@ VALUES
 ('Подписант ОМСУ', 1, 'podpisOMSU', '671fecc874b8a2ce874de8e7c9470c71f4ff7584d6f967071f0bddaa4c077dd0'),
 ('Подписант по отлову', 2, 'podpisOtl', '3b5dd350c00c85b94cde6c27e3429238cdd82a61fdbe2247651b6e85c63a4bbd');
 
-INSERT INTO Card (numMK, dateMK, OMSU, adressTrapping, numWorkOrder, locality, dateWorkOrder, dateTrapping, targetOrder, typeOrder, firstNameExecuter, surNameExecuter, patronymicExecuter, phoneNumberExecuter, typeApplicant, firstNameAppl, surNameAppl, patronymicAppl, adressAppl, phoneNumberAppl, id_org, accessRoles, animalId)
+-- Запустить в новом запросе
+INSERT INTO Card (numMK, dateMK, id_OMSU, adressTrapping, numWorkOrder, locality, dateWorkOrder, dateTrapping, targetOrder, typeOrder, firstNameExecuter, surNameExecuter, patronymicExecuter, phoneNumberExecuter, typeApplicant, firstNameAppl, surNameAppl, patronymicAppl, adressAppl, phoneNumberAppl, id_org, accessRoles, id_animal)
 VALUES
 (23123, '13.05.2018', 1, 'adressTrapping1', 23, 'locality1', '20.05.2018', '21.09.2012', 'targetOrder1', 'Заказ-наряд', 'Андрей', 'Тверских', 'Артёмович', '89217384358', 'Физическое лицо', 'Владимир', 'Лузан', 'Владимирович', 'adressAppl1', '89213384358', 1, '{"Оператор по отлову", "Куратор ВетСлужбы", "Куратор ОМСУ", "Подписант ОМСУ"}', NULL),
 (35121, '03.11.2020', 2, 'adressTrapping2', 32, 'locality2', '27.11.2020', '22.01.2022', 'targetOrder2', 'План-график', 'Иван', 'Паловских', 'Артурович', '89215384348', 'Физическое лицо', 'Иван', 'Шарифулин', 'Степанович', 'adressAppl2', '89217389358', 2, '{"Оператор по отлову","Куратор ВетСлужбы", "Подписант по отлову"}', 2),
@@ -38,7 +44,7 @@ VALUES
 (65252, '28.04.2022', 2, 'adressTrapping6', 92, 'locality6', '05.03.2022', '20.01.2021', 'targetOrder6', 'Заказ-наряд', 'Данил', 'Сушопов', 'Иванович', '89235386353', 'Юридическое лицо', 'Артём', 'Базаров', 'Артёмович', 'adressAppl6', '89211384358', 2, '{"Оператор по отлову","Куратор по отлову", "Оператор ВетСлужбы"}', 4);
 
 -- Запустить в новом запросе
-INSERT INTO Log (date, userId, cardId, operation)
+INSERT INTO Log (date, id_user, id_card, operation)
 VALUES
 ('13.05.2018', 2, 1, 'Добавление карточки в реестр'),
 ('19.07.2018', 1, 1, 'Удаление карточки из реестра'),

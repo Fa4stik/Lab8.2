@@ -13,8 +13,9 @@ namespace PIS8_2.MVVM.Model
 
         public int Id { get; set; }
         public string Nameomsu { get; set; }
-        public string Munformation { get; set; }
+        public int IdMunicip { get; set; }
 
+        public virtual Municip IdMunicipNavigation { get; set; }
         public virtual ICollection<Card> Cards { get; set; }
         public virtual ICollection<Tuser> Tusers { get; set; }
     }

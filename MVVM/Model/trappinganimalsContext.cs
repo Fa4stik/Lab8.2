@@ -19,6 +19,7 @@ namespace PIS8_2.MVVM.Model
         public virtual DbSet<Animal> Animals { get; set; }
         public virtual DbSet<Card> Cards { get; set; }
         public virtual DbSet<Log> Logs { get; set; }
+        public virtual DbSet<Municip> Municips { get; set; }
         public virtual DbSet<Omsu> Omsus { get; set; }
         public virtual DbSet<Organisation> Organisations { get; set; }
         public virtual DbSet<Tuser> Tusers { get; set; }
@@ -81,8 +82,6 @@ namespace PIS8_2.MVVM.Model
                     .HasMaxLength(50)
                     .HasColumnName("adresstrapping");
 
-                entity.Property(e => e.Animalid).HasColumnName("animalid");
-
                 entity.Property(e => e.Datemk).HasColumnName("datemk");
 
                 entity.Property(e => e.Datetrapping).HasColumnName("datetrapping");
@@ -99,6 +98,10 @@ namespace PIS8_2.MVVM.Model
                     .HasMaxLength(50)
                     .HasColumnName("firstnameexecuter");
 
+                entity.Property(e => e.IdAnimal).HasColumnName("id_animal");
+
+                entity.Property(e => e.IdOmsu).HasColumnName("id_omsu");
+
                 entity.Property(e => e.IdOrg).HasColumnName("id_org");
 
                 entity.Property(e => e.Locality)
@@ -109,8 +112,6 @@ namespace PIS8_2.MVVM.Model
                 entity.Property(e => e.Nummk).HasColumnName("nummk");
 
                 entity.Property(e => e.Numworkorder).HasColumnName("numworkorder");
-
-                entity.Property(e => e.Omsu).HasColumnName("omsu");
 
                 entity.Property(e => e.Patronymicappl)
                     .HasMaxLength(50)
@@ -146,22 +147,22 @@ namespace PIS8_2.MVVM.Model
                     .HasMaxLength(50)
                     .HasColumnName("targetorder");
 
-                entity.HasOne(d => d.Animal)
+                entity.HasOne(d => d.IdAnimalNavigation)
                     .WithMany(p => p.Cards)
-                    .HasForeignKey(d => d.Animalid)
-                    .HasConstraintName("card_animalid_fkey");
+                    .HasForeignKey(d => d.IdAnimal)
+                    .HasConstraintName("card_id_animal_fkey");
+
+                entity.HasOne(d => d.IdOmsuNavigation)
+                    .WithMany(p => p.Cards)
+                    .HasForeignKey(d => d.IdOmsu)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("card_id_omsu_fkey");
 
                 entity.HasOne(d => d.IdOrgNavigation)
                     .WithMany(p => p.Cards)
                     .HasForeignKey(d => d.IdOrg)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("card_id_org_fkey");
-
-                entity.HasOne(d => d.OmsuNavigation)
-                    .WithMany(p => p.Cards)
-                    .HasForeignKey(d => d.Omsu)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("card_omsu_fkey");
             });
 
             modelBuilder.Entity<Log>(entity =>
@@ -170,23 +171,35 @@ namespace PIS8_2.MVVM.Model
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Cardid).HasColumnName("cardid");
-
                 entity.Property(e => e.Date).HasColumnName("date");
 
-                entity.Property(e => e.Userid).HasColumnName("userid");
+                entity.Property(e => e.IdCard).HasColumnName("id_card");
 
-                entity.HasOne(d => d.Card)
-                    .WithMany(p => p.Logs)
-                    .HasForeignKey(d => d.Cardid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("log_cardid_fkey");
+                entity.Property(e => e.IdUser).HasColumnName("id_user");
 
-                entity.HasOne(d => d.User)
+                entity.HasOne(d => d.IdCardNavigation)
                     .WithMany(p => p.Logs)
-                    .HasForeignKey(d => d.Userid)
+                    .HasForeignKey(d => d.IdCard)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("log_userid_fkey");
+                    .HasConstraintName("log_id_card_fkey");
+
+                entity.HasOne(d => d.IdUserNavigation)
+                    .WithMany(p => p.Logs)
+                    .HasForeignKey(d => d.IdUser)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("log_id_user_fkey");
+            });
+
+            modelBuilder.Entity<Municip>(entity =>
+            {
+                entity.ToTable("municip");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Namemunicip)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnName("namemunicip");
             });
 
             modelBuilder.Entity<Omsu>(entity =>
@@ -195,15 +208,18 @@ namespace PIS8_2.MVVM.Model
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Munformation)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnName("munformation");
+                entity.Property(e => e.IdMunicip).HasColumnName("id_municip");
 
                 entity.Property(e => e.Nameomsu)
                     .IsRequired()
-                    .HasMaxLength(50)
+                    .HasMaxLength(100)
                     .HasColumnName("nameomsu");
+
+                entity.HasOne(d => d.IdMunicipNavigation)
+                    .WithMany(p => p.Omsus)
+                    .HasForeignKey(d => d.IdMunicip)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("omsu_id_municip_fkey");
             });
 
             modelBuilder.Entity<Organisation>(entity =>

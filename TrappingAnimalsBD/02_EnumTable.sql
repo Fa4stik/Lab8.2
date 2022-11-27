@@ -41,14 +41,19 @@ CREATE TABLE Organisation
 	phoneNumber VARCHAR(11) NOT NULL
 );
 
+CREATE TABLE Municip
+(
+	id SERIAL PRIMARY KEY,
+	nameMunicip VARCHAR(100) NOT NULL
+);
+
 CREATE TABLE OMSU
 (
 	id SERIAL PRIMARY KEY,
-	nameOMSU VARCHAR(50) NOT NULL,
-	munFormation VARCHAR(50) NOT NULL
+	nameOMSU VARCHAR(100) NOT NULL,
+	id_municip INT NOT NULL,
+	FOREIGN KEY (id_municip) REFERENCES Municip(id)
 );
-
-
 
 CREATE TABLE TUser
 (
@@ -67,7 +72,7 @@ CREATE TABLE Card
 	id SERIAL PRIMARY KEY,
 	numMK INT NOT NULL, -- номер МК 
 	dateMK date NOT NULL, -- дата МК 
-	OMSU INT NOT NULL, -- орган местного самоуправления 
+	id_OMSU INT NOT NULL, -- орган местного самоуправления 
 	adressTrapping VARCHAR(50) NOT NULL, -- адрес отлова 
 	numWorkOrder INT NOT NULL, -- номер заказ-наряда 
 	locality VARCHAR(50) NOT NULL, -- Населённый пункт 
@@ -87,21 +92,21 @@ CREATE TABLE Card
 	phoneNumberAppl VARCHAR(11) NOT NULL, -- номер заявителя 
 	id_org INT NOT NULL, 
 	accessRoles ROLE_TYPE[],
-	animalId INT,
+	id_animal INT,
 	FOREIGN KEY (id_org) REFERENCES Organisation (id),
-	FOREIGN KEY (animalId) REFERENCES Animal (id),
-	FOREIGN KEY (OMSU) REFERENCES OMSU (id)
+	FOREIGN KEY (id_animal) REFERENCES Animal (id),
+	FOREIGN KEY (id_OMSU) REFERENCES OMSU (id)
 );
 
 CREATE TABLE Log
 (
 	id SERIAL PRIMARY KEY,
 	date date NOT NULL,
-	userId INT NOT NULL,
-	cardId INT NOT NULL,
+	id_user INT NOT NULL,
+	id_card INT NOT NULL,
 	operation OPERATION NOT NULL,
-	FOREIGN KEY (userId) REFERENCES TUser (id),
-	FOREIGN KEY (cardId) REFERENCES Card (id)
+	FOREIGN KEY (id_user) REFERENCES TUser (id),
+	FOREIGN KEY (id_card) REFERENCES Card (id)
 );
 
 -- DROP TYPE Name

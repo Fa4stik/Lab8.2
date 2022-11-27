@@ -7,10 +7,10 @@ namespace PIS8_2.MVVM.Model
     {
         public int Id { get; set; }
         public DateOnly Date { get; set; }
-        public int Userid { get; set; }
-        public int Cardid { get; set; }
+        public int IdUser { get; set; }
+        public int IdCard { get; set; }
 
-        public virtual Card Card { get; set; }
-        public virtual Tuser User { get; set; }
+        public virtual Card IdCardNavigation { get; set; }
+        public virtual Tuser IdUserNavigation { get; set; }
     }
 }

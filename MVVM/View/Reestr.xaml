@@ -12,7 +12,7 @@
                 <!--<DataGridCheckBoxColumn Binding="{Binding Path=Check}" IsReadOnly="False"/>-->
                 <DataGridTextColumn Binding="{Binding Path=Nummk}" IsReadOnly="True" Header="Номер МК"/>
                 <DataGridTextColumn Binding="{Binding Path=Datemk}" IsReadOnly="True" Header="Дата МК"/>
-                <DataGridTextColumn Binding="{Binding Path=Omsu}" IsReadOnly="True" Header="ОМСУ"/>
+                <DataGridTextColumn Binding="{Binding Path=IdOmsu}" IsReadOnly="True" Header="ОМСУ"/>
                 <DataGridTextColumn Binding="{Binding Path=Adresstrapping}" IsReadOnly="True" Header="Адрес отлова"/>
                 <DataGridTextColumn Binding="{Binding Path=Numworkorder}" IsReadOnly="True" Header="Номер заказ-наряда"/>
                 <DataGridTextColumn Binding="{Binding Path=Locality}" IsReadOnly="True" Header="Населённый пункт"/>
