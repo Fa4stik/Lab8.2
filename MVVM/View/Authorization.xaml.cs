@@ -34,7 +34,7 @@ namespace PIS8_2
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            byte[] hashByte = HashPassword(Password.Password);
+            byte[] hashByte = HashPassword(Password.Text);
             var hashString = HashToString(hashByte);
             using (var db = new trappinganimalsContext())
             {

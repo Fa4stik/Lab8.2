@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PIS8_2.MVVM.ViewModel.Base
+namespace PIS8_2.MVVM.ViewModels.Base
 {
     internal abstract class ViewModel : INotifyPropertyChanged
     {
