@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PIS8_2.MVVM.Model
 {
-    public partial class Log
+    public  class Log
     {
         public int Id { get; set; }
         public DateOnly Date { get; set; }
@@ -11,6 +11,6 @@ namespace PIS8_2.MVVM.Model
         public int Cardid { get; set; }
 
         public virtual Card Card { get; set; }
-        public virtual Tuser User { get; set; }
+        public virtual TUser User { get; set; }
     }
 }

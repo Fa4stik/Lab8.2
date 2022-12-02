@@ -19,9 +19,15 @@ namespace PIS8_2
     /// <summary>
     /// Логика взаимодействия для Authorization.xaml
     /// </summary>
-
-    public partial class Authorization : Window
+    public interface ICloseable
     {
+        void Close();
+    }
+
+    public partial class Authorization : Window, ICloseable
+    {
+        
+
         public Authorization()
         {
             InitializeComponent();
@@ -34,16 +40,16 @@ namespace PIS8_2
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            byte[] hashByte = HashPassword(Password.Text);
-            var hashString = HashToString(hashByte);
-            using (var db = new trappinganimalsContext())
-            {
-                var user = db.Tusers.ToList();
-                if (user.Exists(x => x.Login == Login.Text && x.Passwordhash == hashString))
-                    new Reestr().Show();
-                else
-                    MessageBox.Show("Неверный логин/пароль");
-            }
+            //byte[] hashByte = HashPassword(Password.Text);
+            //var hashString = HashToString(hashByte);
+            //using (var db = new trappinganimalsContext())
+            //{
+            //    var user = db.Tusers.ToList();
+            //    if (user.Exists(x => x.Login == Login.Text && x.Passwordhash == hashString))
+            //        new Reestr().Show();
+            //    else
+            //        MessageBox.Show("Неверный логин/пароль");
+            //}
         }
 
         static byte[] HashPassword(string password)

@@ -19,4 +19,5 @@ namespace PIS8_2.Commands.Base
 
         public abstract void Execute(object parameter);
     }
+
 }

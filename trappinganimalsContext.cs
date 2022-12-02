@@ -21,7 +21,7 @@ namespace PIS8_2
         public virtual DbSet<Card> Cards { get; set; }
         public virtual DbSet<Log> Logs { get; set; }
         public virtual DbSet<Organisation> Organisations { get; set; }
-        public virtual DbSet<Tuser> Tusers { get; set; }
+        public virtual DbSet<TUser> Tusers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -139,11 +139,11 @@ namespace PIS8_2
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("log_cardid_fkey");
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Logs)
-                    .HasForeignKey(d => d.Userid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("log_userid_fkey");
+                //entity.HasOne(d => d.User)
+                //    .WithMany(p => p.Logs)
+                //    .HasForeignKey(d => d.Userid)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("log_userid_fkey");
             });
 
             modelBuilder.Entity<Organisation>(entity =>
@@ -158,7 +158,7 @@ namespace PIS8_2
                     .HasColumnName("name");
             });
 
-            modelBuilder.Entity<Tuser>(entity =>
+            modelBuilder.Entity<TUser>(entity =>
             {
                 entity.ToTable("tuser");
 
@@ -178,11 +178,11 @@ namespace PIS8_2
                     .HasMaxLength(66)
                     .HasColumnName("passwordhash");
 
-                entity.HasOne(d => d.IdOrgNavigation)
-                    .WithMany(p => p.Tusers)
-                    .HasForeignKey(d => d.IdOrg)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("tuser_id_org_fkey");
+                //entity.HasOne(d => d.IdOrgNavigation)
+                //    .WithMany(p => p.Tusers)
+                //    .HasForeignKey(d => d.IdOrg)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("tuser_id_org_fkey");
             });
 
             OnModelCreatingPartial(modelBuilder);

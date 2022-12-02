@@ -17,8 +17,9 @@ namespace PIS8_2.MVVM.ViewModels
         private string _login;
         private string _password;
         
+        
         public string Login { get =>_login;
-            set => SetField(ref _login, value,Login);
+            set => SetField(ref _login, value);
         }
 
         public string Password
@@ -27,14 +28,28 @@ namespace PIS8_2.MVVM.ViewModels
             set => SetField(ref _password, value);
         }
 
+        // Тестовые команды
+        //private RelayCommand _authCommand;
 
-        private ICommand _authCommand;
-
-        public ICommand AuthCommand => _authCommand ?? (_authCommand = new RelayCommand( OnSearch));
-
-        public virtual void OnSearch(object Value = null)
+        //public RelayCommand AuthCommand => _authCommand ??= new RelayCommand(DoSomethink); 1 вариант записи
+        public RelayCommand AuthCommand { get; }
+        private bool CanAuthCommandExecute(object parametr) => true;
+        //второй вариант записи
+        private void OnAuthCommandExecute(object parametr)
         {
-            MessageBox.Show("asdasd");
+            //essageBox.Show(parametr.ToString());
+           CloseWindowCommand.Execute(parametr);
+        }
+
+        private RelayCommand<ICloseable> _closeWindowCommand;
+        public RelayCommand<ICloseable> CloseWindowCommand => _closeWindowCommand ??= new RelayCommand<ICloseable>(CloseWindow);
+        public AuthVM()
+        {
+            AuthCommand=new RelayCommand(OnAuthCommandExecute,CanAuthCommandExecute);
+        }
+        private void CloseWindow(ICloseable window)
+        {
+            window?.Close();
         }
     }
 }

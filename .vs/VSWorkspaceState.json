@@ -1,7 +1,14 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Commands",
+    "\\Commands\\Base",
+    "\\MVVM",
+    "\\MVVM\\View",
+    "\\MVVM\\ViewModels",
+    "\\MVVM\\ViewModels\\Base",
+    "\\Properties"
   ],
-  "SelectedNode": "\\Authorization.xaml.cs",
+  "SelectedNode": "\\MVVM\\ViewModels\\AuthVM.cs",
   "PreviewInSolutionExplorer": false
 }

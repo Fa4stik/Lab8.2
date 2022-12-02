@@ -7,7 +7,7 @@ using PIS8_2.Commands.Base;
 
 namespace PIS8_2.Commands
 {
-    internal class RelayCommand:Command
+    internal class RelayCommand : Command
     {
         private readonly Action<object> _execute;
         private readonly Func<object, bool> _canExecute;
@@ -23,4 +23,22 @@ namespace PIS8_2.Commands
         public override void Execute(object parameter) => _execute(parameter);
         
     }
+    internal class RelayCommand<T> : Command
+    {
+        private readonly Action<T> _execute;
+        private readonly Func<T, bool> _canExecute;
+
+        public RelayCommand(Action<T> Execute, Func<T, bool> CanExecute = null)
+        {
+            _execute = Execute ?? throw new ArgumentException(nameof(Execute));
+            _canExecute = CanExecute;
+        }
+        public override bool CanExecute(object parameter) => _canExecute?.Invoke((T)parameter) ?? true;
+
+
+        public override void Execute(object parameter) => _execute((T)parameter);
+
+    }
+
+
 }
