@@ -41,7 +41,9 @@
             <MenuItem Header="Фильтр"/>
             <MenuItem Header="Удалить"/>
             <MenuItem Header="Сортировка"/>
-            <MenuItem Header="Выход" HorizontalAlignment="Right" Command="{Binding ExitCommand}"/>
+            <MenuItem Header="{Binding Login}" HorizontalAlignment="Right" FlowDirection="RightToLeft">
+                <MenuItem Header="Выход" Command="{Binding ExitCommand}" Background="Aqua"/>
+            </MenuItem>
         </Menu>
 
     </Grid>

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using PIS8_2.Commands;
+using PIS8_2.MVVM.Model;
 using PIS8_2.Service;
 using PIS8_2.Stores;
 
@@ -39,7 +40,11 @@ namespace PIS8_2.MVVM.ViewModels
 
         public LoginViewModel(NavigationStore navigationStore)
         {
-            LoginCommand = new LoginCommand(this, new NavigationService<ReestrViewModel>(navigationStore,()=>new ReestrViewModel(navigationStore)));
+            ParameterNavigationService<TUser, ReestrViewModel> navigationService =
+                new ParameterNavigationService<TUser, ReestrViewModel>(
+                    navigationStore,
+                    (parameter) => new ReestrViewModel(parameter, navigationStore));
+            LoginCommand = new LoginCommand(this, navigationService);
             //LoginCommand = new NavigateCommand<ReestrViewModel>(navigationStore, ()=>new ReestrViewModel(navigationStore));
         }
     }

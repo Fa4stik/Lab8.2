@@ -11,7 +11,7 @@ namespace PIS8_2.MVVM.Model.Data
         //достаем из бд юзера или return null 
         public TUser ExecuteUser(string login, string password)
         {
-            return new TUser();
+            return new TUser("12312");
         }
     }
 }

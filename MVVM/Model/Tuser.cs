@@ -14,7 +14,10 @@ namespace PIS8_2.MVVM.Model
         //    Login=login;
         //    Passwordhash=passwordhash;
         //}
-
+        public TUser(string login)
+        {
+            Login=login;
+        }
         public int Id { get; set; }
         public Role UserRole { get; set; }
         public int IdOrg { get; set; }
