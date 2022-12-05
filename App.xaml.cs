@@ -5,6 +5,9 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using PIS8_2.MVVM.View;
+using PIS8_2.MVVM.ViewModels;
+using PIS8_2.Stores;
 
 namespace PIS8_2
 {
@@ -13,5 +16,18 @@ namespace PIS8_2
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            NavigationStore navigationStore = new NavigationStore();
+
+            navigationStore.CurrentViewModel = new LoginViewModel(navigationStore);
+
+            MainWindow = new MainWindow()
+            {
+                DataContext = new MainViewModel(navigationStore)
+            };
+            MainWindow.Show();
+            base.OnStartup(e);
+        }
     }
 }

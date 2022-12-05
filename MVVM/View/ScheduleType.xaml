@@ -45,7 +45,7 @@
             <StackPanel Margin="0,10">
                 <TextBlock HorizontalAlignment="Center" Text="Заказчик" FontSize="20"></TextBlock>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Width="250" TextAlignment="Right" Text="Название организации):" FontSize="14" Padding="20,0" Margin="0,20,0,0"></TextBlock>
+                    <TextBlock Width="250" TextAlignment="Right" Text="Название организации:" FontSize="14" Padding="20,0" Margin="0,20,0,0"></TextBlock>
                     <TextBox Width="300" BorderThickness="0,0,0,2"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">

@@ -6,14 +6,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Microsoft.EntityFrameworkCore;
 using PIS8_2.Commands;
+using PIS8_2.MVVM.Model.Data;
 using PIS8_2.MVVM.Model;
-using PIS8_2.MVVM.ViewModels.Base;
 
 namespace PIS8_2.MVVM.ViewModels
 {
-    class AuthVM:ViewModel
+    internal class AuthVM:ViewModel
     {
+        private Connection connection;
+
+
+
         private string _login;
         private string _password;
         
@@ -32,21 +37,37 @@ namespace PIS8_2.MVVM.ViewModels
         //private RelayCommand _authCommand;
 
         //public RelayCommand AuthCommand => _authCommand ??= new RelayCommand(DoSomethink); 1 вариант записи
-        public RelayCommand AuthCommand { get; }
+
+
+
+        public RelayCommand<ICloseable> AuthCommand { get; }
         private bool CanAuthCommandExecute(object parametr) => true;
-        //второй вариант записи
-        private void OnAuthCommandExecute(object parametr)
+        private void OnAuthCommandExecute(ICloseable window)
         {
-            //essageBox.Show(parametr.ToString());
-           CloseWindowCommand.Execute(parametr);
+            if (connection.ExecuteUser(Login, Password)!=null)
+            {
+                new Reestr().Show();
+                CloseWindow(window);
+            }
+            else
+            {
+                MessageBox.Show("Неверный логин или пароль");
+            }
+           
         }
 
         private RelayCommand<ICloseable> _closeWindowCommand;
         public RelayCommand<ICloseable> CloseWindowCommand => _closeWindowCommand ??= new RelayCommand<ICloseable>(CloseWindow);
         public AuthVM()
         {
-            AuthCommand=new RelayCommand(OnAuthCommandExecute,CanAuthCommandExecute);
+            AuthCommand=new RelayCommand<ICloseable>(OnAuthCommandExecute,CanAuthCommandExecute);
+
+
+           // _reestrVm = new ReestrVM(this);
+
+            connection=new Connection();
         }
+
         private void CloseWindow(ICloseable window)
         {
             window?.Close();

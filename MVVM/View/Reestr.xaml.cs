@@ -19,7 +19,7 @@ namespace PIS8_2
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    
+
     public class ReestrInfo
     {
         public bool Check { get; set; } // выделение
@@ -36,7 +36,7 @@ namespace PIS8_2
         public string CaptureOrder { get; set; } // заявка на отлов или план-график
 
     }
-    public partial class Reestr : Window
+    public partial class Reestr : Window, ICloseable
     {
         private BindingList<ReestrInfo> _reestrInfo;
         public Reestr()

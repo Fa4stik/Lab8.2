@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="PIS8_2.MVVM.View.ReestrView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PIS8_2.MVVM.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="1200
+             ">
+
+    <Grid>
+        <DataGrid x:Name="dgReestr"  AutoGenerateColumns="False" Margin="0,30,0,0">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Binding="{Binding Path=Check}" IsReadOnly="False"/>
+                <DataGridTextColumn Binding="{Binding Path=NumMK}" IsReadOnly="True" Header="Номер МК"/>
+                <DataGridTextColumn Binding="{Binding Path=DataMK}" IsReadOnly="True" Header="Дата МК"/>
+                <DataGridTextColumn Binding="{Binding Path=Munic}" IsReadOnly="True" Header="Мун. обр."/>
+                <DataGridTextColumn Binding="{Binding Path=OMSU}" IsReadOnly="True" Header="ОМСУ"/>
+                <DataGridTextColumn Binding="{Binding Path=ExecMK}" IsReadOnly="True" Header="Исполнитель МК"/>
+                <DataGridTextColumn Binding="{Binding Path=NumOrder}" IsReadOnly="True" Header="Номер заказ-наряда"/>
+                <DataGridTextColumn Binding="{Binding Path=Locality}" IsReadOnly="True" Header="Населённый пункт"/>
+                <DataGridTextColumn Binding="{Binding Path=DataOrder}" IsReadOnly="True" Header="Дата заказ-наряда"/>
+                <DataGridTextColumn Binding="{Binding Path=DataCapture}" IsReadOnly="True" Header="Дата отлова"/>
+                <DataGridTextColumn Binding="{Binding Path=PurposeCapture}" IsReadOnly="True" Header="Цель отлова"/>
+                <DataGridTextColumn Binding="{Binding Path=CaptureOrder}" IsReadOnly="True" Header="Отлов по заявке или план-графику"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Menu>
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <DockPanel HorizontalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <MenuItem Header="Открыть"/>
+            <MenuItem Header="Добавить">
+                <MenuItem Header="По заявке" Background="Aqua"></MenuItem>
+                <MenuItem Header="По плану графику" Background="Aqua"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Редактировать"/>
+            <MenuItem Header="Экспорт Excel"/>
+            <MenuItem Header="Фильтр"/>
+            <MenuItem Header="Удалить"/>
+            <MenuItem Header="Сортировка"/>
+            <MenuItem Header="Выход" HorizontalAlignment="Right" Command="{Binding ExitCommand}"/>
+        </Menu>
+
+    </Grid>
+</UserControl>

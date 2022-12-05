@@ -2,10 +2,12 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:PIS8_2"
-             StartupUri="/MVVM/View/Authorization.xaml">
+             xmlns:viewModels="clr-namespace:PIS8_2.MVVM.ViewModels"
+             xmlns:views="clr-namespace:PIS8_2.MVVM.View"
+             >
     <Application.Resources>
-        
-        
+
+
         <Style TargetType="{x:Type Button}">
             <Setter Property="Background" Value="#FF007DFF"/>
             <Setter Property="Foreground" Value="White"/>
@@ -62,4 +64,5 @@
             <Setter Property="Cursor" Value="Hand"/>
         </Style>
     </Application.Resources>
+
 </Application>
