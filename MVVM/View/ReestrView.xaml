@@ -33,8 +33,8 @@
             </Menu.ItemsPanel>
             <MenuItem Header="Открыть"/>
             <MenuItem Header="Добавить">
-                <MenuItem Header="По заявке" Background="Aqua"></MenuItem>
-                <MenuItem Header="По плану графику" Background="Aqua"></MenuItem>
+                <MenuItem Header="По заявке" Background="Aqua" Command="{Binding AddRequestCommand}"></MenuItem>
+                <MenuItem Header="По плану графику" Background="Aqua" Command="{Binding AddScheduleCommand}"></MenuItem>
             </MenuItem>
             <MenuItem Header="Редактировать"/>
             <MenuItem Header="Экспорт Excel"/>

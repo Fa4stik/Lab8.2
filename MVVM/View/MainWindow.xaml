@@ -17,6 +17,12 @@
             <DataTemplate DataType="{x:Type viewModels:ReestrViewModel}">
                 <views:ReestrView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:ScheduleTypeViewModel}">
+                <views:ScheduleTypeView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:RequestTypeViewModel}">
+                <views:RequestTypeView/>
+            </DataTemplate>
         </ContentControl.Resources>
     </ContentControl>
 </Window>

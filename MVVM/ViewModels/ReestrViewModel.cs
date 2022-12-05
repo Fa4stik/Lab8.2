@@ -14,10 +14,14 @@ namespace PIS8_2.MVVM.ViewModels
     internal class ReestrViewModel:ViewModel
     {
         private readonly TUser _user;
-        public string Login => _user.Login;
+        public string Login => _user?.Login;
+
 
 
         public ICommand ExitCommand { get; }
+        public ICommand AddRequestCommand { get; }
+        public ICommand AddScheduleCommand { get; }
+
 
 
         public ReestrViewModel(TUser user,NavigationStore navigationStore)
@@ -28,6 +32,26 @@ namespace PIS8_2.MVVM.ViewModels
             ExitCommand =
                 new ExitCommand(new NavigationService<LoginViewModel>(navigationStore,
                     () => new LoginViewModel(navigationStore)));
+            AddScheduleCommand =
+                new AddScheduleTypeCommand(new NavigationService<ScheduleTypeViewModel>(navigationStore,
+                    () => new ScheduleTypeViewModel(navigationStore)));
+            AddRequestCommand =
+                new AddRequestTypeCommand(new NavigationService<RequestTypeViewModel>(navigationStore,
+                    () => new RequestTypeViewModel(navigationStore)));
+
+        }
+
+        public ReestrViewModel(NavigationStore navigationStore)
+        {
+            ExitCommand =
+                new ExitCommand(new NavigationService<LoginViewModel>(navigationStore,
+                    () => new LoginViewModel(navigationStore)));
+            AddScheduleCommand =
+                new AddScheduleTypeCommand(new NavigationService<ScheduleTypeViewModel>(navigationStore,
+                    () => new ScheduleTypeViewModel(navigationStore)));
+            AddRequestCommand =
+                new AddRequestTypeCommand(new NavigationService<RequestTypeViewModel>(navigationStore,
+                    () => new RequestTypeViewModel(navigationStore)));
         }
     }
 }
