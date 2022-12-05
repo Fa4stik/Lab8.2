@@ -8,12 +8,13 @@ using PIS8_2.Stores;
 
 namespace PIS8_2.Service
 {
-    internal class NavigationService
+    internal class NavigationService<TViewModel>
+    where TViewModel:ViewModel
     {
         private readonly NavigationStore _navigationStore;
-        private readonly Func<ViewModel> _createViewModel;
+        private readonly Func<TViewModel> _createViewModel;
 
-        public NavigationService(NavigationStore navigationStore, Func<ViewModel> createViewModel)
+        public NavigationService(NavigationStore navigationStore, Func<TViewModel> createViewModel)
         {
             _navigationStore = navigationStore;
             _createViewModel = createViewModel;

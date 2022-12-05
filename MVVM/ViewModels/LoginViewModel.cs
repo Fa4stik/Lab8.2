@@ -39,7 +39,7 @@ namespace PIS8_2.MVVM.ViewModels
 
         public LoginViewModel(NavigationStore navigationStore)
         {
-            LoginCommand = new LoginCommand(navigationStore);
+            LoginCommand = new LoginCommand(this, new NavigationService<ReestrViewModel>(navigationStore,()=>new ReestrViewModel(navigationStore)));
             //LoginCommand = new NavigateCommand<ReestrViewModel>(navigationStore, ()=>new ReestrViewModel(navigationStore));
         }
     }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PIS8_2.Commands.Base;
 using PIS8_2.MVVM.ViewModels;
+using PIS8_2.Service;
 using PIS8_2.Stores;
 
 namespace PIS8_2.Commands
@@ -12,20 +13,19 @@ namespace PIS8_2.Commands
     internal class NavigateCommand<TViewModel>:Command
     where TViewModel : ViewModel
     {
-        private readonly NavigationStore _navigationStore;
-        private readonly Func<TViewModel> _createViewModel;
+        private readonly NavigationService<TViewModel> _navigationService;
 
-        public NavigateCommand(NavigationStore navigationStore, Func<TViewModel> createViewModel)
+        public NavigateCommand(NavigationService<TViewModel> navigationService)
         {
-            _navigationStore = navigationStore;
-            _createViewModel = createViewModel;
+            _navigationService = navigationService;
         }
+
 
         public override bool CanExecute(object parameter) => true;
 
         public override void Execute(object parameter)
         {
-            _navigationStore.CurrentViewModel = _createViewModel();
+            _navigationService.Navigate();
         }
     }
 }

@@ -5,24 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using PIS8_2.Commands.Base;
 using PIS8_2.MVVM.ViewModels;
+using PIS8_2.Service;
 using PIS8_2.Stores;
 
 namespace PIS8_2.Commands
 {
     internal class ExitCommand:Command
     {
-        private readonly NavigationStore _navigationStore;
+        private readonly NavigationService<LoginViewModel> _navigationService;
 
-        public ExitCommand(NavigationStore navigationStore)
+        public ExitCommand(NavigationService<LoginViewModel> navigationService)
         {
-            _navigationStore = navigationStore;
+            _navigationService = navigationService;
         }
 
         public override bool CanExecute(object parameter) => true;
 
         public override void Execute(object parameter)
         { 
-            new NavigateCommand<LoginViewModel>(_navigationStore, () => new LoginViewModel(_navigationStore)).Execute(parameter);
+            _navigationService.Navigate();
         }
     }
 }

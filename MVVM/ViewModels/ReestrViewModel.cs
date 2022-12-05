@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using PIS8_2.Commands;
+using PIS8_2.Service;
 using PIS8_2.Stores;
 
 namespace PIS8_2.MVVM.ViewModels
@@ -18,7 +19,9 @@ namespace PIS8_2.MVVM.ViewModels
 
         public ReestrViewModel(NavigationStore navigationStore)
         {
-            ExitCommand = new ExitCommand(navigationStore);
+            ExitCommand =
+                new ExitCommand(new NavigationService<LoginViewModel>(navigationStore,
+                    () => new LoginViewModel(navigationStore)));
         }
     }
 }
