@@ -21,8 +21,8 @@ namespace PIS8_2.Commands
         public override bool CanExecute(object parameter) => true;
 
         public override void Execute(object parameter)
-        {
-            _navigationStore.CurrentViewModel = new LoginViewModel(_navigationStore);
+        { 
+            new NavigateCommand<LoginViewModel>(_navigationStore, () => new LoginViewModel(_navigationStore)).Execute(parameter);
         }
     }
 }
