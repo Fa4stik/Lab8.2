@@ -4,12 +4,12 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PIS8_2.MVVM.View"
+      xmlns:vm="clr-namespace:PIS8_2.MVVM.ViewModels"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="1200
+      d:DesignHeight="450" d:DesignWidth="1600
              ">
-
     <Grid>
-        <DataGrid x:Name="dgReestr"  AutoGenerateColumns="False" Margin="0,30,0,0">
+        <!--<DataGrid x:Name="dgReestr"  AutoGenerateColumns="False" Margin="0,30,0,0">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Binding="{Binding Path=Check}" IsReadOnly="False"/>
                 <DataGridTextColumn Binding="{Binding Path=NumMK}" IsReadOnly="True" Header="Номер МК"/>
@@ -23,6 +23,55 @@
                 <DataGridTextColumn Binding="{Binding Path=DataCapture}" IsReadOnly="True" Header="Дата отлова"/>
                 <DataGridTextColumn Binding="{Binding Path=PurposeCapture}" IsReadOnly="True" Header="Цель отлова"/>
                 <DataGridTextColumn Binding="{Binding Path=CaptureOrder}" IsReadOnly="True" Header="Отлов по заявке или план-графику"/>
+            </DataGrid.Columns>
+        </DataGrid>-->
+        <DataGrid ItemsSource="{Binding Cards}" Margin="0,30,0,0" AutoGenerateColumns="False" >
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn IsReadOnly="False" ></DataGridCheckBoxColumn>
+                <DataGridTextColumn Header="Номер МК" Binding="{Binding Nummk}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Дата заключения МК" Binding="{Binding Datemk}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Мун. обр." Binding="{Binding }" IsReadOnly="True" />
+                <DataGridTextColumn Header="ОМСУ" Binding="{Binding  }" IsReadOnly="True" />
+                <DataGridTextColumn Header="Исполнитель МК" Binding="{Binding IdOrgNavigation.Nameorg}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Номер заказ-наряда" Binding="{Binding Numworkorder}" IsReadOnly="True" /> 
+                <DataGridTextColumn Header="Населённый пункт" Binding="{Binding Locality}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Дата выдачи заказ-наряда" Binding="{Binding Dateworkorder}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Дата отлова" Binding="{Binding Dateworkorder}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Дата выдачи заказ-наряда" Binding="{Binding Datetrapping}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Цель отлова" Binding="{Binding Targetorder}" IsReadOnly="True" />
+
+                <!--Номер МК
+                Дата заключения МК
+                Муниципальное образование
+                ОМСУ
+                Исполнитель МК
+                Номер заказа-наряда
+                Населённый пункт
+                Дата выдачи заказа-наряда
+                Дата отлова
+                Цель отлова
+                Отлов по заявке или по плану-графику-->
+                <!--public int Id { get; set; }
+                public int Nummk { get; set; }
+                public DateOnly Datemk { get; set; }
+                public int IdOmsu { get; set; }
+                public string Adresstrapping { get; set; }
+                public int Numworkorder { get; set; }
+                public string Locality { get; set; }
+                public DateOnly Dateworkorder { get; set; }
+                public DateOnly Datetrapping { get; set; }
+                public string Targetorder { get; set; }
+                public string Firstnameexecuter { get; set; }
+                public string Surnameexecuter { get; set; }
+                public string Patronymicexecuter { get; set; }
+                public string Phonenumberexecuter { get; set; }
+                public string Firstnameappl { get; set; }
+                public string Surnameappl { get; set; }
+                public string Patronymicappl { get; set; }
+                public string Adressappl { get; set; }
+                public string Phonenumberappl { get; set; }
+                public int IdOrg { get; set; }
+                public int? IdAnimal { get; set; }-->
             </DataGrid.Columns>
         </DataGrid>
         <Menu>
@@ -45,6 +94,7 @@
                 <MenuItem Header="Выход" Command="{Binding ExitCommand}" Background="Aqua"/>
             </MenuItem>
         </Menu>
+        
 
     </Grid>
 </UserControl>

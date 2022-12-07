@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\MVVM",
-    "\\MVVM\\View"
+    "\\MVVM\\View",
+    "\\MVVM\\ViewModels"
   ],
-  "SelectedNode": "\\MVVM\\View\\Reestr.xaml",
+  "SelectedNode": "\\MVVM\\ViewModels\\ReestrViewModel.cs",
   "PreviewInSolutionExplorer": false
 }
