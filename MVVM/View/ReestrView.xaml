@@ -25,13 +25,20 @@
                 <DataGridTextColumn Binding="{Binding Path=CaptureOrder}" IsReadOnly="True" Header="Отлов по заявке или план-графику"/>
             </DataGrid.Columns>
         </DataGrid>-->
-        <DataGrid ItemsSource="{Binding Cards}" Margin="0,30,0,0" AutoGenerateColumns="False" >
+        <DataGrid ItemsSource="{Binding Cards}" Margin="0,30,0,0" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"  >
+
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn IsReadOnly="False" ></DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn IsReadOnly="False" CanUserReorder="False" >
+                    <DataGridCheckBoxColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <CheckBox />
+                        </DataTemplate>
+                    </DataGridCheckBoxColumn.HeaderTemplate>
+                </DataGridCheckBoxColumn>
                 <DataGridTextColumn Header="Номер МК" Binding="{Binding Nummk}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Дата заключения МК" Binding="{Binding Datemk}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Мун. обр." Binding="{Binding }" IsReadOnly="True" />
-                <DataGridTextColumn Header="ОМСУ" Binding="{Binding  }" IsReadOnly="True" />
+                <DataGridTextColumn Header="Мун. обр."  IsReadOnly="True" />
+                <DataGridTextColumn Header="ОМСУ"  IsReadOnly="True" />
                 <DataGridTextColumn Header="Исполнитель МК" Binding="{Binding IdOrgNavigation.Nameorg}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Номер заказ-наряда" Binding="{Binding Numworkorder}" IsReadOnly="True" /> 
                 <DataGridTextColumn Header="Населённый пункт" Binding="{Binding Locality}" IsReadOnly="True" />
