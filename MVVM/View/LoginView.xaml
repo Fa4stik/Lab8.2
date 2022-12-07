@@ -8,19 +8,20 @@
       d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid Margin="0,0,3.6,-2">
-        <Border HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="115" BorderBrush="DodgerBlue"
+        <Border HorizontalAlignment="Center" VerticalAlignment="Center"  BorderBrush="DodgerBlue"
                 BorderThickness="1" CornerRadius="10">
-            <StackPanel Width="300" Height="110">
+            <StackPanel Margin="20" >
                 <StackPanel HorizontalAlignment="Center">
                     <TextBlock Text="Логин" />
-                    <TextBox x:Name="Login" BorderBrush="DodgerBlue" Width="250" MaxLength="50" Text="{Binding Login}"/>
+                    <TextBox x:Name="Login" BorderBrush="DodgerBlue" Width="250" MaxLength="50" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="Пароль" />
-                    <TextBox x:Name="Password" BorderBrush="DodgerBlue" Width="250" MaxLength="50" Text="{Binding Password}"/>
-
+                    <PasswordBox x:Name="Password" BorderBrush="DodgerBlue" Width="250" MaxLength="50" Password="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
+                    
                 </StackPanel>
                 <Button  Width="150" Margin="0,10,0,0" Height="25" Content="Войти" Background="DodgerBlue" FontSize="14"
                          Foreground="White" Command="{Binding LoginCommand}"/>
 
+                <TextBlock Text="{Binding Error}" HorizontalAlignment="Center" Visibility="{Binding VisabilitiError}" d:Visibility="Collapsed"  Margin="0,20,0,0" FontSize="14" Foreground="Red" />
             </StackPanel>
         </Border>
     </Grid>
