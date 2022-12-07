@@ -26,6 +26,7 @@ namespace PIS8_2.MVVM.ViewModels
         }
 
         private string _password;
+
         public string Password
         {
             get => _password;

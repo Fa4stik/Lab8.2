@@ -20,7 +20,6 @@ namespace PIS8_2.Commands
         private readonly LoginViewModel _viewModel;
         private readonly ParameterNavigationService<TUser, ReestrViewModel> _navigationService;
         private readonly Connection _conn;
-        private readonly PasswordBox _passwordBox;
 
 
         public LoginCommand(LoginViewModel viewModel,ParameterNavigationService<TUser,ReestrViewModel> navigationService)

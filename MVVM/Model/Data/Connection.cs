@@ -13,7 +13,7 @@ namespace PIS8_2.MVVM.Model.Data
         //достаем из бд юзера или return null 
         public TUser ExecuteUser(string login, string password)
         {
-            var hashPassword = HashPassword(password);
+            var hashPassword = (password);
             using (var db = new trappinganimalsContext())
             {
                 var user = db.Tusers.ToList();
