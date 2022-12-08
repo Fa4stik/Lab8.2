@@ -128,6 +128,10 @@ public partial class TrappinganimalsContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("targetorder");
 
+            entity.Property(e => e.TypeOrder)
+                .HasConversion(c => c.ToString(), c => Enum.Parse<TypeOrder>(c))
+                .HasColumnName("typeorder");
+
             entity.HasOne(d => d.IdAnimalNavigation).WithMany(p => p.Cards)
                 .HasForeignKey(d => d.IdAnimal)
                 .HasConstraintName("card_id_animal_fkey");
