@@ -362,3 +362,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /.vs/PIS8_2/v17/.suo
+/.vs/slnx.sqlite
