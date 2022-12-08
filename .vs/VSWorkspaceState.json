@@ -2,9 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\MVVM",
+    "\\MVVM\\Model",
+    "\\MVVM\\Model\\Data",
     "\\MVVM\\View",
     "\\MVVM\\ViewModels"
   ],
-  "SelectedNode": "\\MVVM\\ViewModels\\ReestrViewModel.cs",
+  "SelectedNode": "\\MVVM\\Model\\Data\\Connection.cs",
   "PreviewInSolutionExplorer": false
 }
