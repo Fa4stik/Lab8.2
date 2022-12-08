@@ -5,9 +5,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PIS8_2.MVVM.View"
       xmlns:vm="clr-namespace:PIS8_2.MVVM.ViewModels"
+      xmlns:con="clr-namespace:PIS8_2.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="1600
              ">
+    <UserControl.Resources>
+        <con:EnumToDescription x:Key="EnumToDescription" />
+    </UserControl.Resources>
     <Grid>
         <!--<DataGrid x:Name="dgReestr"  AutoGenerateColumns="False" Margin="0,30,0,0">
             <DataGrid.Columns>
@@ -46,7 +50,7 @@
                 <DataGridTextColumn Header="Дата отлова" Binding="{Binding Dateworkorder}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Дата выдачи заказ-наряда" Binding="{Binding Datetrapping}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Цель отлова" Binding="{Binding Targetorder}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Тип отлова" Binding="{Binding Targetorder}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Тип отлова" Binding="{Binding TypeOrder, Converter={StaticResource EnumToDescription}, ConverterParameter=0}" IsReadOnly="True" />
 
                 <!--Номер МК
                 Дата заключения МК

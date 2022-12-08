@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace PIS8_2.MVVM.Model;
 
@@ -48,6 +49,7 @@ public partial class Card
     public int IdOrg { get; set; }
 
     public int? IdAnimal { get; set; }
+    public TypeOrder TypeOrder { get; set; }
 
     public virtual Animal IdAnimalNavigation { get; set; }
 
@@ -58,4 +60,12 @@ public partial class Card
     public virtual Organisation IdOrgNavigation { get; set; }
 
     public virtual ICollection<Log> Logs { get; } = new List<Log>();
+}
+
+public enum TypeOrder
+{
+    [Description("План-график")]
+    Schedule,
+    [Description("Заказ-наряд")]
+    WorkOrder
 }
