@@ -24,7 +24,7 @@ public partial class Card
 
     public DateOnly Dateworkorder { get; set; }
 
-    public DateOnly Datetrapping { get; set; }
+    public DateTime Datetrapping { get; set; }
 
     public string Targetorder { get; set; }
 
@@ -49,7 +49,8 @@ public partial class Card
     public int IdOrg { get; set; }
 
     public int? IdAnimal { get; set; }
-    public TypeOrder TypeOrder { get; set; }
+
+    public string TypeOrder { get; set; }
 
     public virtual Animal IdAnimalNavigation { get; set; }
 

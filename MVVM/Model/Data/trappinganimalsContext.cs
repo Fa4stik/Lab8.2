@@ -30,7 +30,7 @@ public partial class TrappinganimalsContext : DbContext
     public virtual DbSet<Tuser> Tusers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=trappinganimals;Username=postgres;Password=123");
+        => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=trappinganimals;Username=postgres;Password=2476");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -129,9 +129,11 @@ public partial class TrappinganimalsContext : DbContext
                 .HasColumnName("targetorder");
 
             entity.Property(e => e.TypeOrder)
-                .HasDefaultValue()
                 //.HasConversion(c => c.ToString(), c => Enum.Parse<TypeOrder>(c))
+                .IsRequired()
+                .HasMaxLength(50)
                 .HasColumnName("typeorder");
+            
 
             entity.HasOne(d => d.IdAnimalNavigation).WithMany(p => p.Cards)
                 .HasForeignKey(d => d.IdAnimal)
