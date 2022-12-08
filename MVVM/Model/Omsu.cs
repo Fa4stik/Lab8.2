@@ -11,6 +11,8 @@ public partial class Omsu
 
     public int IdMunicip { get; set; }
 
+    public virtual ICollection<Card> Cards { get; } = new List<Card>();
+
     public virtual Municip IdMunicipNavigation { get; set; }
 
     public virtual ICollection<Tuser> Tusers { get; } = new List<Tuser>();

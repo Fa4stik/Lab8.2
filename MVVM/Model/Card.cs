@@ -11,6 +11,8 @@ public partial class Card
 
     public DateOnly Datemk { get; set; }
 
+    public int IdOmsu { get; set; }
+
     public int IdMunicip { get; set; }
 
     public string Adresstrapping { get; set; }
@@ -50,6 +52,8 @@ public partial class Card
     public virtual Animal IdAnimalNavigation { get; set; }
 
     public virtual Municip IdMunicipNavigation { get; set; }
+
+    public virtual Omsu IdOmsuNavigation { get; set; }
 
     public virtual Organisation IdOrgNavigation { get; set; }
 

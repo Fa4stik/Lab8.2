@@ -72,6 +72,7 @@ CREATE TABLE Card
 	id SERIAL PRIMARY KEY,
 	numMK INT NOT NULL, -- номер МК 
 	dateMK date NOT NULL, -- дата МК 
+	id_OMSU INT NOT NULL, -- орган местного самоуправления
 	id_municip INT NOT NULL, -- муниципальное образование
 	adressTrapping VARCHAR(50) NOT NULL, -- адрес отлова 
 	numWorkOrder INT NOT NULL, -- номер заказ-наряда 
@@ -95,7 +96,8 @@ CREATE TABLE Card
 	id_animal INT,
 	FOREIGN KEY (id_org) REFERENCES Organisation (id),
 	FOREIGN KEY (id_animal) REFERENCES Animal (id),
-	FOREIGN KEY (id_municip) REFERENCES Municip (id)
+	FOREIGN KEY (id_municip) REFERENCES Municip (id),
+	FOREIGN KEY (id_OMSU) REFERENCES OMSU (id)
 );
 
 CREATE TABLE Log

@@ -93,6 +93,7 @@ public partial class TrappinganimalsContext : DbContext
                 .HasColumnName("firstnameexecuter");
             entity.Property(e => e.IdAnimal).HasColumnName("id_animal");
             entity.Property(e => e.IdMunicip).HasColumnName("id_municip");
+            entity.Property(e => e.IdOmsu).HasColumnName("id_omsu");
             entity.Property(e => e.IdOrg).HasColumnName("id_org");
             entity.Property(e => e.Locality)
                 .IsRequired()
@@ -136,6 +137,11 @@ public partial class TrappinganimalsContext : DbContext
                 .HasForeignKey(d => d.IdMunicip)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("card_id_municip_fkey");
+
+            entity.HasOne(d => d.IdOmsuNavigation).WithMany(p => p.Cards)
+                .HasForeignKey(d => d.IdOmsu)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("card_id_omsu_fkey");
 
             entity.HasOne(d => d.IdOrgNavigation).WithMany(p => p.Cards)
                 .HasForeignKey(d => d.IdOrg)
