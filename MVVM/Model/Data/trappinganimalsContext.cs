@@ -129,7 +129,8 @@ public partial class TrappinganimalsContext : DbContext
                 .HasColumnName("targetorder");
 
             entity.Property(e => e.TypeOrder)
-                .HasConversion(c => c.ToString(), c => Enum.Parse<TypeOrder>(c))
+                .HasDefaultValue()
+                //.HasConversion(c => c.ToString(), c => Enum.Parse<TypeOrder>(c))
                 .HasColumnName("typeorder");
 
             entity.HasOne(d => d.IdAnimalNavigation).WithMany(p => p.Cards)
