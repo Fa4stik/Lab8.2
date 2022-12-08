@@ -17,7 +17,7 @@ namespace PIS8_2.MVVM.Model.Data
             var hashPassword = HashPassword(password);
             using (var db = new TrappinganimalsContext())
             {
-                var user = db.Tusers.Include(c => c.IdOrgNavigation).ToList();
+                var user = db.Tusers.Include(c => c.IdOrgNavigation).Include(c=>c.IdOmsuNavigation.IdMunicipNavigation).ToList();
                 return user.FirstOrDefault(u => u.Login == login && u.Passwordhash == hashPassword);
             }
         }
@@ -34,7 +34,7 @@ namespace PIS8_2.MVVM.Model.Data
             //var id = user.IdOrg ?? GetMunicip(user.IdOmsu);
             using (var db = new TrappinganimalsContext())
             {
-                return db.Cards.Include(c => c.IdOrgNavigation).Where(c => c.IdOrg == user.IdOrg).ToList();
+                return db.Cards.Include(c => c.IdOrgNavigation).Include(c => c.IdMunicipNavigation).Where(c => c.IdOrg == user.IdOrg).ToList();
             }
 
         }

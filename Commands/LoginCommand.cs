@@ -36,7 +36,7 @@ namespace PIS8_2.Commands
             var user = _conn.ExecuteUser(_viewModel.Login, _viewModel.Password);
             if (user != null)
             {
-                //_navigationService.Navigate(user);
+                _navigationService.Navigate(user);
             }
             else
             {

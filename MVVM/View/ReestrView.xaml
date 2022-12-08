@@ -37,7 +37,7 @@
                 </DataGridCheckBoxColumn>
                 <DataGridTextColumn Header="Номер МК" Binding="{Binding Nummk}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Дата заключения МК" Binding="{Binding Datemk}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Мун. обр."  IsReadOnly="True" />
+                <DataGridTextColumn Header="Мун. обр." Binding="{Binding IdMunicipNavigation.Namemunicip}"  IsReadOnly="True" />
                 <DataGridTextColumn Header="ОМСУ"  IsReadOnly="True" />
                 <DataGridTextColumn Header="Исполнитель МК" Binding="{Binding IdOrgNavigation.Nameorg}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Номер заказ-наряда" Binding="{Binding Numworkorder}" IsReadOnly="True" /> 
