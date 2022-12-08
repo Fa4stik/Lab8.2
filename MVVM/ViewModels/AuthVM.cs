@@ -44,7 +44,7 @@ namespace PIS8_2.MVVM.ViewModels
         private bool CanAuthCommandExecute(object parametr) => true;
         private void OnAuthCommandExecute(ICloseable window)
         {
-            if (connection.ExecuteUser(Login, Password)!=null)
+            if (connection.ExecuteUser(Login, Password) != null)
             {
                 new Reestr().Show();
                 CloseWindow(window);
@@ -53,7 +53,7 @@ namespace PIS8_2.MVVM.ViewModels
             {
                 MessageBox.Show("Неверный логин или пароль");
             }
-           
+
         }
 
         private RelayCommand<ICloseable> _closeWindowCommand;

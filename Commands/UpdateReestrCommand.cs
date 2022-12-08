@@ -24,7 +24,7 @@ namespace PIS8_2.Commands
 
         public override void Execute(object parameter)
         {
-            _viewModel.Cards=_conn.ExecuteCards(_viewModel.User).ToList();
+            _viewModel.Cards = _conn.ExecuteCards(_viewModel.User).ToList();
         }
     }
 }

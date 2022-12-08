@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +15,7 @@ namespace PIS8_2.MVVM.ViewModels
     internal class ReestrViewModel:ViewModel
     {
         private readonly Connection _conn;
-        public string Login => _user?.Login;
+        public Tuser User { get; }
         public string Login => User?.Login;
 
         private List<Card> _cards;
@@ -27,7 +27,7 @@ namespace PIS8_2.MVVM.ViewModels
             }
             set
             {
-                _cards=value;
+                _cards = value;
                 OnPropertyChanged(nameof(Cards));
             }
         }
@@ -38,9 +38,9 @@ namespace PIS8_2.MVVM.ViewModels
         public ICommand UpdateReestr { get; }
 
 
-        public ReestrViewModel(TUser user,NavigationStore navigationStore)
+        public ReestrViewModel(Tuser user, NavigationStore navigationStore)
         {
-            _conn=new Connection();
+            _conn = new Connection();
             User = user;
             Cards = _conn.ExecuteCards(User).ToList();
             UpdateReestr = new UpdateReestrCommand(this);
@@ -67,7 +67,7 @@ namespace PIS8_2.MVVM.ViewModels
             AddRequestCommand =
                 new AddRequestTypeCommand(new NavigationService<RequestTypeViewModel>(navigationStore,
                     () => new RequestTypeViewModel(navigationStore)));
-            
+
         }
     }
 }

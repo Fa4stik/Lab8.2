@@ -65,8 +65,8 @@ namespace PIS8_2.MVVM.ViewModels
         {
             #region Commands
 
-            ParameterNavigationService<TUser, ReestrViewModel> navigationService =
-                new ParameterNavigationService<TUser, ReestrViewModel>(
+            ParameterNavigationService<Tuser, ReestrViewModel> navigationService =
+                new ParameterNavigationService<Tuser, ReestrViewModel>(
                     navigationStore,
                     (parameter) => new ReestrViewModel(parameter, navigationStore));
             LoginCommand = new LoginCommand(this, navigationService);
