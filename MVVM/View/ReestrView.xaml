@@ -7,8 +7,15 @@
       xmlns:vm="clr-namespace:PIS8_2.MVVM.ViewModels"
       xmlns:con="clr-namespace:PIS8_2.Converters"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="1600
-             ">
+      d:DesignHeight="450" d:DesignWidth="1600"
+      
+      d:DataContext="{d:DesignInstance vm:ReestrViewModel, IsDesignTimeCreatable=True}"
+      >
+
+
+    <!--d:DataContext="{d:DesignInstance vm:ReestrViewModel, IsDesignTimeCreatable=True}"-->  <!--Для интелисенса-->
+
+    
     <UserControl.Resources>
         <con:EnumToDescription x:Key="EnumToDescription" />
     </UserControl.Resources>

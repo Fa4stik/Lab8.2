@@ -4,18 +4,29 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PIS8_2.MVVM.View"
+      xmlns:vm="clr-namespace:PIS8_2.MVVM.ViewModels"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800">
+      d:DesignHeight="450" d:DesignWidth="800"
+      d:DataContext="{d:DesignInstance vm:ScheduleTypeViewModel, IsDesignTimeCreatable=True}"
+>
 
+    <!--d:DataContext="{d:DesignInstance vm:ScheduleTypeViewModel, IsDesignTimeCreatable=True}"-->
+    <!--Для интелисенса-->
 
-    <ScrollViewer>
-        <StackPanel Margin="0,0,0,-8">
+    <ScrollViewer >
+        <StackPanel Margin="0,0,0,-8" >
             <Menu>
                 <MenuItem Header="&lt;" Command="{Binding BackToReestrCommand}" />
                 <MenuItem Header="Экспорт" />
                 <MenuItem Header="Редактировать"></MenuItem>
             </Menu>
             <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Width="250" TextAlignment="Right" Text="Номер МК:" FontSize="14" Padding="20,0"
+                               Margin="0,20,0,0">
+                    </TextBlock>
+                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.Nummk}"></TextBox>
+                </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Width="250" TextAlignment="Right" Text="Дата отлова:" FontSize="14" Padding="20,0"
                                Margin="0,20,0,0">
@@ -32,7 +43,7 @@
                     <TextBlock Width="250" TextAlignment="Right" Text="Место отлова:" FontSize="14" Padding="20,0"
                                Margin="0,20,0,0">
                     </TextBlock>
-                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.Datetrapping}"></TextBox>
+                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.Adresstrapping}"></TextBox>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
