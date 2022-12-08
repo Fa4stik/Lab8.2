@@ -25,7 +25,7 @@
                 <DataGridTextColumn Binding="{Binding Path=CaptureOrder}" IsReadOnly="True" Header="Отлов по заявке или план-графику"/>
             </DataGrid.Columns>
         </DataGrid>-->
-        <DataGrid ItemsSource="{Binding Cards}" Margin="0,30,0,0" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"  >
+        <DataGrid Name="DataGridReestr" ItemsSource="{Binding Cards}" Margin="0,30,0,0" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"  >
 
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn IsReadOnly="False" CanUserReorder="False" >
@@ -46,6 +46,7 @@
                 <DataGridTextColumn Header="Дата отлова" Binding="{Binding Dateworkorder}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Дата выдачи заказ-наряда" Binding="{Binding Datetrapping}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Цель отлова" Binding="{Binding Targetorder}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Тип отлова" Binding="{Binding Targetorder}" IsReadOnly="True" />
 
                 <!--Номер МК
                 Дата заключения МК
@@ -87,7 +88,7 @@
                     <DockPanel HorizontalAlignment="Stretch"/>
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
-            <MenuItem Header="Открыть"/>
+            <MenuItem Header="Открыть" CommandParameter="{Binding ElementName=DataGridReestr,Path=SelectedItem}" Command="{Binding OpenScheduleCardCommand}" />
             <MenuItem Header="Добавить">
                 <MenuItem Header="По заявке" Background="Aqua" Command="{Binding AddRequestCommand}"></MenuItem>
                 <MenuItem Header="По плану графику" Background="Aqua" Command="{Binding AddScheduleCommand}"></MenuItem>

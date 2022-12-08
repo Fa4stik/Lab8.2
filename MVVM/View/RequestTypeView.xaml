@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800">
 
-    <ScrollViewer Margin="0,0,0,13">
+    <ScrollViewer >
         <Grid ScrollViewer.CanContentScroll="True" Height="1055">
 
             <Menu>

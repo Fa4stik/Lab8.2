@@ -4,27 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PIS8_2.Commands.Base;
-using PIS8_2.MVVM.Model.Data;
+using PIS8_2.MVVM.Model;
 using PIS8_2.MVVM.ViewModels;
+using PIS8_2.Service;
 
 namespace PIS8_2.Commands
 {
-    internal class UpdateReestrCommand:Command
+    internal class OpenScheduleCardCommand:Command
     {
         private readonly ReestrViewModel _viewModel;
-        private readonly Connection _conn;
+        private readonly ParameterNavigationService<Card, ScheduleTypeViewModel> _navigationService;
+        
 
-        public UpdateReestrCommand(ReestrViewModel viewModel)
+
+        public OpenScheduleCardCommand(ReestrViewModel viewModel, ParameterNavigationService<Card, ScheduleTypeViewModel> navigationService)
         {
             _viewModel = viewModel;
-            _conn = new Connection();
+            _navigationService = navigationService;
         }
-
         public override bool CanExecute(object parameter) => true;
 
         public override void Execute(object parameter)
         {
-           // _viewModel.Cards = _conn.ExecuteCards(_viewModel.User).ToList();
+            _navigationService.Navigate((Card)parameter);
         }
     }
 }

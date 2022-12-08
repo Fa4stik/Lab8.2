@@ -13,11 +13,11 @@ namespace PIS8_2.MVVM.ViewModels
     internal class RequestTypeViewModel:ViewModel
     {
         public ICommand BackToReestrCommand { get; }
-        public RequestTypeViewModel(NavigationStore navigationStore)
+        public RequestTypeViewModel(NavigationStore navigationStore,UserStore user)
         {
-            BackToReestrCommand =
-                new BackToReestrCommand(new NavigationService<ReestrViewModel>(navigationStore,
-                    () => new ReestrViewModel(navigationStore)));
+            //BackToReestrCommand =
+            //    new BackToReestrCommand(new NavigationService<ReestrViewModel>(navigationStore,
+            //        () => new ReestrViewModel(navigationStore)));
         }
     }
 }

@@ -18,14 +18,16 @@ namespace PIS8_2.Commands
     internal class LoginCommand:Command
     {
         private readonly LoginViewModel _viewModel;
-        private readonly ParameterNavigationService<Tuser, ReestrViewModel> _navigationService;
+        private readonly NavigationService<ReestrViewModel> _navigationService;
         private readonly Connection _conn;
+        private readonly UserStore _userStore;
 
 
-        public LoginCommand(LoginViewModel viewModel, ParameterNavigationService<Tuser, ReestrViewModel> navigationService)
+        public LoginCommand(LoginViewModel viewModel, UserStore userStore, NavigationService<ReestrViewModel> navigationService)
         {
             _viewModel = viewModel;
             _navigationService = navigationService;
+            _userStore = userStore;
             _conn = new Connection();
         }
 
@@ -36,7 +38,8 @@ namespace PIS8_2.Commands
             var user = _conn.ExecuteUser(_viewModel.Login, _viewModel.Password);
             if (user != null)
             {
-                _navigationService.Navigate(user);
+                _userStore.CurrentUser = user;
+                _navigationService.Navigate();
             }
             else
             {

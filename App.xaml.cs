@@ -18,9 +18,10 @@ namespace PIS8_2
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            UserStore userStore = new UserStore();
             NavigationStore navigationStore = new NavigationStore();
 
-            navigationStore.CurrentViewModel = new LoginViewModel(navigationStore);
+            navigationStore.CurrentViewModel = new LoginViewModel(navigationStore, userStore);
 
             MainWindow = new MainWindow()
             {

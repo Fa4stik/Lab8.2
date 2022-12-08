@@ -61,15 +61,15 @@ namespace PIS8_2.MVVM.ViewModels
 
         public ICommand LoginCommand { get; }
 
-        public LoginViewModel(NavigationStore navigationStore)
+        public LoginViewModel(NavigationStore navigationStore, UserStore userStore)
         {
             #region Commands
 
-            ParameterNavigationService<Tuser, ReestrViewModel> navigationService =
-                new ParameterNavigationService<Tuser, ReestrViewModel>(
+            var navigationService =
+                new NavigationService<ReestrViewModel>(
                     navigationStore,
-                    (parameter) => new ReestrViewModel(parameter, navigationStore));
-            LoginCommand = new LoginCommand(this, navigationService);
+                    () => new ReestrViewModel(userStore, navigationStore));
+            LoginCommand = new LoginCommand(this, userStore, navigationService);
 
             #endregion
 

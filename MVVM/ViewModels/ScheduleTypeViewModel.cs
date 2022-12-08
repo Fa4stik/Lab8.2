@@ -7,17 +7,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using PIS8_2.MVVM.Model;
 
 namespace PIS8_2.MVVM.ViewModels
 {
     internal class ScheduleTypeViewModel:ViewModel
     {
-        public ICommand BackToReestrCommand { get; }
-        public ScheduleTypeViewModel(NavigationStore navigationStore)
+        private Card _card;
+
+        public Card Card
         {
+            get => _card;
+            set
+            {
+                _card = value;
+                OnPropertyChanged("Card");
+            }
+        }
+        
+        
+
+        public ICommand BackToReestrCommand { get; }
+        public ScheduleTypeViewModel(NavigationStore navigationStore,UserStore userStore,Card selectedCard)
+        {
+            _card = selectedCard;
+
+
+
             BackToReestrCommand =
                 new BackToReestrCommand(new NavigationService<ReestrViewModel>(navigationStore,
-                    () => new ReestrViewModel(navigationStore)));
+                    () => new ReestrViewModel(userStore, navigationStore)));
         }
     }
 }
