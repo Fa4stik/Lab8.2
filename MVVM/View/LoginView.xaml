@@ -1,9 +1,10 @@
-﻿<UserControl x:Class="PIS8_2.MVVM.View.LoginView"
+<UserControl x:Class="PIS8_2.MVVM.View.LoginView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PIS8_2.MVVM.View"
+      xmlns:components="clr-namespace:PasswordBoxMVVM.Components"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800">
 
@@ -21,6 +22,7 @@
                 <Button  Width="150" Margin="0,10,0,0" Height="25" Content="Войти" Background="DodgerBlue" FontSize="14"
                          Foreground="White" Command="{Binding LoginCommand}"/>
 
+                <TextBlock Text="{Binding Error}" HorizontalAlignment="Center" Visibility="{Binding VisabilitiError}" d:Visibility="Collapsed"  Margin="0,20,0,0" FontSize="14" Foreground="Red" />
             </StackPanel>
         </Border>
     </Grid>

@@ -1,14 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Commands",
-    "\\Commands\\Base",
     "\\MVVM",
     "\\MVVM\\View",
-    "\\MVVM\\ViewModels",
-    "\\MVVM\\ViewModels\\Base",
-    "\\Properties"
+    "\\MVVM\\ViewModels"
   ],
-  "SelectedNode": "\\App.xaml.cs",
+  "SelectedNode": "\\MVVM\\ViewModels\\ReestrViewModel.cs",
   "PreviewInSolutionExplorer": false
 }
