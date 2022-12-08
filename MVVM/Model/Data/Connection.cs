@@ -34,7 +34,7 @@ namespace PIS8_2.MVVM.Model.Data
             //var id = user.IdOrg ?? GetMunicip(user.IdOmsu);
             using (var db = new TrappinganimalsContext())
             {
-                return db.Cards.Include(c => c.IdOrgNavigation).Include(c => c.IdMunicipNavigation).Where(c => c.IdOrg == user.IdOrg).ToList();
+                return db.Cards.Include(c => c.IdOrgNavigation).Include(c => c.IdMunicipNavigation).Include(c => c.IdOmsuNavigation).Where(c => c.IdOrg == user.IdOrg).ToList();
             }
 
         }

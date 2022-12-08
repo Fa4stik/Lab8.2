@@ -42,7 +42,7 @@
                 <DataGridTextColumn Header="Номер МК" Binding="{Binding Nummk}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Дата заключения МК" Binding="{Binding Datemk}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Мун. обр." Binding="{Binding IdMunicipNavigation.Namemunicip}"  IsReadOnly="True" />
-                <DataGridTextColumn Header="ОМСУ"  IsReadOnly="True" />
+                <DataGridTextColumn Header="ОМСУ" Binding="{Binding IdOmsuNavigation.Nameomsu}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Исполнитель МК" Binding="{Binding IdOrgNavigation.Nameorg}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Номер заказ-наряда" Binding="{Binding Numworkorder}" IsReadOnly="True" /> 
                 <DataGridTextColumn Header="Населённый пункт" Binding="{Binding Locality}" IsReadOnly="True" />
@@ -50,7 +50,7 @@
                 <DataGridTextColumn Header="Дата отлова" Binding="{Binding Dateworkorder}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Дата выдачи заказ-наряда" Binding="{Binding Datetrapping}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Цель отлова" Binding="{Binding Targetorder}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Тип отлова" Binding="{Binding TypeOrder, Converter={StaticResource EnumToDescription}, ConverterParameter=0}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Тип отлова" Binding="{Binding TypeOrder}" IsReadOnly="True" />
 
                 <!--Номер МК
                 Дата заключения МК

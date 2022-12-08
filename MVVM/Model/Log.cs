@@ -12,6 +12,7 @@ public partial class Log
     public int IdUser { get; set; }
 
     public int IdCard { get; set; }
+    public string Operation { get; set; }
 
     public virtual Card IdCardNavigation { get; set; }
 
