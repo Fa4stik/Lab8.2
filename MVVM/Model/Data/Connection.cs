@@ -14,7 +14,7 @@ namespace PIS8_2.MVVM.Model.Data
         //достаем из бд юзера или return null 
         public Tuser ExecuteUser(string login, string password)
         {
-            var hashPassword = (password);
+            var hashPassword = HashPassword(password);
             using (var db = new TrappinganimalsContext())
             {
                 var user = db.Tusers.Include(c => c.IdOrgNavigation).Include(c=>c.IdOmsuNavigation.IdMunicipNavigation).ToList();

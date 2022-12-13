@@ -4,16 +4,10 @@
     <ProjectView>ShowAllFiles</ProjectView>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="MVVM\View\Authorization.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="MVVM\View\LoginView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MVVM\View\MainWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="MVVM\View\Reestr.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MVVM\View\ReestrView.xaml.cs">
@@ -27,16 +21,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="MVVM\View\Authorization.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="MVVM\View\LoginView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MVVM\View\MainWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="MVVM\View\Reestr.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MVVM\View\ReestrView.xaml">
