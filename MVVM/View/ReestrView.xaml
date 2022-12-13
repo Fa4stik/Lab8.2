@@ -7,8 +7,15 @@
       xmlns:vm="clr-namespace:PIS8_2.MVVM.ViewModels"
       xmlns:con="clr-namespace:PIS8_2.Converters"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="1600
-             ">
+      d:DesignHeight="450" d:DesignWidth="1600"
+      
+      d:DataContext="{d:DesignInstance vm:ReestrViewModel, IsDesignTimeCreatable=True}"
+      >
+
+
+    <!--d:DataContext="{d:DesignInstance vm:ReestrViewModel, IsDesignTimeCreatable=True}"-->  <!--Для интелисенса-->
+
+    
     <UserControl.Resources>
         <con:EnumToDescription x:Key="EnumToDescription" />
     </UserControl.Resources>
@@ -42,12 +49,13 @@
                 <DataGridTextColumn Header="Номер МК" Binding="{Binding Nummk}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Дата заключения МК" Binding="{Binding Datemk}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Мун. обр." Binding="{Binding IdMunicipNavigation.Namemunicip}"  IsReadOnly="True" />
-                <DataGridTextColumn Header="ОМСУ" Binding="{Binding IdOmsuNavigation.Nameomsu}" IsReadOnly="True" />
+                <DataGridTextColumn Header="ОМСУ" Binding="{Binding IdOmsuNavigation.Nameomsu}"  IsReadOnly="True" />
                 <DataGridTextColumn Header="Исполнитель МК" Binding="{Binding IdOrgNavigation.Nameorg}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Номер заказ-наряда" Binding="{Binding Numworkorder}" IsReadOnly="True" /> 
                 <DataGridTextColumn Header="Населённый пункт" Binding="{Binding Locality}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Дата выдачи заказ-наряда" Binding="{Binding Dateworkorder}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Дата отлова" Binding="{Binding Datetrapping}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Дата отлова" Binding="{Binding Dateworkorder}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Дата выдачи заказ-наряда" Binding="{Binding Datetrapping}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Цель отлова" Binding="{Binding Targetorder}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Тип отлова" Binding="{Binding TypeOrder}" IsReadOnly="True" />
 
