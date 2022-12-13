@@ -12,7 +12,7 @@ namespace PIS8_2.MVVM.Model.ExportExcel
 {
     internal class ExportExcelReestr
     {
-        public byte[] GenerateReport(ICollection<ICollection<object>> item)
+        public byte[] GenerateReport(List<LimitedCard> item)
         {
             var package = new ExcelPackage();
 
@@ -25,17 +25,18 @@ namespace PIS8_2.MVVM.Model.ExportExcel
             "Дата отлова", "Цель отлова", "Тип отлова"};
             sheet.Cells[1, 1].LoadFromArrays(new object[][] { header });
 
-            // Style line header
-            FullBorderFillThin(1, 1, 1, header.Length, sheet);
+            // Style line and text
+            FullBorderFillThin(1, 1, item.Count+1, header.Length, sheet);
+            sheet.Cells[1,1,1, header.Length].Style.Font.Bold = true;
 
             // Fill cell
             var i = 2;
             foreach (var row in item)
             {
                 var j = 1;
-                foreach (var column in row)
+                foreach (var column in row.GetType().GetProperties().Skip(1))
                 {
-                    sheet.Cells[i, j].Value = row.ToString();
+                    sheet.Cells[i, j].Value = column.GetValue(row);
                     j++;
                 }
                 i++;
@@ -55,6 +56,14 @@ namespace PIS8_2.MVVM.Model.ExportExcel
             styleHeader.Border.Right.Style = ExcelBorderStyle.Thin;
         }
 
-        public void SaveToExcel(string path, byte[] reportExcel) => File.WriteAllBytes(path, reportExcel);
+        public void SaveToExcel(byte[] reportExcel)
+        {
+            var saveDialog = new Microsoft.Win32.SaveFileDialog();
+            saveDialog.FileName = "ExcelReestr.xlsx";
+            saveDialog.DefaultExt = ".xlsx";
+            saveDialog.Filter = "Excel documents (.xlsx)|*.xlsx";
+            saveDialog.ShowDialog();
+            File.WriteAllBytes(saveDialog.FileName, reportExcel);
+        }
     }
 }

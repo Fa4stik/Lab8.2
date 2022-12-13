@@ -31,6 +31,7 @@ namespace PIS8_2.MVVM.ViewModels
         public ICommand AddScheduleCommand { get; }
         public ICommand UpdateReestr { get; }
         public ICommand OpenScheduleCardCommand { get; }
+        public ICommand ExportExcelCommand { get; }
 
         
         public ReestrViewModel(UserStore userStore, NavigationStore navigationStore)
@@ -55,6 +56,8 @@ namespace PIS8_2.MVVM.ViewModels
             AddRequestCommand =
                 new AddRequestTypeCommand(new NavigationService<RequestTypeViewModel>(navigationStore,
                     () => new RequestTypeViewModel(navigationStore,userStore)));
+
+            ExportExcelCommand = new ExportExcelCommand(this);
 
         }
     }

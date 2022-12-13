@@ -22,7 +22,7 @@ namespace PIS8_2.MVVM.Model.Data
             }
         }
 
-        static string HashPassword(string password)
+        private static string HashPassword(string password)
         {
             byte[] bytes = Encoding.UTF8.GetBytes(password);
             return Convert.ToHexString(SHA256.HashData(bytes)).ToLower();
@@ -44,6 +44,19 @@ namespace PIS8_2.MVVM.Model.Data
             using (var db = new TrappinganimalsContext())
             {
                 return db.Municips.First(m => m.Id == idOmsu).Id;
+            }
+        }
+
+        public Card ExecuteCardId(int id)
+        {
+            using (var db = new TrappinganimalsContext())
+            {
+                return db
+                    .Cards
+                    .Include(c => c.IdOrgNavigation)
+                    .Include(c => c.IdMunicipNavigation)
+                    .Include(c => c.IdOmsuNavigation)
+                    .FirstOrDefault(c => c.Id == id);
             }
         }
     }

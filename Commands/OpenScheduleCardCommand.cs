@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OfficeOpenXml;
 using PIS8_2.Commands.Base;
 using PIS8_2.MVVM.Model;
+using PIS8_2.MVVM.Model.Data;
 using PIS8_2.MVVM.ViewModels;
 using PIS8_2.Service;
 
@@ -14,6 +16,7 @@ namespace PIS8_2.Commands
     {
         private readonly ReestrViewModel _viewModel;
         private readonly ParameterNavigationService<Card, ScheduleTypeViewModel> _navigationService;
+        private readonly Connection _conn;
         
 
 
@@ -26,7 +29,8 @@ namespace PIS8_2.Commands
 
         public override void Execute(object parameter)
         {
-            _navigationService.Navigate((Card)parameter);
+            var card = _conn.ExecuteCardId((parameter as LimitedCard).Id);
+            _navigationService.Navigate(card);
         }
     }
 }
