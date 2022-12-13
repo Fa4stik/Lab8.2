@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using PIS8_2.Commands;
 using PIS8_2.MVVM.Model.Data;
 using PIS8_2.MVVM.Model;
+using PIS8_2.MVVM.View;
 
 namespace PIS8_2.MVVM.ViewModels
 {

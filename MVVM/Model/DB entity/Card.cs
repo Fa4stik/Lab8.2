@@ -24,7 +24,7 @@ public partial class Card
 
     public DateOnly Dateworkorder { get; set; }
 
-    public DateTime Datetrapping { get; set; }
+    public DateOnly Datetrapping { get; set; }
 
     public string Targetorder { get; set; }
 
@@ -49,8 +49,9 @@ public partial class Card
     public int IdOrg { get; set; }
 
     public int? IdAnimal { get; set; }
-
     public string TypeOrder { get; set; }
+    public string TypeApplicant { get; set; }
+    public string[] AccessRoles { get; set; }
 
     public virtual Animal IdAnimalNavigation { get; set; }
 
@@ -61,12 +62,4 @@ public partial class Card
     public virtual Organisation IdOrgNavigation { get; set; }
 
     public virtual ICollection<Log> Logs { get; } = new List<Log>();
-}
-
-public enum TypeOrder
-{
-    [Description("План-график")]
-    Schedule,
-    [Description("Заказ-наряд")]
-    WorkOrder
 }

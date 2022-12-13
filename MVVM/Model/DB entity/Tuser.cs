@@ -14,6 +14,7 @@ public partial class Tuser
     public string Login { get; set; }
 
     public string Passwordhash { get; set; }
+    public string Role { get; set; }
 
     public virtual Omsu IdOmsuNavigation { get; set; }
 

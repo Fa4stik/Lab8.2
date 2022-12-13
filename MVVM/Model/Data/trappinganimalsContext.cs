@@ -30,7 +30,7 @@ public partial class TrappinganimalsContext : DbContext
     public virtual DbSet<Tuser> Tusers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=trappinganimals;Username=postgres;Password=2476");
+        => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=trappinganimals;Username=postgres;Password=123");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -62,6 +62,13 @@ public partial class TrappinganimalsContext : DbContext
             entity.Property(e => e.Tail)
                 .HasMaxLength(50)
                 .HasColumnName("tail");
+            // enum
+            entity.Property(e => e.AnimalType)
+                .HasColumnName("animaltype");
+            entity.Property(e => e.Size)
+                .HasColumnName("size");
+            entity.Property(e => e.Hair)
+                .HasColumnName("hair");
         });
 
         modelBuilder.Entity<Card>(entity =>
@@ -127,13 +134,17 @@ public partial class TrappinganimalsContext : DbContext
                 .IsRequired()
                 .HasMaxLength(50)
                 .HasColumnName("targetorder");
-
+            // ~~~ enum
             entity.Property(e => e.TypeOrder)
-                //.HasConversion(c => c.ToString(), c => Enum.Parse<TypeOrder>(c))
                 .IsRequired()
-                .HasMaxLength(50)
+                //.HasConversion(c => c.ToString(), c => Enum.Parse<TypeOrder>(c)) || Для релиза необходимо, чтобы все значения в enum DB были на англ.
                 .HasColumnName("typeorder");
-            
+            entity.Property(e => e.TypeApplicant)
+                .IsRequired()
+                .HasColumnName("typeapplicant");
+            entity.Property(e => e.AccessRoles)
+                .IsRequired()
+                .HasColumnName("accessroles");
 
             entity.HasOne(d => d.IdAnimalNavigation).WithMany(p => p.Cards)
                 .HasForeignKey(d => d.IdAnimal)
@@ -161,10 +172,22 @@ public partial class TrappinganimalsContext : DbContext
 
             entity.ToTable("log");
 
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Date).HasColumnName("date");
-            entity.Property(e => e.IdCard).HasColumnName("id_card");
-            entity.Property(e => e.IdUser).HasColumnName("id_user");
+            entity.Property(e => e.Id)
+                .IsRequired()
+                .HasColumnName("id");
+            entity.Property(e => e.Date)
+                .IsRequired()
+                .HasColumnName("date");
+            entity.Property(e => e.IdCard)
+                .IsRequired()
+                .HasColumnName("id_card");
+            entity.Property(e => e.IdUser)
+                .IsRequired()
+                .HasColumnName("id_user");
+            // enum
+            entity.Property(e => e.Operation)
+                .IsRequired()
+                .HasColumnName("operation");
 
             entity.HasOne(d => d.IdCardNavigation).WithMany(p => p.Logs)
                 .HasForeignKey(d => d.IdCard)
@@ -259,6 +282,10 @@ public partial class TrappinganimalsContext : DbContext
                 .IsRequired()
                 .HasMaxLength(66)
                 .HasColumnName("passwordhash");
+            // enum
+            entity.Property(e => e.Role)
+                .IsRequired()
+                .HasColumnName("role");
 
             entity.HasOne(d => d.IdOmsuNavigation).WithMany(p => p.Tusers)
                 .HasForeignKey(d => d.IdOmsu)
