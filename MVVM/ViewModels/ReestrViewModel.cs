@@ -15,13 +15,12 @@ namespace PIS8_2.MVVM.ViewModels
 {
     internal class ReestrViewModel:ViewModel
     {
-        private readonly Connection _conn;
         private UserStore UserStore { get; }
         public string Login => UserStore.CurrentUser.Login;
 
 
-        private List<Card> _cards;
-        public List<Card> Cards
+        private List<LimitedCard> _cards;
+        public List<LimitedCard> Cards
         {
             get => _cards;
             set => SetField(ref _cards, value, nameof(Cards));
@@ -36,14 +35,16 @@ namespace PIS8_2.MVVM.ViewModels
         
         public ReestrViewModel(UserStore userStore, NavigationStore navigationStore)
         {
-            _conn = new Connection();
             UserStore = userStore;
-            Cards = _conn.ExecuteCards(UserStore.CurrentUser).ToList();
+
+
+            UpdateReestr = new UpdateReestrCommand(this, userStore);
+            UpdateReestr.Execute(null);
 
             OpenScheduleCardCommand = new OpenScheduleCardCommand(this,
                 new ParameterNavigationService<Card, ScheduleTypeViewModel>(navigationStore,
                     (parameter) => new ScheduleTypeViewModel(navigationStore,userStore,parameter)));
-            UpdateReestr = new UpdateReestrCommand(this);
+            
 
             ExitCommand =
                 new ExitCommand(new NavigationService<LoginViewModel>(navigationStore,

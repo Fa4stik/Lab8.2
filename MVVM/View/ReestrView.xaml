@@ -48,9 +48,9 @@
                 </DataGridCheckBoxColumn>
                 <DataGridTextColumn Header="Номер МК" Binding="{Binding Nummk}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Дата заключения МК" Binding="{Binding Datemk}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Мун. обр." Binding="{Binding IdMunicipNavigation.Namemunicip}"  IsReadOnly="True" />
-                <DataGridTextColumn Header="ОМСУ" Binding="{Binding IdOmsuNavigation.Nameomsu}"  IsReadOnly="True" />
-                <DataGridTextColumn Header="Исполнитель МК" Binding="{Binding IdOrgNavigation.Nameorg}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Мун. обр." Binding="{Binding Namemunicip}"  IsReadOnly="True" />
+                <DataGridTextColumn Header="ОМСУ" Binding="{Binding Nameomsu}"  IsReadOnly="True" />
+                <DataGridTextColumn Header="Исполнитель МК" Binding="{Binding Nameorg}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Номер заказ-наряда" Binding="{Binding Numworkorder}" IsReadOnly="True" /> 
                 <DataGridTextColumn Header="Населённый пункт" Binding="{Binding Locality}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Дата выдачи заказ-наряда" Binding="{Binding Dateworkorder}" IsReadOnly="True" />

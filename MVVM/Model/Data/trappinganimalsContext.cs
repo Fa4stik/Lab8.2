@@ -30,7 +30,7 @@ public partial class TrappinganimalsContext : DbContext
     public virtual DbSet<Tuser> Tusers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=trappinganimals;Username=postgres;Password=123");
+        => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=trappinganimals;Username=postgres;Password=2476");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

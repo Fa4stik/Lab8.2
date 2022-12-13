@@ -4,19 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PIS8_2.Commands.Base;
+using PIS8_2.Converters;
+using PIS8_2.MVVM.Model;
 using PIS8_2.MVVM.Model.Data;
 using PIS8_2.MVVM.ViewModels;
+using PIS8_2.Stores;
 
 namespace PIS8_2.Commands
 {
     internal class UpdateReestrCommand:Command
     {
         private readonly ReestrViewModel _viewModel;
+        private readonly UserStore _userStore;
         private readonly Connection _conn;
 
-        public UpdateReestrCommand(ReestrViewModel viewModel)
+        public UpdateReestrCommand(ReestrViewModel viewModel, UserStore userStore)
         {
             _viewModel = viewModel;
+            _userStore = userStore;
             _conn = new Connection();
         }
 
@@ -24,7 +29,8 @@ namespace PIS8_2.Commands
 
         public override void Execute(object parameter)
         {
-           // _viewModel.Cards = _conn.ExecuteCards(_viewModel.User).ToList();
+            var cards=_conn.ExecuteCards(_userStore.CurrentUser);
+            _viewModel.Cards = ConverterCardsToLimitedCards.ConvertCardsToLimitedCards(cards);
         }
     }
 }
