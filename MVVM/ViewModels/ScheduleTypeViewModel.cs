@@ -24,7 +24,7 @@ namespace PIS8_2.MVVM.ViewModels
         
 
         public ICommand BackToReestrCommand { get; }
-        public ScheduleTypeViewModel(NavigationStore navigationStore,UserStore userStore,Card selectedCard)
+        public ScheduleTypeViewModel(NavigationStore navigationStore,UserStore userStore, Card selectedCard)
         {
             _card = selectedCard;
 

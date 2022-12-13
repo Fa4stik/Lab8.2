@@ -24,12 +24,15 @@ namespace PIS8_2.Commands
         {
             _viewModel = viewModel;
             _navigationService = navigationService;
+            _conn=new Connection();
         }
         public override bool CanExecute(object parameter) => true;
 
         public override void Execute(object parameter)
         {
-            var card = _conn.ExecuteCardId((parameter as LimitedCard).Id);
+            var limitedCard = parameter as LimitedCard;
+            if (limitedCard == null) return;
+            var card = _conn.ExecuteCardId(limitedCard.Id);
             _navigationService.Navigate(card);
         }
     }

@@ -24,7 +24,7 @@ public partial class Card
 
     public DateOnly Dateworkorder { get; set; }
 
-    public DateOnly Datetrapping { get; set; }
+    public DateTime Datetrapping { get; set; }
 
     public string Targetorder { get; set; }
 
