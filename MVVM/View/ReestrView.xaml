@@ -89,7 +89,7 @@
                 <MenuItem Header="По плану графику" Background="Aqua" Command="{Binding AddScheduleCommand}"></MenuItem>
             </MenuItem>
             <MenuItem Header="Редактировать"/>
-            <MenuItem Header="Экспорт Excel"/>
+            <MenuItem Header="Экспорт Excel" Command="{Binding ExportExcelCommand}"/>
             <MenuItem Header="Фильтр"/>
             <MenuItem Header="Удалить"/>
             <MenuItem Header="Сортировка"/>
