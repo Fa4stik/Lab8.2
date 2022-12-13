@@ -40,27 +40,7 @@ namespace PIS8_2
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //byte[] hashByte = HashPassword(Password.Text);
-            //var hashString = HashToString(hashByte);
-            //using (var db = new trappinganimalsContext())
-            //{
-            //    var user = db.Tusers.ToList();
-            //    if (user.Exists(x => x.Login == Login.Text && x.Passwordhash == hashString))
-            //        new Reestr().Show();
-            //    else
-            //        MessageBox.Show("Неверный логин/пароль");
-            //}
-        }
 
-        static byte[] HashPassword(string password)
-        {
-            byte[] bytes = Encoding.UTF8.GetBytes(password);
-            return SHA256.HashData(bytes);
-        }
-
-        static string HashToString(byte[] hash)
-        {
-            return Convert.ToHexString(hash).ToLower();
         }
     }
 }

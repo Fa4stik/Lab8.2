@@ -18,11 +18,7 @@ namespace PIS8_2.MVVM.ViewModels
         public string Login
         {
             get => _login;
-            set
-            {
-                _login = value;
-                OnPropertyChanged();
-            }
+            set => SetField(ref _login, value, "Login"); 
         }
 
         private string _password;
@@ -30,33 +26,21 @@ namespace PIS8_2.MVVM.ViewModels
         public string Password
         {
             get => _password;
-            set
-            {
-                _password = value;
-                OnPropertyChanged();
-            }
+            set => SetField(ref _password, value, "Password");
         }
 
         private string _error;
         public string Error
         {
             get => _error;
-            set
-            {
-                _error = value;
-                OnPropertyChanged(nameof(Error));
-            }
+            set => SetField(ref _error, value, "Error");
         }
 
         private Visibility _visabilitiError;
         public Visibility VisabilitiError
         {
             get => _visabilitiError;
-            set
-            {
-                _visabilitiError = value;
-                OnPropertyChanged(nameof(VisabilitiError));
-            }
+            set => SetField(ref _visabilitiError, value, nameof(VisabilitiError));
         }
 
         public ICommand LoginCommand { get; }

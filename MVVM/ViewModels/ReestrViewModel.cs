@@ -23,15 +23,8 @@ namespace PIS8_2.MVVM.ViewModels
         private List<Card> _cards;
         public List<Card> Cards
         {
-            get
-            {
-                return _cards;
-            }
-            set
-            {
-                _cards = value;
-                OnPropertyChanged(nameof(Cards));
-            }
+            get => _cards;
+            set => SetField(ref _cards, value, nameof(Cards));
         }
 
         public ICommand ExitCommand { get; }

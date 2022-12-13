@@ -25,13 +25,13 @@ namespace PIS8_2.MVVM.ViewModels
         
         
         public string Login { get =>_login;
-            set => SetField(ref _login, value);
+            set => SetField(ref _login, value, "Login");
         }
 
         public string Password
         {
             get => _password;
-            set => SetField(ref _password, value);
+            set => SetField(ref _password, value, "Password");
         }
 
         // Тестовые команды

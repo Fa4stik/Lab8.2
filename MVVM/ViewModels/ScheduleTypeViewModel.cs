@@ -18,11 +18,7 @@ namespace PIS8_2.MVVM.ViewModels
         public Card Card
         {
             get => _card;
-            set
-            {
-                _card = value;
-                OnPropertyChanged("Card");
-            }
+            set => SetField(ref _card, value, nameof(Card));
         }
         
         
