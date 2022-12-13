@@ -25,9 +25,9 @@
                 <DataGridTextColumn Binding="{Binding Path=CaptureOrder}" IsReadOnly="True" Header="Отлов по заявке или план-графику"/>
             </DataGrid.Columns>
         </DataGrid>
-            <TextBlock Text="{Binding Cards}"></TextBlock>
+        <TextBlock Text="{Binding Cards}"></TextBlock>
 
-            <Menu>
+        <Menu>
             <MenuItem Header="Открыть" Click="OpenButton_Click"/>
             <MenuItem Header="Добавить" Click="Button_Click"/>
             <MenuItem Header="Редактировать"/>
@@ -36,7 +36,7 @@
             <MenuItem Header="Удалить" Click="DelButton_Click"/>
             <MenuItem Header="Сортировка"/>
         </Menu>
-       
+
         <!--<Button Content="Добавить" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="13" Height="31" Width="90" Click="Button_Click" Margin="97,0,0,0"/>
         <Button Content="Редактировать" HorizontalAlignment="Left" Margin="192,0,0,0" VerticalAlignment="Top" Width="114" FontSize="13" Height="31"/>
         <Button Content="Экспорт Excel" HorizontalAlignment="Left" Margin="425,0,0,0" VerticalAlignment="Top" Width="109" FontSize="13" Height="31"/>

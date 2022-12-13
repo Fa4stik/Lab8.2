@@ -26,7 +26,7 @@ namespace PIS8_2
 
     public partial class Authorization : Window, ICloseable
     {
-        
+
 
         public Authorization()
         {
