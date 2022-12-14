@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using System.Windows.Documents;
 using System.Windows;
-using System.Drawing;
 using HorizontalAlignment = Spire.Doc.Documents.HorizontalAlignment;
 using Spire.Doc;
 using Document = Spire.Doc.Document;
@@ -13,8 +12,6 @@ using Paragraph = Spire.Doc.Documents.Paragraph;
 using TextRange = Spire.Doc.Fields.TextRange;
 using System.Globalization;
 using Spire.Doc.Documents;
-using Spire.Pdf.Exporting.XPS.Schema;
-using OfficeOpenXml.FormulaParsing.Utilities;
 
 namespace PIS8_2.MVVM.Model.Export
 {
@@ -53,9 +50,9 @@ namespace PIS8_2.MVVM.Model.Export
             AddHeader(table, 0, "Дата отлова", HorizontalAlignment.Left, card.Datetrapping.ToString("D",
                               CultureInfo.CreateSpecificCulture("ru-RU")));
             AddHeader(table, 1, "Место отлова:", HorizontalAlignment.Left);
-            AddHeader(table, 2, "Муниципальное образование", HorizontalAlignment.Left, card.IdMunicipNavigation.Namemunicip);
-            AddHeader(table, 3, "Населённый пункт", HorizontalAlignment.Left, card.Locality);
-            AddHeader(table, 4, "Адрес места отлова", HorizontalAlignment.Left, card.Adresstrapping);
+            AddHeader(table, 2, "Муниципальное образование", HorizontalAlignment.Right, card.IdMunicipNavigation.Namemunicip);
+            AddHeader(table, 3, "Населённый пункт", HorizontalAlignment.Right, card.Locality);
+            AddHeader(table, 4, "Адрес места отлова", HorizontalAlignment.Right, card.Adresstrapping);
 
             AddNextLine(s, 1);
 
