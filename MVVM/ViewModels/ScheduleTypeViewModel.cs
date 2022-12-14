@@ -20,19 +20,25 @@ namespace PIS8_2.MVVM.ViewModels
             get => _card;
             set => SetField(ref _card, value, nameof(Card));
         }
-        
-        
 
+        private bool _isEditMode;
+
+        public bool IsEditMode
+        {
+            get => _isEditMode;
+            set => SetField(ref _isEditMode, value, "IsEditMode");
+        }
         public ICommand BackToReestrCommand { get; }
+        public ICommand ExportWordCommand { get; }
         public ScheduleTypeViewModel(NavigationStore navigationStore,UserStore userStore, Card selectedCard)
         {
             _card = selectedCard;
 
-
-
             BackToReestrCommand =
                 new BackToReestrCommand(new NavigationService<ReestrViewModel>(navigationStore,
                     () => new ReestrViewModel(userStore, navigationStore)));
+
+            ExportWordCommand = new ExportWordCommand(this);
         }
     }
 }

@@ -9,10 +9,6 @@ CREATE TYPE ORDER_TYPE as ENUM('План-график', 'Заказ-наряд')
 CREATE TYPE OPERATION as ENUM('Удаление карточки из реестра', 'Добавление карточки в реестр',
 							 'Изменение карточки', 'Удаление файла');
 
-
-
-
-
 CREATE TABLE Organisation
 (
 	id SERIAL PRIMARY KEY,
