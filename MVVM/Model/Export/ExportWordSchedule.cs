@@ -31,7 +31,14 @@ namespace PIS8_2.MVVM.Model.Export
             // Ориентация страницы
             s.PageSetup.Orientation = PageOrientation.Landscape;
 
-            AddNextLine(s, 4);
+            // Шапка
+            Paragraph header = s.AddParagraph();
+            header.Format.HorizontalAlignment = HorizontalAlignment.Center;
+            TextRange headerTR = header.AppendText($"\n\nЗаказ-наряд № {card.Numworkorder}");
+            headerTR.CharacterFormat.Bold = true;
+            headerTR.CharacterFormat.FontSize = 12;
+
+            AddNextLine(s, 2);
 
             // Отображение обводки таблицы
             Table table = s.AddTable(true);
@@ -78,7 +85,14 @@ namespace PIS8_2.MVVM.Model.Export
             saveDialog.DefaultExt = ".docx";
             saveDialog.Filter = "Word documents (.docx)|*.docx";
             saveDialog.ShowDialog();
-            doc.SaveToFile(saveDialog.FileName, FileFormat.Docx2013);
+            try
+            {
+                doc.SaveToFile(saveDialog.FileName, FileFormat.Docx2013);
+            }
+            catch
+            {
+                MessageBox.Show("Закройте файл, перед тем как сохранить!");
+            }
         }
 
         private static void AddNextLine(Section s, int count)
