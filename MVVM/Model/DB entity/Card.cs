@@ -28,32 +28,12 @@ public partial class Card
 
     public string Targetorder { get; set; }
 
-    public string Firstnameexecuter { get; set; }
-
-    public string Surnameexecuter { get; set; }
-
-    public string Patronymicexecuter { get; set; }
-
-    public string Phonenumberexecuter { get; set; }
-
-    public string Firstnameappl { get; set; }
-
-    public string Surnameappl { get; set; }
-
-    public string Patronymicappl { get; set; }
-
-    public string Adressappl { get; set; }
-
-    public string Phonenumberappl { get; set; }
-
     public int IdOrg { get; set; }
 
-    public int? IdAnimal { get; set; }
     public string TypeOrder { get; set; }
-    public string TypeApplicant { get; set; }
+
     public string[] AccessRoles { get; set; }
 
-    public virtual Animal IdAnimalNavigation { get; set; }
 
     public virtual Municip IdMunicipNavigation { get; set; }
 

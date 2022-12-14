@@ -15,7 +15,6 @@ public partial class TrappinganimalsContext : DbContext
     {
     }
 
-    public virtual DbSet<Animal> Animals { get; set; }
 
     public virtual DbSet<Card> Cards { get; set; }
 
@@ -35,41 +34,10 @@ public partial class TrappinganimalsContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder
-            .HasPostgresEnum("animal_hair", new[] { "Короткошёрстная", "Длинношёрстная", "Жесткошёрстная", "Кудрявая" })
-            .HasPostgresEnum("animal_size", new[] { "Большой", "Средний", "Маленький" })
-            .HasPostgresEnum("animal_type", new[] { "Кошка", "Котёнок", "Собака", "Щенок" })
-            .HasPostgresEnum("applicant_type", new[] { "Физическое лицо", "Юридическое лицо" })
             .HasPostgresEnum("operation", new[] { "Удаление карточки из реестра", "Добавление карточки в реестр", "Изменение карточки", "Удаление файла" })
             .HasPostgresEnum("order_type", new[] { "План-график", "Заказ-наряд" })
             .HasPostgresEnum("role_type", new[] { "Оператор по отлову", "Куратор ВетСлужбы", "Куратор ОМСУ", "Куратор по отлову", "Оператор ВетСлужбы", "Оператор ОМСУ", "Подписант ВетСлужбы", "Подписант ОМСУ", "Подписант по отлову" });
 
-        modelBuilder.Entity<Animal>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("animal_pkey");
-
-            entity.ToTable("animal");
-
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Description)
-                .HasMaxLength(50)
-                .HasColumnName("description");
-            entity.Property(e => e.Ears)
-                .HasMaxLength(50)
-                .HasColumnName("ears");
-            entity.Property(e => e.Kingcolor)
-                .HasMaxLength(50)
-                .HasColumnName("kingcolor");
-            entity.Property(e => e.Tail)
-                .HasMaxLength(50)
-                .HasColumnName("tail");
-            // enum
-            entity.Property(e => e.AnimalType)
-                .HasColumnName("animaltype");
-            entity.Property(e => e.Size)
-                .HasColumnName("size");
-            entity.Property(e => e.Hair)
-                .HasColumnName("hair");
-        });
 
         modelBuilder.Entity<Card>(entity =>
         {
@@ -78,10 +46,7 @@ public partial class TrappinganimalsContext : DbContext
             entity.ToTable("card");
 
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Adressappl)
-                .IsRequired()
-                .HasMaxLength(100)
-                .HasColumnName("adressappl");
+            
             entity.Property(e => e.Adresstrapping)
                 .IsRequired()
                 .HasMaxLength(50)
@@ -89,15 +54,6 @@ public partial class TrappinganimalsContext : DbContext
             entity.Property(e => e.Datemk).HasColumnName("datemk");
             entity.Property(e => e.Datetrapping).HasColumnName("datetrapping");
             entity.Property(e => e.Dateworkorder).HasColumnName("dateworkorder");
-            entity.Property(e => e.Firstnameappl)
-                .IsRequired()
-                .HasMaxLength(50)
-                .HasColumnName("firstnameappl");
-            entity.Property(e => e.Firstnameexecuter)
-                .IsRequired()
-                .HasMaxLength(50)
-                .HasColumnName("firstnameexecuter");
-            entity.Property(e => e.IdAnimal).HasColumnName("id_animal");
             entity.Property(e => e.IdMunicip).HasColumnName("id_municip");
             entity.Property(e => e.IdOmsu).HasColumnName("id_omsu");
             entity.Property(e => e.IdOrg).HasColumnName("id_org");
@@ -107,29 +63,6 @@ public partial class TrappinganimalsContext : DbContext
                 .HasColumnName("locality");
             entity.Property(e => e.Nummk).HasColumnName("nummk");
             entity.Property(e => e.Numworkorder).HasColumnName("numworkorder");
-            entity.Property(e => e.Patronymicappl)
-                .HasMaxLength(50)
-                .HasColumnName("patronymicappl");
-            entity.Property(e => e.Patronymicexecuter)
-                .IsRequired()
-                .HasMaxLength(50)
-                .HasColumnName("patronymicexecuter");
-            entity.Property(e => e.Phonenumberappl)
-                .IsRequired()
-                .HasMaxLength(11)
-                .HasColumnName("phonenumberappl");
-            entity.Property(e => e.Phonenumberexecuter)
-                .IsRequired()
-                .HasMaxLength(11)
-                .HasColumnName("phonenumberexecuter");
-            entity.Property(e => e.Surnameappl)
-                .IsRequired()
-                .HasMaxLength(50)
-                .HasColumnName("surnameappl");
-            entity.Property(e => e.Surnameexecuter)
-                .IsRequired()
-                .HasMaxLength(50)
-                .HasColumnName("surnameexecuter");
             entity.Property(e => e.Targetorder)
                 .IsRequired()
                 .HasMaxLength(50)
@@ -139,16 +72,9 @@ public partial class TrappinganimalsContext : DbContext
                 .IsRequired()
                 //.HasConversion(c => c.ToString(), c => Enum.Parse<TypeOrder>(c)) || Для релиза необходимо, чтобы все значения в enum DB были на англ.
                 .HasColumnName("typeorder");
-            entity.Property(e => e.TypeApplicant)
-                .IsRequired()
-                .HasColumnName("typeapplicant");
             entity.Property(e => e.AccessRoles)
                 .IsRequired()
                 .HasColumnName("accessroles");
-
-            entity.HasOne(d => d.IdAnimalNavigation).WithMany(p => p.Cards)
-                .HasForeignKey(d => d.IdAnimal)
-                .HasConstraintName("card_id_animal_fkey");
 
             entity.HasOne(d => d.IdMunicipNavigation).WithMany(p => p.Cards)
                 .HasForeignKey(d => d.IdMunicip)
@@ -225,6 +151,25 @@ public partial class TrappinganimalsContext : DbContext
                 .IsRequired()
                 .HasMaxLength(100)
                 .HasColumnName("nameomsu");
+            entity.Property(e => e.Adress)
+                .IsRequired()
+                .HasMaxLength(100)
+                .HasColumnName("adress");
+            entity.Property(e => e.Firstnamedir)
+                .IsRequired()
+                .HasMaxLength(50)
+                .HasColumnName("firstnamedir");
+            entity.Property(e => e.Patronymicdir)
+                .HasMaxLength(50)
+                .HasColumnName("patronymicdir");
+            entity.Property(e => e.Phonenumber)
+                .IsRequired()
+                .HasMaxLength(11)
+                .HasColumnName("phonenumber");
+            entity.Property(e => e.Surnamedir)
+                .IsRequired()
+                .HasMaxLength(50)
+                .HasColumnName("surnamedir");
 
             entity.HasOne(d => d.IdMunicipNavigation).WithMany(p => p.Omsus)
                 .HasForeignKey(d => d.IdMunicip)

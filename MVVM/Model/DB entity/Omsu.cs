@@ -9,6 +9,16 @@ public partial class Omsu
 
     public string Nameomsu { get; set; }
 
+    public string Firstnamedir { get; set; }
+
+    public string Surnamedir { get; set; }
+
+    public string Patronymicdir { get; set; }
+
+    public string Adress { get; set; }
+
+    public string Phonenumber { get; set; }
+
     public int IdMunicip { get; set; }
 
     public virtual ICollection<Card> Cards { get; } = new List<Card>();
