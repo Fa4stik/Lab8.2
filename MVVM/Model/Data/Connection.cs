@@ -61,11 +61,41 @@ namespace PIS8_2.MVVM.Model.Data
                     .ToList()
                     //.Where(c=>c.AccessRoles.Contains(user.Role))
                     .ToList();
-                if (filter != null && !filter.IsDefaultFilter)
+                if (filter != null)
                 {
-                    cards = cards.Where(c => c.Nummk > filter.StartNummk).ToList();
+                    cards = cards
+                        .Where(c => c.Nummk >= filter.StartNummk && c.Nummk <= filter.EndNummk)
+                        .Where(c => c.Datemk >= filter.StartDatemk && c.Datemk <= filter.EndDatemk)
+                        .Where(c => c.Adresstrapping.Contains(filter.StartAdresstrapping, StringComparison.InvariantCultureIgnoreCase))
+                        .Where(c => c.IdMunicipNavigation.Namemunicip.Contains(filter.StartMunicipName, StringComparison.InvariantCultureIgnoreCase))
+                        .Where(c => c.IdOmsuNavigation.Nameomsu.Contains(filter.StartOmsuName, StringComparison.InvariantCultureIgnoreCase))
+                        .Where(c => c.IdOrgNavigation.Nameorg.Contains(filter.StartOrgName, StringComparison.InvariantCultureIgnoreCase))
+                        .Where(c => c.Locality.Contains(filter.StartLocality, StringComparison.InvariantCultureIgnoreCase))
+                        .Where(c => c.Numworkorder >= filter.StartNumworkorder && c.Numworkorder <= filter.EndNumworkorder)
+                        .Where(c => c.Dateworkorder >= filter.StartDateworkorder && c.Dateworkorder <= filter.EndDateworkorder)
+                        .Where(c => c.Datetrapping >= filter.StartDatetrapping && c.Datetrapping <= filter.EndDatetrapping)
+                        .Where(c => c.TypeOrder.Contains(filter.StartTypeOrder, StringComparison.InvariantCultureIgnoreCase))
+                        .Where(c => c.Targetorder.Contains(filter.StartTargetorder, StringComparison.InvariantCultureIgnoreCase))
+                        .ToList();
                 }
-
+                //IsDefaultFilter = true;
+                //StartNummk = 0;+
+                //EndNummk = int.MaxValue;+
+                //StartDatemk = DateTime.Now.AddYears(-1);+
+                //EndDatemk = DateTime.Now.AddYears(1);+
+                //StartAdresstrapping = Empty;+
+                //StartMunicipName = Empty;+
+                //StartOmsuName = Empty;+
+                //StartOrgName = Empty;+
+                //StartLocality = Empty;+
+                //StartNumworkorder = 0;+
+                //EndNumworkorder = int.MaxValue;+
+                //StartDateworkorder = DateTime.Now.AddYears(-1);+
+                //EndDateworkorder = DateTime.Now.AddYears(1);+
+                //StartDatetrapping = DateTime.Now.AddYears(-1);
+                //EndDatetrapping = DateTime.Now.AddYears(1);
+                //StartTargetorder = Empty;
+                //StartTypeOrder = Empty;
                 return cards;
             }
         }

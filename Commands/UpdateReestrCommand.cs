@@ -30,7 +30,7 @@ namespace PIS8_2.Commands
         public override void Execute(object parameter)
         {
             IEnumerable<Card> cards;
-            if (_viewModel.Filter.IsDefaultFilter)
+            if (_viewModel.Filter==null)
             {
                 cards = _conn.ExecuteCardsWithFilter(_userStore.CurrentUser);
             }

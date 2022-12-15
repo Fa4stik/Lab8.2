@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.String;
 
 namespace PIS8_2.MVVM.Model
 {
@@ -19,22 +20,18 @@ namespace PIS8_2.MVVM.Model
 
 
         public string StartAdresstrapping { get; set; }
-        public string EndAdresstrapping { get; set; }
+
 
         public string StartMunicipName { get; set; }
-        public string EndMunicipName { get; set; }
-               
+
         public string StartOmsuName { get; set; }
-        public string EndOmsuName { get; set; }
-             
+
         public string StartOrgName { get; set; }
-        public string EndOrgName { get; set; }
 
         public int StartNumworkorder { get; set; }
         public int EndNumworkorder { get; set; }
 
         public string StartLocality { get; set; }
-        public string EndLocality { get; set; }
 
         public DateTime StartDateworkorder { get; set; }
         public DateTime EndDateworkorder { get; set; }
@@ -43,7 +40,8 @@ namespace PIS8_2.MVVM.Model
         public DateTime EndDatetrapping { get; set; }
 
         public string StartTargetorder { get; set; }
-        public string EndTargetorder { get; set; }
+
+        public string StartTypeOrder { get; set; }
 
         public FilterModel()
         {
@@ -55,24 +53,22 @@ namespace PIS8_2.MVVM.Model
             IsDefaultFilter=true;
             StartNummk = 0;
             EndNummk = int.MaxValue;
-            StartDatemk=DateTime.MinValue;
-            EndDatemk=DateTime.MaxValue;
-            StartAdresstrapping = null;
-            EndAdresstrapping = null;
-            StartMunicipName = null;
-            EndMunicipName = null;
-            StartOmsuName = null;
-            EndOmsuName = null;
-            StartOrgName = null;
-            EndOrgName = null;
+            StartDatemk=DateTime.Now.AddYears(-3);
+            EndDatemk= DateTime.Now.AddYears(1);
+            StartAdresstrapping = Empty;
+            StartMunicipName = Empty;
+            StartOmsuName = Empty;
+            StartOrgName = Empty;
+            StartLocality= Empty;
             StartNumworkorder = 0;
             EndNumworkorder = int.MaxValue;
-            StartDateworkorder=DateTime.MinValue;
-            EndDateworkorder=DateTime.MaxValue;
-            StartDatetrapping= DateTime.MinValue;
-            EndDatetrapping= DateTime.MaxValue;
-            StartTargetorder=null;
-            EndTargetorder=null;
+            StartDateworkorder= DateTime.Now.AddYears(-3);
+            EndDateworkorder= DateTime.Now.AddYears(1);
+            StartDatetrapping = DateTime.Now.AddYears(-3);
+            EndDatetrapping= DateTime.Now.AddYears(1);
+            StartTargetorder = Empty;
+            StartTypeOrder= Empty;
+           
         }
     }
 }

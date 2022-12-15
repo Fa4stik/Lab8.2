@@ -13,15 +13,16 @@
       >
 
 
-    <!--d:DataContext="{d:DesignInstance vm:ReestrViewModel, IsDesignTimeCreatable=True}"-->  <!--Для интелисенса-->
+    <!--d:DataContext="{d:DesignInstance vm:ReestrViewModel, IsDesignTimeCreatable=True}"-->
+    <!--Для интелисенса-->
 
-    
+
     <!--<UserControl.Resources>
         <con:EnumToDescription x:Key="EnumToDescription" />
     </UserControl.Resources>-->
     <StackPanel Background="WhiteSmoke">
-        
-        
+
+
 
 
         <Menu>
@@ -37,7 +38,7 @@
             </MenuItem>
             <MenuItem Header="Редактировать"/>
             <MenuItem Header="Экспорт Excel" Command="{Binding ExportExcelCommand}"/>
-            <MenuItem Header="Фильтр"  />
+            <MenuItem Header="Фильтр" Command="{Binding ApplyFilter}" />
             <MenuItem Header="Удалить"/>
             <MenuItem Header="Сортировка"/>
 
@@ -61,7 +62,7 @@
                 <TextBox Width="200"></TextBox>
             </StackPanel>
         </StackPanel>-->
-        <Grid Background="AliceBlue">
+        <Grid Background="AliceBlue" Visibility="{Binding FilterVisability}">
             <Grid  Margin="10,20,40,20" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="24"></RowDefinition>
@@ -92,9 +93,9 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="От: " Grid.Column="0"></TextBlock>
-                    <TextBox Grid.Column="1" Text="{Binding Filter.StartNummk}" ></TextBox>
+                    <TextBox Grid.Column="1" Text="{Binding Filter.StartNummk,UpdateSourceTrigger=PropertyChanged}" MaxLength="10"></TextBox>
                     <TextBlock Text="До: " Grid.Column="2"></TextBlock>
-                    <TextBox Grid.Column="3" Text="{Binding Filter.EndNummk}" ></TextBox>
+                    <TextBox Grid.Column="3" Text="{Binding Filter.EndNummk,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" ></TextBox>
                 </Grid>
 
                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Дата заключения МК   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis"></TextBlock>
@@ -131,49 +132,27 @@
                 <TextBlock Grid.Column="0" Grid.Row="2" Text="Мун. обр.   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis"></TextBlock>
 
                 <Grid Grid.Column="1" Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock Text="От: " Grid.Column="0"></TextBlock>
-                    <TextBox Grid.Column="1" Text="{Binding Filter.StartMunicipName}" ></TextBox>
-                    <TextBlock Text="До: " Grid.Column="2"></TextBlock>
-                    <TextBox Grid.Column="3" Text="{Binding Filter.EndMunicipName}" ></TextBox>
+                    <TextBox  Text="{Binding Filter.StartMunicipName}" MaxLength="50"></TextBox>
                 </Grid>
 
                 <TextBlock Grid.Column="2" Grid.Row="0" Text="ОМСУ   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis"></TextBlock>
 
                 <Grid Grid.Column="3" Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="От: " Grid.Column="0"></TextBlock>
-                    <TextBox Grid.Column="1" Text="{Binding Filter.StartOmsuName}" ></TextBox>
-                    <TextBlock Text="До: " Grid.Column="2"></TextBlock>
-                    <TextBox Grid.Column="3" Text="{Binding Filter.EndOmsuName}" ></TextBox>
+
+
+                    <TextBox  Text="{Binding Filter.StartOmsuName}" MaxLength="50" ></TextBox>
+
                 </Grid>
 
                 <TextBlock Grid.Column="2" Grid.Row="1" Text="Исполнитель МК   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis"></TextBlock>
 
                 <Grid Grid.Column="3" Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="От: " Grid.Column="0"></TextBlock>
-                    <TextBox Grid.Column="1" ></TextBox>
-                    <TextBlock Text="До: " Grid.Column="2"></TextBlock>
-                    <TextBox Grid.Column="3" ></TextBox>
+
+
+                    <TextBox  Text="{Binding Filter.StartOrgName}" MaxLength="50"></TextBox>
+
                 </Grid>
 
                 <TextBlock Grid.Column="2" Grid.Row="2" Text="Номер заказ-наряда   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis"></TextBlock>
@@ -187,25 +166,19 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="От: " Grid.Column="0"></TextBlock>
-                    <TextBox Grid.Column="1" ></TextBox>
+                    <TextBox Grid.Column="1" Text="{Binding Filter.StartNumworkorder,UpdateSourceTrigger=PropertyChanged}" MaxLength="10"></TextBox>
                     <TextBlock Text="До: " Grid.Column="2"></TextBlock>
-                    <TextBox Grid.Column="3" ></TextBox>
+                    <TextBox Grid.Column="3" Text="{Binding Filter.EndNumworkorder,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" ></TextBox>
                 </Grid>
 
                 <TextBlock Grid.Column="4" Grid.Row="0" Text="Населённый пункт   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis"></TextBlock>
 
                 <Grid Grid.Column="5" Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="От: " Grid.Column="0"></TextBlock>
-                    <TextBox Grid.Column="1" ></TextBox>
-                    <TextBlock Text="До: " Grid.Column="2"></TextBlock>
-                    <TextBox Grid.Column="3" ></TextBox>
+
+
+                    <TextBox  Text="{Binding Filter.StartLocality}" MaxLength="50" ></TextBox>
+
                 </Grid>
 
                 <TextBlock Grid.Column="4" Grid.Row="1" Text="Дата выдачи заказ-наряда   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis"></TextBlock>
@@ -219,7 +192,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="От: " Grid.Column="0"></TextBlock>
-                    <DatePicker Grid.Column="1" >
+                    <DatePicker Grid.Column="1" SelectedDate="{Binding Filter.StartDateworkorder}">
                         <DatePicker.Resources>
                             <Style TargetType="DatePickerTextBox">
                                 <Setter Property="IsReadOnly" Value="True"  />
@@ -227,7 +200,7 @@
                         </DatePicker.Resources>
                     </DatePicker>
                     <TextBlock Text="До: " Grid.Column="2"></TextBlock>
-                    <DatePicker Grid.Column="3" >
+                    <DatePicker Grid.Column="3" SelectedDate="{Binding Filter.EndDateworkorder}">
                         <DatePicker.Resources>
                             <Style TargetType="DatePickerTextBox">
                                 <Setter Property="IsReadOnly" Value="True"  />
@@ -247,7 +220,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="От: " Grid.Column="0"></TextBlock>
-                    <DatePicker Grid.Column="1" >
+                    <DatePicker Grid.Column="1" SelectedDate="{Binding Filter.StartDatetrapping}">
                         <DatePicker.Resources>
                             <Style TargetType="DatePickerTextBox">
                                 <Setter Property="IsReadOnly" Value="True"  />
@@ -255,7 +228,7 @@
                         </DatePicker.Resources>
                     </DatePicker>
                     <TextBlock Text="До: " Grid.Column="2"></TextBlock>
-                    <DatePicker Grid.Column="3" >
+                    <DatePicker Grid.Column="3" SelectedDate="{Binding Filter.EndDatetrapping}">
                         <DatePicker.Resources>
                             <Style TargetType="DatePickerTextBox">
                                 <Setter Property="IsReadOnly" Value="True"  />
@@ -267,33 +240,25 @@
                 <TextBlock Grid.Column="6" Grid.Row="0" Text="Цель отлова   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis"></TextBlock>
 
                 <Grid Grid.Column="7" Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="От: " Grid.Column="0"></TextBlock>
-                    <TextBox Grid.Column="1" ></TextBox>
-                    <TextBlock Text="До: " Grid.Column="2"></TextBlock>
-                    <TextBox Grid.Column="3" ></TextBox>
+
+
+                    <TextBox  Text="{Binding Filter.StartTargetorder}" MaxLength="50"></TextBox>
+
                 </Grid>
 
                 <TextBlock Grid.Column="6" Grid.Row="1" Text="Тип отлова   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis"></TextBlock>
 
                 <Grid Grid.Column="7" Grid.Row="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="29*"/>
+                        <ColumnDefinition Width="196*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="От: " Grid.Column="0"></TextBlock>
-                    <TextBox Grid.Column="1" ></TextBox>
-                    <TextBlock Text="До: " Grid.Column="2"></TextBlock>
-                    <TextBox Grid.Column="3" ></TextBox>
+
+
+                    <TextBox  Text="{Binding Filter.StartTypeOrder}" MaxLength="50" Grid.ColumnSpan="2"></TextBox>
+
                 </Grid>
 
                 <Button Grid.Column="0" Grid.Row="3" Margin="30,5" Content="Фильтровать" Command="{Binding UpdateReestr}"></Button>
@@ -301,8 +266,8 @@
 
             </Grid>
         </Grid>
-        
-        
+
+
 
 
 
@@ -321,7 +286,7 @@
                 <DataGridTextColumn Header="Муниципальное образование" Binding="{Binding Namemunicip}"  IsReadOnly="True" />
                 <DataGridTextColumn Header="ОМСУ" Binding="{Binding Nameomsu}"  IsReadOnly="True" />
                 <DataGridTextColumn Header="Исполнитель МК" Binding="{Binding Nameorg}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Номер заказ-наряда" Binding="{Binding Numworkorder}" IsReadOnly="True" /> 
+                <DataGridTextColumn Header="Номер заказ-наряда" Binding="{Binding Numworkorder}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Населённый пункт" Binding="{Binding Locality}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Дата выдачи заказ-наряда" Binding="{Binding Dateworkorder, StringFormat=dd-MM-yyyy}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Дата отлова" Binding="{Binding Datetrapping, StringFormat=dd-MM-yyyy}" IsReadOnly="True" />
@@ -362,7 +327,7 @@
                 public int? IdAnimal { get; set; }-->
             </DataGrid.Columns>
         </DataGrid>
-        
+
 
 
     </StackPanel>
