@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using PIS8_2.Commands;
 using PIS8_2.MVVM.Model;
@@ -27,6 +28,15 @@ namespace PIS8_2.MVVM.ViewModels
         public string Login => UserStore.CurrentUser.Login;
 
 
+
+        private Visibility _filterVisability;
+
+        public Visibility FilterVisability
+        {
+            get => _filterVisability;
+            set => SetField(ref _filterVisability, value);
+        }
+
         private List<LimitedCard> _cards;
         public List<LimitedCard> Cards
         {
@@ -46,8 +56,10 @@ namespace PIS8_2.MVVM.ViewModels
         public ReestrViewModel(UserStore userStore, NavigationStore navigationStore)
         {
             UserStore = userStore;
-            Filter = new FilterModel();
-            Filter.StateFilterToDefaultState();
+
+            FilterVisability = Visibility.Collapsed;
+
+
 
             UpdateReestr = new UpdateReestrCommand(this, userStore);
             UpdateReestr.Execute(null);
