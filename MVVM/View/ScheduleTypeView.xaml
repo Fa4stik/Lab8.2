@@ -25,13 +25,13 @@
                     <TextBlock Width="250" TextAlignment="Right" Text="Номер МК:" FontSize="14" Padding="20,0"
                                Margin="0,20,0,0">
                     </TextBlock>
-                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.Nummk}"></TextBox>
+                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.Nummk}" VerticalAlignment="Bottom" IsReadOnly="{Binding IsReadOnly}"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Width="250" TextAlignment="Right" Text="Дата отлова:" FontSize="14" Padding="20,0"
                                Margin="0,20,0,0">
                     </TextBlock>
-                    <DatePicker VerticalAlignment="Bottom" Width="200"  SelectedDate="{Binding Card.Datetrapping}">
+                    <DatePicker VerticalAlignment="Bottom" Width="200"  SelectedDate="{Binding Card.Datetrapping}" IsEnabled="{Binding IsEditMode}">
                         <DatePicker.Resources>
                             <Style TargetType="DatePickerTextBox">
                                 <Setter Property="IsReadOnly" Value="True"  />
@@ -43,26 +43,26 @@
                     <TextBlock Width="250" TextAlignment="Right" Text="Место отлова:" FontSize="14" Padding="20,0"
                                Margin="0,20,0,0">
                     </TextBlock>
-                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.Adresstrapping}"></TextBox>
+                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.Adresstrapping}" VerticalAlignment="Bottom" IsReadOnly="{Binding IsReadOnly}"></TextBox>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Width="250" TextAlignment="Right" Text="Муниципальное образование:" FontSize="14"
                                Padding="20,0" Margin="0,20,0,0">
                     </TextBlock>
-                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.IdMunicipNavigation.Namemunicip}"></TextBox>
+                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.IdMunicipNavigation.Namemunicip}" VerticalAlignment="Bottom" IsReadOnly="{Binding IsEditMode}"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Width="250" TextAlignment="Right" Text="Населённый пункт:" FontSize="14" Padding="20,0"
                                Margin="0,20,0,0">
                     </TextBlock>
-                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.Locality}"></TextBox>
+                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.Locality}" VerticalAlignment="Bottom" IsReadOnly="{Binding IsReadOnly}"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Width="250" TextAlignment="Right" Text="Адрес места отлова:" FontSize="14"
                                Padding="20,0" Margin="0,20,0,0">
                     </TextBlock>
-                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.Adresstrapping}"></TextBox>
+                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.Adresstrapping}" VerticalAlignment="Bottom" IsReadOnly="{Binding IsReadOnly}"></TextBox>
                 </StackPanel>
             </StackPanel>
 

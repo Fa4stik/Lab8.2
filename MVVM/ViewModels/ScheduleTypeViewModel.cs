@@ -21,13 +21,19 @@ namespace PIS8_2.MVVM.ViewModels
             set => SetField(ref _card, value, nameof(Card));
         }
 
-        private bool _isEditMode;
+        private bool _isEditMode = false;
 
         public bool IsEditMode
         {
             get => _isEditMode;
             set => SetField(ref _isEditMode, value, "IsEditMode");
         }
+
+        public bool IsReadOnly
+        {
+            get => !_isEditMode;
+        }
+
         public ICommand BackToReestrCommand { get; }
         public ICommand ExportWordCommand { get; }
         public ScheduleTypeViewModel(NavigationStore navigationStore,UserStore userStore, Card selectedCard)
