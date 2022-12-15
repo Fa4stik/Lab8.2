@@ -54,6 +54,7 @@ namespace PIS8_2.MVVM.ViewModels
                     navigationStore,
                     () => new ReestrViewModel(userStore, navigationStore));
             LoginCommand = new LoginCommand(this, userStore, navigationService);
+            
 
             #endregion
 

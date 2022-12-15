@@ -16,6 +16,14 @@ namespace PIS8_2.MVVM.ViewModels
     internal class ReestrViewModel:ViewModel
     {
         private UserStore UserStore { get; }
+
+        private FilterModel _filter;
+
+        public FilterModel Filter
+        {
+            get => _filter;
+            set => SetField(ref _filter, value, nameof(Filter));
+        }
         public string Login => UserStore.CurrentUser.Login;
 
 
@@ -32,12 +40,14 @@ namespace PIS8_2.MVVM.ViewModels
         public ICommand UpdateReestr { get; }
         public ICommand OpenScheduleCardCommand { get; }
         public ICommand ExportExcelCommand { get; }
+        public ICommand ApplyFilter { get; }
 
         
         public ReestrViewModel(UserStore userStore, NavigationStore navigationStore)
         {
             UserStore = userStore;
-
+            Filter = new FilterModel();
+            Filter.StateFilterToDefaultState();
 
             UpdateReestr = new UpdateReestrCommand(this, userStore);
             UpdateReestr.Execute(null);
@@ -58,6 +68,8 @@ namespace PIS8_2.MVVM.ViewModels
                     () => new RequestTypeViewModel(navigationStore,userStore)));
 
             ExportExcelCommand = new ExportExcelCommand(this);
+
+            ApplyFilter=new ApplyFilterCommand(this,userStore);
 
         }
     }

@@ -10,7 +10,7 @@ public partial class Card
 
     public int Nummk { get; set; }
 
-    public DateOnly Datemk { get; set; }
+    public DateTime Datemk { get; set; }
 
     public int IdOmsu { get; set; }
 
@@ -22,7 +22,7 @@ public partial class Card
 
     public string Locality { get; set; }
 
-    public DateOnly Dateworkorder { get; set; }
+    public DateTime Dateworkorder { get; set; }
 
     public DateTime Datetrapping { get; set; }
 

@@ -29,7 +29,15 @@ namespace PIS8_2.Commands
 
         public override void Execute(object parameter)
         {
-            var cards=_conn.ExecuteCards(_userStore.CurrentUser);
+            IEnumerable<Card> cards;
+            if (_viewModel.Filter.IsDefaultFilter)
+            {
+                cards = _conn.ExecuteCardsWithFilter(_userStore.CurrentUser);
+            }
+            else
+            {
+                cards = _conn.ExecuteCardsWithFilter(_userStore.CurrentUser,_viewModel.Filter);
+            }
             _viewModel.Cards = ConverterCardsToLimitedCards.ConvertCardsToLimitedCards(cards);
         }
     }

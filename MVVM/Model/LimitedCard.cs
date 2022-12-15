@@ -8,7 +8,7 @@ namespace PIS8_2.MVVM.Model
 {
     internal class LimitedCard
     {
-        public LimitedCard(int id, int nummk, DateOnly datemk, string namemunicip, string nameomsu, int numworkorder, string locality, DateOnly dateworkorder, DateTime datetrapping, string targetorder, string typeOrder, string nameorg)
+        public LimitedCard(int id, int nummk, DateTime datemk, string namemunicip, string nameomsu, int numworkorder, string locality, DateTime dateworkorder, DateTime datetrapping, string targetorder, string typeOrder, string nameorg)
         {
             Id = id;
             Nummk = nummk;
@@ -27,7 +27,7 @@ namespace PIS8_2.MVVM.Model
 
         public int Id { get; set; }
         public int Nummk { get; set; }
-        public DateOnly Datemk { get; set; }
+        public DateTime Datemk { get; set; }
 
         public string Namemunicip { get; set; }
 
@@ -37,7 +37,7 @@ namespace PIS8_2.MVVM.Model
 
         public string Locality { get; set; }
 
-        public DateOnly Dateworkorder { get; set; }
+        public DateTime Dateworkorder { get; set; }
         public DateTime Datetrapping { get; set; }
         public string Targetorder { get; set; }
         public string TypeOrder { get; set; }

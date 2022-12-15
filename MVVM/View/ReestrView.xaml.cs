@@ -24,5 +24,6 @@ namespace PIS8_2.MVVM.View
         {
             InitializeComponent();
         }
+
     }
 }

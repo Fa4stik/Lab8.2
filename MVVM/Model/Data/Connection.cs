@@ -28,15 +28,46 @@ namespace PIS8_2.MVVM.Model.Data
             return Convert.ToHexString(SHA256.HashData(bytes)).ToLower();
         }
 
-        public ICollection<Card> ExecuteCards(Tuser user)
+        public IEnumerable<Card> ExecuteCards(Tuser user)
         {
             //поправить
             //var id = user.IdOrg ?? GetMunicip(user.IdOmsu);
             using (var db = new TrappinganimalsContext())
             {
-                return db.Cards.Include(c => c.IdOrgNavigation).Include(c => c.IdMunicipNavigation).Include(c => c.IdOmsuNavigation).Where(c => c.IdOrg == user.IdOrg).ToList();
+               
+                return db.Cards
+                    .Include(c => c.IdOrgNavigation)
+                    .Include(c => c.IdMunicipNavigation)
+                    .Include(c => c.IdOmsuNavigation)
+                    .Where(c => c.IdOrg == user.IdOrg)
+                    .ToList()
+                    //.Where(c=>c.AccessRoles.Contains(user.Role))
+                    .ToList();
             }
 
+        }
+
+        public IEnumerable<Card> ExecuteCardsWithFilter(Tuser user, FilterModel filter=null)
+        {
+            using (var db = new TrappinganimalsContext())
+            {
+                
+
+                var cards= db.Cards
+                    .Include(c => c.IdOrgNavigation)
+                    .Include(c => c.IdMunicipNavigation)
+                    .Include(c => c.IdOmsuNavigation)
+                    .Where(c => c.IdOrg == user.IdOrg)
+                    .ToList()
+                    //.Where(c=>c.AccessRoles.Contains(user.Role))
+                    .ToList();
+                if (filter != null && !filter.IsDefaultFilter)
+                {
+                    cards = cards.Where(c => c.Nummk > filter.StartNummk).ToList();
+                }
+
+                return cards;
+            }
         }
 
         public int GetMunicip(int idOmsu)
