@@ -101,6 +101,8 @@ namespace PIS8_2.MVVM.ViewModels
 
             SaveModeShangeCommand = new SaveModeChangeCommand(this);
 
+            AddModeChangeCommand = new AddModeChangeCommand(_card, userStore);
+
             _conn = new Connection();
             Municips = _conn.GetNamesMunicip();
             Omsus = _conn.GetNamesOMSU();
