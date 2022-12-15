@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using PIS8_2.MVVM.Model;
+using System.Windows.Data;
 
 namespace PIS8_2.MVVM.ViewModels
 {
@@ -29,13 +30,18 @@ namespace PIS8_2.MVVM.ViewModels
             set => SetField(ref _isEditMode, value, "IsEditMode");
         }
 
+        private bool _isReadOnly = true;
+
         public bool IsReadOnly
         {
-            get => !_isEditMode;
+            get => _isReadOnly;
+            set => SetField(ref _isReadOnly, value, "IsReadOnly");
         }
 
         public ICommand BackToReestrCommand { get; }
         public ICommand ExportWordCommand { get; }
+        public ICommand EditModeChangeCommand { get; }
+
         public ScheduleTypeViewModel(NavigationStore navigationStore,UserStore userStore, Card selectedCard)
         {
             _card = selectedCard;
@@ -45,6 +51,14 @@ namespace PIS8_2.MVVM.ViewModels
                     () => new ReestrViewModel(userStore, navigationStore)));
 
             ExportWordCommand = new ExportWordCommand(this);
+
+            EditModeChangeCommand = new EditModeChangeCommand(this);
+        }
+
+        public void ChangeEditMode()
+        {
+            IsEditMode = true;
+            IsReadOnly = false;
         }
     }
 }

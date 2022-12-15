@@ -19,7 +19,7 @@ namespace PIS8_2.Commands
             _scheduleTypeViewModel = scheduleTypeViewModel;
         }
 
-        public override bool CanExecute(object parameter) => !_scheduleTypeViewModel.IsEditMode;
+        public override bool CanExecute(object parameter) => true;
 
         public override void Execute(object parameter)
         {
