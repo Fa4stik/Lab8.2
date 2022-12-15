@@ -1,5 +1,3 @@
-
-
 INSERT INTO Organisation (nameOrg, firstNameDir, surNameDir, patronymicDir, adress, phoneNumber)
 VALUES
 ('ООО Отлов', 'Смирнов', 'Иван', 'Андреевич', 'Ленина 38', '89237384958'),

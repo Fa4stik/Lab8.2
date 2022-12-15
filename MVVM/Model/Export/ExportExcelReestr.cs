@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection.PortableExecutable;
+using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PIS8_2.MVVM.Model.ExportExcel
 {
@@ -63,7 +65,14 @@ namespace PIS8_2.MVVM.Model.ExportExcel
             saveDialog.DefaultExt = ".xlsx";
             saveDialog.Filter = "Excel documents (.xlsx)|*.xlsx";
             saveDialog.ShowDialog();
-            File.WriteAllBytes(saveDialog.FileName, reportExcel);
+            try
+            {
+                File.WriteAllBytes(saveDialog.FileName, reportExcel);
+            }
+            catch
+            {
+                MessageBox.Show("Закройте файл, перед тем как сохранить!");
+            }
         }
     }
 }

@@ -17,7 +17,7 @@
         <StackPanel Margin="0,0,0,-8" >
             <Menu>
                 <MenuItem Header="&lt;" Command="{Binding BackToReestrCommand}" />
-                <MenuItem Header="Экспорт" />
+                <MenuItem Header="Экспорт" Cursor="Hand" Command="{Binding ExportWordCommand}"/>
                 <MenuItem Header="Редактировать"></MenuItem>
             </Menu>
             <StackPanel>
@@ -149,7 +149,7 @@
                 <Button Content="Сохранить" FontSize="14" Width="100" Height="30" Margin="50,0"
                         HorizontalAlignment="Center" VerticalAlignment="Center">
                 </Button>
-                <Button Content="Отменить " FontSize="14" Width="100" Height="30" Background="Gray"></Button>
+                <Button Content="Отменить " FontSize="14" Width="100" Height="30" Background="Gray" Cursor="Hand"></Button>
             </StackPanel>
         </StackPanel></ScrollViewer>
 </UserControl>
