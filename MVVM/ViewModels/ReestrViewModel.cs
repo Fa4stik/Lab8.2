@@ -52,7 +52,10 @@ namespace PIS8_2.MVVM.ViewModels
         public ICommand ExportExcelCommand { get; }
         public ICommand ApplyFilter { get; }
 
-        
+        public ICommand ResetFilter { get; }
+
+
+
         public ReestrViewModel(UserStore userStore, NavigationStore navigationStore)
         {
             UserStore = userStore;
@@ -66,8 +69,8 @@ namespace PIS8_2.MVVM.ViewModels
 
             OpenScheduleCardCommand = new OpenScheduleCardCommand(
                 new ParameterNavigationService<Card, ScheduleTypeViewModel>(navigationStore,
-                    (parameter) => new ScheduleTypeViewModel(navigationStore,userStore,parameter)));
-            
+                    (parameter) => new ScheduleTypeViewModel(navigationStore, userStore, parameter)));
+
 
             ExitCommand =
                 new ExitCommand(new NavigationService<LoginViewModel>(navigationStore,
@@ -86,7 +89,7 @@ namespace PIS8_2.MVVM.ViewModels
             AddScheduleCommand = new AddScheduleTypeCommand(
                 new NavigationService<ScheduleTypeViewModel>(
                     navigationStore, () => new ScheduleTypeViewModel(navigationStore, userStore)));
-
+            ResetFilter=new ResetFilterCommand(this);
         }
     }
 }

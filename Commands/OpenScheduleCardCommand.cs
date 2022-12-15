@@ -25,12 +25,11 @@ namespace PIS8_2.Commands
             _navigationService = navigationService;
             _conn=new Connection();
         }
-        public override bool CanExecute(object parameter) => true;
+        public override bool CanExecute(object parameter) => parameter is LimitedCard;
 
         public override void Execute(object parameter)
         {
-            var limitedCard = parameter as LimitedCard;
-            if (limitedCard == null) return;
+            if (parameter is not LimitedCard limitedCard) return;
             var card = _conn.ExecuteCardId(limitedCard.Id);
             _navigationService.Navigate(card);
         }

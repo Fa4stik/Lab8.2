@@ -9,8 +9,6 @@ namespace PIS8_2.MVVM.Model
 {
     public class FilterModel
     {
-        public bool IsDefaultFilter { get; set; }
-
         public int StartNummk { get; set; }
         public int EndNummk { get; set; }
 
@@ -50,7 +48,6 @@ namespace PIS8_2.MVVM.Model
 
         public void StateFilterToDefaultState()
         {
-            IsDefaultFilter=true;
             StartNummk = 0;
             EndNummk = int.MaxValue;
             StartDatemk=DateTime.Now.AddYears(-3);

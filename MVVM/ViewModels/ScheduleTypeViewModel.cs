@@ -37,7 +37,7 @@ namespace PIS8_2.MVVM.ViewModels
         public List<string> Omsus
         {
             get => _omsus;
-            set => SetField(ref _omsus, value, "Municips");
+            set => SetField(ref _omsus, value, "Omsus");
         }
 
         private bool _isEditMode = false;

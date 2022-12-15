@@ -17,9 +17,11 @@
     <!--Для интелисенса-->
 
 
-    <!--<UserControl.Resources>
+    <UserControl.Resources>
         <con:EnumToDescription x:Key="EnumToDescription" />
-    </UserControl.Resources>-->
+    </UserControl.Resources>
+
+
     <StackPanel Background="WhiteSmoke">
 
 
@@ -257,12 +259,12 @@
 
 
 
-                    <TextBox  Text="{Binding Filter.StartTypeOrder}" MaxLength="50" Grid.ColumnSpan="2"></TextBox>
+                    <TextBox  Text="{Binding Filter.StartTypeOrder, Mode=TwoWay}" MaxLength="50" Grid.ColumnSpan="2"></TextBox>
 
                 </Grid>
 
-                <Button Grid.Column="0" Grid.Row="3" Margin="30,5" Content="Фильтровать" Command="{Binding UpdateReestr}"></Button>
-                <Button Grid.Column="1" Grid.Row="3" Margin="30,5" Content="Отмена" Background="Gray"></Button>
+                <Button Grid.Column="0" Grid.Row="3" Margin="22,5" Content="Фильтровать" Command="{Binding UpdateReestr}"></Button>
+                <Button Grid.Column="1" Grid.Row="3" Margin="30,5" Content="Закрыть" Background="Gray" Command="{Binding ApplyFilter}"></Button>
 
             </Grid>
         </Grid>
