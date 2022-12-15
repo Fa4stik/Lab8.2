@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PIS8_2.MVVM.Model
 {
-    internal class LimitedCard
+    public class LimitedCard
     {
         public LimitedCard(int id, int nummk, DateTime datemk, string namemunicip, string nameomsu, int numworkorder, string locality, DateTime dateworkorder, DateTime datetrapping, string targetorder, string typeOrder, string nameorg)
         {

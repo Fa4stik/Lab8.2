@@ -4,21 +4,24 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PIS8_2.MVVM.View"
-      xmlns:vm="clr-namespace:PIS8_2.MVVM.ViewModels"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      xmlns:vm="clr-namespace:PIS8_2.MVVM.ViewModels" xmlns:con="clr-namespace:PIS8_2.Converters"
+             mc:Ignorable="d" Height="1080" Width="1920"
       d:DataContext="{d:DesignInstance vm:ScheduleTypeViewModel, IsDesignTimeCreatable=True}"
->
+             
 
+    >
+    <UserControl.Resources>
+        <con:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+    </UserControl.Resources>
     <!--d:DataContext="{d:DesignInstance vm:ScheduleTypeViewModel, IsDesignTimeCreatable=True}"-->
     <!--Для интелисенса-->
 
-    <ScrollViewer >
+    <ScrollViewer>
         <StackPanel Margin="0,0,0,-8" >
             <Menu>
                 <MenuItem Header="&lt;" Command="{Binding BackToReestrCommand}" />
-                <MenuItem Header="Экспорт" Cursor="Hand" Command="{Binding ExportWordCommand}"/>
-                <MenuItem Header="Редактировать" Command="{Binding EditModeChangeCommand}" Cursor="Hand"></MenuItem>
+                <MenuItem Header="Экспорт" Cursor="Hand" Command="{Binding ExportWordCommand}" Visibility="{Binding BoxesMenuItemsVisibility}"/>
+                <MenuItem Header="Редактировать" Command="{Binding EditModeChangeCommand}" Visibility="{Binding BoxesMenuItemsVisibility}" Cursor="Hand"></MenuItem>
             </Menu>
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
@@ -39,18 +42,13 @@
                         </DatePicker.Resources>
                     </DatePicker>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Width="250" TextAlignment="Right" Text="Место отлова:" FontSize="14" Padding="20,0"
-                               Margin="0,20,0,0">
-                    </TextBlock>
-                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.Adresstrapping}" VerticalAlignment="Bottom" IsReadOnly="{Binding IsReadOnly}"></TextBox>
-                </StackPanel>
+                <StackPanel Orientation="Horizontal"/>
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Width="250" TextAlignment="Right" Text="Муниципальное образование:" FontSize="14"
                                Padding="20,0" Margin="0,20,0,0">
                     </TextBlock>
-                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.IdMunicipNavigation.Namemunicip}" VerticalAlignment="Bottom" IsReadOnly="{Binding IsReadOnly}"></TextBox>
+                    <ComboBox Width="300" BorderThickness="0,0,0,2" SelectedItem="{Binding Card.IdMunicipNavigation.Namemunicip}" VerticalAlignment="Bottom" IsEnabled="{Binding IsEditMode}" ItemsSource="{Binding Municips}"></ComboBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Width="250" TextAlignment="Right" Text="Населённый пункт:" FontSize="14" Padding="20,0"
@@ -63,6 +61,48 @@
                                Padding="20,0" Margin="0,20,0,0">
                     </TextBlock>
                     <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.Adresstrapping}" VerticalAlignment="Bottom" IsReadOnly="{Binding IsReadOnly}"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Visibility="{Binding MoreBoxesVisibility}">
+                    <TextBlock Width="250" TextAlignment="Right" Text="Дата заключения МК:" FontSize="14" Padding="20,0"
+                               Margin="0,20,0,0">
+                    </TextBlock>
+                    <DatePicker VerticalAlignment="Bottom" Width="200" SelectedDate="{Binding Card.Datemk}" IsEnabled="{Binding IsEditMode}">
+                        <DatePicker.Resources>
+                            <Style TargetType="DatePickerTextBox">
+                                <Setter Property="IsReadOnly" Value="True"/>
+                            </Style>
+                        </DatePicker.Resources>
+                    </DatePicker>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Visibility="{Binding MoreBoxesVisibility}">
+                    <TextBlock Width="250" TextAlignment="Right" Text="ОМСУ:" FontSize="14"
+                               Padding="20,0" Margin="0,20,0,0">
+                    </TextBlock>
+                    <ComboBox Width="300" BorderThickness="0,0,0,2" SelectedItem="{Binding Card.IdOmsuNavigation.Nameomsu}" VerticalAlignment="Bottom" IsEnabled="{Binding IsEditMode}" ItemsSource="{Binding Omsus}"></ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Visibility="{Binding MoreBoxesVisibility}">
+                    <TextBlock Width="250" TextAlignment="Right" Text="Населённый пункт:" FontSize="14"
+                               Padding="20,0" Margin="0,20,0,0">
+                    </TextBlock>
+                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.Locality}" VerticalAlignment="Bottom" IsReadOnly="{Binding IsReadOnly}"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Visibility="{Binding MoreBoxesVisibility}">
+                    <TextBlock Width="250" TextAlignment="Right" Text="Дата выдачи зака-наряда:" FontSize="14" Padding="20,0"
+                               Margin="0,20,0,0">
+                    </TextBlock>
+                    <DatePicker VerticalAlignment="Bottom" Width="200" SelectedDate="{Binding Card.Dateworkorder}" IsEnabled="{Binding IsEditMode}">
+                        <DatePicker.Resources>
+                            <Style TargetType="DatePickerTextBox">
+                                <Setter Property="IsReadOnly" Value="True"/>
+                            </Style>
+                        </DatePicker.Resources>
+                    </DatePicker>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Visibility="{Binding MoreBoxesVisibility}">
+                    <TextBlock Width="250" TextAlignment="Right" Text="Цель отлова:" FontSize="14"
+                               Padding="20,0" Margin="0,20,0,0">
+                    </TextBlock>
+                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.Targetorder}" VerticalAlignment="Bottom" IsReadOnly="{Binding IsReadOnly}"></TextBox>
                 </StackPanel>
             </StackPanel>
 
@@ -146,10 +186,14 @@
                 </StackPanel>
             </StackPanel>-->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="left" Margin="0,50">
-                <Button Content="Сохранить" FontSize="14" Width="100" Height="30" Margin="50,0"
-                        HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Content="Сохранить" FontSize="14" Width="100" Height="30" Margin="50,100"
+                        HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Command="{Binding SaveModeShangeCommand}">
+                </Button>
+                <Button Content="Добавить" FontSize="14" Width="100" Height="30" Margin="50,100"
+                        HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Command="{Binding AddModeChangeCommand, Converter=}">
                 </Button>
                 <Button Content="Отменить " FontSize="14" Width="100" Height="30" Background="Gray" Cursor="Hand"></Button>
             </StackPanel>
-        </StackPanel></ScrollViewer>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

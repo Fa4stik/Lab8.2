@@ -31,8 +31,8 @@
                     <DockPanel HorizontalAlignment="Stretch"/>
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
-            <MenuItem Header="Открыть" CommandParameter="{Binding ElementName=DataGridReestr,Path=SelectedItem}" Command="{Binding OpenScheduleCardCommand}" />
-            <MenuItem Header="Добавить">
+            <MenuItem Header="Открыть" CommandParameter="{Binding ElementName=DataGridReestr,Path=SelectedItem}" Command="{Binding OpenScheduleCardCommand}" Cursor="Hand" />
+            <MenuItem Header="Добавить" Command="{Binding }" Cursor="Hand">
                 <MenuItem Header="По заявке" Background="Aqua" Command="{Binding AddRequestCommand}"></MenuItem>
                 <MenuItem Header="По плану графику" Background="Aqua" Command="{Binding AddScheduleCommand}"></MenuItem>
             </MenuItem>

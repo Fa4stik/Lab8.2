@@ -64,7 +64,7 @@ namespace PIS8_2.MVVM.ViewModels
             UpdateReestr = new UpdateReestrCommand(this, userStore);
             UpdateReestr.Execute(null);
 
-            OpenScheduleCardCommand = new OpenScheduleCardCommand(this,
+            OpenScheduleCardCommand = new OpenScheduleCardCommand(
                 new ParameterNavigationService<Card, ScheduleTypeViewModel>(navigationStore,
                     (parameter) => new ScheduleTypeViewModel(navigationStore,userStore,parameter)));
             
@@ -82,6 +82,10 @@ namespace PIS8_2.MVVM.ViewModels
             ExportExcelCommand = new ExportExcelCommand(this);
 
             ApplyFilter=new ApplyFilterCommand(this,userStore);
+
+            AddScheduleCommand = new AddScheduleTypeCommand(
+                new NavigationService<ScheduleTypeViewModel>(
+                    navigationStore, () => new ScheduleTypeViewModel(navigationStore, userStore)));
 
         }
     }

@@ -6,6 +6,8 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Security.Policy;
 using Microsoft.EntityFrameworkCore;
+using System.Data.SqlTypes;
+using System.Security.Cryptography.Xml;
 
 namespace PIS8_2.MVVM.Model.Data
 {
@@ -118,6 +120,55 @@ namespace PIS8_2.MVVM.Model.Data
                     .Include(c => c.IdMunicipNavigation)
                     .Include(c => c.IdOmsuNavigation)
                     .FirstOrDefault(c => c.Id == id);
+            }
+        }
+
+        public void EditCard(Card newCard)
+        {
+            using (var db = new TrappinganimalsContext())
+            {
+                var curCard = db.Cards.FirstOrDefault(c => c.Id == newCard.Id);
+                curCard = newCard;
+                db.SaveChanges();
+            }
+        }
+
+        public List<string> GetNamesMunicip()
+        {
+            using (var db = new TrappinganimalsContext())
+            {
+                return db.Municips
+                    .Select(m => m.Namemunicip)
+                    .ToList();
+            }
+        }
+
+        public List<string> GetNamesOMSU()
+        {
+            using (var db = new TrappinganimalsContext())
+            {
+                return db.Omsus
+                    .Select(m => m.Nameomsu)
+                    .ToList();
+            }
+        }
+
+        public void AddCard(Card card)
+        {
+            using (var db = new TrappinganimalsContext())
+            {
+                db.Cards.Add(card);
+                db.SaveChanges();
+            }
+        }
+
+        public void DeleteCards(LimitedCard[] limitedCards)
+        {
+            using (var db = new TrappinganimalsContext())
+            {
+                foreach (var limitedCard in limitedCards)
+                    db.Cards.Remove(db.Cards.FirstOrDefault(c => c.Id == limitedCard.Id));
+                db.SaveChanges();
             }
         }
     }

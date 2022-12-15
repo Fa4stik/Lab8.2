@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using OfficeOpenXml;
 using PIS8_2.Commands.Base;
 using PIS8_2.MVVM.Model;
@@ -14,15 +15,13 @@ namespace PIS8_2.Commands
 {
     internal class OpenScheduleCardCommand:Command
     {
-        private readonly ReestrViewModel _viewModel;
         private readonly ParameterNavigationService<Card, ScheduleTypeViewModel> _navigationService;
         private readonly Connection _conn;
         
 
 
-        public OpenScheduleCardCommand(ReestrViewModel viewModel, ParameterNavigationService<Card, ScheduleTypeViewModel> navigationService)
+        public OpenScheduleCardCommand(ParameterNavigationService<Card, ScheduleTypeViewModel> navigationService)
         {
-            _viewModel = viewModel;
             _navigationService = navigationService;
             _conn=new Connection();
         }
