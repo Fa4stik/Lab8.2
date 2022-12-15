@@ -51,8 +51,8 @@ namespace PIS8_2.MVVM.ViewModels
                     () => new ReestrViewModel(userStore, navigationStore)));
 
             ExportWordCommand = new ExportWordCommand(this);
-
             EditModeChangeCommand = new EditModeChangeCommand(this);
+
         }
 
         public void ChangeEditMode()
