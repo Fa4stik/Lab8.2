@@ -8,7 +8,7 @@ using System.Windows.Data;
 namespace PIS8_2.Converters
 {
     [ValueConversion(typeof(bool), typeof(bool))]
-    internal class InverseBooleanConverter : IValueConverter
+    public class InverseBooleanConverter : IValueConverter
     {
         #region IValueConverter Members
 

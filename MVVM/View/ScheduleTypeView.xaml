@@ -4,14 +4,15 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PIS8_2.MVVM.View"
-      xmlns:vm="clr-namespace:PIS8_2.MVVM.ViewModels" xmlns:con="clr-namespace:PIS8_2.Converters"
+      xmlns:vm="clr-namespace:PIS8_2.MVVM.ViewModels" 
+      xmlns:con="clr-namespace:PIS8_2.Converters"
              mc:Ignorable="d" Height="1080" Width="1920"
       d:DataContext="{d:DesignInstance vm:ScheduleTypeViewModel, IsDesignTimeCreatable=True}"
              
 
     >
     <UserControl.Resources>
-        <con:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+        <con:InverseBooleanConverter x:Key="InverseBoolean" />
     </UserControl.Resources>
     <!--d:DataContext="{d:DesignInstance vm:ScheduleTypeViewModel, IsDesignTimeCreatable=True}"-->
     <!--Для интелисенса-->
@@ -187,10 +188,10 @@
             </StackPanel>-->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="left" Margin="0,50">
                 <Button Content="Сохранить" FontSize="14" Width="100" Height="30" Margin="50,100"
-                        HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Command="{Binding SaveModeShangeCommand}">
+                        HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Command="{Binding SaveModeShangeCommand}" Visibility="{Binding BoxesMenuItemsVisibility}">
                 </Button>
                 <Button Content="Добавить" FontSize="14" Width="100" Height="30" Margin="50,100"
-                        HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Command="{Binding AddModeChangeCommand, Converter=}">
+                        HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Command="{Binding AddModeChangeCommand}" Visibility="{Binding MoreBoxesVisibility}">
                 </Button>
                 <Button Content="Отменить " FontSize="14" Width="100" Height="30" Background="Gray" Cursor="Hand"></Button>
             </StackPanel>
