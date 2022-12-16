@@ -83,7 +83,14 @@ namespace PIS8_2.MVVM.ViewModels
                 ChangeEditMode();
                 MoreBoxesVisibility = Visibility.Visible;
                 BoxesMenuItemsVisibility = Visibility.Collapsed;
-                _card = new Card();
+                _card = new Card() {
+                    IdMunicipNavigation = new Municip(),
+                    IdOmsuNavigation = new Omsu(),
+                    IdOrgNavigation = new Organisation(),
+                    Datetrapping = DateTime.Now.Subtract(new TimeSpan(2, 0, 0, 0)),
+                    Datemk = DateTime.Now,
+                    Dateworkorder = DateTime.Now.Subtract(new TimeSpan(3, 0, 0, 0)),
+                };
             }
             else
             {

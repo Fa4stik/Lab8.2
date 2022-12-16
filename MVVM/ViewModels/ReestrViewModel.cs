@@ -44,6 +44,18 @@ namespace PIS8_2.MVVM.ViewModels
             set => SetField(ref _cards, value, nameof(Cards));
         }
 
+        private bool _isAllCheckedItems;
+        public bool IsAllCheckedItems
+        {
+            get => _isAllCheckedItems;
+            set
+            {
+                foreach (var card in Cards)
+                    card.IsSelectedCard = value;
+                SetField(ref _isAllCheckedItems, value, "IsAllCheckedItems");
+            }
+        }
+
         public ICommand ExitCommand { get; }
         public ICommand AddRequestCommand { get; }
         public ICommand AddScheduleCommand { get; }
@@ -53,7 +65,7 @@ namespace PIS8_2.MVVM.ViewModels
         public ICommand ApplyFilter { get; }
 
         public ICommand ResetFilter { get; }
-
+        public ICommand DelCardCommand { get; }
 
 
         public ReestrViewModel(UserStore userStore, NavigationStore navigationStore)
@@ -90,6 +102,8 @@ namespace PIS8_2.MVVM.ViewModels
                 new NavigationService<ScheduleTypeViewModel>(
                     navigationStore, () => new ScheduleTypeViewModel(navigationStore, userStore)));
             ResetFilter=new ResetFilterCommand(this);
+
+            DelCardCommand = new DelCardCommand(this);
         }
     }
 }

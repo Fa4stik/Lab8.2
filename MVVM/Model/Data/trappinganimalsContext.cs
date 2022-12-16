@@ -17,14 +17,18 @@ public partial class TrappinganimalsContext : DbContext
     }
 
     static TrappinganimalsContext()
-    => NpgsqlConnection.GlobalTypeMapper
+    {
+        NpgsqlConnection.GlobalTypeMapper
         .MapEnum<role_type>()
         .MapEnum<operation>()
         .MapEnum<order_type>();
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+    }
 
     public TrappinganimalsContext(DbContextOptions<TrappinganimalsContext> options)
         : base(options)
     {
+        //AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
     }
 
 

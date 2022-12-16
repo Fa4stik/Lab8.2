@@ -35,13 +35,12 @@
             </Menu.ItemsPanel>
             <MenuItem Header="Открыть" CommandParameter="{Binding ElementName=DataGridReestr,Path=SelectedItem}" Command="{Binding OpenScheduleCardCommand}" Cursor="Hand" />
             <MenuItem Header="Добавить" Command="{Binding }" Cursor="Hand">
-                <MenuItem Header="По заявке" Background="Aqua" Command="{Binding AddRequestCommand}"></MenuItem>
                 <MenuItem Header="По плану графику" Background="Aqua" Command="{Binding AddScheduleCommand}"></MenuItem>
             </MenuItem>
             <MenuItem Header="Редактировать"/>
             <MenuItem Header="Экспорт Excel" Command="{Binding ExportExcelCommand}"/>
             <MenuItem Header="Фильтр" Command="{Binding ApplyFilter}" />
-            <MenuItem Header="Удалить"/>
+            <MenuItem Header="Удалить" Command="{Binding DelCardCommand}" CommandParameter="{Binding ElementName=DataGridReestr, Path=ItemsSource}"/>
             <MenuItem Header="Сортировка"/>
 
             <MenuItem Header="{Binding Login}" HorizontalAlignment="Right" FlowDirection="RightToLeft">
@@ -273,13 +272,13 @@
 
 
 
-        <DataGrid Name="DataGridReestr" ItemsSource="{Binding Cards}" FontSize="14" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" >
+        <DataGrid Name="DataGridReestr" ItemsSource="{Binding Cards}" FontSize="14" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
 
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn IsReadOnly="False" CanUserReorder="False" >
+                <DataGridCheckBoxColumn IsReadOnly="False" CanUserReorder="False" Binding="{Binding IsSelectedCard, UpdateSourceTrigger=PropertyChanged}">
                     <DataGridCheckBoxColumn.HeaderTemplate>
                         <DataTemplate>
-                            <CheckBox />
+                            <CheckBox IsChecked="{Binding DataContext.IsAllCheckedItems, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}" />
                         </DataTemplate>
                     </DataGridCheckBoxColumn.HeaderTemplate>
                 </DataGridCheckBoxColumn>

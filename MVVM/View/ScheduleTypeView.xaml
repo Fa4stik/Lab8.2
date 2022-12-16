@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PIS8_2.MVVM.View"
       xmlns:vm="clr-namespace:PIS8_2.MVVM.ViewModels" 
-      xmlns:con="clr-namespace:PIS8_2.Converters"
+      xmlns:con="clr-namespace:PIS8_2.Converters" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" Height="1080" Width="1920"
       d:DataContext="{d:DesignInstance vm:ScheduleTypeViewModel, IsDesignTimeCreatable=True}"
              
@@ -29,7 +29,8 @@
                     <TextBlock Width="250" TextAlignment="Right" Text="Номер МК:" FontSize="14" Padding="20,0"
                                Margin="0,20,0,0">
                     </TextBlock>
-                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.Nummk}" VerticalAlignment="Bottom" IsReadOnly="{Binding IsReadOnly}"></TextBox>
+                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.Nummk, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Bottom" IsReadOnly="{Binding IsReadOnly}" MaxLength="10" Cursor="Hand">
+                    </TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Width="250" TextAlignment="Right" Text="Дата отлова:" FontSize="14" Padding="20,0"
@@ -80,12 +81,6 @@
                                Padding="20,0" Margin="0,20,0,0">
                     </TextBlock>
                     <ComboBox Width="300" BorderThickness="0,0,0,2" SelectedItem="{Binding Card.IdOmsuNavigation.Nameomsu}" VerticalAlignment="Bottom" IsEnabled="{Binding IsEditMode}" ItemsSource="{Binding Omsus}"></ComboBox>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Visibility="{Binding MoreBoxesVisibility}">
-                    <TextBlock Width="250" TextAlignment="Right" Text="Населённый пункт:" FontSize="14"
-                               Padding="20,0" Margin="0,20,0,0">
-                    </TextBlock>
-                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.Locality}" VerticalAlignment="Bottom" IsReadOnly="{Binding IsReadOnly}"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Visibility="{Binding MoreBoxesVisibility}">
                     <TextBlock Width="250" TextAlignment="Right" Text="Дата выдачи зака-наряда:" FontSize="14" Padding="20,0"
