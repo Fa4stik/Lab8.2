@@ -273,7 +273,7 @@
 
 
 
-        <DataGrid Name="DataGridReestr" ItemsSource="{Binding Cards}" FontSize="14" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" >
+        <DataGrid Name="DataGridReestr" ItemsSource="{Binding Cards}" FontSize="14" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"  >
 
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn IsReadOnly="False" CanUserReorder="False"  >
