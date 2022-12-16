@@ -76,7 +76,7 @@ namespace PIS8_2.MVVM.Model.Data
                         .Where(c => c.Numworkorder >= filter.StartNumworkorder && c.Numworkorder <= filter.EndNumworkorder)
                         .Where(c => c.Dateworkorder >= filter.StartDateworkorder && c.Dateworkorder <= filter.EndDateworkorder)
                         .Where(c => c.Datetrapping >= filter.StartDatetrapping && c.Datetrapping <= filter.EndDatetrapping)
-                        .Where(c => c.TypeOrder.Contains(filter.StartTypeOrder, StringComparison.InvariantCultureIgnoreCase))
+                        .Where(c => c.TypeOrder.ToString().Contains(filter.StartTypeOrder, StringComparison.InvariantCultureIgnoreCase))
                         .Where(c => c.Targetorder.Contains(filter.StartTargetorder, StringComparison.InvariantCultureIgnoreCase))
                         .ToList();
                 }

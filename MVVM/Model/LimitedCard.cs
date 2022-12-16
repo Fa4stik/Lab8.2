@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static PIS8_2.MVVM.Model.Card;
 
 namespace PIS8_2.MVVM.Model
 {
     public class LimitedCard
     {
-        public LimitedCard(int id, int nummk, DateTime datemk, string namemunicip, string nameomsu, int numworkorder, string locality, DateTime dateworkorder, DateTime datetrapping, string targetorder, string typeOrder, string nameorg)
+        public LimitedCard(int id, int nummk, DateTime datemk, string namemunicip, string nameomsu, int numworkorder, string locality, DateTime dateworkorder, DateTime datetrapping, string targetorder, order_type typeOrder, string nameorg)
         {
             Id = id;
             Nummk = nummk;
@@ -40,7 +41,7 @@ namespace PIS8_2.MVVM.Model
         public DateTime Dateworkorder { get; set; }
         public DateTime Datetrapping { get; set; }
         public string Targetorder { get; set; }
-        public string TypeOrder { get; set; }
+        public order_type TypeOrder { get; set; }
 
         
 

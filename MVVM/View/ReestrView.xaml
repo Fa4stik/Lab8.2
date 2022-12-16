@@ -293,7 +293,7 @@
                 <DataGridTextColumn Header="Дата выдачи заказ-наряда" Binding="{Binding Dateworkorder, StringFormat=dd-MM-yyyy}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Дата отлова" Binding="{Binding Datetrapping, StringFormat=dd-MM-yyyy}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Цель отлова" Binding="{Binding Targetorder}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Тип отлова" Binding="{Binding TypeOrder}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Тип отлова" Binding="{Binding TypeOrder, Converter={StaticResource EnumToDescription}}" IsReadOnly="True" />
 
                 <!--Номер МК
                 Дата заключения МК
