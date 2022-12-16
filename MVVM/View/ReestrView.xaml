@@ -42,7 +42,7 @@
             <MenuItem Header="Экспорт Excel" Command="{Binding ExportExcelCommand}"/>
             <MenuItem Header="Фильтр" Command="{Binding ApplyFilter}" />
             <MenuItem Header="Удалить"/>
-            <MenuItem Header="Сортировка"/>
+            <MenuItem Header="Сортировка" Command="{Binding SortingCommand}"/>
 
             <MenuItem Header="{Binding Login}" HorizontalAlignment="Right" FlowDirection="RightToLeft">
                 <MenuItem Header="Выход" Command="{Binding ExitCommand}" Background="Aqua"/>
@@ -276,14 +276,14 @@
         <DataGrid Name="DataGridReestr" ItemsSource="{Binding Cards}" FontSize="14" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" >
 
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn IsReadOnly="False" CanUserReorder="False" >
+                <DataGridCheckBoxColumn IsReadOnly="False" CanUserReorder="False"  >
                     <DataGridCheckBoxColumn.HeaderTemplate>
                         <DataTemplate>
                             <CheckBox />
                         </DataTemplate>
                     </DataGridCheckBoxColumn.HeaderTemplate>
                 </DataGridCheckBoxColumn>
-                <DataGridTextColumn Header="Номер МК" Binding="{Binding Nummk}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Номер МК" Binding="{Binding Nummk}" IsReadOnly="True"  />
                 <DataGridTextColumn Header="Дата заключения МК" Binding="{Binding Datemk, StringFormat=dd-MM-yyyy}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Муниципальное образование" Binding="{Binding Namemunicip}"  IsReadOnly="True" />
                 <DataGridTextColumn Header="ОМСУ" Binding="{Binding Nameomsu}"  IsReadOnly="True" />
@@ -293,7 +293,8 @@
                 <DataGridTextColumn Header="Дата выдачи заказ-наряда" Binding="{Binding Dateworkorder, StringFormat=dd-MM-yyyy}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Дата отлова" Binding="{Binding Datetrapping, StringFormat=dd-MM-yyyy}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Цель отлова" Binding="{Binding Targetorder}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Тип отлова" Binding="{Binding TypeOrder}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Тип отлова" Binding="{Binding TypeOrder}" IsReadOnly="True">
+                </DataGridTextColumn>
 
                 <!--Номер МК
                 Дата заключения МК

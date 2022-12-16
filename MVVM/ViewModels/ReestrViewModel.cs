@@ -54,6 +54,7 @@ namespace PIS8_2.MVVM.ViewModels
 
         public ICommand ResetFilter { get; }
 
+        public ICommand SortingCommand { get; }
 
 
         public ReestrViewModel(UserStore userStore, NavigationStore navigationStore)
@@ -90,6 +91,7 @@ namespace PIS8_2.MVVM.ViewModels
                 new NavigationService<ScheduleTypeViewModel>(
                     navigationStore, () => new ScheduleTypeViewModel(navigationStore, userStore)));
             ResetFilter=new ResetFilterCommand(this);
+            SortingCommand=new SortingCommand(this);
         }
     }
 }
