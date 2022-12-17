@@ -27,9 +27,6 @@ namespace PIS8_2.Commands
                 "max" => _viewModel.CurrentPage != _viewModel.MaxPage,
                 _ => false
             };
-            //var operation = Convert.ToInt32(parameter);
-            //return _viewModel.CurrentPage + operation != 0 && _viewModel.CurrentPage + operation <= _viewModel.MaxPage;
-            //return true;
         }
 
         public override void Execute(object parameter)
@@ -49,7 +46,6 @@ namespace PIS8_2.Commands
                     _viewModel.CurrentPage=_viewModel.MaxPage;
                     break;
             }
-            //_viewModel.CurrentPage = Convert.ToInt32(parameter);
             _viewModel.UpdateReestr.Execute(null);
         }
     }

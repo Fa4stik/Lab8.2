@@ -100,7 +100,7 @@ namespace PIS8_2.Commands
                 db.Add(_card);
                 db.SaveChanges();
 
-                //_openScheduleCardCommand.Execute(ConverterCardsToLimitedCards.ConvertCardToLimitedCard(_card));
+                _openScheduleCardCommand.Execute(ConverterCardsToLimitedCards.ConvertCardToLimitedCard(_card));
             }
         }
     }
