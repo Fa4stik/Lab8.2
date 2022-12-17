@@ -50,19 +50,19 @@
                     <TextBlock Width="250" TextAlignment="Right" Text="Муниципальное образование:" FontSize="14"
                                Padding="20,0" Margin="0,20,0,0">
                     </TextBlock>
-                    <ComboBox Width="300" BorderThickness="0,0,0,2" SelectedItem="{Binding Card.IdMunicipNavigation.Namemunicip}" VerticalAlignment="Bottom" IsEnabled="{Binding IsEditMode}" ItemsSource="{Binding Municips}"></ComboBox>
+                    <ComboBox Width="300" BorderThickness="0,0,0,2" SelectedItem="{Binding Card.IdMunicipNavigation.Namemunicip}" VerticalAlignment="Bottom" IsEnabled="{Binding IsEditMode}" ItemsSource="{Binding Municips}" SelectedIndex="0"></ComboBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Width="250" TextAlignment="Right" Text="Населённый пункт:" FontSize="14" Padding="20,0"
                                Margin="0,20,0,0">
                     </TextBlock>
-                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.Locality}" VerticalAlignment="Bottom" IsReadOnly="{Binding IsReadOnly}"></TextBox>
+                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.Locality, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Bottom" IsReadOnly="{Binding IsReadOnly}"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Width="250" TextAlignment="Right" Text="Адрес места отлова:" FontSize="14"
                                Padding="20,0" Margin="0,20,0,0">
                     </TextBlock>
-                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.Adresstrapping}" VerticalAlignment="Bottom" IsReadOnly="{Binding IsReadOnly}"></TextBox>
+                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.Adresstrapping, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Bottom" IsReadOnly="{Binding IsReadOnly}"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Visibility="{Binding MoreBoxesVisibility}">
                     <TextBlock Width="250" TextAlignment="Right" Text="Дата заключения МК:" FontSize="14" Padding="20,0"
@@ -80,7 +80,7 @@
                     <TextBlock Width="250" TextAlignment="Right" Text="ОМСУ:" FontSize="14"
                                Padding="20,0" Margin="0,20,0,0">
                     </TextBlock>
-                    <ComboBox Width="300" BorderThickness="0,0,0,2" SelectedItem="{Binding Card.IdOmsuNavigation.Nameomsu}" VerticalAlignment="Bottom" IsEnabled="{Binding IsEditMode}" ItemsSource="{Binding Omsus}"></ComboBox>
+                    <ComboBox Width="300" BorderThickness="0,0,0,2" SelectedItem="{Binding Card.IdOmsuNavigation.Nameomsu}" VerticalAlignment="Bottom" IsEnabled="{Binding IsEditMode}" ItemsSource="{Binding Omsus}" SelectedIndex="0"></ComboBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Visibility="{Binding MoreBoxesVisibility}">
                     <TextBlock Width="250" TextAlignment="Right" Text="Дата выдачи зака-наряда:" FontSize="14" Padding="20,0"
@@ -98,7 +98,7 @@
                     <TextBlock Width="250" TextAlignment="Right" Text="Цель отлова:" FontSize="14"
                                Padding="20,0" Margin="0,20,0,0">
                     </TextBlock>
-                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.Targetorder}" VerticalAlignment="Bottom" IsReadOnly="{Binding IsReadOnly}"></TextBox>
+                    <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.Targetorder, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Bottom" IsReadOnly="{Binding IsReadOnly}"></TextBox>
                 </StackPanel>
             </StackPanel>
 

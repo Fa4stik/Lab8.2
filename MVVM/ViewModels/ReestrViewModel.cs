@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using PIS8_2.Commands;
+using PIS8_2.Commands.Base;
 using PIS8_2.MVVM.Model;
 using PIS8_2.MVVM.Model.Data;
 using PIS8_2.Service;
@@ -100,7 +101,7 @@ namespace PIS8_2.MVVM.ViewModels
 
             AddScheduleCommand = new AddScheduleTypeCommand(
                 new NavigationService<ScheduleTypeViewModel>(
-                    navigationStore, () => new ScheduleTypeViewModel(navigationStore, userStore)));
+                    navigationStore, () => new ScheduleTypeViewModel(navigationStore, userStore, null, OpenScheduleCardCommand)));
             ResetFilter=new ResetFilterCommand(this);
 
             DelCardCommand = new DelCardCommand(this);

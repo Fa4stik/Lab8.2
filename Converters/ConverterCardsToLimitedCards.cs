@@ -13,5 +13,10 @@ namespace PIS8_2.Converters
         {
             return cards.Select(card => new LimitedCard(card.Id, card.Nummk, card.Datemk, card.IdMunicipNavigation.Namemunicip, card.IdOmsuNavigation.Nameomsu, card.Numworkorder, card.Locality, card.Dateworkorder, card.Datetrapping, card.Targetorder, card.TypeOrder,card.IdOrgNavigation.Nameorg)).ToList();
         }
+
+        public static LimitedCard ConvertCardToLimitedCard(Card card)
+        {
+            return new LimitedCard(card.Id, card.Nummk, card.Datemk, card.IdMunicipNavigation.Namemunicip, card.IdOmsuNavigation.Nameomsu, card.Numworkorder, card.Locality, card.Dateworkorder, card.Datetrapping, card.Targetorder, card.TypeOrder, card.IdOrgNavigation.Nameorg);
+        }
     }
 }

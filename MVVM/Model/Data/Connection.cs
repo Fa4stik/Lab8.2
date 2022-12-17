@@ -127,8 +127,7 @@ namespace PIS8_2.MVVM.Model.Data
         {
             using (var db = new TrappinganimalsContext())
             {
-                var curCard = db.Cards.FirstOrDefault(c => c.Id == newCard.Id);
-                curCard = newCard;
+                db.Cards.Update(newCard);
                 db.SaveChanges();
             }
         }
