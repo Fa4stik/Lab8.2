@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using static PIS8_2.MVVM.Model.Card;
 
 namespace PIS8_2.MVVM.Model
 {
-    public class LimitedCard
+    public class LimitedCard : INotifyPropertyChanged
     {
-        public LimitedCard(int id, int nummk, DateTime datemk, string namemunicip, string nameomsu, int numworkorder, string locality, DateTime dateworkorder, DateTime datetrapping, string targetorder, string typeOrder, string nameorg)
+        public LimitedCard(int id, int nummk, DateTime datemk, string namemunicip, string nameomsu, int numworkorder, string locality, DateTime dateworkorder, DateTime datetrapping, string targetorder, order_type typeOrder, string nameorg)
         {
             Id = id;
             Nummk = nummk;
@@ -24,7 +27,11 @@ namespace PIS8_2.MVVM.Model
             Nameorg = nameorg;
         }
 
-
+        private bool _isSelectedCard;
+        public bool IsSelectedCard {
+            get => _isSelectedCard;
+            set => SetField(ref _isSelectedCard, value, "IsSelectedCard");
+        }
         public int Id { get; set; }
         public int Nummk { get; set; }
         public DateTime Datemk { get; set; }
@@ -40,10 +47,23 @@ namespace PIS8_2.MVVM.Model
         public DateTime Dateworkorder { get; set; }
         public DateTime Datetrapping { get; set; }
         public string Targetorder { get; set; }
-        public string TypeOrder { get; set; }
+        public order_type TypeOrder { get; set; }
 
-        
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
         //<DataGridTextColumn Header = "Номер МК" Binding="{Binding Nummk}" IsReadOnly="True" />
         //<DataGridTextColumn Header = "Дата заключения МК" Binding="{Binding Datemk}" IsReadOnly="True"/>
         //<DataGridTextColumn Header = "Мун. обр." Binding="{Binding IdMunicipNavigation.Namemunicip}"  IsReadOnly="True" />

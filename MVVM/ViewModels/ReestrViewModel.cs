@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using PIS8_2.Commands;
+using PIS8_2.Commands.Base;
 using PIS8_2.MVVM.Model;
 using PIS8_2.MVVM.Model.Data;
 using PIS8_2.Service;
@@ -44,6 +45,18 @@ namespace PIS8_2.MVVM.ViewModels
             set => SetField(ref _cards, value, nameof(Cards));
         }
 
+        private bool _isAllCheckedItems;
+        public bool IsAllCheckedItems
+        {
+            get => _isAllCheckedItems;
+            set
+            {
+                foreach (var card in Cards)
+                    card.IsSelectedCard = value;
+                SetField(ref _isAllCheckedItems, value, "IsAllCheckedItems");
+            }
+        }
+
         public ICommand ExitCommand { get; }
         public ICommand AddRequestCommand { get; }
         public ICommand AddScheduleCommand { get; }
@@ -53,8 +66,7 @@ namespace PIS8_2.MVVM.ViewModels
         public ICommand ApplyFilter { get; }
 
         public ICommand ResetFilter { get; }
-
-        public ICommand SortingCommand { get; }
+        public ICommand DelCardCommand { get; }
 
 
         public ReestrViewModel(UserStore userStore, NavigationStore navigationStore)
@@ -89,9 +101,10 @@ namespace PIS8_2.MVVM.ViewModels
 
             AddScheduleCommand = new AddScheduleTypeCommand(
                 new NavigationService<ScheduleTypeViewModel>(
-                    navigationStore, () => new ScheduleTypeViewModel(navigationStore, userStore)));
+                    navigationStore, () => new ScheduleTypeViewModel(navigationStore, userStore, null, OpenScheduleCardCommand)));
             ResetFilter=new ResetFilterCommand(this);
-            SortingCommand=new SortingCommand(this);
+
+            DelCardCommand = new DelCardCommand(this);
         }
     }
 }

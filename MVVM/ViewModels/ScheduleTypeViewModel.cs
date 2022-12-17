@@ -76,14 +76,21 @@ namespace PIS8_2.MVVM.ViewModels
         public ICommand SaveModeShangeCommand { get; }
         public ICommand AddModeChangeCommand { get; }
 
-        public ScheduleTypeViewModel(NavigationStore navigationStore,UserStore userStore, Card selectedCard = null)
+        public ScheduleTypeViewModel(NavigationStore navigationStore,UserStore userStore, Card selectedCard = null, ICommand openScheduleCardCommand = null)
         {
             if (selectedCard == null)
             {
                 ChangeEditMode();
                 MoreBoxesVisibility = Visibility.Visible;
                 BoxesMenuItemsVisibility = Visibility.Collapsed;
-                _card = new Card();
+                _card = new Card() {
+                    IdMunicipNavigation = new Municip(),
+                    IdOmsuNavigation = new Omsu(),
+                    IdOrgNavigation = new Organisation(),
+                    Datetrapping = DateTime.Now.AddDays(-3),
+                    Datemk = DateTime.Now,
+                    Dateworkorder = DateTime.Now.AddDays(-2),
+                };
             }
             else
             {
@@ -101,7 +108,7 @@ namespace PIS8_2.MVVM.ViewModels
 
             SaveModeShangeCommand = new SaveModeChangeCommand(this);
 
-            AddModeChangeCommand = new AddModeChangeCommand(_card, userStore);
+            AddModeChangeCommand = new AddModeChangeCommand(_card, userStore, openScheduleCardCommand);
 
             _conn = new Connection();
             Municips = _conn.GetNamesMunicip();

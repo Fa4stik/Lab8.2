@@ -1,6 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
+using static PIS8_2.MVVM.Model.Card;
+using static PIS8_2.MVVM.Model.Log;
+using static PIS8_2.MVVM.Model.Tuser;
 
 namespace PIS8_2.MVVM.Model.Data;
 
@@ -10,9 +16,19 @@ public partial class TrappinganimalsContext : DbContext
     {
     }
 
+    static TrappinganimalsContext()
+    {
+        NpgsqlConnection.GlobalTypeMapper
+        .MapEnum<role_type>()
+        .MapEnum<operation>()
+        .MapEnum<order_type>();
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+    }
+
     public TrappinganimalsContext(DbContextOptions<TrappinganimalsContext> options)
         : base(options)
     {
+        //AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
     }
 
 
@@ -34,9 +50,9 @@ public partial class TrappinganimalsContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder
-            .HasPostgresEnum("operation", new[] { "Удаление карточки из реестра", "Добавление карточки в реестр", "Изменение карточки", "Удаление файла" })
-            .HasPostgresEnum("order_type", new[] { "План-график", "Заказ-наряд" })
-            .HasPostgresEnum("role_type", new[] { "Оператор по отлову", "Куратор ВетСлужбы", "Куратор ОМСУ", "Куратор по отлову", "Оператор ВетСлужбы", "Оператор ОМСУ", "Подписант ВетСлужбы", "Подписант ОМСУ", "Подписант по отлову" });
+            .HasPostgresEnum<operation>()
+            .HasPostgresEnum<order_type>()
+            .HasPostgresEnum<role_type>();
 
 
         modelBuilder.Entity<Card>(entity =>
@@ -73,6 +89,9 @@ public partial class TrappinganimalsContext : DbContext
                 //.HasConversion(c => c.ToString(), c => Enum.Parse<TypeOrder>(c)) || Для релиза необходимо, чтобы все значения в enum DB были на англ.
                 .HasColumnName("typeorder");
             entity.Property(e => e.AccessRoles)
+                //.HasConversion(
+                //e => e.Cast<int>().ToArray(),
+                //e => e.Cast<role_type>().ToArray())
                 .IsRequired()
                 .HasColumnName("accessroles");
 

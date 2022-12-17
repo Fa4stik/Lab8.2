@@ -25,5 +25,9 @@ namespace PIS8_2.MVVM.View
             InitializeComponent();
         }
 
+        private void CheckBox_TargetUpdated(object sender, DataTransferEventArgs e)
+        {
+
+        }
     }
 }
