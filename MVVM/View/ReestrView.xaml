@@ -7,7 +7,7 @@
       xmlns:vm="clr-namespace:PIS8_2.MVVM.ViewModels"
       xmlns:con="clr-namespace:PIS8_2.Converters"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="1600"
+      d:DesignHeight="800" d:DesignWidth="1600"
       
       d:DataContext="{d:DesignInstance vm:ReestrViewModel, IsDesignTimeCreatable=True}"
       >
@@ -22,12 +22,12 @@
     </UserControl.Resources>
 
 
-    <StackPanel Background="WhiteSmoke">
+    <DockPanel Background="WhiteSmoke" LastChildFill="False"  Cursor=""  >
 
 
 
 
-        <Menu>
+        <Menu DockPanel.Dock="Top">
             <Menu.ItemsPanel>
                 <ItemsPanelTemplate>
                     <DockPanel HorizontalAlignment="Stretch"/>
@@ -63,7 +63,7 @@
                 <TextBox Width="200"></TextBox>
             </StackPanel>
         </StackPanel>-->
-        <Grid Background="AliceBlue" Visibility="{Binding FilterVisability}">
+        <Grid Background="AliceBlue" Visibility="{Binding FilterVisability}" DockPanel.Dock="Top">
             <Grid  Margin="10,20,40,20" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="24"></RowDefinition>
@@ -268,11 +268,21 @@
             </Grid>
         </Grid>
 
+        <StackPanel DockPanel.Dock="Bottom" >
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="&lt;&lt;" FontSize="20" Margin="5" Width="40" Command="{Binding MovePageCommand}" CommandParameter="min"/>
+                <Button Content="&lt;" FontSize="20" Margin="5" Width="40" Command="{Binding MovePageCommand}" CommandParameter="-"></Button>
+                <TextBlock FontSize="20" Text="{Binding CurrentPage}" VerticalAlignment="Center" Foreground="CornflowerBlue" Margin="10,0"></TextBlock>
+                <TextBlock FontSize="20" Text="из"  Foreground="CornflowerBlue"  VerticalAlignment="Center"></TextBlock>
+                <TextBlock FontSize="20" Text="{Binding MaxPage}" VerticalAlignment="Center" Foreground="CornflowerBlue" Margin="10,0"></TextBlock>
+                <Button Content=">" FontSize="20" Margin="5" Width="40" Command="{Binding MovePageCommand}" CommandParameter="+"></Button>
+                <Button Content=">>" FontSize="20" Margin="5" Width="40" Command="{Binding MovePageCommand}" CommandParameter="max"></Button>
+            </StackPanel>
+        </StackPanel>
 
 
 
-
-        <DataGrid Name="DataGridReestr" ItemsSource="{Binding Cards}" FontSize="14" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+        <DataGrid Name="DataGridReestr" ItemsSource="{Binding Cards}" FontSize="14" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" DockPanel.Dock="Top">
 
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn IsReadOnly="False" CanUserReorder="False" Binding="{Binding IsSelectedCard, UpdateSourceTrigger=PropertyChanged}">
@@ -293,43 +303,11 @@
                 <DataGridTextColumn Header="Дата отлова" Binding="{Binding Datetrapping, StringFormat=dd-MM-yyyy}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Цель отлова" Binding="{Binding Targetorder}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Тип отлова" Binding="{Binding TypeOrder, Converter={StaticResource EnumToDescription}}" IsReadOnly="True" />
-
-                <!--Номер МК
-                Дата заключения МК
-                Муниципальное образование
-                ОМСУ
-                Исполнитель МК
-                Номер заказа-наряда
-                Населённый пункт
-                Дата выдачи заказа-наряда
-                Дата отлова
-                Цель отлова
-                Отлов по заявке или по плану-графику-->
-                <!--public int Id { get; set; }
-                public int Nummk { get; set; }
-                public DateOnly Datemk { get; set; }
-                public int IdOmsu { get; set; }
-                public string Adresstrapping { get; set; }
-                public int Numworkorder { get; set; }
-                public string Locality { get; set; }
-                public DateOnly Dateworkorder { get; set; }
-                public DateOnly Datetrapping { get; set; }
-                public string Targetorder { get; set; }
-                public string Firstnameexecuter { get; set; }
-                public string Surnameexecuter { get; set; }
-                public string Patronymicexecuter { get; set; }
-                public string Phonenumberexecuter { get; set; }
-                public string Firstnameappl { get; set; }
-                public string Surnameappl { get; set; }
-                public string Patronymicappl { get; set; }
-                public string Adressappl { get; set; }
-                public string Phonenumberappl { get; set; }
-                public int IdOrg { get; set; }
-                public int? IdAnimal { get; set; }-->
             </DataGrid.Columns>
         </DataGrid>
 
 
+        
 
-    </StackPanel>
+    </DockPanel>
 </UserControl>

@@ -15,7 +15,6 @@ namespace PIS8_2.Commands
 {
     internal class ApplyFilterCommand:Command
     {
-        private readonly Connection _conn;
         private readonly ReestrViewModel _viewModel;
         private readonly UserStore _userStore;
 

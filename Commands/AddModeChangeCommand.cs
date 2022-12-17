@@ -41,7 +41,7 @@ namespace PIS8_2.Commands
                                     .Where(c => c.PropertyType == typeof(string))
                                     .ToList())
             {
-                if (item.GetValue(_card) == null || item.GetValue(_card) == string.Empty)
+                if (item.GetValue(_card) == null || (string)item.GetValue(_card) == string.Empty)
                     return false;
             }
 
@@ -51,7 +51,7 @@ namespace PIS8_2.Commands
                                     .Where(c => c.PropertyType == typeof(Enum))
                                     .ToList())
             {
-                if (item.GetValue(_card) == null || item.GetValue(_card) == string.Empty)
+                if (item.GetValue(_card) == null || (string)item.GetValue(_card) == string.Empty)
                     return false;
             }
 
@@ -100,7 +100,7 @@ namespace PIS8_2.Commands
                 db.Add(_card);
                 db.SaveChanges();
 
-                _openScheduleCardCommand.Execute(ConverterCardsToLimitedCards.ConvertCardToLimitedCard(_card));
+                //_openScheduleCardCommand.Execute(ConverterCardsToLimitedCards.ConvertCardToLimitedCard(_card));
             }
         }
     }

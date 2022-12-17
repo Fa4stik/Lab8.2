@@ -38,7 +38,14 @@ namespace PIS8_2.Commands
             {
                 cards = _conn.ExecuteCardsWithFilter(_userStore.CurrentUser,_viewModel.Filter);
             }
-            _viewModel.Cards = ConverterCardsToLimitedCards.ConvertCardsToLimitedCards(cards);
+            _viewModel.Cards = ConverterCardsToLimitedCards.ConvertCardsToLimitedCards(cards)
+                .ToList();
+            _viewModel.MaxPage = (int)Math.Ceiling((double)_viewModel.Cards.Count/100);
+            _viewModel.Cards=_viewModel.Cards
+                .Skip((_viewModel.CurrentPage - 1) * 100)
+                .Take(_viewModel.CurrentPage * 100)
+                .ToList();
+
         }
     }
 }

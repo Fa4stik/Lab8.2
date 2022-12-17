@@ -53,16 +53,16 @@ namespace PIS8_2.MVVM.Model.Data
         {
             using (var db = new TrappinganimalsContext())
             {
-                
 
-                var cards= db.Cards
+
+                var cards = db.Cards
                     .Include(c => c.IdOrgNavigation)
                     .Include(c => c.IdMunicipNavigation)
                     .Include(c => c.IdOmsuNavigation)
                     .Where(c => c.IdOrg == user.IdOrg)
-                    .ToList()
-                    //.Where(c=>c.AccessRoles.Contains(user.Role))
+                    //.Where(c => c.AccessRoles.ToString()!.Contains(user.Role.ToString()))
                     .ToList();
+                    
                 if (filter != null)
                 {
                     cards = cards
@@ -78,6 +78,7 @@ namespace PIS8_2.MVVM.Model.Data
                         .Where(c => c.Datetrapping >= filter.StartDatetrapping && c.Datetrapping <= filter.EndDatetrapping)
                         .Where(c => c.TypeOrder.ToString().Contains(filter.StartTypeOrder, StringComparison.InvariantCultureIgnoreCase))
                         .Where(c => c.Targetorder.Contains(filter.StartTargetorder, StringComparison.InvariantCultureIgnoreCase))
+                     
                         .ToList();
                 }
                 //IsDefaultFilter = true;

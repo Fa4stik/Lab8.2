@@ -8,7 +8,7 @@
         xmlns:pis82="clr-namespace:PIS8_2"
         xmlns:view="clr-namespace:PIS8_2.MVVM.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1079" Width="1200"
+        Title="MainWindow" 
         WindowState="Maximized"
         >
     <ContentControl Content="{Binding CurrentViewModel}">

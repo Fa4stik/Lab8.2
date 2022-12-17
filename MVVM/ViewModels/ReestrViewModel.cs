@@ -57,6 +57,20 @@ namespace PIS8_2.MVVM.ViewModels
             }
         }
 
+        private int _currentPage=1;
+        public int CurrentPage
+        {
+            get => _currentPage;
+            set => SetField(ref _currentPage,value, "CurrentPage");
+        }
+
+        private int _maxPage = 1;
+        public int MaxPage
+        {
+            get => _maxPage;
+            set => SetField(ref _maxPage, value, "MaxPage");
+        }
+
         public ICommand ExitCommand { get; }
         public ICommand AddRequestCommand { get; }
         public ICommand AddScheduleCommand { get; }
@@ -67,6 +81,9 @@ namespace PIS8_2.MVVM.ViewModels
 
         public ICommand ResetFilter { get; }
         public ICommand DelCardCommand { get; }
+
+        public ICommand MovePageCommand { get; }
+
 
 
         public ReestrViewModel(UserStore userStore, NavigationStore navigationStore)
@@ -105,6 +122,8 @@ namespace PIS8_2.MVVM.ViewModels
             ResetFilter=new ResetFilterCommand(this);
 
             DelCardCommand = new DelCardCommand(this);
+
+            MovePageCommand=new MovePageCommand(this);
         }
     }
 }
