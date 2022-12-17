@@ -117,7 +117,7 @@ namespace PIS8_2.MVVM.ViewModels
             ExportWordCommand = new ExportWordCommand(this);
             EditModeChangeCommand = new EditModeChangeCommand(this);
 
-            SaveModeShangeCommand = new SaveModeChangeCommand(this);
+            SaveModeShangeCommand = new SaveModeChangeCommand(this, userStore);
 
             AddModeChangeCommand = new AddModeChangeCommand(_card, userStore, openScheduleCardCommand);
 

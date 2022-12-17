@@ -121,7 +121,7 @@ namespace PIS8_2.MVVM.ViewModels
                     navigationStore, () => new ScheduleTypeViewModel(navigationStore, userStore, null, OpenScheduleCardCommand)));
             ResetFilter=new ResetFilterCommand(this);
 
-            DelCardCommand = new DelCardCommand(this);
+            DelCardCommand = new DelCardCommand(this, userStore);
 
             MovePageCommand=new MovePageCommand(this);
         }

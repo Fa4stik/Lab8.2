@@ -8,6 +8,11 @@ using System.Security.Policy;
 using Microsoft.EntityFrameworkCore;
 using System.Data.SqlTypes;
 using System.Security.Cryptography.Xml;
+using PIS8_2.Commands;
+using PIS8_2.Converters;
+using static PIS8_2.MVVM.Model.Tuser;
+using System.Security.RightsManagement;
+using PIS8_2.Stores;
 
 namespace PIS8_2.MVVM.Model.Data
 {
@@ -103,7 +108,7 @@ namespace PIS8_2.MVVM.Model.Data
             }
         }
 
-        public void Journaling(Tuser user,Card card, Log.operation operation)
+        public void Journaling(Tuser user, Card card, Log.operation operation)
         {
             using (var db = new TrappinganimalsContext())
             {
@@ -116,9 +121,9 @@ namespace PIS8_2.MVVM.Model.Data
                     IdUser = user.Id,
                     IdUserNavigation = user,
                     Operation = operation
-
                 };
-                db.Logs.Add(log);
+                db.Add(log);
+                db.SaveChanges();
             }
         }
 
@@ -143,12 +148,57 @@ namespace PIS8_2.MVVM.Model.Data
             }
         }
 
-        public void EditCard(Card newCard)
+        public void EditCard(Card newCard, Tuser user)
         {
             using (var db = new TrappinganimalsContext())
             {
                 db.Cards.Update(newCard);
                 db.SaveChanges();
+                Journaling(user, newCard, Log.operation.editCard);
+            }
+        }
+
+        public void AddCard(Card _card, Tuser _user)
+        {
+            using (var db = new TrappinganimalsContext())
+            {
+                var card = db.Cards
+                    .Include(c => c.IdMunicipNavigation)
+                    .Include(c => c.IdOmsuNavigation)
+                    .Include(c => c.IdOrgNavigation);
+
+                _card.Id = card
+                    .OrderBy(c => c.Id)
+                    .LastOrDefault().Id + 1;
+
+                // Муниципальное образование
+                _card.IdMunicip = card.FirstOrDefault(c => c.IdMunicipNavigation.Namemunicip == _card.IdMunicipNavigation.Namemunicip).IdMunicipNavigation.Id;
+                _card.IdMunicipNavigation = card.FirstOrDefault(c => c.IdMunicip == _card.IdMunicip).IdMunicipNavigation;
+
+                // ОМСУ
+                _card.IdOmsu = card.FirstOrDefault(c => c.IdOmsuNavigation.Nameomsu == _card.IdOmsuNavigation.Nameomsu).IdOmsuNavigation.Id;
+                _card.IdOmsuNavigation = card.FirstOrDefault(c => c.IdOmsu == _card.IdOmsu).IdOmsuNavigation;
+
+                // Организация
+                _card.IdOrg = _user.IdOrg.Value;
+                _card.IdOrgNavigation = card.FirstOrDefault(c => c.IdOrg == _card.IdOrg).IdOrgNavigation;
+
+                int numWordOrder = card.Select(c => c.Numworkorder).ToList().Max() + 1;
+                _card.Numworkorder = numWordOrder;
+                _card.TypeOrder = Card.order_type.schedule;
+                _card.AccessRoles = new role_type[] { _user.Role };
+
+                //string text = "";
+                //foreach (var item in _card.GetType().GetProperties())
+                //{
+                //    text += item.Name + @" \ " + item.GetValue(_card) + "\n";
+                //}
+                //MessageBox.Show(text);
+
+                db.Add(_card);
+                db.SaveChanges();
+
+                Journaling(_user, _card, Log.operation.addCardReestr);
             }
         }
 
@@ -172,21 +222,16 @@ namespace PIS8_2.MVVM.Model.Data
             }
         }
 
-        public void AddCard(Card card)
+        public void DeleteCards(int[] idCards, Tuser user)
         {
             using (var db = new TrappinganimalsContext())
             {
-                db.Cards.Add(card);
-                db.SaveChanges();
-            }
-        }
-
-        public void DeleteCards(LimitedCard[] limitedCards)
-        {
-            using (var db = new TrappinganimalsContext())
-            {
-                foreach (var limitedCard in limitedCards)
-                    db.Cards.Remove(db.Cards.FirstOrDefault(c => c.Id == limitedCard.Id));
+                foreach (var i in idCards)
+                {
+                    var card = db.Cards.FirstOrDefault(c => c.Id == i);
+                    Journaling(user, card, Log.operation.delCardReestr);
+                    db.Cards.Remove(card);
+                }
                 db.SaveChanges();
             }
         }
