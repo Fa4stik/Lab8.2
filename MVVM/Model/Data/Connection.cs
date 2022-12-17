@@ -65,7 +65,7 @@ namespace PIS8_2.MVVM.Model.Data
                     .Include(c => c.IdMunicipNavigation)
                     .Include(c => c.IdOmsuNavigation)
                     .Where(c => c.IdOrg == user.IdOrg)
-                    //.Where(c => c.AccessRoles.ToString()!.Contains(user.Role.ToString()))
+                    .Where(c => c.AccessRoles.ToList().Contains(user.Role))
                     .ToList();
                     
                 if (filter != null)
