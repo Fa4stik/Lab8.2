@@ -11,6 +11,7 @@ using PIS8_2.MVVM.Model;
 using System.Windows.Data;
 using PIS8_2.MVVM.Model.Data;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace PIS8_2.MVVM.ViewModels
 {
@@ -55,6 +56,16 @@ namespace PIS8_2.MVVM.ViewModels
             get => _isReadOnly;
             set => SetField(ref _isReadOnly, value, "IsReadOnly");
         }
+
+        private List<DateTime> _blackOutTrappingDates;
+
+        public List<DateTime> BlackOutTrappingDates
+        {
+            get => _blackOutTrappingDates;
+            set => SetField(ref _blackOutTrappingDates, value, "BlackOutTrappingDates");
+        }
+
+        private CalendarDateRange _dateRange=new CalendarDateRange();
 
         private Visibility _moreBoxesVisibility;
         public Visibility MoreBoxesVisibility

@@ -103,6 +103,25 @@ namespace PIS8_2.MVVM.Model.Data
             }
         }
 
+        public void Journaling(Tuser user,Card card, Log.operation operation)
+        {
+            using (var db = new TrappinganimalsContext())
+            {
+                var log = new Log()
+                {
+                    Date = DateTime.Now,
+                    IdCard = card.Id,
+                    Id = db.Logs.Select(l=>l.Id).Max(),
+                    IdCardNavigation = card,
+                    IdUser = user.Id,
+                    IdUserNavigation = user,
+                    Operation = operation
+
+                };
+                db.Logs.Add(log);
+            }
+        }
+
         public int GetMunicip(int idOmsu)
         {
             using (var db = new TrappinganimalsContext())

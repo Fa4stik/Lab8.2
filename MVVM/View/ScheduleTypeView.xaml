@@ -36,7 +36,8 @@
                     <TextBlock Width="250" TextAlignment="Right" Text="Дата отлова:" FontSize="14" Padding="20,0"
                                Margin="0,20,0,0">
                     </TextBlock>
-                    <DatePicker VerticalAlignment="Bottom" Width="200" SelectedDate="{Binding Card.Datetrapping}" IsEnabled="{Binding IsEditMode}">
+                    <DatePicker VerticalAlignment="Bottom" Width="200"  SelectedDate="{Binding Card.Datetrapping}" IsEnabled="{Binding IsEditMode}">
+                        <DatePicker.BlackoutDates/>
                         <DatePicker.Resources>
                             <Style TargetType="DatePickerTextBox">
                                 <Setter Property="IsReadOnly" Value="True"/>
