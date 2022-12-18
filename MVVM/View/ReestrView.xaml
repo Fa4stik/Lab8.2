@@ -22,7 +22,7 @@
     </UserControl.Resources>
 
 
-    <DockPanel Background="WhiteSmoke" LastChildFill="False"  Cursor=""  >
+    <DockPanel Background="WhiteSmoke" LastChildFill="False" >
 
 
 
@@ -66,9 +66,9 @@
         <Grid Background="AliceBlue" Visibility="{Binding FilterVisability}" DockPanel.Dock="Top">
             <Grid  Margin="10,20,40,20" >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="24"></RowDefinition>
-                    <RowDefinition Height="24"></RowDefinition>
-                    <RowDefinition Height="24"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
                     <RowDefinition Height="40"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -83,35 +83,35 @@
 
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Grid.Row="0" Text="Номер МК   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Номер МК   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
 
                 <Grid Grid.Column="1" Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="22*"></ColumnDefinition>
+                        <ColumnDefinition Width="90*"></ColumnDefinition>
+                        <ColumnDefinition Width="27*"></ColumnDefinition>
+                        <ColumnDefinition Width="90*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="От: " Grid.Column="0"></TextBlock>
-                    <TextBox Grid.Column="1" Text="{Binding Filter.StartNummk,UpdateSourceTrigger=PropertyChanged}" MaxLength="10"></TextBox>
-                    <TextBlock Text="До: " Grid.Column="2"></TextBlock>
-                    <TextBox Grid.Column="3" Text="{Binding Filter.EndNummk,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" ></TextBox>
+                    <TextBlock Text="От: " HorizontalAlignment="Center" VerticalAlignment="Center" Height="16" Width="20"/>
+                    <TextBox Text="{Binding Filter.StartNummk,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="18" Margin="22,0,0,0"/>
+                    <TextBlock Text="До: " Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Height="16" Margin="5,0,0,0" Width="21"/>
+                    <TextBox Grid.Column="2" Text="{Binding Filter.EndNummk,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="18" Margin="26,0,0,0" ></TextBox>
                 </Grid>
 
-                <TextBlock Grid.Column="0" Grid.Row="1" Text="Дата заключения МК   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Дата заключения МК   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
 
                 <Grid Grid.Column="1" Grid.Row="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="22*"></ColumnDefinition>
+                        <ColumnDefinition Width="90*"></ColumnDefinition>
+                        <ColumnDefinition Width="25*"></ColumnDefinition>
+                        <ColumnDefinition Width="90*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="От: " Grid.Column="0" ></TextBlock>
+                    <TextBlock Text="От: " Grid.Column="0" VerticalAlignment="Center" Height="16" ></TextBlock>
 
-                    <DatePicker Grid.Column="1" SelectedDate="{Binding Filter.StartDatemk}" >
+                    <DatePicker SelectedDate="{Binding Filter.StartDatemk}" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="24" Margin="22,0,0,0" >
                         <DatePicker.Resources>
                             <Style TargetType="DatePickerTextBox">
                                 <Setter Property="IsReadOnly" Value="True"  />
@@ -119,9 +119,9 @@
                         </DatePicker.Resources>
                     </DatePicker>
 
-                    <TextBlock Text="До: " Grid.Column="2"></TextBlock>
+                    <TextBlock Text="До: " Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Height="16" Margin="4,0,0,0" Width="21"></TextBlock>
 
-                    <DatePicker Grid.Column="3" SelectedDate="{Binding Filter.EndDatemk}">
+                    <DatePicker Grid.Column="2" SelectedDate="{Binding Filter.EndDatemk}" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="24" Margin="25,0,0,0">
                         <DatePicker.Resources>
                             <Style TargetType="DatePickerTextBox">
                                 <Setter Property="IsReadOnly" Value="True"  />
@@ -130,78 +130,78 @@
                     </DatePicker>
                 </Grid>
 
-                <TextBlock Grid.Column="0" Grid.Row="2" Text="Мун. обр.   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Мун. обр.   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"></TextBlock>
 
                 <Grid Grid.Column="1" Grid.Row="2">
-                    <TextBox  Text="{Binding Filter.StartMunicipName}" MaxLength="50"></TextBox>
+                    <TextBox  Text="{Binding Filter.StartMunicipName}" MaxLength="50" VerticalAlignment="Center"/>
                 </Grid>
 
-                <TextBlock Grid.Column="2" Grid.Row="0" Text="ОМСУ   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis"></TextBlock>
+                <TextBlock Grid.Column="2" Grid.Row="0" Text="ОМСУ   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
 
                 <Grid Grid.Column="3" Grid.Row="0">
 
 
 
-                    <TextBox  Text="{Binding Filter.StartOmsuName}" MaxLength="50" ></TextBox>
+                    <TextBox  Text="{Binding Filter.StartOmsuName}" MaxLength="50" VerticalAlignment="Center" ></TextBox>
 
                 </Grid>
 
-                <TextBlock Grid.Column="2" Grid.Row="1" Text="Исполнитель МК   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis"></TextBlock>
+                <TextBlock Grid.Column="2" Grid.Row="1" Text="Исполнитель МК   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"></TextBlock>
 
                 <Grid Grid.Column="3" Grid.Row="1">
 
 
 
-                    <TextBox  Text="{Binding Filter.StartOrgName}" MaxLength="50"></TextBox>
+                    <TextBox  Text="{Binding Filter.StartOrgName}" MaxLength="50" VerticalAlignment="Center"></TextBox>
 
                 </Grid>
 
-                <TextBlock Grid.Column="2" Grid.Row="2" Text="Номер заказ-наряда   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis"></TextBlock>
+                <TextBlock Grid.Column="2" Grid.Row="2" Text="Номер заказ-наряда   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"></TextBlock>
 
                 <Grid Grid.Column="3" Grid.Row="2">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="22*"></ColumnDefinition>
+                        <ColumnDefinition Width="80*"></ColumnDefinition>
+                        <ColumnDefinition Width="31*"></ColumnDefinition>
+                        <ColumnDefinition Width="80*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="От: " Grid.Column="0"></TextBlock>
-                    <TextBox Grid.Column="1" Text="{Binding Filter.StartNumworkorder,UpdateSourceTrigger=PropertyChanged}" MaxLength="10"></TextBox>
-                    <TextBlock Text="До: " Grid.Column="2"></TextBlock>
-                    <TextBox Grid.Column="3" Text="{Binding Filter.EndNumworkorder,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" ></TextBox>
+                    <TextBlock Text="От: " Grid.Column="0" VerticalAlignment="Center" Height="16"></TextBlock>
+                    <TextBox Text="{Binding Filter.StartNumworkorder,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="18" Margin="22,0,0,0"/>
+                    <TextBlock Text="До: " Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Height="16" Width="21"></TextBlock>
+                    <TextBox Grid.Column="2" Text="{Binding Filter.EndNumworkorder,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="18" Margin="26,0,0,0" ></TextBox>
                 </Grid>
 
-                <TextBlock Grid.Column="4" Grid.Row="0" Text="Населённый пункт   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis"></TextBlock>
+                <TextBlock Grid.Column="4" Grid.Row="0" Text="Населённый пункт   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
 
                 <Grid Grid.Column="5" Grid.Row="0">
 
 
 
-                    <TextBox  Text="{Binding Filter.StartLocality}" MaxLength="50" ></TextBox>
+                    <TextBox  Text="{Binding Filter.StartLocality}" MaxLength="50" VerticalAlignment="Center" ></TextBox>
 
                 </Grid>
 
-                <TextBlock Grid.Column="4" Grid.Row="1" Text="Дата выдачи заказ-наряда   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis"></TextBlock>
+                <TextBlock Grid.Column="4" Grid.Row="1" Text="Дата выдачи заказ-наряда   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"></TextBlock>
 
                 <Grid Grid.Column="5" Grid.Row="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="11*"></ColumnDefinition>
+                        <ColumnDefinition Width="50*"></ColumnDefinition>
+                        <ColumnDefinition Width="15*"></ColumnDefinition>
+                        <ColumnDefinition Width="50*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="От: " Grid.Column="0"></TextBlock>
-                    <DatePicker Grid.Column="1" SelectedDate="{Binding Filter.StartDateworkorder}">
+                    <TextBlock Text="От: " Grid.Column="0" VerticalAlignment="Center" Height="16"></TextBlock>
+                    <DatePicker SelectedDate="{Binding Filter.StartDateworkorder}" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="24" Margin="22,0,0,0">
                         <DatePicker.Resources>
                             <Style TargetType="DatePickerTextBox">
                                 <Setter Property="IsReadOnly" Value="True"  />
                             </Style>
                         </DatePicker.Resources>
                     </DatePicker>
-                    <TextBlock Text="До: " Grid.Column="2"></TextBlock>
-                    <DatePicker Grid.Column="3" SelectedDate="{Binding Filter.EndDateworkorder}">
+                    <TextBlock Text="До: " Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Height="16" Margin="6,0,0,0" Width="21"></TextBlock>
+                    <DatePicker Grid.Column="2" SelectedDate="{Binding Filter.EndDateworkorder}" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="24" Margin="27,0,0,0">
                         <DatePicker.Resources>
                             <Style TargetType="DatePickerTextBox">
                                 <Setter Property="IsReadOnly" Value="True"  />
@@ -210,26 +210,26 @@
                     </DatePicker>
                 </Grid>
 
-                <TextBlock Grid.Column="4" Grid.Row="2" Text="Дата отлова   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis"></TextBlock>
+                <TextBlock Grid.Column="4" Grid.Row="2" Text="Дата отлова   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"></TextBlock>
 
                 <Grid Grid.Column="5" Grid.Row="2">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="22*"></ColumnDefinition>
+                        <ColumnDefinition Width="90*"></ColumnDefinition>
+                        <ColumnDefinition Width="29*"></ColumnDefinition>
+                        <ColumnDefinition Width="83*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="От: " Grid.Column="0"></TextBlock>
-                    <DatePicker Grid.Column="1" SelectedDate="{Binding Filter.StartDatetrapping}">
+                    <TextBlock Text="От: " Grid.Column="0" VerticalAlignment="Center" Height="16"></TextBlock>
+                    <DatePicker SelectedDate="{Binding Filter.StartDatetrapping}" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="24" Margin="22,0,0,0">
                         <DatePicker.Resources>
                             <Style TargetType="DatePickerTextBox">
                                 <Setter Property="IsReadOnly" Value="True"  />
                             </Style>
                         </DatePicker.Resources>
                     </DatePicker>
-                    <TextBlock Text="До: " Grid.Column="2"></TextBlock>
-                    <DatePicker Grid.Column="3" SelectedDate="{Binding Filter.EndDatetrapping}">
+                    <TextBlock Text="До: " Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Height="16" Margin="6,0,0,0" Width="21"></TextBlock>
+                    <DatePicker Grid.Column="2" SelectedDate="{Binding Filter.EndDatetrapping}" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="24" Margin="27,0,0,0">
                         <DatePicker.Resources>
                             <Style TargetType="DatePickerTextBox">
                                 <Setter Property="IsReadOnly" Value="True"  />
@@ -238,17 +238,17 @@
                     </DatePicker>
                 </Grid>
 
-                <TextBlock Grid.Column="6" Grid.Row="0" Text="Цель отлова   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis"></TextBlock>
+                <TextBlock Grid.Column="6" Grid.Row="0" Text="Цель отлова   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"></TextBlock>
 
                 <Grid Grid.Column="7" Grid.Row="0">
 
 
 
-                    <TextBox  Text="{Binding Filter.StartTargetorder}" MaxLength="50"></TextBox>
+                    <TextBox  Text="{Binding Filter.StartTargetorder}" MaxLength="50" VerticalAlignment="Center"></TextBox>
 
                 </Grid>
 
-                <TextBlock Grid.Column="6" Grid.Row="1" Text="Тип отлова   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis"></TextBlock>
+                <TextBlock Grid.Column="6" Grid.Row="1" Text="Тип отлова   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"></TextBlock>
 
                 <Grid Grid.Column="7" Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -258,25 +258,25 @@
 
 
 
-                    <TextBox  Text="{Binding Filter.StartTypeOrder, Mode=TwoWay}" MaxLength="50" Grid.ColumnSpan="2"></TextBox>
+                    <TextBox  Text="{Binding Filter.StartTypeOrder, Mode=TwoWay}" MaxLength="50" Grid.ColumnSpan="2" VerticalAlignment="Center"></TextBox>
 
                 </Grid>
 
-                <Button Grid.Column="0" Grid.Row="3" Margin="22,5" Content="Фильтровать" Command="{Binding UpdateReestr}"></Button>
-                <Button Grid.Column="1" Grid.Row="3" Margin="30,5" Content="Закрыть" Background="Gray" Command="{Binding ApplyFilter}"></Button>
+                <Button Grid.Column="0" Grid.Row="3" Margin="22,5" Content="Фильтровать" Style="{StaticResource button-blue}" Command="{Binding UpdateReestr}"></Button>
+                <Button Grid.Column="1" Grid.Row="3" Margin="30,5" Content="Закрыть" Style="{StaticResource button-gray}" Command="{Binding ApplyFilter}"></Button>
 
             </Grid>
         </Grid>
 
-        <StackPanel DockPanel.Dock="Bottom" >
+        <StackPanel DockPanel.Dock="Bottom" Margin="0,0,0,20">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="&lt;&lt;" FontSize="20" Margin="5" Width="40" Command="{Binding MovePageCommand}" CommandParameter="min"/>
-                <Button Content="&lt;" FontSize="20" Margin="5" Width="40" Command="{Binding MovePageCommand}" CommandParameter="-"></Button>
+                <Button Content="&lt;&lt;" FontSize="20" Margin="5" Width="40" Command="{Binding MovePageCommand}" CommandParameter="min" Style="{StaticResource button-gray}"/>
+                <Button Content="&lt;" FontSize="20" Margin="5" Width="40" Command="{Binding MovePageCommand}" CommandParameter="-" Style="{StaticResource button-gray}"></Button>
                 <TextBlock FontSize="20" Text="{Binding CurrentPage}" VerticalAlignment="Center" Foreground="CornflowerBlue" Margin="10,0"></TextBlock>
                 <TextBlock FontSize="20" Text="из"  Foreground="CornflowerBlue"  VerticalAlignment="Center"></TextBlock>
                 <TextBlock FontSize="20" Text="{Binding MaxPage}" VerticalAlignment="Center" Foreground="CornflowerBlue" Margin="10,0"></TextBlock>
-                <Button Content=">" FontSize="20" Margin="5" Width="40" Command="{Binding MovePageCommand}" CommandParameter="+"></Button>
-                <Button Content=">>" FontSize="20" Margin="5" Width="40" Command="{Binding MovePageCommand}" CommandParameter="max"></Button>
+                <Button Content=">" FontSize="20" Margin="5" Width="40" Command="{Binding MovePageCommand}" CommandParameter="+" Style="{StaticResource button-gray}"></Button>
+                <Button Content=">>" FontSize="20" Margin="5" Width="40" Command="{Binding MovePageCommand}" CommandParameter="max" Style="{StaticResource button-gray}"></Button>
             </StackPanel>
         </StackPanel>
 
@@ -307,7 +307,7 @@
         </DataGrid>
 
 
-        
+
 
     </DockPanel>
 </UserControl>
