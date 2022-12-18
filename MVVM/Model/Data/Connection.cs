@@ -54,6 +54,24 @@ namespace PIS8_2.MVVM.Model.Data
 
         }
 
+        public void AddFile(string nameFile, string filePath)
+        {
+            var file = System.IO.File.ReadAllBytes(filePath);
+
+            using (var db = new TrappinganimalsContext())
+            {
+                var id = db.Files.Count()+1;
+                var newFile = new File()
+                {
+                    Id = id,
+                    Name = nameFile,
+                    File1 = file,
+                };
+                db.Add(file);
+                db.SaveChanges();
+            }
+        }
+
         public IEnumerable<Card> ExecuteCardsWithFilter(Tuser user, FilterModel filter=null)
         {
             using (var db = new TrappinganimalsContext())
