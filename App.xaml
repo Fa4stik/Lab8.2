@@ -47,6 +47,10 @@
             </Style.Triggers>
         </Style>
 
+        <Style x:Key="passwordBox">
+            <Setter Property="ItemsControl.BorderThickness" Value="0"></Setter>
+        </Style>
+
         <Style TargetType="Menu">
             <Setter Property="Background" Value="#FF007DFF"/>
             <Setter Property="Foreground" Value="White"/>
