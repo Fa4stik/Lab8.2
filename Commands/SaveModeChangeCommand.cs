@@ -1,4 +1,6 @@
 ﻿using PIS8_2.Commands.Base;
+using PIS8_2.Converters;
+using PIS8_2.MVVM.Model;
 using PIS8_2.MVVM.Model.Data;
 using PIS8_2.MVVM.ViewModels;
 using PIS8_2.Stores;
@@ -27,6 +29,7 @@ namespace PIS8_2.Commands
         {
             _conn.EditCard(_scheduleTypeViewModel.Card, _userStore.CurrentUser);
             _scheduleTypeViewModel.ChangeSaveMode();
+
         }
     }
 }

@@ -191,10 +191,13 @@
                         HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Command="{Binding AddModeChangeCommand}" Visibility="{Binding MoreBoxesVisibility}">
                 </Button>
                 <Button Content="Загрузить файл" FontSize="14" Width="150" Height="30" Margin="50, 100"
-                        HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Command="{Binding DownloadFileCommand}">
+                        HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Command="{Binding DownloadFileCommand}" Visibility="{Binding BoxesMenuItemsVisibility}">
                 </Button>
-                <Label Content="{Binding Card.IdFileNavigation.Name, Converter={StaticResource ConverterNullFileToString}}" Margin="0, 100">
+                <Label Content="{Binding Card.IdFileNavigation.Name, Converter={StaticResource ConverterNullFileToString}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0, 100" Visibility="{Binding BoxesMenuItemsVisibility}">
                 </Label>
+                <Button Content="Удалить файл" FontSize="14" Width="150" Height="30" Margin="50, 100"
+                        HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Command="{Binding DeleteFileCommand}" Visibility="{Binding CheckModeDeleteVisibility}">
+                </Button>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>
