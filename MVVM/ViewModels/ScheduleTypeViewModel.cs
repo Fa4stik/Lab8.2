@@ -86,6 +86,7 @@ namespace PIS8_2.MVVM.ViewModels
         public ICommand EditModeChangeCommand { get; }
         public ICommand SaveModeShangeCommand { get; }
         public ICommand AddModeChangeCommand { get; }
+        public ICommand DownloadFileCommand { get; }
 
         public ScheduleTypeViewModel(NavigationStore navigationStore,UserStore userStore, Card selectedCard = null, ICommand openScheduleCardCommand = null)
         {
@@ -120,6 +121,8 @@ namespace PIS8_2.MVVM.ViewModels
             SaveModeShangeCommand = new SaveModeChangeCommand(this, userStore);
 
             AddModeChangeCommand = new AddModeChangeCommand(_card, userStore, openScheduleCardCommand);
+
+            DownloadFileCommand = new DownloadFileCommand(this);
 
             _conn = new Connection();
             Municips = _conn.GetNamesMunicip();

@@ -43,6 +43,7 @@ public partial class TrappinganimalsContext : DbContext
     public virtual DbSet<Organisation> Organisations { get; set; }
 
     public virtual DbSet<Tuser> Tusers { get; set; }
+    public virtual DbSet<File> Files { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=trappinganimals;Username=postgres;Password=123");
@@ -109,6 +110,29 @@ public partial class TrappinganimalsContext : DbContext
                 .HasForeignKey(d => d.IdOrg)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("card_id_org_fkey");
+
+            entity.HasOne(d => d.IdFileNavigation).WithMany(p => p.Cards)
+                .HasForeignKey(d => d.IdOrg)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("card_id_file_fkey");
+        });
+
+        modelBuilder.Entity<File>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("images_pkey");
+
+            entity.ToTable("files");
+
+            entity.Property(e => e.Id)
+                .HasDefaultValueSql("nextval('images_id_seq'::regclass)")
+                .HasColumnName("id");
+            entity.Property(e => e.File1)
+                .IsRequired()
+                .HasColumnName("file");
+            entity.Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(30)
+                .HasColumnName("name");
         });
 
         modelBuilder.Entity<Log>(entity =>
@@ -126,23 +150,14 @@ public partial class TrappinganimalsContext : DbContext
             entity.Property(e => e.IdCard)
                 .IsRequired()
                 .HasColumnName("id_card");
-            entity.Property(e => e.IdUser)
+            entity.Property(e => e.UserLogin)
                 .IsRequired()
-                .HasColumnName("id_user");
+                .HasMaxLength(50)
+                .HasColumnName("userlogin");
             // enum
             entity.Property(e => e.Operation)
                 .IsRequired()
                 .HasColumnName("operation");
-
-            entity.HasOne(d => d.IdCardNavigation).WithMany(p => p.Logs)
-                .HasForeignKey(d => d.IdCard)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("log_id_card_fkey");
-
-            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.Logs)
-                .HasForeignKey(d => d.IdUser)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("log_id_user_fkey");
         });
 
         modelBuilder.Entity<Municip>(entity =>

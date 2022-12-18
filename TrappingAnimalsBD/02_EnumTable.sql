@@ -26,6 +26,22 @@ CREATE TABLE Municip
 	nameMunicip VARCHAR(100) NOT NULL
 );
 
+CREATE TABLE Files
+(
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(30) NOT NULL,
+	file bytea NOT NULL
+);
+
+CREATE TABLE Log
+(
+	id SERIAL PRIMARY KEY,
+	date date NOT NULL,
+	userLogin VARCHAR(50) NOT NULL,
+	id_card INT NOT NULL,
+	operation OPERATION NOT NULL
+);
+
 CREATE TABLE OMSU
 (
 	id SERIAL PRIMARY KEY,
@@ -67,20 +83,11 @@ CREATE TABLE Card
 	typeOrder ORDER_TYPE NOT NULL, -- тип заказ-наряда 
 	id_org INT NOT NULL, 
 	accessRoles ROLE_TYPE[],
+	id_file INT,
 	FOREIGN KEY (id_org) REFERENCES Organisation (id),
 	FOREIGN KEY (id_municip) REFERENCES Municip (id),
-	FOREIGN KEY (id_OMSU) REFERENCES OMSU (id)
-);
-
-CREATE TABLE Log
-(
-	id SERIAL PRIMARY KEY,
-	date date NOT NULL,
-	id_user INT NOT NULL,
-	id_card INT NOT NULL,
-	operation OPERATION NOT NULL,
-	FOREIGN KEY (id_user) REFERENCES TUser (id),
-	FOREIGN KEY (id_card) REFERENCES Card (id)
+	FOREIGN KEY (id_OMSU) REFERENCES OMSU (id),
+	FOREIGN KEY (id_file) REFERENCES Files (id)
 );
 
 -- DROP TYPE Name

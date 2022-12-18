@@ -45,7 +45,8 @@ public partial class Card
 
     public virtual Organisation IdOrgNavigation { get; set; }
 
-    public virtual ICollection<Log> Logs { get; } = new List<Log>();
+    public virtual File IdFileNavigation { get; set; }
+
     public enum order_type
     {
         [Description("Заказ-наряд"), PgName("Заказ-наряд")]

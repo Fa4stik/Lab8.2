@@ -58,12 +58,11 @@ namespace PIS8_2.MVVM.Model.Data
         {
             using (var db = new TrappinganimalsContext())
             {
-
-
                 var cards = db.Cards
                     .Include(c => c.IdOrgNavigation)
                     .Include(c => c.IdMunicipNavigation)
                     .Include(c => c.IdOmsuNavigation)
+                    //.Include(c => c.IdFileNavigation)
                     .Where(c => c.IdOrg == user.IdOrg)
                     .Where(c => c.AccessRoles.ToList().Contains(user.Role))
                     .ToList();
@@ -117,9 +116,7 @@ namespace PIS8_2.MVVM.Model.Data
                     Date = DateTime.Now,
                     IdCard = card.Id,
                     Id = db.Logs.Select(l=>l.Id).Max(),
-                    IdCardNavigation = card,
-                    IdUser = user.Id,
-                    IdUserNavigation = user,
+                    UserLogin = user.Login,
                     Operation = operation
                 };
                 db.Add(log);

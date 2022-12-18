@@ -13,6 +13,7 @@
     >
     <UserControl.Resources>
         <con:InverseBooleanConverter x:Key="InverseBoolean" />
+        <con:ConverterNullFileToString x:Key="ConverterNullFileToString" />
     </UserControl.Resources>
     <!--d:DataContext="{d:DesignInstance vm:ScheduleTypeViewModel, IsDesignTimeCreatable=True}"-->
     <!--Для интелисенса-->
@@ -182,14 +183,18 @@
                     </Button>
                 </StackPanel>
             </StackPanel>-->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="left" Margin="0,50">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="left" Margin="0,50" >
                 <Button Content="Сохранить" FontSize="14" Width="100" Height="30" Margin="50,100"
                         HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Command="{Binding SaveModeShangeCommand}" Visibility="{Binding BoxesMenuItemsVisibility}">
                 </Button>
                 <Button Content="Добавить" FontSize="14" Width="100" Height="30" Margin="50,100"
                         HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Command="{Binding AddModeChangeCommand}" Visibility="{Binding MoreBoxesVisibility}">
                 </Button>
-                <Button Content="Отменить " FontSize="14" Width="100" Height="30" Background="Gray" Cursor="Hand"></Button>
+                <Button Content="Загрузить файл" FontSize="14" Width="150" Height="30" Margin="50, 100"
+                        HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Command="{Binding DownloadFileCommand}">
+                </Button>
+                <Label Content="{Binding Card.IdFileNavigation.Name, Converter={StaticResource ConverterNullFileToString}}" Margin="0, 100">
+                </Label>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>
