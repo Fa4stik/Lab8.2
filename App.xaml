@@ -8,7 +8,8 @@
     <Application.Resources>
 
 
-        <Style TargetType="{x:Type Button}">
+        <Style TargetType="{x:Type Button}"
+               x:Key="button-blue">
             <Setter Property="Background" Value="#FF007DFF"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Cursor" Value="Hand"/>
@@ -27,8 +28,29 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
-        <Style x:Key="btn1">
+
+        <Style TargetType="{x:Type Button}"
+               x:Key="button-gray">
+            <Setter Property="Background" Value="#FF9A9898"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF707070"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!--<Style x:Key="btn-gray">
             <Setter Property="Control.Background" Value="#FF9A9898"/>
             <Setter Property="Control.Foreground" Value="White"/>
             <Setter Property="Control.Template">
@@ -45,11 +67,7 @@
                     <Setter Property="Control.Background" Value="#FF707070"/>
                 </Trigger>
             </Style.Triggers>
-        </Style>
-
-        <Style x:Key="passwordBox">
-            <Setter Property="ItemsControl.BorderThickness" Value="0"></Setter>
-        </Style>
+        </Style>-->
 
         <Style TargetType="Menu">
             <Setter Property="Background" Value="#FF007DFF"/>
