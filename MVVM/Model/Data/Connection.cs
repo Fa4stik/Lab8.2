@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 using System.Security.Policy;
 using Microsoft.EntityFrameworkCore;
 using System.Data.SqlTypes;
+using System.Linq.Expressions;
 using System.Security.Cryptography.Xml;
 using PIS8_2.Commands;
 using PIS8_2.Converters;
 using static PIS8_2.MVVM.Model.Tuser;
 using System.Security.RightsManagement;
 using PIS8_2.Stores;
+using System.Reflection;
 
 namespace PIS8_2.MVVM.Model.Data
 {
@@ -54,7 +56,7 @@ namespace PIS8_2.MVVM.Model.Data
 
         }
 
-        public IEnumerable<Card> ExecuteCardsWithFilter(Tuser user, FilterModel filter=null)
+        public IEnumerable<Card> ExecuteCardsWithFilter(Tuser user, FilterModel filter=null,List<Sorter> sorterParams=null)
         {
             using (var db = new TrappinganimalsContext())
             {
@@ -65,27 +67,98 @@ namespace PIS8_2.MVVM.Model.Data
                     .Include(c => c.IdMunicipNavigation)
                     .Include(c => c.IdOmsuNavigation)
                     .Where(c => c.IdOrg == user.IdOrg)
-                    .Where(c => c.AccessRoles.ToList().Contains(user.Role))
-                    .ToList();
-                    
+                    .Where(c => c.AccessRoles.ToList().Contains(user.Role));
+
                 if (filter != null)
                 {
                     cards = cards
                         .Where(c => c.Nummk >= filter.StartNummk && c.Nummk <= filter.EndNummk)
                         .Where(c => c.Datemk >= filter.StartDatemk && c.Datemk <= filter.EndDatemk)
-                        .Where(c => c.Adresstrapping.Contains(filter.StartAdresstrapping, StringComparison.InvariantCultureIgnoreCase))
-                        .Where(c => c.IdMunicipNavigation.Namemunicip.Contains(filter.StartMunicipName, StringComparison.InvariantCultureIgnoreCase))
-                        .Where(c => c.IdOmsuNavigation.Nameomsu.Contains(filter.StartOmsuName, StringComparison.InvariantCultureIgnoreCase))
-                        .Where(c => c.IdOrgNavigation.Nameorg.Contains(filter.StartOrgName, StringComparison.InvariantCultureIgnoreCase))
-                        .Where(c => c.Locality.Contains(filter.StartLocality, StringComparison.InvariantCultureIgnoreCase))
-                        .Where(c => c.Numworkorder >= filter.StartNumworkorder && c.Numworkorder <= filter.EndNumworkorder)
-                        .Where(c => c.Dateworkorder >= filter.StartDateworkorder && c.Dateworkorder <= filter.EndDateworkorder)
-                        .Where(c => c.Datetrapping >= filter.StartDatetrapping && c.Datetrapping <= filter.EndDatetrapping)
-                        .Where(c => c.TypeOrder.ToString().Contains(filter.StartTypeOrder, StringComparison.InvariantCultureIgnoreCase))
-                        .Where(c => c.Targetorder.Contains(filter.StartTargetorder, StringComparison.InvariantCultureIgnoreCase))
-                     
-                        .ToList();
+                        .Where(c => c.Adresstrapping.Contains(filter.StartAdresstrapping,
+                            StringComparison.InvariantCultureIgnoreCase))
+                        .Where(c => c.IdMunicipNavigation.Namemunicip.Contains(filter.StartMunicipName,
+                            StringComparison.InvariantCultureIgnoreCase))
+                        .Where(c => c.IdOmsuNavigation.Nameomsu.Contains(filter.StartOmsuName,
+                            StringComparison.InvariantCultureIgnoreCase))
+                        .Where(c => c.IdOrgNavigation.Nameorg.Contains(filter.StartOrgName,
+                            StringComparison.InvariantCultureIgnoreCase))
+                        .Where(c => c.Locality.Contains(filter.StartLocality,
+                            StringComparison.InvariantCultureIgnoreCase))
+                        .Where(c => c.Numworkorder >= filter.StartNumworkorder &&
+                                    c.Numworkorder <= filter.EndNumworkorder)
+                        .Where(c => c.Dateworkorder >= filter.StartDateworkorder &&
+                                    c.Dateworkorder <= filter.EndDateworkorder)
+                        .Where(c => c.Datetrapping >= filter.StartDatetrapping &&
+                                    c.Datetrapping <= filter.EndDatetrapping)
+                        .Where(c => c.TypeOrder.ToString().Contains(filter.StartTypeOrder,
+                            StringComparison.InvariantCultureIgnoreCase))
+                        .Where(c => c.Targetorder.Contains(filter.StartTargetorder,
+                            StringComparison.InvariantCultureIgnoreCase));
+
+
                 }
+
+                //cards = cards.OrderBy(x=>0).ThenBy(x=>x.AccessRoles);
+
+
+
+                var a = (IOrderedQueryable<Card>) cards;
+                if (!sorterParams.Any(x => x.NumberSorting != 0)) return a.ToList();
+                {
+                    a = a.OrderBy(x => 0);
+                    
+                    //a = cards.OrderBy(c => c.GetType().GetProperty(sorterParams[0].PropetryName).GetValue(c));
+
+                    
+                    //else
+                    //{
+                    //    a = cards.OrderByDescending(c => c.GetType().GetProperty(sorterParams[0].PropetryName).GetValue(c));
+                    //}
+                    foreach (var sorter in sorterParams.OrderBy(c => c.NumberSorting))
+                    {
+
+                        if (sorter.Direction == Direction.Ascending)
+                        {
+                           //var b = cards.First().GetType().GetProperty(sorter.PropetryName).Name.ToString();
+                            a = a.ThenBy(sorter.PropetryName);
+                            //(c => c.GetType().GetProperty(sorter.PropetryName).Name)
+                        }
+                        else if (sorter.Direction == Direction.Descending)
+                        {
+                           // var b = cards.First().GetType().GetProperty(sorter.PropetryName).Name.ToString();
+                            a = a.ThenByDescending(sorter.PropetryName);
+                        }
+
+                        //cards=cards.OrderBy(x=>x.(sorter.DisplayState.GetTypeCode() == TypeCode.Boolean)).ThenBy()
+                        //var a = (sorter.DisplayState.GetTypeCode());
+                    }
+                }
+
+                //var newClass = new List<NewClass>();
+                //var usList = new List<User>();
+                //usList.Add(new User()
+                //{
+                //    Login = "123",
+                //});
+
+                //usList.Add(new User()
+                //{
+                //    Login = "111",
+                //});
+
+                //newClass.Add(new NewClass()
+                //{
+                //    Name = "Login",
+                //});
+                //foreach (var item in newClass)
+                //{
+                //    // 
+                //    Console.WriteLine(usList.Where(s => s.GetType().GetProperty(item.Name).GetValue(s) == "123").First().Login);
+                //}
+
+
+
+
                 //IsDefaultFilter = true;
                 //StartNummk = 0;+
                 //EndNummk = int.MaxValue;+
@@ -104,7 +177,7 @@ namespace PIS8_2.MVVM.Model.Data
                 //EndDatetrapping = DateTime.Now.AddYears(1);
                 //StartTargetorder = Empty;
                 //StartTypeOrder = Empty;
-                return cards;
+                return a.ToList();
             }
         }
 
@@ -116,10 +189,8 @@ namespace PIS8_2.MVVM.Model.Data
                 {
                     Date = DateTime.Now,
                     IdCard = card.Id,
-                    Id = db.Logs.Select(l=>l.Id).Max(),
-                    IdCardNavigation = card,
+                    Id = db.Logs.Select(l => l.Id).Max() + 1,
                     IdUser = user.Id,
-                    IdUserNavigation = user,
                     Operation = operation
                 };
                 db.Add(log);
@@ -131,6 +202,7 @@ namespace PIS8_2.MVVM.Model.Data
         {
             using (var db = new TrappinganimalsContext())
             {
+               
                 return db.Municips.First(m => m.Id == idOmsu).Id;
             }
         }
@@ -154,8 +226,9 @@ namespace PIS8_2.MVVM.Model.Data
             {
                 db.Cards.Update(newCard);
                 db.SaveChanges();
-                Journaling(user, newCard, Log.operation.editCard);
+                
             }
+            Journaling(user, newCard, Log.operation.editCard);
         }
 
         public void AddCard(Card _card, Tuser _user)
@@ -198,8 +271,9 @@ namespace PIS8_2.MVVM.Model.Data
                 db.Add(_card);
                 db.SaveChanges();
 
-                Journaling(_user, _card, Log.operation.addCardReestr);
+                
             }
+            Journaling(_user, _card, Log.operation.addCardReestr);
         }
 
         public List<string> GetNamesMunicip()
@@ -235,5 +309,59 @@ namespace PIS8_2.MVVM.Model.Data
                 db.SaveChanges();
             }
         }
+    }
+}
+public static class IQueryableExtensions
+{
+    public static IOrderedQueryable<T> OrderBy<T>(this IQueryable<T> query, string propertyName, IComparer<object> comparer = null)
+    {
+        return CallOrderedQueryable(query, "OrderBy", propertyName, comparer);
+    }
+
+    public static IOrderedQueryable<T> OrderByDescending<T>(this IQueryable<T> query, string propertyName, IComparer<object> comparer = null)
+    {
+        return CallOrderedQueryable(query, "OrderByDescending", propertyName, comparer);
+    }
+
+    public static IOrderedQueryable<T> ThenBy<T>(this IOrderedQueryable<T> query, string propertyName, IComparer<object> comparer = null)
+    {
+        return CallOrderedQueryable(query, "ThenBy", propertyName, comparer);
+    }
+
+    public static IOrderedQueryable<T> ThenByDescending<T>(this IOrderedQueryable<T> query, string propertyName, IComparer<object> comparer = null)
+    {
+        return CallOrderedQueryable(query, "ThenByDescending", propertyName, comparer);
+    }
+
+    /// <summary>
+    /// Builds the Queryable functions using a TSource property name.
+    /// </summary>
+    public static IOrderedQueryable<T> CallOrderedQueryable<T>(this IQueryable<T> query, string methodName, string propertyName,
+            IComparer<object> comparer = null)
+    {
+        var param = Expression.Parameter(typeof(T), "x");
+
+        var body = propertyName.Split('.').Aggregate<string, Expression>(param, Expression.PropertyOrField);
+
+        return comparer != null
+            ? (IOrderedQueryable<T>)query.Provider.CreateQuery(
+                Expression.Call(
+                    typeof(Queryable),
+                    methodName,
+                    new[] { typeof(T), body.Type },
+                    query.Expression,
+                    Expression.Lambda(body, param),
+                    Expression.Constant(comparer)
+                )
+            )
+            : (IOrderedQueryable<T>)query.Provider.CreateQuery(
+                Expression.Call(
+                    typeof(Queryable),
+                    methodName,
+                    new[] { typeof(T), body.Type },
+                    query.Expression,
+                    Expression.Lambda(body, param)
+                )
+            );
     }
 }

@@ -32,11 +32,11 @@ namespace PIS8_2.Commands
             IEnumerable<Card> cards;
             if (_viewModel.Filter==null)
             {
-                cards = _conn.ExecuteCardsWithFilter(_userStore.CurrentUser);
+                cards = _conn.ExecuteCardsWithFilter(_userStore.CurrentUser,null, _viewModel.SortingList.ToList());
             }
             else
             {
-                cards = _conn.ExecuteCardsWithFilter(_userStore.CurrentUser,_viewModel.Filter);
+                cards = _conn.ExecuteCardsWithFilter(_userStore.CurrentUser,_viewModel.Filter,_viewModel.SortingList.ToList());
             }
             _viewModel.Cards = ConverterCardsToLimitedCards.ConvertCardsToLimitedCards(cards)
                 .ToList();

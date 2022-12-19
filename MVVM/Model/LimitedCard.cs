@@ -35,7 +35,7 @@ namespace PIS8_2.MVVM.Model
         public int Id { get; set; }
         public int Nummk { get; set; }
         public DateTime Datemk { get; set; }
-
+        
         public string Namemunicip { get; set; }
 
         public string Nameomsu { get; set; }

@@ -8,7 +8,7 @@
       xmlns:con="clr-namespace:PIS8_2.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="1600"
-      
+      xmlns:behaviours="http://schemas.microsoft.com/xaml/behaviors"
       d:DataContext="{d:DesignInstance vm:ReestrViewModel, IsDesignTimeCreatable=True}"
       >
 
@@ -19,7 +19,9 @@
 
     <UserControl.Resources>
         <con:EnumToDescription x:Key="EnumToDescription" />
+        <con:SorterStateConverter x:Key="SorterStateConverter" />
     </UserControl.Resources>
+    
 
 
     <DockPanel Background="WhiteSmoke" LastChildFill="False"  Cursor=""  >
@@ -41,7 +43,7 @@
             <MenuItem Header="Экспорт Excel" Command="{Binding ExportExcelCommand}"/>
             <MenuItem Header="Фильтр" Command="{Binding ApplyFilter}" />
             <MenuItem Header="Удалить" Command="{Binding DelCardCommand}" CommandParameter="{Binding ElementName=DataGridReestr, Path=ItemsSource}"/>
-            <MenuItem Header="Сортировка"/>
+            <MenuItem Header="{Binding SortingList.Count}"/>
 
             <MenuItem Header="{Binding Login}" HorizontalAlignment="Right" FlowDirection="RightToLeft">
                 <MenuItem Header="Выход" Command="{Binding ExitCommand}" Background="Aqua"/>
@@ -94,7 +96,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="От: " Grid.Column="0"></TextBlock>
-                    <TextBox Grid.Column="1" Text="{Binding Filter.StartNummk,UpdateSourceTrigger=PropertyChanged}" MaxLength="10"></TextBox>
+                    <TextBox Grid.Column="1" Text="{Binding Filter.StartNummk,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" ></TextBox>
                     <TextBlock Text="До: " Grid.Column="2"></TextBlock>
                     <TextBox Grid.Column="3" Text="{Binding Filter.EndNummk,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" ></TextBox>
                 </Grid>
@@ -282,27 +284,140 @@
 
 
 
-        <DataGrid Name="DataGridReestr" ItemsSource="{Binding Cards}" FontSize="14" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" DockPanel.Dock="Top">
-
+        <DataGrid Name="DataGridReestr" 
+                  ItemsSource="{Binding Cards}" 
+                  FontSize="14" SelectionMode="Single"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False" 
+                  CanUserDeleteRows="False" 
+                  DockPanel.Dock="Top"
+                  CanUserReorderColumns="False" 
+                  CanUserResizeColumns="False" 
+                  CanUserResizeRows="False">
+            <behaviours:Interaction.Triggers>
+                <behaviours:EventTrigger EventName="Sorting">
+                    <behaviours:InvokeCommandAction Command="{Binding SortingCommand}" PassEventArgsToCommand="True"/>
+                </behaviours:EventTrigger>
+            </behaviours:Interaction.Triggers>
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn IsReadOnly="False" CanUserReorder="False" Binding="{Binding IsSelectedCard, UpdateSourceTrigger=PropertyChanged}">
+                <DataGridCheckBoxColumn IsReadOnly="False" CanUserReorder="False" Binding="{Binding IsSelectedCard, UpdateSourceTrigger=PropertyChanged}" >
                     <DataGridCheckBoxColumn.HeaderTemplate>
                         <DataTemplate>
                             <CheckBox IsChecked="{Binding DataContext.IsAllCheckedItems, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}" />
                         </DataTemplate>
                     </DataGridCheckBoxColumn.HeaderTemplate>
                 </DataGridCheckBoxColumn>
-                <DataGridTextColumn Header="Номер МК" Binding="{Binding Nummk}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Дата заключения МК" Binding="{Binding Datemk, StringFormat=dd-MM-yyyy}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Муниципальное образование" Binding="{Binding Namemunicip}"  IsReadOnly="True" />
-                <DataGridTextColumn Header="ОМСУ" Binding="{Binding Nameomsu}"  IsReadOnly="True" />
-                <DataGridTextColumn Header="Исполнитель МК" Binding="{Binding Nameorg}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Номер заказ-наряда" Binding="{Binding Numworkorder}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Населённый пункт" Binding="{Binding Locality}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Дата выдачи заказ-наряда" Binding="{Binding Dateworkorder, StringFormat=dd-MM-yyyy}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Дата отлова" Binding="{Binding Datetrapping, StringFormat=dd-MM-yyyy}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Цель отлова" Binding="{Binding Targetorder}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Тип отлова" Binding="{Binding TypeOrder, Converter={StaticResource EnumToDescription}}" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding Nummk}" IsReadOnly="True"   >
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Номер МК"></TextBlock>
+                                <TextBlock  Text="{Binding DataContext.SortingList[0].DisplayState, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+                <!--<DataGridTextColumn Header="Номер МК" Binding="{Binding Nummk}" IsReadOnly="True"  />-->
+                <DataGridTextColumn Header="Дата заключения МК" Binding="{Binding Datemk, StringFormat=dd-MM-yyyy}" IsReadOnly="True">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Дата заключения МК"></TextBlock>
+                                <TextBlock  Text="{Binding DataContext.SortingList[1].DisplayState, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Муниципальное образование" Binding="{Binding Namemunicip}"  IsReadOnly="True">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Муниципальное образование"></TextBlock>
+                                <TextBlock  Text="{Binding DataContext.SortingList[2].DisplayState, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="ОМСУ" Binding="{Binding Nameomsu}"  IsReadOnly="True">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="ОМСУ"></TextBlock>
+                                <TextBlock  Text="{Binding DataContext.SortingList[3].DisplayState, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Исполнитель МК" Binding="{Binding Nameorg}" IsReadOnly="True">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Исполнитель МК"></TextBlock>
+                                <TextBlock  Text="{Binding DataContext.SortingList[4].DisplayState, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Номер заказ-наряда" Binding="{Binding Numworkorder}" IsReadOnly="True">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Номер заказ-наряда"></TextBlock>
+                                <TextBlock  Text="{Binding DataContext.SortingList[5].DisplayState, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Населённый пункт" Binding="{Binding Locality}" IsReadOnly="True">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Населённый пункт"></TextBlock>
+                                <TextBlock  Text="{Binding DataContext.SortingList[6].DisplayState, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Дата выдачи заказ-наряда" Binding="{Binding Dateworkorder, StringFormat=dd-MM-yyyy}" IsReadOnly="True">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Дата выдачи заказ-наряда"></TextBlock>
+                                <TextBlock  Text="{Binding DataContext.SortingList[7].DisplayState, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Дата отлова" Binding="{Binding Datetrapping, StringFormat=dd-MM-yyyy}" IsReadOnly="True">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Дата отлова"></TextBlock>
+                                <TextBlock  Text="{Binding DataContext.SortingList[8].DisplayState, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Цель отлова" Binding="{Binding Targetorder}" IsReadOnly="True">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Цель отлова"></TextBlock>
+                                <TextBlock  Text="{Binding DataContext.SortingList[9].DisplayState, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Тип отлова" Binding="{Binding TypeOrder, Converter={StaticResource EnumToDescription}}" IsReadOnly="True">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Тип отлова"></TextBlock>
+                                <TextBlock  Text="{Binding DataContext.SortingList[10].DisplayState, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 
