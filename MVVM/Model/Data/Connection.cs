@@ -56,6 +56,7 @@ namespace PIS8_2.MVVM.Model.Data
 
         }
 
+
         public IEnumerable<Card> ExecuteCardsWithFilter(Tuser user, FilterModel filter=null,List<Sorter> sorterParams=null)
         {
             using (var db = new TrappinganimalsContext())
@@ -68,116 +69,48 @@ namespace PIS8_2.MVVM.Model.Data
                     .Include(c => c.IdOmsuNavigation)
                     .Where(c => c.IdOrg == user.IdOrg)
                     .Where(c => c.AccessRoles.ToList().Contains(user.Role));
-
                 if (filter != null)
                 {
                     cards = cards
                         .Where(c => c.Nummk >= filter.StartNummk && c.Nummk <= filter.EndNummk)
                         .Where(c => c.Datemk >= filter.StartDatemk && c.Datemk <= filter.EndDatemk)
-                        .Where(c => c.Adresstrapping.Contains(filter.StartAdresstrapping,
-                            StringComparison.InvariantCultureIgnoreCase))
-                        .Where(c => c.IdMunicipNavigation.Namemunicip.Contains(filter.StartMunicipName,
-                            StringComparison.InvariantCultureIgnoreCase))
-                        .Where(c => c.IdOmsuNavigation.Nameomsu.Contains(filter.StartOmsuName,
-                            StringComparison.InvariantCultureIgnoreCase))
-                        .Where(c => c.IdOrgNavigation.Nameorg.Contains(filter.StartOrgName,
-                            StringComparison.InvariantCultureIgnoreCase))
-                        .Where(c => c.Locality.Contains(filter.StartLocality,
-                            StringComparison.InvariantCultureIgnoreCase))
+                        .Where(c => EF.Functions.ILike(c.IdMunicipNavigation.Namemunicip,
+                            $"%{filter.StartMunicipName}%"))
+                        .Where(c => EF.Functions.ILike(c.IdOmsuNavigation.Nameomsu, $"%{filter.StartOmsuName}%"))
+                        .Where(c => EF.Functions.ILike(c.IdOrgNavigation.Nameorg, $"%{filter.StartOrgName}%"))
+                        .Where(c => EF.Functions.ILike(c.Locality, $"%{filter.StartLocality}%"))
                         .Where(c => c.Numworkorder >= filter.StartNumworkorder &&
                                     c.Numworkorder <= filter.EndNumworkorder)
                         .Where(c => c.Dateworkorder >= filter.StartDateworkorder &&
                                     c.Dateworkorder <= filter.EndDateworkorder)
                         .Where(c => c.Datetrapping >= filter.StartDatetrapping &&
                                     c.Datetrapping <= filter.EndDatetrapping)
-                        .Where(c => c.TypeOrder.ToString().Contains(filter.StartTypeOrder,
-                            StringComparison.InvariantCultureIgnoreCase))
-                        .Where(c => c.Targetorder.Contains(filter.StartTargetorder,
-                            StringComparison.InvariantCultureIgnoreCase));
-
+                        .Where(c => EF.Functions.ILike(c.TypeOrder.ToString(), $"%{filter.StartTypeOrder}%"))
+                        .Where(c => EF.Functions.ILike(c.Targetorder, $"%{filter.StartTargetorder}%"));
 
                 }
 
-                //cards = cards.OrderBy(x=>0).ThenBy(x=>x.AccessRoles);
 
 
 
-                var a = (IOrderedQueryable<Card>) cards;
-                if (!sorterParams.Any(x => x.NumberSorting != 0)) return a.ToList();
+                var sorteredCards = (IOrderedQueryable<Card>)cards;
+                if (sorterParams != null && sorterParams.All(x => x.NumberSorting == 0)) return sorteredCards.ToList();
                 {
-                    a = a.OrderBy(x => 0);
-                    
-                    //a = cards.OrderBy(c => c.GetType().GetProperty(sorterParams[0].PropetryName).GetValue(c));
+                    sorteredCards = sorteredCards.OrderBy(x => 0);
 
-                    
-                    //else
-                    //{
-                    //    a = cards.OrderByDescending(c => c.GetType().GetProperty(sorterParams[0].PropetryName).GetValue(c));
-                    //}
                     foreach (var sorter in sorterParams.OrderBy(c => c.NumberSorting))
                     {
-
-                        if (sorter.Direction == Direction.Ascending)
+                        sorteredCards = sorter.Direction switch
                         {
-                           //var b = cards.First().GetType().GetProperty(sorter.PropetryName).Name.ToString();
-                            a = a.ThenBy(sorter.PropetryName);
-                            //(c => c.GetType().GetProperty(sorter.PropetryName).Name)
-                        }
-                        else if (sorter.Direction == Direction.Descending)
-                        {
-                           // var b = cards.First().GetType().GetProperty(sorter.PropetryName).Name.ToString();
-                            a = a.ThenByDescending(sorter.PropetryName);
-                        }
-
-                        //cards=cards.OrderBy(x=>x.(sorter.DisplayState.GetTypeCode() == TypeCode.Boolean)).ThenBy()
-                        //var a = (sorter.DisplayState.GetTypeCode());
+                            Direction.Ascending => sorteredCards.ThenBy(sorter.PropetryName),
+                            Direction.Descending => sorteredCards.ThenByDescending(sorter.PropetryName),
+                            _ => sorteredCards
+                        };
                     }
                 }
 
-                //var newClass = new List<NewClass>();
-                //var usList = new List<User>();
-                //usList.Add(new User()
-                //{
-                //    Login = "123",
-                //});
 
-                //usList.Add(new User()
-                //{
-                //    Login = "111",
-                //});
-
-                //newClass.Add(new NewClass()
-                //{
-                //    Name = "Login",
-                //});
-                //foreach (var item in newClass)
-                //{
-                //    // 
-                //    Console.WriteLine(usList.Where(s => s.GetType().GetProperty(item.Name).GetValue(s) == "123").First().Login);
-                //}
-
-
-
-
-                //IsDefaultFilter = true;
-                //StartNummk = 0;+
-                //EndNummk = int.MaxValue;+
-                //StartDatemk = DateTime.Now.AddYears(-1);+
-                //EndDatemk = DateTime.Now.AddYears(1);+
-                //StartAdresstrapping = Empty;+
-                //StartMunicipName = Empty;+
-                //StartOmsuName = Empty;+
-                //StartOrgName = Empty;+
-                //StartLocality = Empty;+
-                //StartNumworkorder = 0;+
-                //EndNumworkorder = int.MaxValue;+
-                //StartDateworkorder = DateTime.Now.AddYears(-1);+
-                //EndDateworkorder = DateTime.Now.AddYears(1);+
-                //StartDatetrapping = DateTime.Now.AddYears(-1);
-                //EndDatetrapping = DateTime.Now.AddYears(1);
-                //StartTargetorder = Empty;
-                //StartTypeOrder = Empty;
-                return a.ToList();
+                return sorteredCards.ToList();
             }
         }
 
@@ -311,6 +244,9 @@ namespace PIS8_2.MVVM.Model.Data
         }
     }
 }
+
+
+//Вынести куда-то
 public static class IQueryableExtensions
 {
     public static IOrderedQueryable<T> OrderBy<T>(this IQueryable<T> query, string propertyName, IComparer<object> comparer = null)
@@ -341,7 +277,7 @@ public static class IQueryableExtensions
     {
         var param = Expression.Parameter(typeof(T), "x");
 
-        var body = propertyName.Split('.').Aggregate<string, Expression>(param, Expression.PropertyOrField);
+        var body = propertyName.Replace("DOT",".").Split('.').Aggregate<string, Expression>(param, Expression.PropertyOrField);
 
         return comparer != null
             ? (IOrderedQueryable<T>)query.Provider.CreateQuery(

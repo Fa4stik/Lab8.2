@@ -79,16 +79,16 @@ namespace PIS8_2.MVVM.ViewModels
         {
             new Sorter(0, "Nummk"),
             new Sorter(0, "Datemk"),
-            new Sorter(0, "Namemunicip"),
-            new Sorter(0, "Nameomsu"),
-            new Sorter(0, "Nameorg"),
+            new Sorter(0, "IdMunicipNavigationDOTNamemunicip"),
+            new Sorter(0, "IdOmsuNavigationDOTNameomsu"),
+            new Sorter(0, "IdOrgNavigationDOTNameorg"),
             new Sorter(0, "Numworkorder"),
             new Sorter(0, "Locality"),
             new Sorter(0, "Dateworkorder"),
             new Sorter(0, "Datetrapping"),
             new Sorter(0, "Targetorder"),
             new Sorter(0, "TypeOrder"),
-            //Datemk Namemunicip Nameomsu Nameorg Numworkorder Locality Dateworkorder Datetrapping Targetorder TypeOrder
+            //Datemk IdMunicipNavigationDOTNamemunicip IdOmsuNavigationDOTNameomsu IdOrgNavigationDOTNameorg Numworkorder Locality Dateworkorder Datetrapping Targetorder TypeOrder
 
 
         };

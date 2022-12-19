@@ -27,50 +27,28 @@ namespace PIS8_2.Commands
             var dataGridSortingEventArgs = (DataGridSortingEventArgs)parameter;
             dataGridSortingEventArgs.Handled=true;
             var column=dataGridSortingEventArgs.Column;
+
             if (_viewModel.SortingList.Select(c=>c.PropetryName).Contains(column.SortMemberPath))
             {
                 var first = _viewModel.SortingList.First(c => c.PropetryName == column.SortMemberPath);
-                if (first.Direction == Direction.None)
+                switch (first.Direction)
                 {
-                    first.Direction = Direction.Ascending;
-                    _viewModel.SortingList.First(c => c.PropetryName == column.SortMemberPath).Direction = Direction.Ascending;
-                    _viewModel.SortingList.First(c => c.PropetryName == column.SortMemberPath).NumberSorting=_viewModel.SortingList.Max(c=>c.NumberSorting)+1;
-                    foreach (var sorter in _viewModel.SortingList)
-                    {
-                        sorter.DisplayState += "";
-                    }
-                    //dataGridSortingEventArgs.Column.Header = ((string)dataGridSortingEventArgs.Column.Header)
-                    //    .Split("▲")
-                    //    .First();
-                    //dataGridSortingEventArgs.Column.Header += $" ▼ {first.NumberSorting}";
-                }
-                else if (first.Direction == Direction.Ascending)
-                {
-                    _viewModel.SortingList.First(c => c.PropetryName == column.SortMemberPath).Direction = Direction.Descending;
-                    foreach (var sorter in _viewModel.SortingList)
-                    {
-                        sorter.DisplayState += "";
-                    }
-                    //dataGridSortingEventArgs.Column.Header = ((string)dataGridSortingEventArgs.Column.Header)
-                    //    .Split("▲")
-                    //    .First();
-                    //dataGridSortingEventArgs.Column.Header += $" ▼ {first.NumberSorting}";
-                }
-                else if(first.Direction == Direction.Descending)
-                {
-                    _viewModel.SortingList.First(c => c.PropetryName == column.SortMemberPath).Direction = Direction.None;
-                    ReArangeSorterListNumSorting(first.NumberSorting);
-                    _viewModel.SortingList.First(c => c.PropetryName == column.SortMemberPath).NumberSorting = 0;
-                    //_viewModel.SortingList.Remove(first);
-                    //dataGridSortingEventArgs.Column.Header = ((string) dataGridSortingEventArgs.Column.Header)
-                    //    .Split("▼")
-                    //    .First();
+                    case Direction.None:
+                        first.Direction = Direction.Ascending;
+                        _viewModel.SortingList.First(c => c.PropetryName == column.SortMemberPath).Direction = Direction.Ascending;
+                        _viewModel.SortingList.First(c => c.PropetryName == column.SortMemberPath).NumberSorting=_viewModel.SortingList.Max(c=>c.NumberSorting)+1;
+                        break;
+                    case Direction.Ascending:
+                        _viewModel.SortingList.First(c => c.PropetryName == column.SortMemberPath).Direction = Direction.Descending;
+                        break;
+                    case Direction.Descending:
+                        _viewModel.SortingList.First(c => c.PropetryName == column.SortMemberPath).Direction = Direction.None;
+                        ReArangeSorterListNumSorting(first.NumberSorting);
+                        _viewModel.SortingList.First(c => c.PropetryName == column.SortMemberPath).NumberSorting = 0;
+                        break;
 
-                    foreach (var sorter in _viewModel.SortingList)
-                    {
-                        sorter.DisplayState += "";
-                    }
                 }
+                UpdateDisplayState();
             }
 
 
@@ -90,6 +68,14 @@ namespace PIS8_2.Commands
             //var t = c.Column;
             //var b = parameter.GetType();
 
+        }
+
+        private void UpdateDisplayState()
+        {
+            foreach (var sorter in _viewModel.SortingList)
+            {
+                sorter.DisplayState += "";
+            }
         }
 
         private void ReArangeSorterListNumSorting(int numSorting)

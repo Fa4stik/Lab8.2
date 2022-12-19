@@ -11,20 +11,20 @@ namespace PIS8_2.MVVM.Model
 {
     public class LimitedCard : INotifyPropertyChanged
     {
-        public LimitedCard(int id, int nummk, DateTime datemk, string namemunicip, string nameomsu, int numworkorder, string locality, DateTime dateworkorder, DateTime datetrapping, string targetorder, order_type typeOrder, string nameorg)
+        public LimitedCard(int id, int nummk, DateTime datemk, string idMunicipNavigationDotNamemunicip, string idOmsuNavigationDotNameomsu, int numworkorder, string locality, DateTime dateworkorder, DateTime datetrapping, string targetorder, order_type typeOrder, string idOrgNavigationDotNameorg)
         {
             Id = id;
             Nummk = nummk;
             Datemk = datemk;
-            Namemunicip = namemunicip;
-            Nameomsu = nameomsu;
+            IdMunicipNavigationDOTNamemunicip = idMunicipNavigationDotNamemunicip;
+            IdOmsuNavigationDOTNameomsu = idOmsuNavigationDotNameomsu;
             Numworkorder = numworkorder;
             Locality = locality;
             Dateworkorder = dateworkorder;
             Datetrapping = datetrapping;
             Targetorder = targetorder;
             TypeOrder = typeOrder;
-            Nameorg = nameorg;
+            IdOrgNavigationDOTNameorg = idOrgNavigationDotNameorg;
         }
 
         private bool _isSelectedCard;
@@ -36,10 +36,16 @@ namespace PIS8_2.MVVM.Model
         public int Nummk { get; set; }
         public DateTime Datemk { get; set; }
         
-        public string Namemunicip { get; set; }
+        public string IdMunicipNavigationDOTNamemunicip { get; set; }
 
-        public string Nameomsu { get; set; }
-        public string Nameorg { get; set; }
+        public string IdOmsuNavigationDOTNameomsu { get; set; }
+        public string IdOrgNavigationDOTNameorg { get; set; }
+
+        //public virtual Municip IdMunicipNavigation { get; set; }
+
+        //public virtual Omsu IdOmsuNavigation { get; set; }
+
+        //public virtual Organisation IdOrgNavigation { get; set; }
         public int Numworkorder { get; set; }
 
         public string Locality { get; set; }
@@ -66,9 +72,9 @@ namespace PIS8_2.MVVM.Model
         }
         //<DataGridTextColumn Header = "Номер МК" Binding="{Binding Nummk}" IsReadOnly="True" />
         //<DataGridTextColumn Header = "Дата заключения МК" Binding="{Binding Datemk}" IsReadOnly="True"/>
-        //<DataGridTextColumn Header = "Мун. обр." Binding="{Binding IdMunicipNavigation.Namemunicip}"  IsReadOnly="True" />
-        //<DataGridTextColumn Header = "ОМСУ" Binding="{Binding IdOmsuNavigation.Nameomsu}"  IsReadOnly="True" />
-        //<DataGridTextColumn Header = "Исполнитель МК" Binding="{Binding IdOrgNavigation.Nameorg}" IsReadOnly="True" />
+        //<DataGridTextColumn Header = "Мун. обр." Binding="{Binding IdMunicipNavigation.IdMunicipNavigationDOTNamemunicip}"  IsReadOnly="True" />
+        //<DataGridTextColumn Header = "ОМСУ" Binding="{Binding IdOmsuNavigation.IdOmsuNavigationDOTNameomsu}"  IsReadOnly="True" />
+        //<DataGridTextColumn Header = "Исполнитель МК" Binding="{Binding IdOrgNavigation.IdOrgNavigationDOTNameorg}" IsReadOnly="True" />
         //<DataGridTextColumn Header = "Номер заказ-наряда" Binding="{Binding Numworkorder}" IsReadOnly="True" /> 
         //<DataGridTextColumn Header = "Населённый пункт" Binding="{Binding Locality}" IsReadOnly="True" />
         //<DataGridTextColumn Header = "Дата выдачи заказ-наряда" Binding="{Binding Datetrapping}" IsReadOnly="True" />
