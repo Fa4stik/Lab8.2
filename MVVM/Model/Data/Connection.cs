@@ -23,6 +23,7 @@ using Microsoft.Win32;
 using PIS8_2.MVVM.ViewModels;
 using System.Drawing;
 using System.IO;
+using Expression = System.Linq.Expressions.Expression;
 
 namespace PIS8_2.MVVM.Model.Data
 {
