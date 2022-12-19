@@ -29,46 +29,26 @@ namespace PIS8_2.MVVM.View
         private void Control_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             {
-
                 //open a pdf document
-
                 OpenFileDialog dialog = new OpenFileDialog()
                 {
-
                     Filter = "Pdf document(*.Pdf)|*.pdf",
-
                     Title = "Open Pdf Document",
-
                     Multiselect = false
-
                 };
-
                 bool? result = dialog.ShowDialog();
-
                 if (result.Value)
-
                 {
-
                     try
-
                     {
-
                         //Load pdf document from file.
-
                         this.pdfDocumentViewer1.LoadFromFile(dialog.FileName);
-
                     }
-
                     catch (Exception ex)
-
                     {
-
                         MessageBox.Show(ex.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-
                     }
-
                 }
-
             }
         }
     }
