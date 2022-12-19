@@ -12,15 +12,11 @@ public partial class Log
 
     public DateTime Date { get; set; }
 
-    public int IdUser { get; set; }
+    public string UserLogin { get; set; }
 
     public int IdCard { get; set; }
     [Column("operation")]
     public operation Operation { get; set; }
-
-    public virtual Card IdCardNavigation { get; set; }
-
-    public virtual Tuser IdUserNavigation { get; set; }
 
     public enum operation
     {

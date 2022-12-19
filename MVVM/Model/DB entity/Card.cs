@@ -37,6 +37,7 @@ public partial class Card
     public order_type TypeOrder { get; set; }
     [Column("role_type")]
     public role_type[] AccessRoles { get; set; } 
+    public int IdFile { get; set; }
 
 
     public virtual Municip IdMunicipNavigation { get; set; }
@@ -45,7 +46,8 @@ public partial class Card
 
     public virtual Organisation IdOrgNavigation { get; set; }
 
-    public virtual ICollection<Log> Logs { get; } = new List<Log>();
+    public virtual FilePdf IdFileNavigation { get; set; }
+
     public enum order_type
     {
         [Description("Заказ-наряд"), PgName("Заказ-наряд")]

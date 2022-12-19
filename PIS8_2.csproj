@@ -8,10 +8,17 @@
     <ImplicitUsings>disable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="MVVM\View\icons\key-icon.png" />
+    <None Remove="MVVM\View\icons\user-icon.png" />
+    <None Remove="MVVM\View\key-icon.png" />
+    <None Remove="MVVM\View\user-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="bin\Debug\PIS8_2.exe.config" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="MVVM\View\icons\import.png" />
+    <Resource Include="MVVM\View\icons\key-icon.png" />
     <Resource Include="MVVM\View\icons\open-document.png" />
   </ItemGroup>
   <ItemGroup>
@@ -19,6 +26,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="MVVM\View\icons\cancel1.png" />
+    <Resource Include="MVVM\View\icons\user-icon.png" />
+    <Resource Include="MVVM\View\key-icon.png" />
+    <Resource Include="MVVM\View\user-icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\PIS8_2.exe" />
@@ -29,6 +39,7 @@
     <Folder Include="MVVM\ViewModels\Base\" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="EPPlus" Version="4.5.3.3" />
     <PackageReference Include="FreeSpire.Doc" Version="10.8.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />

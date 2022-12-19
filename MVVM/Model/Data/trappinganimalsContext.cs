@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Common;
+using System.Data.Entity.Infrastructure.Interception;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
@@ -28,7 +30,6 @@ public partial class TrappinganimalsContext : DbContext
     public TrappinganimalsContext(DbContextOptions<TrappinganimalsContext> options)
         : base(options)
     {
-        //AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
     }
 
 
@@ -43,6 +44,7 @@ public partial class TrappinganimalsContext : DbContext
     public virtual DbSet<Organisation> Organisations { get; set; }
 
     public virtual DbSet<Tuser> Tusers { get; set; }
+    public virtual DbSet<FilePdf> Files { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=trappinganimals;Username=postgres;Password=123");
@@ -73,6 +75,9 @@ public partial class TrappinganimalsContext : DbContext
             entity.Property(e => e.IdMunicip).HasColumnName("id_municip");
             entity.Property(e => e.IdOmsu).HasColumnName("id_omsu");
             entity.Property(e => e.IdOrg).HasColumnName("id_org");
+            entity.Property(e => e.IdFile)
+            .IsRequired()
+            .HasColumnName("id_file");
             entity.Property(e => e.Locality)
                 .IsRequired()
                 .HasMaxLength(50)
@@ -109,6 +114,24 @@ public partial class TrappinganimalsContext : DbContext
                 .HasForeignKey(d => d.IdOrg)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("card_id_org_fkey");
+
+            entity.HasOne(d => d.IdFileNavigation).WithMany(p => p.Cards)
+                .HasForeignKey(d => d.IdFile)
+                .HasConstraintName("card_id_file_fkey");
+        });
+
+        modelBuilder.Entity<FilePdf>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("files_pkey");
+
+            entity.ToTable("files");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.File)
+                .HasColumnName("file");
+            entity.Property(e => e.Name)
+                .HasMaxLength(30)
+                .HasColumnName("name");
         });
 
         modelBuilder.Entity<Log>(entity =>
@@ -126,23 +149,14 @@ public partial class TrappinganimalsContext : DbContext
             entity.Property(e => e.IdCard)
                 .IsRequired()
                 .HasColumnName("id_card");
-            entity.Property(e => e.IdUser)
+            entity.Property(e => e.UserLogin)
                 .IsRequired()
-                .HasColumnName("id_user");
+                .HasMaxLength(50)
+                .HasColumnName("userlogin");
             // enum
             entity.Property(e => e.Operation)
                 .IsRequired()
                 .HasColumnName("operation");
-
-            entity.HasOne(d => d.IdCardNavigation).WithMany(p => p.Logs)
-                .HasForeignKey(d => d.IdCard)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("log_id_card_fkey");
-
-            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.Logs)
-                .HasForeignKey(d => d.IdUser)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("log_id_user_fkey");
         });
 
         modelBuilder.Entity<Municip>(entity =>

@@ -67,7 +67,7 @@ namespace PIS8_2.MVVM.Model.ExportExcel
             saveDialog.ShowDialog();
             try
             {
-                File.WriteAllBytes(saveDialog.FileName, reportExcel);
+                System.IO.File.WriteAllBytes(saveDialog.FileName, reportExcel);
             }
             catch
             {

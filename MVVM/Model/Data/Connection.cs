@@ -15,6 +15,14 @@ using static PIS8_2.MVVM.Model.Tuser;
 using System.Security.RightsManagement;
 using PIS8_2.Stores;
 using System.Reflection;
+using System.Windows;
+using Microsoft.Extensions.Logging;
+using System.Data.Entity.Infrastructure.Interception;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Win32;
+using PIS8_2.MVVM.ViewModels;
+using System.Drawing;
+using System.IO;
 
 namespace PIS8_2.MVVM.Model.Data
 {
@@ -37,23 +45,67 @@ namespace PIS8_2.MVVM.Model.Data
             return Convert.ToHexString(SHA256.HashData(bytes)).ToLower();
         }
 
-        public IEnumerable<Card> ExecuteCards(Tuser user)
+        //public IEnumerable<Card> ExecuteCards(Tuser user)
+        //{
+        //    //поправить
+        //    //var id = user.IdOrg ?? GetMunicip(user.IdOmsu);
+        //    using (var db = new TrappinganimalsContext())
+        //    {
+               
+        //        return db.Cards
+        //            .Include(c => c.IdOrgNavigation)
+        //            .Include(c => c.IdMunicipNavigation)
+        //            .Include(c => c.IdOmsuNavigation)
+        //            .Where(c => c.IdOrg == user.IdOrg)
+        //            .ToList()
+        //            //.Where(c=>c.AccessRoles.Contains(user.Role))
+        //            .ToList();
+        //    }
+
+        //}
+
+        public void DeleteFile(Card card)
         {
-            //поправить
-            //var id = user.IdOrg ?? GetMunicip(user.IdOmsu);
             using (var db = new TrappinganimalsContext())
             {
-               
-                return db.Cards
-                    .Include(c => c.IdOrgNavigation)
-                    .Include(c => c.IdMunicipNavigation)
-                    .Include(c => c.IdOmsuNavigation)
-                    .Where(c => c.IdOrg == user.IdOrg)
-                    .ToList()
-                    //.Where(c=>c.AccessRoles.Contains(user.Role))
-                    .ToList();
+                var file = db.Files.FirstOrDefault(f => f.Id == card.IdFile);
+                file.Name = null;
+                file.File = null;
+                db.SaveChanges();
             }
+        }
 
+        public string AddFile(Card card)
+        {
+
+            var openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "pdf files (*.pdf)|*.pdf";
+            openFileDialog.FilterIndex = 2;
+            openFileDialog.RestoreDirectory = true;
+            string fileName = null;
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                var filePath = openFileDialog.FileName;
+                fileName = Path.GetFileName(filePath);
+                var file = System.IO.File.ReadAllBytes(filePath);
+
+                using (var db = new TrappinganimalsContext())
+                {
+                    var newFile = new FilePdf()
+                    {
+                        Id = (int)card.IdFile,
+                        Name = fileName,
+                        File = file,
+                    };
+                    db.Files.Update(newFile);
+                    db.SaveChanges();
+                }
+            }
+            return fileName == null ? "Файл не найден" : fileName;
+            // Принимать ид карточки, либо ид файла.
+            // Из айди карточки достаём ид файла.
+            // Потом мы достём из db.Files с этим айди, меняем в нём Name и File и Update db по этому файлу
         }
 
 
@@ -61,12 +113,11 @@ namespace PIS8_2.MVVM.Model.Data
         {
             using (var db = new TrappinganimalsContext())
             {
-
-
                 var cards = db.Cards
                     .Include(c => c.IdOrgNavigation)
                     .Include(c => c.IdMunicipNavigation)
                     .Include(c => c.IdOmsuNavigation)
+                    .Include(c => c.IdFileNavigation)
                     .Where(c => c.IdOrg == user.IdOrg)
                     .Where(c => c.AccessRoles.ToList().Contains(user.Role));
                 if (filter != null)
@@ -122,8 +173,8 @@ namespace PIS8_2.MVVM.Model.Data
                 {
                     Date = DateTime.Now,
                     IdCard = card.Id,
-                    Id = db.Logs.Select(l => l.Id).Max() + 1,
-                    IdUser = user.Id,
+                    Id = db.Logs.Max(l => l.Id) +1,
+                    UserLogin = user.Login,
                     Operation = operation
                 };
                 db.Add(log);
@@ -149,6 +200,7 @@ namespace PIS8_2.MVVM.Model.Data
                     .Include(c => c.IdOrgNavigation)
                     .Include(c => c.IdMunicipNavigation)
                     .Include(c => c.IdOmsuNavigation)
+                    .Include(c => c.IdFileNavigation)
                     .FirstOrDefault(c => c.Id == id);
             }
         }
@@ -168,6 +220,7 @@ namespace PIS8_2.MVVM.Model.Data
         {
             using (var db = new TrappinganimalsContext())
             {
+                //db.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
                 var card = db.Cards
                     .Include(c => c.IdMunicipNavigation)
                     .Include(c => c.IdOmsuNavigation)
@@ -201,7 +254,20 @@ namespace PIS8_2.MVVM.Model.Data
                 //}
                 //MessageBox.Show(text);
 
-                db.Add(_card);
+                var id = db.Files
+                    .OrderBy(c => c.Id)
+                    .LastOrDefault().Id +1;
+
+                _card.IdFile = id;
+
+                db.Files.Add(new FilePdf
+                {
+                    Id = id,
+                    Name = null,
+                    File = null,
+                });
+
+                db.Cards.Add(_card);
                 db.SaveChanges();
 
                 

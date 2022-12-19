@@ -24,8 +24,6 @@ public partial class Tuser
 
     public virtual Organisation IdOrgNavigation { get; set; }
 
-    public virtual ICollection<Log> Logs { get; } = new List<Log>();
-
     public enum role_type
     {
         [Description("Оператор по отлову"), PgName("Оператор по отлову")]
