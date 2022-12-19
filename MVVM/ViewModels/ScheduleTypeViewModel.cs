@@ -24,7 +24,11 @@ namespace PIS8_2.MVVM.ViewModels
         public Card Card
         {
             get => _card;
-            set => SetField(ref _card, value, nameof(Card));
+            set
+            {
+                _card = value;
+                OnPropertyChanged("Card");
+            }
         }
 
         private List<string> _municips;
@@ -81,12 +85,20 @@ namespace PIS8_2.MVVM.ViewModels
             set => SetField(ref _boxesMenuItemsVisibility, value, nameof(BoxesMenuItemsVisibility));
         }
 
+        private Visibility _checkModeDeleteVisibility;
+        public Visibility CheckModeDeleteVisibility
+        {
+            get => _checkModeDeleteVisibility;
+            set => SetField(ref _checkModeDeleteVisibility, value, nameof(CheckModeDeleteVisibility));
+        }
+
         public ICommand BackToReestrCommand { get; }
         public ICommand ExportWordCommand { get; }
         public ICommand EditModeChangeCommand { get; }
         public ICommand SaveModeShangeCommand { get; }
         public ICommand AddModeChangeCommand { get; }
         public ICommand DownloadFileCommand { get; }
+        public ICommand DeleteFileCommand { get; }
 
         public ScheduleTypeViewModel(NavigationStore navigationStore,UserStore userStore, Card selectedCard = null, ICommand openScheduleCardCommand = null)
         {
@@ -95,6 +107,7 @@ namespace PIS8_2.MVVM.ViewModels
                 ChangeEditMode();
                 MoreBoxesVisibility = Visibility.Visible;
                 BoxesMenuItemsVisibility = Visibility.Collapsed;
+                CheckModeDeleteVisibility = Visibility.Collapsed;
                 _card = new Card() {
                     IdMunicipNavigation = new Municip(),
                     IdOmsuNavigation = new Omsu(),
@@ -106,6 +119,10 @@ namespace PIS8_2.MVVM.ViewModels
             }
             else
             {
+                if (selectedCard.IdFileNavigation.Name == null)
+                    CheckModeDeleteVisibility = Visibility.Collapsed;
+                else
+                    CheckModeDeleteVisibility = Visibility.Visible;
                 MoreBoxesVisibility = Visibility.Collapsed;
                 BoxesMenuItemsVisibility = Visibility.Visible;
                 _card = selectedCard;
@@ -123,6 +140,8 @@ namespace PIS8_2.MVVM.ViewModels
             AddModeChangeCommand = new AddModeChangeCommand(_card, userStore, openScheduleCardCommand);
 
             DownloadFileCommand = new DownloadFileCommand(this);
+
+            DeleteFileCommand = new DeleteFileCommand(this);
 
             _conn = new Connection();
             Municips = _conn.GetNamesMunicip();

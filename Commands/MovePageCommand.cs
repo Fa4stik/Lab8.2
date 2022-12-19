@@ -46,6 +46,8 @@ namespace PIS8_2.Commands
                     _viewModel.CurrentPage=_viewModel.MaxPage;
                     break;
             }
+
+            _viewModel.IsAllCheckedItems = false;
             _viewModel.UpdateReestr.Execute(null);
         }
     }

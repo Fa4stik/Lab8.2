@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using PIS8_2.Commands;
 using PIS8_2.Commands.Base;
@@ -71,6 +73,26 @@ namespace PIS8_2.MVVM.ViewModels
             set => SetField(ref _maxPage, value, "MaxPage");
         }
 
+        private ObservableCollection<Sorter> _sortigList= new ObservableCollection<Sorter>();
+
+        public ObservableCollection<Sorter> SortingList { get; } = new ObservableCollection<Sorter>()
+        {
+            new Sorter(0, "Nummk"),
+            new Sorter(0, "Datemk"),
+            new Sorter(0, "IdMunicipNavigationDOTNamemunicip"),
+            new Sorter(0, "IdOmsuNavigationDOTNameomsu"),
+            new Sorter(0, "IdOrgNavigationDOTNameorg"),
+            new Sorter(0, "Numworkorder"),
+            new Sorter(0, "Locality"),
+            new Sorter(0, "Dateworkorder"),
+            new Sorter(0, "Datetrapping"),
+            new Sorter(0, "Targetorder"),
+            new Sorter(0, "TypeOrder"),
+            //Datemk IdMunicipNavigationDOTNamemunicip IdOmsuNavigationDOTNameomsu IdOrgNavigationDOTNameorg Numworkorder Locality Dateworkorder Datetrapping Targetorder TypeOrder
+
+
+        };
+
         public ICommand ExitCommand { get; }
         public ICommand AddRequestCommand { get; }
         public ICommand AddScheduleCommand { get; }
@@ -84,10 +106,12 @@ namespace PIS8_2.MVVM.ViewModels
 
         public ICommand MovePageCommand { get; }
 
+        public ICommand SortingCommand { get; }
 
 
         public ReestrViewModel(UserStore userStore, NavigationStore navigationStore)
         {
+
             UserStore = userStore;
 
             FilterVisability = Visibility.Collapsed;
@@ -124,6 +148,8 @@ namespace PIS8_2.MVVM.ViewModels
             DelCardCommand = new DelCardCommand(this, userStore);
 
             MovePageCommand=new MovePageCommand(this);
+
+            SortingCommand = new SortingCommand(this);
         }
     }
 }

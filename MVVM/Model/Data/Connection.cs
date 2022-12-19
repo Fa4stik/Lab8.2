@@ -7,12 +7,23 @@ using System.Threading.Tasks;
 using System.Security.Policy;
 using Microsoft.EntityFrameworkCore;
 using System.Data.SqlTypes;
+using System.Linq.Expressions;
 using System.Security.Cryptography.Xml;
 using PIS8_2.Commands;
 using PIS8_2.Converters;
 using static PIS8_2.MVVM.Model.Tuser;
 using System.Security.RightsManagement;
 using PIS8_2.Stores;
+using System.Reflection;
+using System.Windows;
+using Microsoft.Extensions.Logging;
+using System.Data.Entity.Infrastructure.Interception;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Win32;
+using PIS8_2.MVVM.ViewModels;
+using System.Drawing;
+using System.IO;
+using Expression = System.Linq.Expressions.Expression;
 
 namespace PIS8_2.MVVM.Model.Data
 {
@@ -35,44 +46,71 @@ namespace PIS8_2.MVVM.Model.Data
             return Convert.ToHexString(SHA256.HashData(bytes)).ToLower();
         }
 
-        public IEnumerable<Card> ExecuteCards(Tuser user)
-        {
-            //поправить
-            //var id = user.IdOrg ?? GetMunicip(user.IdOmsu);
-            using (var db = new TrappinganimalsContext())
-            {
+        //public IEnumerable<Card> ExecuteCards(Tuser user)
+        //{
+        //    //поправить
+        //    //var id = user.IdOrg ?? GetMunicip(user.IdOmsu);
+        //    using (var db = new TrappinganimalsContext())
+        //    {
                
-                return db.Cards
-                    .Include(c => c.IdOrgNavigation)
-                    .Include(c => c.IdMunicipNavigation)
-                    .Include(c => c.IdOmsuNavigation)
-                    .Where(c => c.IdOrg == user.IdOrg)
-                    .ToList()
-                    //.Where(c=>c.AccessRoles.Contains(user.Role))
-                    .ToList();
-            }
+        //        return db.Cards
+        //            .Include(c => c.IdOrgNavigation)
+        //            .Include(c => c.IdMunicipNavigation)
+        //            .Include(c => c.IdOmsuNavigation)
+        //            .Where(c => c.IdOrg == user.IdOrg)
+        //            .ToList()
+        //            //.Where(c=>c.AccessRoles.Contains(user.Role))
+        //            .ToList();
+        //    }
 
-        }
+        //}
 
-        public void AddFile(string nameFile, string filePath)
+        public void DeleteFile(Card card)
         {
-            var file = System.IO.File.ReadAllBytes(filePath);
-
             using (var db = new TrappinganimalsContext())
             {
-                var id = db.Files.Count()+1;
-                var newFile = new File()
-                {
-                    Id = id,
-                    Name = nameFile,
-                    File1 = file,
-                };
-                db.Add(file);
+                var file = db.Files.FirstOrDefault(f => f.Id == card.IdFile);
+                file.Name = null;
+                file.File = null;
                 db.SaveChanges();
             }
         }
 
-        public IEnumerable<Card> ExecuteCardsWithFilter(Tuser user, FilterModel filter=null)
+        public string AddFile(Card card)
+        {
+
+            var openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "pdf files (*.pdf)|*.pdf";
+            openFileDialog.FilterIndex = 2;
+            openFileDialog.RestoreDirectory = true;
+            string fileName = null;
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                var filePath = openFileDialog.FileName;
+                fileName = Path.GetFileName(filePath);
+                var file = System.IO.File.ReadAllBytes(filePath);
+
+                using (var db = new TrappinganimalsContext())
+                {
+                    var newFile = new FilePdf()
+                    {
+                        Id = (int)card.IdFile,
+                        Name = fileName,
+                        File = file,
+                    };
+                    db.Files.Update(newFile);
+                    db.SaveChanges();
+                }
+            }
+            return fileName == null ? "Файл не найден" : fileName;
+            // Принимать ид карточки, либо ид файла.
+            // Из айди карточки достаём ид файла.
+            // Потом мы достём из db.Files с этим айди, меняем в нём Name и File и Update db по этому файлу
+        }
+
+
+        public IEnumerable<Card> ExecuteCardsWithFilter(Tuser user, FilterModel filter=null,List<Sorter> sorterParams=null)
         {
             using (var db = new TrappinganimalsContext())
             {
@@ -80,48 +118,51 @@ namespace PIS8_2.MVVM.Model.Data
                     .Include(c => c.IdOrgNavigation)
                     .Include(c => c.IdMunicipNavigation)
                     .Include(c => c.IdOmsuNavigation)
-                    //.Include(c => c.IdFileNavigation)
+                    .Include(c => c.IdFileNavigation)
                     .Where(c => c.IdOrg == user.IdOrg)
-                    .Where(c => c.AccessRoles.ToList().Contains(user.Role))
-                    .ToList();
-                    
+                    .Where(c => c.AccessRoles.ToList().Contains(user.Role));
                 if (filter != null)
                 {
                     cards = cards
                         .Where(c => c.Nummk >= filter.StartNummk && c.Nummk <= filter.EndNummk)
                         .Where(c => c.Datemk >= filter.StartDatemk && c.Datemk <= filter.EndDatemk)
-                        .Where(c => c.Adresstrapping.Contains(filter.StartAdresstrapping, StringComparison.InvariantCultureIgnoreCase))
-                        .Where(c => c.IdMunicipNavigation.Namemunicip.Contains(filter.StartMunicipName, StringComparison.InvariantCultureIgnoreCase))
-                        .Where(c => c.IdOmsuNavigation.Nameomsu.Contains(filter.StartOmsuName, StringComparison.InvariantCultureIgnoreCase))
-                        .Where(c => c.IdOrgNavigation.Nameorg.Contains(filter.StartOrgName, StringComparison.InvariantCultureIgnoreCase))
-                        .Where(c => c.Locality.Contains(filter.StartLocality, StringComparison.InvariantCultureIgnoreCase))
-                        .Where(c => c.Numworkorder >= filter.StartNumworkorder && c.Numworkorder <= filter.EndNumworkorder)
-                        .Where(c => c.Dateworkorder >= filter.StartDateworkorder && c.Dateworkorder <= filter.EndDateworkorder)
-                        .Where(c => c.Datetrapping >= filter.StartDatetrapping && c.Datetrapping <= filter.EndDatetrapping)
-                        .Where(c => c.TypeOrder.ToString().Contains(filter.StartTypeOrder, StringComparison.InvariantCultureIgnoreCase))
-                        .Where(c => c.Targetorder.Contains(filter.StartTargetorder, StringComparison.InvariantCultureIgnoreCase))
-                     
-                        .ToList();
+                        .Where(c => EF.Functions.ILike(c.IdMunicipNavigation.Namemunicip,
+                            $"%{filter.StartMunicipName}%"))
+                        .Where(c => EF.Functions.ILike(c.IdOmsuNavigation.Nameomsu, $"%{filter.StartOmsuName}%"))
+                        .Where(c => EF.Functions.ILike(c.IdOrgNavigation.Nameorg, $"%{filter.StartOrgName}%"))
+                        .Where(c => EF.Functions.ILike(c.Locality, $"%{filter.StartLocality}%"))
+                        .Where(c => c.Numworkorder >= filter.StartNumworkorder &&
+                                    c.Numworkorder <= filter.EndNumworkorder)
+                        .Where(c => c.Dateworkorder >= filter.StartDateworkorder &&
+                                    c.Dateworkorder <= filter.EndDateworkorder)
+                        .Where(c => c.Datetrapping >= filter.StartDatetrapping &&
+                                    c.Datetrapping <= filter.EndDatetrapping)
+                        .Where(c => EF.Functions.ILike(c.TypeOrder.ToString(), $"%{filter.StartTypeOrder}%"))
+                        .Where(c => EF.Functions.ILike(c.Targetorder, $"%{filter.StartTargetorder}%"));
+
                 }
-                //IsDefaultFilter = true;
-                //StartNummk = 0;+
-                //EndNummk = int.MaxValue;+
-                //StartDatemk = DateTime.Now.AddYears(-1);+
-                //EndDatemk = DateTime.Now.AddYears(1);+
-                //StartAdresstrapping = Empty;+
-                //StartMunicipName = Empty;+
-                //StartOmsuName = Empty;+
-                //StartOrgName = Empty;+
-                //StartLocality = Empty;+
-                //StartNumworkorder = 0;+
-                //EndNumworkorder = int.MaxValue;+
-                //StartDateworkorder = DateTime.Now.AddYears(-1);+
-                //EndDateworkorder = DateTime.Now.AddYears(1);+
-                //StartDatetrapping = DateTime.Now.AddYears(-1);
-                //EndDatetrapping = DateTime.Now.AddYears(1);
-                //StartTargetorder = Empty;
-                //StartTypeOrder = Empty;
-                return cards;
+
+
+
+
+                var sorteredCards = (IOrderedQueryable<Card>)cards;
+                if (sorterParams != null && sorterParams.All(x => x.NumberSorting == 0)) return sorteredCards.ToList();
+                {
+                    sorteredCards = sorteredCards.OrderBy(x => 0);
+
+                    foreach (var sorter in sorterParams.OrderBy(c => c.NumberSorting))
+                    {
+                        sorteredCards = sorter.Direction switch
+                        {
+                            Direction.Ascending => sorteredCards.ThenBy(sorter.PropetryName),
+                            Direction.Descending => sorteredCards.ThenByDescending(sorter.PropetryName),
+                            _ => sorteredCards
+                        };
+                    }
+                }
+
+
+                return sorteredCards.ToList();
             }
         }
 
@@ -133,7 +174,7 @@ namespace PIS8_2.MVVM.Model.Data
                 {
                     Date = DateTime.Now,
                     IdCard = card.Id,
-                    Id = db.Logs.Select(l=>l.Id).Max(),
+                    Id = db.Logs.Max(l => l.Id) +1,
                     UserLogin = user.Login,
                     Operation = operation
                 };
@@ -146,6 +187,7 @@ namespace PIS8_2.MVVM.Model.Data
         {
             using (var db = new TrappinganimalsContext())
             {
+               
                 return db.Municips.First(m => m.Id == idOmsu).Id;
             }
         }
@@ -159,6 +201,7 @@ namespace PIS8_2.MVVM.Model.Data
                     .Include(c => c.IdOrgNavigation)
                     .Include(c => c.IdMunicipNavigation)
                     .Include(c => c.IdOmsuNavigation)
+                    .Include(c => c.IdFileNavigation)
                     .FirstOrDefault(c => c.Id == id);
             }
         }
@@ -169,14 +212,16 @@ namespace PIS8_2.MVVM.Model.Data
             {
                 db.Cards.Update(newCard);
                 db.SaveChanges();
-                Journaling(user, newCard, Log.operation.editCard);
+                
             }
+            Journaling(user, newCard, Log.operation.editCard);
         }
 
         public void AddCard(Card _card, Tuser _user)
         {
             using (var db = new TrappinganimalsContext())
             {
+                //db.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
                 var card = db.Cards
                     .Include(c => c.IdMunicipNavigation)
                     .Include(c => c.IdOmsuNavigation)
@@ -210,11 +255,25 @@ namespace PIS8_2.MVVM.Model.Data
                 //}
                 //MessageBox.Show(text);
 
-                db.Add(_card);
+                var id = db.Files
+                    .OrderBy(c => c.Id)
+                    .LastOrDefault().Id +1;
+
+                _card.IdFile = id;
+
+                db.Files.Add(new FilePdf
+                {
+                    Id = id,
+                    Name = null,
+                    File = null,
+                });
+
+                db.Cards.Add(_card);
                 db.SaveChanges();
 
-                Journaling(_user, _card, Log.operation.addCardReestr);
+                
             }
+            Journaling(_user, _card, Log.operation.addCardReestr);
         }
 
         public List<string> GetNamesMunicip()
@@ -250,5 +309,62 @@ namespace PIS8_2.MVVM.Model.Data
                 db.SaveChanges();
             }
         }
+    }
+}
+
+
+//Вынести куда-то
+public static class IQueryableExtensions
+{
+    public static IOrderedQueryable<T> OrderBy<T>(this IQueryable<T> query, string propertyName, IComparer<object> comparer = null)
+    {
+        return CallOrderedQueryable(query, "OrderBy", propertyName, comparer);
+    }
+
+    public static IOrderedQueryable<T> OrderByDescending<T>(this IQueryable<T> query, string propertyName, IComparer<object> comparer = null)
+    {
+        return CallOrderedQueryable(query, "OrderByDescending", propertyName, comparer);
+    }
+
+    public static IOrderedQueryable<T> ThenBy<T>(this IOrderedQueryable<T> query, string propertyName, IComparer<object> comparer = null)
+    {
+        return CallOrderedQueryable(query, "ThenBy", propertyName, comparer);
+    }
+
+    public static IOrderedQueryable<T> ThenByDescending<T>(this IOrderedQueryable<T> query, string propertyName, IComparer<object> comparer = null)
+    {
+        return CallOrderedQueryable(query, "ThenByDescending", propertyName, comparer);
+    }
+
+    /// <summary>
+    /// Builds the Queryable functions using a TSource property name.
+    /// </summary>
+    public static IOrderedQueryable<T> CallOrderedQueryable<T>(this IQueryable<T> query, string methodName, string propertyName,
+            IComparer<object> comparer = null)
+    {
+        var param = Expression.Parameter(typeof(T), "x");
+
+        var body = propertyName.Replace("DOT",".").Split('.').Aggregate<string, Expression>(param, Expression.PropertyOrField);
+
+        return comparer != null
+            ? (IOrderedQueryable<T>)query.Provider.CreateQuery(
+                Expression.Call(
+                    typeof(Queryable),
+                    methodName,
+                    new[] { typeof(T), body.Type },
+                    query.Expression,
+                    Expression.Lambda(body, param),
+                    Expression.Constant(comparer)
+                )
+            )
+            : (IOrderedQueryable<T>)query.Provider.CreateQuery(
+                Expression.Call(
+                    typeof(Queryable),
+                    methodName,
+                    new[] { typeof(T), body.Type },
+                    query.Expression,
+                    Expression.Lambda(body, param)
+                )
+            );
     }
 }

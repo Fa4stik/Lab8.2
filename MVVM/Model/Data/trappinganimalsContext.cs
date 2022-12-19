@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Common;
+using System.Data.Entity.Infrastructure.Interception;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
@@ -28,7 +30,6 @@ public partial class TrappinganimalsContext : DbContext
     public TrappinganimalsContext(DbContextOptions<TrappinganimalsContext> options)
         : base(options)
     {
-        //AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
     }
 
 
@@ -43,7 +44,7 @@ public partial class TrappinganimalsContext : DbContext
     public virtual DbSet<Organisation> Organisations { get; set; }
 
     public virtual DbSet<Tuser> Tusers { get; set; }
-    public virtual DbSet<File> Files { get; set; }
+    public virtual DbSet<FilePdf> Files { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=trappinganimals;Username=postgres;Password=123");
@@ -74,6 +75,9 @@ public partial class TrappinganimalsContext : DbContext
             entity.Property(e => e.IdMunicip).HasColumnName("id_municip");
             entity.Property(e => e.IdOmsu).HasColumnName("id_omsu");
             entity.Property(e => e.IdOrg).HasColumnName("id_org");
+            entity.Property(e => e.IdFile)
+            .IsRequired()
+            .HasColumnName("id_file");
             entity.Property(e => e.Locality)
                 .IsRequired()
                 .HasMaxLength(50)
@@ -112,25 +116,20 @@ public partial class TrappinganimalsContext : DbContext
                 .HasConstraintName("card_id_org_fkey");
 
             entity.HasOne(d => d.IdFileNavigation).WithMany(p => p.Cards)
-                .HasForeignKey(d => d.IdOrg)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasForeignKey(d => d.IdFile)
                 .HasConstraintName("card_id_file_fkey");
         });
 
-        modelBuilder.Entity<File>(entity =>
+        modelBuilder.Entity<FilePdf>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("images_pkey");
+            entity.HasKey(e => e.Id).HasName("files_pkey");
 
             entity.ToTable("files");
 
-            entity.Property(e => e.Id)
-                .HasDefaultValueSql("nextval('images_id_seq'::regclass)")
-                .HasColumnName("id");
-            entity.Property(e => e.File1)
-                .IsRequired()
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.File)
                 .HasColumnName("file");
             entity.Property(e => e.Name)
-                .IsRequired()
                 .HasMaxLength(30)
                 .HasColumnName("name");
         });

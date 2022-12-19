@@ -38,6 +38,7 @@ namespace PIS8_2.Commands
             {
                 _viewModel.FilterVisability = Visibility.Collapsed;
                 _viewModel.Filter = null;
+                _viewModel.UpdateReestr.Execute(null);
             }
             
         }

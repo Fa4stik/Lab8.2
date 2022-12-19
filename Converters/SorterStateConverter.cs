@@ -1,22 +1,21 @@
-﻿using OfficeOpenXml.FormulaParsing.Excel.Functions.RefAndLookup;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using PIS8_2.MVVM.Model;
 
 namespace PIS8_2.Converters
 {
-    internal class ConverterNullFileToString : IValueConverter
+    internal class SorterStateConverter: IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var vl = value as string;
-            if (string.IsNullOrEmpty(vl))
-                return "Файл не найден";
-            return value.ToString();
+           
+            return DateTime.Now.Second.ToString();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
