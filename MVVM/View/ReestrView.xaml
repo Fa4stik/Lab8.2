@@ -310,7 +310,7 @@
 
 
 
-        <DataGrid Name="DataGridReestr" 
+        <DataGrid Style="{DynamicResource DataGridStyles}" CellStyle="{DynamicResource DataGridCellStyles}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyles}" RowStyle="{DynamicResource DataGridRowStyles}" Name="DataGridReestr" 
                   ItemsSource="{Binding Cards}" 
                   FontSize="14" SelectionMode="Single"
                   AutoGenerateColumns="False"

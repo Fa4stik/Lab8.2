@@ -3,6 +3,7 @@ using PIS8_2.Converters;
 using PIS8_2.MVVM.Model;
 using PIS8_2.MVVM.Model.Data;
 using PIS8_2.MVVM.ViewModels;
+using PIS8_2.Service;
 using PIS8_2.Stores;
 using System;
 using System.Collections.Generic;
@@ -15,13 +16,15 @@ namespace PIS8_2.Commands
     internal class SaveModeChangeCommand : Command
     {
         private readonly ScheduleTypeViewModel _scheduleTypeViewModel;
+        private readonly NavigationService<ReestrViewModel> _navigationService;
         private readonly UserStore _userStore;
         private readonly Connection _conn;
-        public SaveModeChangeCommand(ScheduleTypeViewModel scheduleTypeViewModel, UserStore userStore)
+        public SaveModeChangeCommand(ScheduleTypeViewModel scheduleTypeViewModel, UserStore userStore, NavigationService<ReestrViewModel> navigationService)
         {
             _conn = new Connection();
             _userStore = userStore;
             _scheduleTypeViewModel = scheduleTypeViewModel;
+            _navigationService = navigationService;
         }
         public override bool CanExecute(object parameter) => true;
 
@@ -29,7 +32,7 @@ namespace PIS8_2.Commands
         {
             _conn.EditCard(_scheduleTypeViewModel.Card, _userStore.CurrentUser);
             _scheduleTypeViewModel.ChangeSaveMode();
-
+            _navigationService.Navigate();
         }
     }
 }
