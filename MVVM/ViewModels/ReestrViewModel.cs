@@ -40,6 +40,14 @@ namespace PIS8_2.MVVM.ViewModels
             set => SetField(ref _filterVisability, value);
         }
 
+        private Visibility _addVisibility;
+
+        public Visibility AddVisibility
+        {
+            get => _addVisibility;
+            set => SetField(ref _addVisibility, value);
+        }
+
         private List<LimitedCard> _cards;
         public List<LimitedCard> Cards
         {
@@ -116,7 +124,10 @@ namespace PIS8_2.MVVM.ViewModels
 
             FilterVisability = Visibility.Collapsed;
 
-
+            if (userStore.CurrentUser.Role == Tuser.role_type.operOtl)
+            {
+                AddVisibility = Visibility.Collapsed;
+            }
 
             UpdateReestr = new UpdateReestrCommand(this, userStore);
             UpdateReestr.Execute(null);
