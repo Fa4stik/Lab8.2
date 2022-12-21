@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -243,10 +243,12 @@ namespace PIS8_2.MVVM.Model.Data
                 // Муниципальное образование
                 _card.IdMunicip = card.FirstOrDefault(c => c.IdMunicipNavigation.Namemunicip == _card.IdMunicipNavigation.Namemunicip).IdMunicipNavigation.Id;
                 _card.IdMunicipNavigation = card.FirstOrDefault(c => c.IdMunicip == _card.IdMunicip).IdMunicipNavigation;
+                _card.IdMunicipNavigation = municips.FirstOrDefault(c => c.Id == _card.IdMunicip);
 
                 // ОМСУ
                 _card.IdOmsu = card.FirstOrDefault(c => c.IdOmsuNavigation.Nameomsu == _card.IdOmsuNavigation.Nameomsu).IdOmsuNavigation.Id;
                 _card.IdOmsuNavigation = card.FirstOrDefault(c => c.IdOmsu == _card.IdOmsu).IdOmsuNavigation;
+                _card.IdOmsuNavigation = omsu.FirstOrDefault(c => c.Id == _card.IdOmsu);
 
                 // Организация
                 _card.IdOrg = _user.IdOrg.Value;
