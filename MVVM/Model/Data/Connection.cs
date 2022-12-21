@@ -174,7 +174,7 @@ namespace PIS8_2.MVVM.Model.Data
                 {
                     Date = DateTime.Now,
                     IdCard = card.Id,
-                    Id = db.Logs.Max(l => l.Id) +1,
+                    Id = db.Logs.Select(c=>c.Id).DefaultIfEmpty().Max() +1,
                     UserLogin = user.Login,
                     Operation = operation
                 };
