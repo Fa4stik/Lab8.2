@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -38,6 +38,14 @@ namespace PIS8_2.MVVM.ViewModels
         {
             get => _filterVisability;
             set => SetField(ref _filterVisability, value);
+        }
+
+        private Visibility _optionsVisibility;
+
+        public Visibility OptionsVisibility
+        {
+            get => _optionsVisibility;
+            set => SetField(ref _optionsVisibility, value);
         }
 
         private List<LimitedCard> _cards;
@@ -117,6 +125,9 @@ namespace PIS8_2.MVVM.ViewModels
             FilterVisability = Visibility.Collapsed;
 
 
+            {
+                OptionsVisibility = Visibility.Collapsed;
+            }
 
             UpdateReestr = new UpdateReestrCommand(this, userStore);
             UpdateReestr.Execute(null);
