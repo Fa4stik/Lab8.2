@@ -12,6 +12,9 @@ using System.Windows.Data;
 using PIS8_2.MVVM.Model.Data;
 using System.Windows;
 using System.Windows.Controls;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
+using Spire.PdfViewer.Wpf;
+using Microsoft.Win32;
 
 namespace PIS8_2.MVVM.ViewModels
 {
@@ -99,6 +102,9 @@ namespace PIS8_2.MVVM.ViewModels
         public ICommand AddModeChangeCommand { get; }
         public ICommand DownloadFileCommand { get; }
         public ICommand DeleteFileCommand { get; }
+        public ICommand LoadPdfFileCommand { get; }
+
+        
 
         public ScheduleTypeViewModel(NavigationStore navigationStore,UserStore userStore, Card selectedCard = null, ICommand openScheduleCardCommand = null)
         {

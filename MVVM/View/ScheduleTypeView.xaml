@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PIS8_2.MVVM.View"
       xmlns:vm="clr-namespace:PIS8_2.MVVM.ViewModels" 
+      xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:con="clr-namespace:PIS8_2.Converters" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       xmlns:my="clr-namespace:Spire.PdfViewer.Wpf;assembly=Spire.PdfViewer.Wpf"
              mc:Ignorable="d" Height="1080" Width="1920"
@@ -25,9 +26,9 @@
             <StackPanel Orientation="Horizontal">
                 <StackPanel Margin="0,0,0,-8" >
                     <Menu>
-                        <MenuItem Header="&lt;" Command="{Binding BackToReestrCommand}" />
-                        <MenuItem Header="Экспорт" Cursor="Hand" Command="{Binding ExportWordCommand}" Visibility="{Binding BoxesMenuItemsVisibility}"/>
-                        <MenuItem Header="Редактировать" Command="{Binding EditModeChangeCommand}" Visibility="{Binding BoxesMenuItemsVisibility}" Cursor="Hand"></MenuItem>
+                        <MenuItem Header="Назад" Command="{Binding BackToReestrCommand}" Cursor="Hand" Icon="{Icon:Material Kind=Backburger}"/>
+                        <MenuItem Header="Экспорт Word" Cursor="Hand" Command="{Binding ExportWordCommand}" Visibility="{Binding BoxesMenuItemsVisibility}" Icon="{Icon:Material Kind=Export}"/>
+                        <MenuItem Header="Редактировать" Command="{Binding EditModeChangeCommand}" Visibility="{Binding BoxesMenuItemsVisibility}" Cursor="Hand" Icon="{Icon:Material Kind=BookEdit}"/>
                     </Menu>
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
@@ -205,7 +206,7 @@
                         </Button>
                     </StackPanel>
                 </StackPanel>
-                <my:PdfDocumentViewer Width="500" MouseDoubleClick="Control_OnMouseDoubleClick" Name="pdfDocumentViewer1"></my:PdfDocumentViewer>
+                <my:PdfDocumentViewer Width="800" Name="pdfDocumentViewer1" Content="Файл не найден" HorizontalAlignment="Stretch"></my:PdfDocumentViewer>
             </StackPanel>
         </StackPanel>
         
