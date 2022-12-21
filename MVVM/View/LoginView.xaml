@@ -21,20 +21,38 @@
                                  BorderThickness="0,0,0,2"
                                  BorderBrush="DodgerBlue"
                                  Width="250" MaxLength="50"
-                                 Padding="20,0,0,0"
+                                 Padding="30,0,0,0"
                                  Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}">
                             <TextBox.Background>
-                                <ImageBrush ImageSource="{Icon:MaterialImage Kind=Account}"
+                                <ImageBrush ImageSource="{Icon:MaterialImage Kind=Account, Brush=#02192B}"
                                             Stretch="None"
                                             AlignmentX="Left"
-                                            AlignmentY="Center"/>
+                                            AlignmentY="Center" 
+                                            >
+                                    <ImageBrush.Transform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform X="4"/>
+                                        </TransformGroup>
+                                    </ImageBrush.Transform>
+                                    <ImageBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                                            <RotateTransform CenterX="0.5" CenterY="0.5"/>
+                                            <TranslateTransform X="0" Y="0"/>
+                                        </TransformGroup>
+                                    </ImageBrush.RelativeTransform>
+                                </ImageBrush>
                             </TextBox.Background>
                         </TextBox>
                     </StackPanel>
                     <StackPanel Margin="0,20,0,20">
                         <TextBlock x:Name="textBlock" Text="Пароль" FontSize="16" Margin="0,0,0,10"/>
                         <components:BindablePasswordBox x:Name="Password"
-                                                        Padding="20,0,0,0"
+                                                        Padding="30,0,0,0"
                                                         Height="23.28"
                                                         BorderThickness="0,0,0,2"
                                                         BorderBrush="DodgerBlue"
@@ -42,9 +60,19 @@
                                                         Password="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
                                                         FontSize="16">
                             <components:BindablePasswordBox.Background>
-                                <ImageBrush ImageSource="{Icon:MaterialImage Kind=Key}"
+                                <ImageBrush ImageSource="{Icon:MaterialImage Kind=Key, Brush=#02192B}"
                                             Stretch="None"
-                                            AlignmentX="Left"></ImageBrush>
+                                            AlignmentX="Left">
+                                    <ImageBrush.Transform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform X="4"/>
+                                        </TransformGroup>
+                                    </ImageBrush.Transform>
+
+                                </ImageBrush>
                             </components:BindablePasswordBox.Background>
                         </components:BindablePasswordBox>
                     </StackPanel>

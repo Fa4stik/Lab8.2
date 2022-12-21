@@ -29,8 +29,8 @@ CREATE TABLE Municip
 CREATE TABLE Files
 (
 	id SERIAL PRIMARY KEY,
-	name VARCHAR(30) NOT NULL,
-	file bytea NOT NULL
+	name VARCHAR(30),
+	file bytea
 );
 
 CREATE TABLE Log
