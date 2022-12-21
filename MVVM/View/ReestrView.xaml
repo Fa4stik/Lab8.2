@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PIS8_2.MVVM.View"
+      xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:vm="clr-namespace:PIS8_2.MVVM.ViewModels"
       xmlns:con="clr-namespace:PIS8_2.Converters"
       mc:Ignorable="d" 
@@ -34,18 +35,44 @@
                     <DockPanel HorizontalAlignment="Stretch"/>
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
-            <MenuItem Header="Открыть" CommandParameter="{Binding ElementName=DataGridReestr,Path=SelectedItem}" Command="{Binding OpenScheduleCardCommand}" Cursor="Hand" />
-            <MenuItem Header="Добавить" Command="{Binding }" Cursor="Hand">
-                <MenuItem Header="По плану графику" Background="Aqua" Command="{Binding AddScheduleCommand}"></MenuItem>
+            <MenuItem Header="Открыть" CommandParameter="{Binding ElementName=DataGridReestr,Path=SelectedItem}" Command="{Binding OpenScheduleCardCommand}" Cursor="Hand">
+                <MenuItem.Icon>
+                    <Icon:PackIconMaterial Kind="OpenInApp" Width="15" Height="15"></Icon:PackIconMaterial>
+                </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Редактировать"/>
-            <MenuItem Header="Экспорт Excel" Command="{Binding ExportExcelCommand}"/>
-            <MenuItem Header="Фильтр" Command="{Binding ApplyFilter}" />
-            <MenuItem Header="Удалить" Command="{Binding DelCardCommand}" CommandParameter="{Binding ElementName=DataGridReestr, Path=ItemsSource}"/>
-            <MenuItem Header="Сортировка"/>
+            <MenuItem Header="Добавить" Command="{Binding AddScheduleCommand}" Cursor="Hand">
+                <MenuItem.Icon>
+                    <Icon:PackIconMaterial Kind="FileDocument" Width="15" Height="15"></Icon:PackIconMaterial>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Экспорт Excel" Command="{Binding ExportExcelCommand}">
+                <MenuItem.Icon>
+                    <Icon:PackIconMaterial Kind="Export" Width="15" Height="15"></Icon:PackIconMaterial>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Фильтр" Command="{Binding ApplyFilter}">
+                <MenuItem.Icon>
+                    <Icon:PackIconMaterial Kind="Filter" Width="15" Height="15"></Icon:PackIconMaterial>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{Binding DelCardCommand}" CommandParameter="{Binding ElementName=DataGridReestr, Path=ItemsSource}" Cursor="Hand">
+                <MenuItem.Header>
+                    <TextBlock Text="Удалить" HorizontalAlignment="Left"></TextBlock>
+                </MenuItem.Header>
+                <MenuItem.Icon>
+                    <Icon:PackIconMaterial Kind="Delete" Height="15" Width="15"></Icon:PackIconMaterial>
+                </MenuItem.Icon>
+            </MenuItem>
 
-            <MenuItem Header="{Binding Login}" HorizontalAlignment="Right" FlowDirection="RightToLeft">
-                <MenuItem Header="Выход" Command="{Binding ExitCommand}" Background="Aqua"/>
+            <MenuItem Header="{Binding Login}" HorizontalAlignment="Right" FlowDirection="RightToLeft" Cursor="Hand">
+                <MenuItem.Icon>
+                    <Icon:PackIconMaterial Kind="AccountCircle" Height="15" Width="15"></Icon:PackIconMaterial>
+                </MenuItem.Icon>
+                <MenuItem Header="Выход" Command="{Binding ExitCommand}" Background="#5F8BE6" Opacity="80">
+                    <MenuItem.Icon>
+                        <Icon:PackIconMaterial Kind="Logout" Width="15" Height="15"></Icon:PackIconMaterial>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
         </Menu>
 

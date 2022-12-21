@@ -27,8 +27,6 @@
   <ItemGroup>
     <Resource Include="MVVM\View\icons\cancel1.png" />
     <Resource Include="MVVM\View\icons\user-icon.png" />
-    <Resource Include="MVVM\View\key-icon.png" />
-    <Resource Include="MVVM\View\user-icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\PIS8_2.exe" />
@@ -42,6 +40,8 @@
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="EPPlus" Version="4.5.3.3" />
     <PackageReference Include="FreeSpire.Doc" Version="10.8.0" />
+    <PackageReference Include="FreeSpire.PDF" Version="8.6.0" />
+    <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.0">
