@@ -221,18 +221,14 @@ namespace PIS8_2.MVVM.Model.Data
         {
             using (var db = new TrappinganimalsContext())
             {
-                //db.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
                 var card = db.Cards;
-
                 var omsu = db.Omsus;
                 var municips = db.Municips;
                 var orgs = db.Organisations;
-
                 _card.Id = card
                     .Select(c => c.Id)
                     .DefaultIfEmpty()
                     .Max() + 1;
-
                 // Муниципальное образование
                 // _card.IdMunicip = card.FirstOrDefault(c => c.IdMunicipNavigation.Namemunicip == _card.IdMunicipNavigation.Namemunicip).IdMunicipNavigation.Id;
                 _card.IdMunicip = municips.FirstOrDefault(c => c.Namemunicip == _card.IdMunicipNavigation.Namemunicip)!.Id;
