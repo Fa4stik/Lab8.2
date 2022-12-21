@@ -40,7 +40,7 @@
                     <Icon:PackIconMaterial Kind="OpenInApp" Width="15" Height="15"></Icon:PackIconMaterial>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Добавить" Command="{Binding AddScheduleCommand}" Visibility="{Binding AddVisibility}" Cursor="Hand">
+            <MenuItem Header="Добавить" Command="{Binding AddScheduleCommand}" Visibility="{Binding OptionsVisibility}" Cursor="Hand">
                 <MenuItem.Icon>
                     <Icon:PackIconMaterial Kind="FileDocument" Width="15" Height="15"></Icon:PackIconMaterial>
                 </MenuItem.Icon>
@@ -55,7 +55,7 @@
                     <Icon:PackIconMaterial Kind="Filter" Width="15" Height="15"></Icon:PackIconMaterial>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Command="{Binding DelCardCommand}" CommandParameter="{Binding ElementName=DataGridReestr, Path=ItemsSource}" Cursor="Hand">
+            <MenuItem Command="{Binding DelCardCommand}" CommandParameter="{Binding ElementName=DataGridReestr, Path=ItemsSource}" Visibility="{Binding OptionsVisibility}" Cursor="Hand">
                 <MenuItem.Header>
                     <TextBlock Text="Удалить" HorizontalAlignment="Left"></TextBlock>
                 </MenuItem.Header>
