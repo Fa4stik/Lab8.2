@@ -8,13 +8,22 @@
              
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Application.Resources>
-
+        <Style TargetType="Grid">
+            <Setter Property="UseLayoutRounding" Value="True"/>
+        </Style>
 
         <Style TargetType="{x:Type Button}"
                x:Key="button-blue">
             <Setter Property="Background" Value="#FF007DFF"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="UseLayoutRounding" Value="True"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Direction="270" ShadowDepth="3" Color="DarkGray">
+                    </DropShadowEffect>
+                </Setter.Value>
+            </Setter>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -32,44 +41,14 @@
         </Style>
 
         <Style TargetType="{x:Type Button}"
-               x:Key="button-gray">
+               x:Key="button-gray" BasedOn="{StaticResource button-blue}">
             <Setter Property="Background" Value="#FF9A9898"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#FF707070"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
-
-        <!--<Style x:Key="btn-gray">
-            <Setter Property="Control.Background" Value="#FF9A9898"/>
-            <Setter Property="Control.Foreground" Value="White"/>
-            <Setter Property="Control.Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="Control.IsMouseOver" Value="True">
-                    <Setter Property="Control.Background" Value="#FF707070"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>-->
 
         <Style TargetType="Menu">
             <Setter Property="Background" Value="#FF007DFF"/>
