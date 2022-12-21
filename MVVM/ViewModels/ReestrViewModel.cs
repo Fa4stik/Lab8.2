@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -124,7 +124,7 @@ namespace PIS8_2.MVVM.ViewModels
 
             FilterVisability = Visibility.Collapsed;
 
-
+            if (userStore.CurrentUser.Role != Tuser.role_type.operOtl)
             {
                 OptionsVisibility = Visibility.Collapsed;
             }

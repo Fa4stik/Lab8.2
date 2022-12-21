@@ -111,7 +111,7 @@
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="left" Margin="0,50,0,0" >
                     <Button FontSize="14" Width="120" Height="30" Margin="50,100"
-                        Style="{StaticResource button-blue}" Command="{Binding SaveModeShangeCommand}" Visibility="{Binding BoxesMenuItemsVisibility}">
+                        Style="{StaticResource button-blue}" Command="{Binding SaveModeShangeCommand}" Visibility="{Binding BoxesMenuItemsVisibility}" Background="#FF007DFF">
                         <StackPanel>
                             <Icon:PackIconMaterial Kind="ContentSave" Height="15" Width="15"/>
                             <TextBlock Margin="20,-18,0,0">Сохранить</TextBlock>
