@@ -229,7 +229,7 @@ namespace PIS8_2.MVVM.Model.Data
 
                 _card.Id = card
                     .OrderBy(c => c.Id)
-                    .LastOrDefault().Id + 1;
+                    .LastOrDefault() == null ? 1: card.OrderBy(c => c.Id).LastOrDefault().Id + 1;
 
                 // Муниципальное образование
                 _card.IdMunicip = card.FirstOrDefault(c => c.IdMunicipNavigation.Namemunicip == _card.IdMunicipNavigation.Namemunicip).IdMunicipNavigation.Id;

@@ -1,4 +1,5 @@
-﻿using PIS8_2.MVVM.Model;
+﻿#nullable enable
+using PIS8_2.MVVM.Model;
 using System;
 using System.Collections.Generic;
 
