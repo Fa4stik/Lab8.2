@@ -1,5 +1,6 @@
 ﻿using OfficeOpenXml;
 using OfficeOpenXml.Style;
+using PIS8_2.Converters;
 using PIS8_2.MVVM.Model.Data;
 using System;
 using System.Collections.Concurrent;
@@ -21,9 +22,10 @@ namespace PIS8_2.MVVM.Model.ExportExcel
     {
         public byte[] GenerateReport(Tuser user, FilterModel filter, List<Sorter> sorterParams)
         {
-            var item = new Connection().ExecuteCardsWithFilter(user, filter, sorterParams);
+            var card = new Connection().ExecuteCardsWithFilter(user, filter, sorterParams);
             var package = new ExcelPackage();
 
+            var item = ConverterCardsToLimitedCards.ConvertCardsToLimitedCards(card);
             // Add sheet
             var sheet = package.Workbook.Worksheets.Add("Реестр заявок");
 
