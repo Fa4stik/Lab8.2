@@ -36,7 +36,7 @@ namespace PIS8_2.Commands
         public override void Execute(object parameter)
         {
             //var user = _conn.ExecuteUser(_viewModel.Login, _viewModel.Password);
-            var user= _conn.ExecuteUser("kurVet", "kurVet");
+            var user= _conn.ExecuteUser("operOtl", "operOtl");
             if (user != null)
             {
                 _userStore.CurrentUser = user;

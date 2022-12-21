@@ -28,7 +28,8 @@ namespace PIS8_2.Commands
         public override void Execute(object parameter)
         {
             _scheduleTypeViewModel.Card.IdFileNavigation.Name = _conn.AddFile(_scheduleTypeViewModel.Card);
-            _scheduleTypeViewModel.CheckModeDeleteVisibility = Visibility.Visible;
+            if (string.IsNullOrEmpty(_scheduleTypeViewModel.Card.IdFileNavigation.Name))
+                _scheduleTypeViewModel.CheckModeDeleteVisibility = Visibility.Visible;
             _scheduleTypeViewModel.Card = _scheduleTypeViewModel.Card;
         }
     }

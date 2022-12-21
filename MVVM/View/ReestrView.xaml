@@ -10,6 +10,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="1600"
       xmlns:behaviours="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       d:DataContext="{d:DesignInstance vm:ReestrViewModel, IsDesignTimeCreatable=True}"
       >
 
@@ -21,6 +22,7 @@
     <UserControl.Resources>
         <con:EnumToDescription x:Key="EnumToDescription" />
         <con:SorterStateConverter x:Key="SorterStateConverter" />
+        <con:ConverterToSymbolDate x:Key="ConverterToSymbolDate" />
     </UserControl.Resources>
     
 
@@ -29,7 +31,7 @@
 
 
 
-        <Menu DockPanel.Dock="Top">
+        <Menu DockPanel.Dock="Top" Background="#FF2196F3" Foreground="White">
             <Menu.ItemsPanel>
                 <ItemsPanelTemplate>
                     <DockPanel HorizontalAlignment="Stretch"/>
@@ -94,10 +96,10 @@
         <Grid Background="AliceBlue" Visibility="{Binding FilterVisability}" DockPanel.Dock="Top">
             <Grid  Margin="10,20,40,20" >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="30"></RowDefinition>
-                    <RowDefinition Height="30"></RowDefinition>
-                    <RowDefinition Height="30"></RowDefinition>
-                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.75*"></ColumnDefinition>
@@ -122,9 +124,9 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="От: " HorizontalAlignment="Center" VerticalAlignment="Center" Height="16" Width="20"/>
-                    <TextBox Text="{Binding Filter.StartNummk,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="18" Margin="22,0,0,0"/>
+                    <TextBox Text="{Binding Filter.StartNummk,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="22,0,0,0"/>
                     <TextBlock Text="До: " Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Height="16" Margin="5,0,0,0" Width="21"/>
-                    <TextBox Grid.Column="2" Text="{Binding Filter.EndNummk,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="18" Margin="26,0,0,0" ></TextBox>
+                    <TextBox Grid.Column="2" Text="{Binding Filter.EndNummk,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="26,0,0,0" ></TextBox>
                 </Grid>
 
                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Дата заключения МК   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
@@ -139,7 +141,7 @@
 
                     <TextBlock Text="От: " Grid.Column="0" VerticalAlignment="Center" Height="16" ></TextBlock>
 
-                    <DatePicker SelectedDate="{Binding Filter.StartDatemk}" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="24" Margin="22,0,0,0" >
+                    <DatePicker SelectedDate="{Binding Filter.StartDatemk}" xml:lang="ru-RU" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="24" Margin="22,0,0,0" >
                         <DatePicker.Resources>
                             <Style TargetType="DatePickerTextBox">
                                 <Setter Property="IsReadOnly" Value="True"  />
@@ -149,7 +151,7 @@
 
                     <TextBlock Text="До: " Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Height="16" Margin="4,0,0,0" Width="21"></TextBlock>
 
-                    <DatePicker Grid.Column="2" SelectedDate="{Binding Filter.EndDatemk}" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="24" Margin="25,0,0,0">
+                    <DatePicker Grid.Column="2" SelectedDate="{Binding Filter.EndDatemk}" xml:lang="ru-RU" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="24" Margin="25,0,0,0">
                         <DatePicker.Resources>
                             <Style TargetType="DatePickerTextBox">
                                 <Setter Property="IsReadOnly" Value="True"  />
@@ -195,9 +197,9 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="От: " Grid.Column="0" VerticalAlignment="Center" Height="16"></TextBlock>
-                    <TextBox Text="{Binding Filter.StartNumworkorder,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="18" Margin="22,0,0,0"/>
+                    <TextBox Text="{Binding Filter.StartNumworkorder,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="22,0,0,0"/>
                     <TextBlock Text="До: " Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Height="16" Width="21"></TextBlock>
-                    <TextBox Grid.Column="2" Text="{Binding Filter.EndNumworkorder,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="18" Margin="26,0,0,0" ></TextBox>
+                    <TextBox Grid.Column="2" Text="{Binding Filter.EndNumworkorder,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="26,0,0,0" ></TextBox>
                 </Grid>
 
                 <TextBlock Grid.Column="4" Grid.Row="0" Text="Населённый пункт   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
@@ -221,7 +223,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="От: " Grid.Column="0" VerticalAlignment="Center" Height="16"></TextBlock>
-                    <DatePicker SelectedDate="{Binding Filter.StartDateworkorder}" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="24" Margin="22,0,0,0">
+                    <DatePicker SelectedDate="{Binding Filter.StartDateworkorder, Converter={StaticResource ConverterToSymbolDate}}" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="24" Margin="22,0,0,0">
                         <DatePicker.Resources>
                             <Style TargetType="DatePickerTextBox">
                                 <Setter Property="IsReadOnly" Value="True"  />
@@ -229,7 +231,7 @@
                         </DatePicker.Resources>
                     </DatePicker>
                     <TextBlock Text="До: " Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Height="16" Margin="6,0,0,0" Width="21"></TextBlock>
-                    <DatePicker Grid.Column="2" SelectedDate="{Binding Filter.EndDateworkorder}" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="24" Margin="27,0,0,0">
+                    <DatePicker Grid.Column="2" SelectedDate="{Binding Filter.EndDateworkorder, Converter={StaticResource ConverterToSymbolDate}}" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="24" Margin="27,0,0,0">
                         <DatePicker.Resources>
                             <Style TargetType="DatePickerTextBox">
                                 <Setter Property="IsReadOnly" Value="True"  />
@@ -249,7 +251,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="От: " Grid.Column="0" VerticalAlignment="Center" Height="16"></TextBlock>
-                    <DatePicker SelectedDate="{Binding Filter.StartDatetrapping}" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="24" Margin="22,0,0,0">
+                    <DatePicker SelectedDate="{Binding Filter.StartDatetrapping}" xml:lang="ru-RU" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="24" Margin="22,0,0,0">
                         <DatePicker.Resources>
                             <Style TargetType="DatePickerTextBox">
                                 <Setter Property="IsReadOnly" Value="True"  />
@@ -257,7 +259,7 @@
                         </DatePicker.Resources>
                     </DatePicker>
                     <TextBlock Text="До: " Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Height="16" Margin="6,0,0,0" Width="21"></TextBlock>
-                    <DatePicker Grid.Column="2" SelectedDate="{Binding Filter.EndDatetrapping}" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="24" Margin="27,0,0,0">
+                    <DatePicker Grid.Column="2" SelectedDate="{Binding Filter.EndDatetrapping}" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="24" Margin="27,0,0,0" xml:lang="ru-RU">
                         <DatePicker.Resources>
                             <Style TargetType="DatePickerTextBox">
                                 <Setter Property="IsReadOnly" Value="True"  />
@@ -290,28 +292,37 @@
 
                 </Grid>
 
-                <Button Grid.Column="0" Grid.Row="3" Margin="22,5" Content="Фильтровать" Style="{StaticResource button-blue}" Command="{Binding UpdateReestr}"></Button>
-                <Button Grid.Column="1" Grid.Row="3" Margin="30,5" Content="Закрыть" Style="{StaticResource button-gray}" Command="{Binding ApplyFilter}"></Button>
+                <Button Grid.Column="0" Grid.Row="3" Margin="22, 5" Content="Фильтровать" Command="{Binding UpdateReestr}" Cursor="Hand"/>
+                <Button Grid.Column="1" Grid.Row="3" Margin="30,5" Content="Закрыть" Command="{Binding ApplyFilter}"/>
 
             </Grid>
         </Grid>
 
         <StackPanel DockPanel.Dock="Bottom" Margin="0,0,0,20">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="&lt;&lt;" FontSize="20" Margin="5" Width="40" Command="{Binding MovePageCommand}" CommandParameter="min" Style="{StaticResource button-gray}"/>
-                <Button Content="&lt;" FontSize="20" Margin="5" Width="40" Command="{Binding MovePageCommand}" CommandParameter="-" Style="{StaticResource button-gray}"></Button>
+                <Button Content="{Icon:Material Kind=SkipBackwardOutline}" FontSize="20" Margin="5" Width="50" Command="{Binding MovePageCommand}" CommandParameter="min"/>
+                <Button Content="{Icon:Material Kind=SkipNextOutline, RotationAngle=180}" FontSize="20" Margin="5" Command="{Binding MovePageCommand}" CommandParameter="-"></Button>
                 <TextBlock FontSize="20" Text="{Binding CurrentPage}" VerticalAlignment="Center" Foreground="CornflowerBlue" Margin="10,0"></TextBlock>
                 <TextBlock FontSize="20" Text="из"  Foreground="CornflowerBlue"  VerticalAlignment="Center"></TextBlock>
                 <TextBlock FontSize="20" Text="{Binding MaxPage}" VerticalAlignment="Center" Foreground="CornflowerBlue" Margin="10,0"></TextBlock>
-                <Button Content=">" FontSize="20" Margin="5" Width="40" Command="{Binding MovePageCommand}" CommandParameter="+" Style="{StaticResource button-gray}"></Button>
-                <Button Content=">>" FontSize="20" Margin="5" Width="40" Command="{Binding MovePageCommand}" CommandParameter="max" Style="{StaticResource button-gray}"></Button>
+                <Button Content="{Icon:Material Kind=SkipNextOutline}" FontSize="20" Margin="5" Command="{Binding MovePageCommand}" CommandParameter="+"></Button>
+                <Button Content="{Icon:Material Kind=SkipBackwardOutline, RotationAngle=180}" FontSize="20" Margin="5" Width="50" Command="{Binding MovePageCommand}" CommandParameter="max"></Button>
             </StackPanel>
         </StackPanel>
 
 
 
-        <DataGrid Style="{DynamicResource DataGridStyles}" CellStyle="{DynamicResource DataGridCellStyles}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyles}" RowStyle="{DynamicResource DataGridRowStyles}" Name="DataGridReestr" 
-                  ItemsSource="{Binding Cards}" 
+        <DataGrid Name="DataGridReestr"
+            ItemsSource="{Binding Cards}"
+                  HeadersVisibility="Column"
+                  CanUserResizeRows="False"
+                  CanUserResizeColumns="False"
+                  CanUserReorderColumns="False"
+                  CanUserDeleteRows="False"
+                  CanUserAddRows="False"
+                  SelectionMode="Single"
+                  AutoGenerateColumns="False"
+                  FontSize="14"
                   DockPanel.Dock="Top">
             <behaviours:Interaction.Triggers>
                 <behaviours:EventTrigger EventName="Sorting">
@@ -337,7 +348,7 @@
                     </DataGridTextColumn.HeaderTemplate>
                 </DataGridTextColumn>
                 <!--<DataGridTextColumn Header="Номер МК" Binding="{Binding Nummk}" IsReadOnly="True"  />-->
-                <DataGridTextColumn Header="Дата заключения МК" Binding="{Binding Datemk, StringFormat=dd-MM-yyyy}" IsReadOnly="True">
+                <DataGridTextColumn Header="Дата заключения МК" Binding="{Binding Datemk, Converter={StaticResource ConverterToSymbolDate}}" IsReadOnly="True">
                     <DataGridTextColumn.HeaderTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -397,7 +408,7 @@
                         </DataTemplate>
                     </DataGridTextColumn.HeaderTemplate>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Дата выдачи заказ-наряда" Binding="{Binding Dateworkorder, StringFormat=dd-MM-yyyy}" IsReadOnly="True">
+                <DataGridTextColumn Header="Дата выдачи заказ-наряда" Binding="{Binding Dateworkorder, Converter={StaticResource ConverterToSymbolDate}}" IsReadOnly="True">
                     <DataGridTextColumn.HeaderTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -407,7 +418,7 @@
                         </DataTemplate>
                     </DataGridTextColumn.HeaderTemplate>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Дата отлова" Binding="{Binding Datetrapping, StringFormat=dd-MM-yyyy}" IsReadOnly="True">
+                <DataGridTextColumn Header="Дата отлова" Binding="{Binding Datetrapping, Converter={StaticResource ConverterToSymbolDate}}" IsReadOnly="True">
                     <DataGridTextColumn.HeaderTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">

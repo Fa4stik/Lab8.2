@@ -104,9 +104,6 @@ namespace PIS8_2.MVVM.Model.Data
                 }
             }
             return fileName == null ? "Файл не найден" : fileName;
-            // Принимать ид карточки, либо ид файла.
-            // Из айди карточки достаём ид файла.
-            // Потом мы достём из db.Files с этим айди, меняем в нём Name и File и Update db по этому файлу
         }
 
         public void DonwloadFilePdf(Card card)
@@ -116,10 +113,17 @@ namespace PIS8_2.MVVM.Model.Data
             saveDialog.DefaultExt = ".pdf";
             saveDialog.Filter = "Pdf documents (.pdf)|*.pdf";
             saveDialog.ShowDialog();
-            System.IO.File.WriteAllBytes(saveDialog.FileName, card.IdFileNavigation.File);
+            try
+            {
+                System.IO.File.WriteAllBytes(saveDialog.FileName, card.IdFileNavigation.File);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Пустой файл нельзя скачать!");
+            }
         }
 
-        public IEnumerable<Card> ExecuteCardsWithFilter(Tuser user, FilterModel filter=null,List<Sorter> sorterParams=null)
+        public List<Card> ExecuteCardsWithFilter(Tuser user, FilterModel filter=null,List<Sorter> sorterParams=null)
         {
             using (var db = new TrappinganimalsContext())
             {

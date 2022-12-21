@@ -29,7 +29,7 @@ CREATE TABLE Municip
 CREATE TABLE Files
 (
 	id SERIAL PRIMARY KEY,
-	name VARCHAR(30),
+	name VARCHAR(90),
 	file bytea
 );
 

@@ -1,9 +1,14 @@
 ﻿using OfficeOpenXml;
 using OfficeOpenXml.Style;
+using PIS8_2.MVVM.Model.Data;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.PortableExecutable;
 using System.ServiceModel.Channels;
 using System.Text;
@@ -14,8 +19,9 @@ namespace PIS8_2.MVVM.Model.ExportExcel
 {
     internal class ExportExcelReestr
     {
-        public byte[] GenerateReport(List<LimitedCard> item)
+        public byte[] GenerateReport(Tuser user, FilterModel filter, List<Sorter> sorterParams)
         {
+            var item = new Connection().ExecuteCardsWithFilter(user, filter, sorterParams);
             var package = new ExcelPackage();
 
             // Add sheet
@@ -36,9 +42,14 @@ namespace PIS8_2.MVVM.Model.ExportExcel
             foreach (var row in item)
             {
                 var j = 1;
-                foreach (var column in row.GetType().GetProperties().Skip(1))
+                foreach (var column in row.GetType().GetProperties().Skip(2))
                 {
-                    sheet.Cells[i, j].Value = column.GetValue(row);
+                    var value = column.GetValue(row);
+                    if (value is DateTime)
+                        value = Convert.ToDateTime(value).ToString("dd.MM.yyyy");
+                    if (value is Enum)
+                        value = (value as Enum).DisplayName();
+                    sheet.Cells[i, j].Value = value;
                     j++;
                 }
                 i++;
@@ -73,6 +84,31 @@ namespace PIS8_2.MVVM.Model.ExportExcel
             {
                 MessageBox.Show("Закройте файл, перед тем как сохранить!");
             }
+        }
+    }
+
+    public static class EnumExtensions
+    {
+        // Note that we never need to expire these cache items, so we just use ConcurrentDictionary rather than MemoryCache
+        private static readonly
+            ConcurrentDictionary<string, string> DisplayNameCache = new ConcurrentDictionary<string, string>();
+
+        public static string DisplayName(this Enum value)
+        {
+            var key = $"{value.GetType().FullName}.{value}";
+
+            var displayName = DisplayNameCache.GetOrAdd(key, x =>
+            {
+                var name = (DescriptionAttribute[])value
+                    .GetType()
+                    .GetTypeInfo()
+                    .GetField(value.ToString())
+                    .GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+                return name.Length > 0 ? name[0].Description : value.ToString();
+            });
+
+            return displayName;
         }
     }
 }

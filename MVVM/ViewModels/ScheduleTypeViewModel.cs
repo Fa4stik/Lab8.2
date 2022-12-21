@@ -115,7 +115,7 @@ namespace PIS8_2.MVVM.ViewModels
 
         public ScheduleTypeViewModel(NavigationStore navigationStore,UserStore userStore, Card selectedCard = null, ICommand openScheduleCardCommand = null)
         {
-            if (selectedCard == null)
+            if (selectedCard == null) // Добавление карточки
             {
                 ChangeEditMode();
                 MoreBoxesVisibility = Visibility.Visible;
@@ -132,10 +132,11 @@ namespace PIS8_2.MVVM.ViewModels
             }
             else
             {
-                if (selectedCard.IdFileNavigation.Name == null)
+                if (string.IsNullOrEmpty(selectedCard.IdFileNavigation.Name))
                     CheckModeDeleteVisibility = Visibility.Collapsed;
                 else
                     CheckModeDeleteVisibility = Visibility.Visible;
+
                 MoreBoxesVisibility = Visibility.Collapsed;
                 BoxesMenuItemsVisibility = Visibility.Visible;
                 _card = selectedCard;

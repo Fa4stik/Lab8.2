@@ -96,8 +96,6 @@ namespace PIS8_2.MVVM.ViewModels
             new Sorter(0, "Datetrapping"),
             new Sorter(0, "Targetorder"),
             new Sorter(0, "TypeOrder"),
-            //Datemk IdMunicipNavigationDOTNamemunicip IdOmsuNavigationDOTNameomsu IdOrgNavigationDOTNameorg Numworkorder Locality Dateworkorder Datetrapping Targetorder TypeOrder
-
 
         };
 
@@ -147,7 +145,7 @@ namespace PIS8_2.MVVM.ViewModels
                 new AddRequestTypeCommand(new NavigationService<RequestTypeViewModel>(navigationStore,
                     () => new RequestTypeViewModel(navigationStore,userStore)));
 
-            ExportExcelCommand = new ExportExcelCommand(this);
+            ExportExcelCommand = new ExportExcelCommand(this, userStore);
 
             ApplyFilter=new ApplyFilterCommand(this,userStore);
 
