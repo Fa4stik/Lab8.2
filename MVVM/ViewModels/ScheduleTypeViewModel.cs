@@ -102,7 +102,7 @@ namespace PIS8_2.MVVM.ViewModels
         public ICommand AddModeChangeCommand { get; }
         public ICommand DownloadFileCommand { get; }
         public ICommand DeleteFileCommand { get; }
-        public ICommand LoadPdfFileCommand { get; }
+        public ICommand DownloadPdfFileCommand { get; }
 
         
 
@@ -133,6 +133,8 @@ namespace PIS8_2.MVVM.ViewModels
                 BoxesMenuItemsVisibility = Visibility.Visible;
                 _card = selectedCard;
             }
+
+            DownloadPdfFileCommand = new DownloadPdfFileCommand(this);
 
             BackToReestrCommand =
                 new BackToReestrCommand(new NavigationService<ReestrViewModel>(navigationStore,

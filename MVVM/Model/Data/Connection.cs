@@ -109,6 +109,15 @@ namespace PIS8_2.MVVM.Model.Data
             // Потом мы достём из db.Files с этим айди, меняем в нём Name и File и Update db по этому файлу
         }
 
+        public void DonwloadFilePdf(Card card)
+        {
+            var saveDialog = new Microsoft.Win32.SaveFileDialog();
+            saveDialog.FileName = $"{card.IdFileNavigation.Name}";
+            saveDialog.DefaultExt = ".pdf";
+            saveDialog.Filter = "Pdf documents (.pdf)|*.pdf";
+            saveDialog.ShowDialog();
+            System.IO.File.WriteAllBytes(saveDialog.FileName, card.IdFileNavigation.File);
+        }
 
         public IEnumerable<Card> ExecuteCardsWithFilter(Tuser user, FilterModel filter=null,List<Sorter> sorterParams=null)
         {

@@ -109,24 +109,49 @@
                     </StackPanel>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="left" Margin="0,50" >
-                    <Button Content="Сохранить" FontSize="14" Width="100" Height="30" Margin="50,100"
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="left" Margin="0,50,0,0" >
+                    <Button FontSize="14" Width="120" Height="30" Margin="50,100"
                         Style="{StaticResource button-blue}" Command="{Binding SaveModeShangeCommand}" Visibility="{Binding BoxesMenuItemsVisibility}">
+                        <StackPanel>
+                            <Icon:PackIconMaterial Kind="ContentSave" Height="15" Width="15"/>
+                            <TextBlock Margin="20,-18,0,0">Сохранить</TextBlock>
+                        </StackPanel>
                     </Button>
-                    <Button Content="Добавить" FontSize="14" Width="100" Height="30" Margin="50,100"
+                    <Button FontSize="14" Width="120" Height="30" Margin="50,100"
                         Style="{StaticResource button-blue}" Command="{Binding AddModeChangeCommand}" Visibility="{Binding MoreBoxesVisibility}">
+                        <StackPanel>
+                            <Icon:PackIconMaterial Kind="FileDocument" Height="15" Width="15"/>
+                            <TextBlock Margin="20,-18,0,0">Добавить</TextBlock>
+                        </StackPanel>
                     </Button>
-                    <Button Content="Загрузить файл" FontSize="14" Width="150" Height="30" Margin="50, 100"
-                        Style="{StaticResource button-blue}" Command="{Binding DownloadFileCommand}">
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,-170, 0, 0">
+                    <Button FontSize="14" Width="150" Height="30" Margin="50, 100"
+                        Style="{StaticResource button-blue}" Command="{Binding DownloadFileCommand}" Cursor="Hand">
+                        <StackPanel>
+                            <Icon:PackIconMaterial Kind="Upload" Height="15" Width="15"/>
+                            <TextBlock Margin="20,-18,0,0">Загрузить файл</TextBlock>
+                        </StackPanel>
                     </Button>
                     <Label Content="{Binding Card.IdFileNavigation.Name, Converter={StaticResource ConverterNullFileToString}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0, 100" Visibility="{Binding BoxesMenuItemsVisibility}">
                     </Label>
-                    <Button Content="Удалить файл" FontSize="14" Width="150" Height="30" Margin="50, 100"
+                    <Button FontSize="14" Width="150" Height="30" Margin="50, 100"
                         HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Command="{Binding DeleteFileCommand}" Visibility="{Binding CheckModeDeleteVisibility}">
+                        <StackPanel>
+                            <Icon:PackIconMaterial Kind="Delete" Height="15" Width="15"/>
+                            <TextBlock Margin="20,-18,0,0">Удалить файл</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button FontSize="14" Width="150" Height="30" Margin="50, 100" Style="{StaticResource button-blue}"
+                        HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Command="{Binding DownloadPdfFileCommand}" Visibility="{Binding CheckModeDeleteVisibility}">
+                        <StackPanel>
+                            <Icon:PackIconMaterial Kind="Download" Height="15" Width="15"/>
+                            <TextBlock Margin="20,-18,0,0">Скачать файл</TextBlock>
+                        </StackPanel>
                     </Button>
                 </StackPanel>
             </StackPanel>
-            <my:PdfDocumentViewer Name="pdfDocumentViewer1" HorizontalAlignment="Stretch"></my:PdfDocumentViewer>
+            <my:PdfDocumentViewer Name="pdfDocumentViewer1" HorizontalAlignment="Stretch" DockPanel.Dock="Right"></my:PdfDocumentViewer>
         </DockPanel>
 
     </ScrollViewer>
