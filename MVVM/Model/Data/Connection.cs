@@ -222,28 +222,31 @@ namespace PIS8_2.MVVM.Model.Data
             using (var db = new TrappinganimalsContext())
             {
                 //db.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
-                var card = db.Cards
-                    .Include(c => c.IdMunicipNavigation)
-                    .Include(c => c.IdOmsuNavigation)
-                    .Include(c => c.IdOrgNavigation);
+                var card = db.Cards;
+
+                var omsu = db.Omsus;
+                var municips = db.Municips;
 
                 _card.Id = card
-                    .OrderBy(c => c.Id)
-                    .LastOrDefault() == null ? 1: card.OrderBy(c => c.Id).LastOrDefault().Id + 1;
+                    .Select(c => c.Id)
+                    .DefaultIfEmpty()
+                    .Max() + 1;
 
                 // Муниципальное образование
-                _card.IdMunicip = card.FirstOrDefault(c => c.IdMunicipNavigation.Namemunicip == _card.IdMunicipNavigation.Namemunicip).IdMunicipNavigation.Id;
-                _card.IdMunicipNavigation = card.FirstOrDefault(c => c.IdMunicip == _card.IdMunicip).IdMunicipNavigation;
+                // _card.IdMunicip = card.FirstOrDefault(c => c.IdMunicipNavigation.Namemunicip == _card.IdMunicipNavigation.Namemunicip).IdMunicipNavigation.Id;
+                _card.IdMunicip = municips.FirstOrDefault(c => c.Namemunicip == _card.IdMunicipNavigation.Namemunicip)!.Id;
+                //_card.IdMunicipNavigation = card.FirstOrDefault(c => c.IdMunicip == _card.IdMunicip).IdMunicipNavigation;
 
                 // ОМСУ
-                _card.IdOmsu = card.FirstOrDefault(c => c.IdOmsuNavigation.Nameomsu == _card.IdOmsuNavigation.Nameomsu).IdOmsuNavigation.Id;
-                _card.IdOmsuNavigation = card.FirstOrDefault(c => c.IdOmsu == _card.IdOmsu).IdOmsuNavigation;
+                //_card.IdOmsu = card.FirstOrDefault(c => c.IdOmsuNavigation.Nameomsu == _card.IdOmsuNavigation.Nameomsu).IdOmsuNavigation.Id;
+                _card.IdOmsu = omsu.FirstOrDefault(c => c.Nameomsu == _card.IdOmsuNavigation.Nameomsu)!.Id;
+                //_card.IdOmsuNavigation = card.FirstOrDefault(c => c.IdOmsu == _card.IdOmsu).IdOmsuNavigation;
 
                 // Организация
                 _card.IdOrg = _user.IdOrg.Value;
-                _card.IdOrgNavigation = card.FirstOrDefault(c => c.IdOrg == _card.IdOrg).IdOrgNavigation;
+                //_card.IdOrgNavigation = card.FirstOrDefault(c => c.IdOrg == _card.IdOrg).IdOrgNavigation;
 
-                int numWordOrder = card.Select(c => c.Numworkorder).ToList().Max() + 1;
+                int numWordOrder = card.Select(c => c!.Numworkorder!).DefaultIfEmpty().Max()! + 1;
                 _card.Numworkorder = numWordOrder;
                 _card.TypeOrder = Card.order_type.schedule;
                 _card.AccessRoles = new role_type[] { _user.Role };
@@ -256,8 +259,8 @@ namespace PIS8_2.MVVM.Model.Data
                 //MessageBox.Show(text);
 
                 var id = db.Files
-                    .OrderBy(c => c.Id)
-                    .LastOrDefault().Id +1;
+                    .Select(c => c.Id)
+                    .DefaultIfEmpty().Max() +1;
 
                 _card.IdFile = id;
 
