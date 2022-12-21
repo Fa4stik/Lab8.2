@@ -95,6 +95,13 @@ namespace PIS8_2.MVVM.ViewModels
             set => SetField(ref _checkModeDeleteVisibility, value, nameof(CheckModeDeleteVisibility));
         }
 
+        private bool _isEditEnabled;
+        public bool IsEditEnabled
+        {
+            get => _isEditEnabled;
+            set => SetField(ref _isEditEnabled, value, nameof(CheckModeDeleteVisibility));
+        }
+
         public ICommand BackToReestrCommand { get; }
         public ICommand ExportWordCommand { get; }
         public ICommand EditModeChangeCommand { get; }
@@ -133,6 +140,8 @@ namespace PIS8_2.MVVM.ViewModels
                 BoxesMenuItemsVisibility = Visibility.Visible;
                 _card = selectedCard;
             }
+
+            IsEditEnabled = (userStore.CurrentUser.Role == Tuser.role_type.operOtl);
 
             DownloadPdfFileCommand = new DownloadPdfFileCommand(this);
 

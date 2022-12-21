@@ -26,7 +26,7 @@
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="Назад" Command="{Binding BackToReestrCommand}" Cursor="Hand" Icon="{Icon:Material Kind=Backburger}"/>
                 <MenuItem Header="Экспорт Word" Cursor="Hand" Command="{Binding ExportWordCommand}" Visibility="{Binding BoxesMenuItemsVisibility}" Icon="{Icon:Material Kind=Export}"/>
-                <MenuItem Header="Редактировать" Command="{Binding EditModeChangeCommand}" Visibility="{Binding BoxesMenuItemsVisibility}" Cursor="Hand" Icon="{Icon:Material Kind=BookEdit}"/>
+                <MenuItem Header="Редактировать" Command="{Binding EditModeChangeCommand}" Visibility="{Binding BoxesMenuItemsVisibility}" IsEnabled="{Binding IsEditEnabled}" Cursor="Hand" Icon="{Icon:Material Kind=BookEdit}"/>
             </Menu>
             <StackPanel Margin="0,0,0,-8" >
                 <StackPanel>
