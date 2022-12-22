@@ -17,8 +17,8 @@
             <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
                 <views:LoginView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModels:ReestrViewModel}">
-                <views:ReestrView/>
+            <DataTemplate DataType="{x:Type viewModels:RegistryViewModel}">
+                <views:RegistryView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:ScheduleTypeViewModel}">
                 <views:ScheduleTypeView/>

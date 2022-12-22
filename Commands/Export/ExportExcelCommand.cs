@@ -8,20 +8,20 @@ namespace PIS8_2.Commands.Export
 {
     internal class ExportExcelCommand : Command
     {
-        private readonly ReestrViewModel _reestrViewModel;
+        private readonly RegistryViewModel _registryViewModel;
         private readonly UserStore _userStore;
 
-        public ExportExcelCommand(ReestrViewModel reestrViewModel, UserStore userStore)
+        public ExportExcelCommand(RegistryViewModel registryViewModel, UserStore userStore)
         {
-            _reestrViewModel = reestrViewModel;
+            _registryViewModel = registryViewModel;
             _userStore = userStore;
         }
 
-        public override bool CanExecute(object parameter) => _reestrViewModel.Cards.Count != 0;
+        public override bool CanExecute(object parameter) => _registryViewModel.Cards.Count != 0;
 
         public override void Execute(object parameter)
         {
-            var reportExcel = new ExportExcelReestr().GenerateReport(_userStore.CurrentUser, _reestrViewModel.Filter, _reestrViewModel.SortingList.ToList());
+            var reportExcel = new ExportExcelReestr().GenerateReport(_userStore.CurrentUser, _registryViewModel.Filter, _registryViewModel.SortingList.ToList());
             new ExportExcelReestr().SaveToExcel(reportExcel);
         }
     }

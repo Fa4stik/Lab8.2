@@ -6,9 +6,9 @@ namespace PIS8_2.Commands
 {
     internal class BackToReestrCommand:Command
     {
-        private readonly NavigationService<ReestrViewModel> _navigationService;
+        private readonly NavigationService<RegistryViewModel> _navigationService;
 
-        public BackToReestrCommand(NavigationService<ReestrViewModel> navigationService)
+        public BackToReestrCommand(NavigationService<RegistryViewModel> navigationService)
         {
             _navigationService = navigationService;
         }

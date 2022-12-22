@@ -9,12 +9,12 @@ namespace PIS8_2.Commands
 {
     class SortingCommand:Command
     {
-        private readonly ReestrViewModel _viewModel;
+        private readonly RegistryViewModel _viewModel;
         /// <summary>
         /// Этот конструктор принимает текущую viewModel и инициализирует его
         /// </summary>
         /// <param name="viewModel">Текущий реестр</param>
-        public SortingCommand(ReestrViewModel viewModel)
+        public SortingCommand(RegistryViewModel viewModel)
         {
             _viewModel = viewModel;
         }
@@ -55,7 +55,7 @@ namespace PIS8_2.Commands
             }
 
 
-            _viewModel.UpdateReestr.Execute(null);
+            _viewModel.UpdateRegistry.Execute(null);
         }
 
         private void UpdateDisplayState()

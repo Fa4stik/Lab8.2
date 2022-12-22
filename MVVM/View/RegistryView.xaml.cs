@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace PIS8_2.MVVM.View
 {
     /// <summary>
-    /// Логика взаимодействия для ReestrView.xaml
+    /// Логика взаимодействия для RegistryView.xaml
     /// </summary>
-    public partial class ReestrView : UserControl
+    public partial class RegistryView : UserControl
     {
-        public ReestrView()
+        public RegistryView()
         {
             InitializeComponent();
-        }
-
-        private void CheckBox_TargetUpdated(object sender, DataTransferEventArgs e)
-        {
-
         }
     }
 }

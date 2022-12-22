@@ -12,11 +12,11 @@ namespace PIS8_2.Commands
 {
     internal class UpdateReestrCommand:Command
     {
-        private readonly ReestrViewModel _viewModel;
+        private readonly RegistryViewModel _viewModel;
         private readonly UserStore _userStore;
         private readonly Connection _conn;
 
-        public UpdateReestrCommand(ReestrViewModel viewModel, UserStore userStore)
+        public UpdateReestrCommand(RegistryViewModel viewModel, UserStore userStore)
         {
             _viewModel = viewModel;
             _userStore = userStore;

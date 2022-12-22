@@ -5,9 +5,9 @@ namespace PIS8_2.Commands
 {
     class ResetFilterCommand:Command
     {
-        private readonly ReestrViewModel _viewModel;
+        private readonly RegistryViewModel _viewModel;
 
-        public ResetFilterCommand(ReestrViewModel viewModel)
+        public ResetFilterCommand(RegistryViewModel viewModel)
         {
             _viewModel = viewModel;
         }

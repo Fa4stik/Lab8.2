@@ -128,14 +128,57 @@ namespace PIS8_2.MVVM.ViewModels
         public ICommand OnlyNumbersCommand { get; }
         public ICommand BlackOutDatesCommand { get; }
 
-        public ScheduleTypeViewModel(NavigationStore navigationStore,UserStore userStore, Card selectedCard = null, ICommand openScheduleCardCommand = null)
+        public ScheduleTypeViewModel(NavigationStore navigationStore, UserStore userStore, Card selectedCard = null,
+            ICommand openScheduleCardCommand = null)
         {
-            _conn=new Connection();
+            _conn = new Connection();
 
-            var freeDate=new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            TypeCardVisibility(userStore, selectedCard);
+
+            IsEditEnabled = (userStore.CurrentUser.Role == Tuser.role_type.operOtl);
+
+            DownloadPdfFileCommand = new UploadPdfFileCommand(this);
+
+            BackToReestrCommand =
+                new BackToReestrCommand(new NavigationService<RegistryViewModel>(navigationStore,
+                    () => new RegistryViewModel(userStore, navigationStore)));
+
+            ExportWordCommand = new ExportWordCommand(this);
+
+            EditModeChangeCommand = new EditModeChangeCommand(this);
+
+            SaveModeShangeCommand = new SaveModeChangeCommand(this, userStore, new NavigationService<RegistryViewModel>(
+                navigationStore,
+                () => new RegistryViewModel(userStore, navigationStore)));
+
+            AddModeChangeCommand = new AddModeChangeCommand(_card, userStore, openScheduleCardCommand);
+
+            DownloadFileCommand = new DownloadFileCommand(this);
+
+            DeleteFileCommand = new DeleteFileCommand(this);
+
+            LoadPdfFileCommand = new LoadPdfFileCommand(this);
+
+            OnlyNumbersCommand = new OnlyNumbersCommand();
+
+            BlackOutDatesCommand = new BlackOutDatesCommand(userStore, this);
+
+            _conn = new Connection();
+            Municips = _conn.GetNamesMunicip();
+            Omsus = _conn.GetNamesOMSU();
+        }
+
+        /// <summary>
+        /// Отвечает за отображение начальных элементов в окне карточке
+        /// </summary>
+        /// <param name="userStore">Текущий пользователь</param>
+        /// <param name="selectedCard">Текущая карточка план-графика</param>
+        private void TypeCardVisibility(UserStore userStore, Card selectedCard)
+        {
+            var freeDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
             while (_conn.GetBlackOutDates(userStore.CurrentUser.IdOrg).Contains(freeDate))
             {
-                freeDate=freeDate.AddDays(1);
+                freeDate = freeDate.AddDays(1);
             }
 
             if (selectedCard == null) // Добавление карточки
@@ -146,7 +189,8 @@ namespace PIS8_2.MVVM.ViewModels
                 BoxesMenuItemsVisibility = Visibility.Collapsed;
                 CheckTypeOrderFromWordExport = Visibility.Collapsed;
                 CheckModeDeleteVisibility = Visibility.Collapsed;
-                _card = new Card() {
+                _card = new Card()
+                {
                     IdMunicipNavigation = new Municip(),
                     IdOmsuNavigation = new Omsu(),
                     IdOrgNavigation = new Organisation(),
@@ -170,37 +214,6 @@ namespace PIS8_2.MVVM.ViewModels
                 BoxesMenuItemsVisibility = Visibility.Visible;
                 _card = selectedCard;
             }
-
-            IsEditEnabled = (userStore.CurrentUser.Role == Tuser.role_type.operOtl);
-
-            DownloadPdfFileCommand = new UploadPdfFileCommand(this);
-
-            BackToReestrCommand =
-                new BackToReestrCommand(new NavigationService<ReestrViewModel>(navigationStore,
-                    () => new ReestrViewModel(userStore, navigationStore)));
-
-            ExportWordCommand = new ExportWordCommand(this);
-
-            EditModeChangeCommand = new EditModeChangeCommand(this);
-
-            SaveModeShangeCommand = new SaveModeChangeCommand(this, userStore, new NavigationService<ReestrViewModel>(navigationStore,
-                    () => new ReestrViewModel(userStore, navigationStore)));
-
-            AddModeChangeCommand = new AddModeChangeCommand(_card, userStore, openScheduleCardCommand);
-
-            DownloadFileCommand = new DownloadFileCommand(this);
-
-            DeleteFileCommand = new DeleteFileCommand(this);
-
-            LoadPdfFileCommand=new LoadPdfFileCommand(this);
-
-            OnlyNumbersCommand = new OnlyNumbersCommand();
-
-            BlackOutDatesCommand=new BlackOutDatesCommand(userStore,this);
-
-            _conn = new Connection();
-            Municips = _conn.GetNamesMunicip();
-            Omsus = _conn.GetNamesOMSU();
         }
 
         /// <summary>

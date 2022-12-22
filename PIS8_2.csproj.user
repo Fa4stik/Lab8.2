@@ -10,7 +10,7 @@
     <Compile Update="MVVM\View\MainWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="MVVM\View\ReestrView.xaml.cs">
+    <Compile Update="MVVM\View\RegistryView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MVVM\View\ScheduleTypeView.xaml.cs">
@@ -24,7 +24,7 @@
     <Page Update="MVVM\View\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MVVM\View\ReestrView.xaml">
+    <Page Update="MVVM\View\RegistryView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MVVM\View\ScheduleTypeView.xaml">

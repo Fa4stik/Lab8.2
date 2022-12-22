@@ -50,16 +50,14 @@ namespace PIS8_2.MVVM.ViewModels
             #region Commands
 
             var navigationService =
-                new NavigationService<ReestrViewModel>(
+                new NavigationService<RegistryViewModel>(
                     navigationStore,
-                    () => new ReestrViewModel(userStore, navigationStore));
+                    () => new RegistryViewModel(userStore, navigationStore));
             LoginCommand = new LoginCommand(this, userStore, navigationService);
             
 
             #endregion
-
             _visabilitiError = Visibility.Collapsed;
-            //LoginCommand = new NavigateCommand<ReestrViewModel>(navigationStore, ()=>new ReestrViewModel(navigationStore));
         }
     }
 }

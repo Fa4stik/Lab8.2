@@ -8,10 +8,10 @@ namespace PIS8_2.Commands
 {
     internal class ApplyFilterCommand:Command
     {
-        private readonly ReestrViewModel _viewModel;
+        private readonly RegistryViewModel _viewModel;
         private readonly UserStore _userStore;
 
-        public ApplyFilterCommand(ReestrViewModel viewModel, UserStore userStore)
+        public ApplyFilterCommand(RegistryViewModel viewModel, UserStore userStore)
         {
             _viewModel = viewModel;
             _userStore = userStore;
@@ -31,7 +31,7 @@ namespace PIS8_2.Commands
             {
                 _viewModel.FilterVisability = Visibility.Collapsed;
                 _viewModel.Filter = null;
-                _viewModel.UpdateReestr.Execute(null);
+                _viewModel.UpdateRegistry.Execute(null);
             }
             
         }

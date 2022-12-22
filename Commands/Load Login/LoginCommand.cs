@@ -10,12 +10,12 @@ namespace PIS8_2.Commands
     internal class LoginCommand:Command
     {
         private readonly LoginViewModel _viewModel;
-        private readonly NavigationService<ReestrViewModel> _navigationService;
+        private readonly NavigationService<RegistryViewModel> _navigationService;
         private readonly Connection _conn;
         private readonly UserStore _userStore;
 
 
-        public LoginCommand(LoginViewModel viewModel, UserStore userStore, NavigationService<ReestrViewModel> navigationService)
+        public LoginCommand(LoginViewModel viewModel, UserStore userStore, NavigationService<RegistryViewModel> navigationService)
         {
             _viewModel = viewModel;
             _navigationService = navigationService;

@@ -12,7 +12,7 @@ using PIS8_2.Stores;
 
 namespace PIS8_2.MVVM.ViewModels
 {
-    internal class ReestrViewModel:ViewModel
+    internal class RegistryViewModel:ViewModel
     {
         private UserStore UserStore { get; }
 
@@ -96,21 +96,17 @@ namespace PIS8_2.MVVM.ViewModels
 
         public ICommand ExitCommand { get; }
         public ICommand AddScheduleCommand { get; }
-        public ICommand UpdateReestr { get; }
+        public ICommand UpdateRegistry { get; }
         public ICommand OpenScheduleCardCommand { get; }
         public ICommand ExportExcelCommand { get; }
         public ICommand ApplyFilter { get; }
-
         public ICommand ResetFilter { get; }
         public ICommand DelCardCommand { get; }
-
         public ICommand MovePageCommand { get; }
-
         public ICommand SortingCommand { get; }
         public ICommand OnlyNumbersCommand { get; }
 
-
-        public ReestrViewModel(UserStore userStore, NavigationStore navigationStore)
+        public RegistryViewModel(UserStore userStore, NavigationStore navigationStore)
         {
 
             UserStore = userStore;
@@ -122,8 +118,8 @@ namespace PIS8_2.MVVM.ViewModels
                 OptionsVisibility = Visibility.Collapsed;
             }
 
-            UpdateReestr = new UpdateReestrCommand(this, userStore);
-            UpdateReestr.Execute(null);
+            UpdateRegistry = new UpdateReestrCommand(this, userStore);
+            UpdateRegistry.Execute(null);
 
             OpenScheduleCardCommand = new OpenScheduleCardCommand(
                 new ParameterNavigationService<Card, ScheduleTypeViewModel>(navigationStore,

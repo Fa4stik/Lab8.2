@@ -9,10 +9,10 @@ namespace PIS8_2.Commands
     internal class SaveModeChangeCommand : Command
     {
         private readonly ScheduleTypeViewModel _scheduleTypeViewModel;
-        private readonly NavigationService<ReestrViewModel> _navigationService;
+        private readonly NavigationService<RegistryViewModel> _navigationService;
         private readonly UserStore _userStore;
         private readonly Connection _conn;
-        public SaveModeChangeCommand(ScheduleTypeViewModel scheduleTypeViewModel, UserStore userStore, NavigationService<ReestrViewModel> navigationService)
+        public SaveModeChangeCommand(ScheduleTypeViewModel scheduleTypeViewModel, UserStore userStore, NavigationService<RegistryViewModel> navigationService)
         {
             _conn = new Connection();
             _userStore = userStore;

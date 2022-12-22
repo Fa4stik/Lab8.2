@@ -5,9 +5,9 @@ namespace PIS8_2.Commands
 {
     internal class MovePageCommand:Command
     {
-        private readonly ReestrViewModel _viewModel;
+        private readonly RegistryViewModel _viewModel;
 
-        public MovePageCommand(ReestrViewModel viewModel)
+        public MovePageCommand(RegistryViewModel viewModel)
         {
             _viewModel = viewModel;
         }
@@ -43,7 +43,7 @@ namespace PIS8_2.Commands
             }
 
             _viewModel.IsAllCheckedItems = false;
-            _viewModel.UpdateReestr.Execute(null);
+            _viewModel.UpdateRegistry.Execute(null);
         }
     }
 }

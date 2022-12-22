@@ -10,11 +10,11 @@ namespace PIS8_2.Commands
 {
     internal class DelCardCommand : Command
     {
-        private readonly ReestrViewModel _viewModel;
+        private readonly RegistryViewModel _viewModel;
         private readonly Connection _conn;
         private readonly UserStore _user;
 
-        public DelCardCommand(ReestrViewModel viewModel, UserStore user)
+        public DelCardCommand(RegistryViewModel viewModel, UserStore user)
         {
             _conn = new Connection();
             _user = user;
@@ -34,7 +34,7 @@ namespace PIS8_2.Commands
                 .Select(c => c.Id)
                 .ToArray();
             _conn.DeleteCards(idCards, _user.CurrentUser);
-            _viewModel.UpdateReestr.Execute(null);
+            _viewModel.UpdateRegistry.Execute(null);
         }
     }
 }

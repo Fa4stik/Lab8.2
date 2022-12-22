@@ -17,7 +17,6 @@ namespace PIS8_2.MVVM.ViewModels
         public MainViewModel(NavigationStore navigationStore)
         {
             _navigationStore = navigationStore;
-
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
         }
 
