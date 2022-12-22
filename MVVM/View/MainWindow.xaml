@@ -8,6 +8,7 @@
         xmlns:pis82="clr-namespace:PIS8_2"
         xmlns:view="clr-namespace:PIS8_2.MVVM.View"
         mc:Ignorable="d"
+        MinWidth="900"
         Title="MainWindow" 
         WindowState="Maximized"
         >

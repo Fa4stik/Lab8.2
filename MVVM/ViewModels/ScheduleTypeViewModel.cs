@@ -9,12 +9,12 @@ using PIS8_2.MVVM.Model.Data;
 using System.Windows;
 using System.Windows.Controls;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
-using Spire.PdfViewer.Wpf;
 using Microsoft.Win32;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 using PIS8_2.Commands.Load;
 using PIS8_2.Commands.Export;
 using PIS8_2.Commands.Add;
+using PIS8_2.Commands.Others;
 
 namespace PIS8_2.MVVM.ViewModels
 {
@@ -135,6 +135,7 @@ namespace PIS8_2.MVVM.ViewModels
         public ICommand DownloadPdfFileCommand { get; }
         
         public ICommand LoadPdfFileCommand { get; }
+        public ICommand OnlyNumbersCommand { get; }
 
 
         public ScheduleTypeViewModel(NavigationStore navigationStore,UserStore userStore, Card selectedCard = null, ICommand openScheduleCardCommand = null)
@@ -194,6 +195,8 @@ namespace PIS8_2.MVVM.ViewModels
             DeleteFileCommand = new DeleteFileCommand(this);
 
             LoadPdfFileCommand=new LoadPdfFileCommand(this);
+
+            OnlyNumbersCommand = new OnlyNumbersCommand();
 
             _conn = new Connection();
             Municips = _conn.GetNamesMunicip();

@@ -298,7 +298,12 @@ namespace PIS8_2.MVVM.Model.Data
         {
             using (var db = new TrappinganimalsContext())
             {
-                return db.Files.FirstOrDefault(c => c.Id == id)!.File;
+                return db.Files
+                    .Where(c => c.Id == id)
+                    .Select(c => c.File)
+                    .DefaultIfEmpty()
+                    .First();
+               
             }
         }
 

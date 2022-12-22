@@ -8,7 +8,7 @@
       xmlns:vm="clr-namespace:PIS8_2.MVVM.ViewModels"
       xmlns:con="clr-namespace:PIS8_2.Converters"
       mc:Ignorable="d" 
-      d:DesignHeight="800" d:DesignWidth="1600"
+      MinWidth="900"
       xmlns:behaviours="http://schemas.microsoft.com/xaml/behaviors"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       d:DataContext="{d:DesignInstance vm:ReestrViewModel, IsDesignTimeCreatable=True}"
@@ -17,7 +17,6 @@
 
     <!--d:DataContext="{d:DesignInstance vm:ReestrViewModel, IsDesignTimeCreatable=True}"-->
     <!--Для интелисенса-->
-
 
     <UserControl.Resources>
         <con:EnumToDescription x:Key="EnumToDescription" />
@@ -39,22 +38,22 @@
             </Menu.ItemsPanel>
             <MenuItem Header="Открыть" CommandParameter="{Binding ElementName=DataGridReestr,Path=SelectedItem}" Command="{Binding OpenScheduleCardCommand}" Cursor="Hand">
                 <MenuItem.Icon>
-                    <Icon:PackIconMaterial Kind="OpenInApp" Width="15" Height="15"></Icon:PackIconMaterial>
+                    <Icon:PackIconMaterial Kind="OpenInApp" ></Icon:PackIconMaterial>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Добавить" Command="{Binding AddScheduleCommand}" Visibility="{Binding OptionsVisibility}" Cursor="Hand">
                 <MenuItem.Icon>
-                    <Icon:PackIconMaterial Kind="FileDocument" Width="15" Height="15"></Icon:PackIconMaterial>
+                    <Icon:PackIconMaterial Kind="FileDocument" ></Icon:PackIconMaterial>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Экспорт Excel" Command="{Binding ExportExcelCommand}">
                 <MenuItem.Icon>
-                    <Icon:PackIconMaterial Kind="Export" Width="15" Height="15"></Icon:PackIconMaterial>
+                    <Icon:PackIconMaterial Kind="Export"></Icon:PackIconMaterial>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Фильтр" Command="{Binding ApplyFilter}">
                 <MenuItem.Icon>
-                    <Icon:PackIconMaterial Kind="Filter" Width="15" Height="15"></Icon:PackIconMaterial>
+                    <Icon:PackIconMaterial Kind="Filter" ></Icon:PackIconMaterial>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Command="{Binding DelCardCommand}" CommandParameter="{Binding ElementName=DataGridReestr, Path=ItemsSource}" Visibility="{Binding OptionsVisibility}" Cursor="Hand">
@@ -62,17 +61,17 @@
                     <TextBlock Text="Удалить" HorizontalAlignment="Left"></TextBlock>
                 </MenuItem.Header>
                 <MenuItem.Icon>
-                    <Icon:PackIconMaterial Kind="Delete" Height="15" Width="15"></Icon:PackIconMaterial>
+                    <Icon:PackIconMaterial Kind="Delete" ></Icon:PackIconMaterial>
                 </MenuItem.Icon>
             </MenuItem>
 
             <MenuItem Header="{Binding Login}" HorizontalAlignment="Right" FlowDirection="RightToLeft" Cursor="Hand">
                 <MenuItem.Icon>
-                    <Icon:PackIconMaterial Kind="AccountCircle" Height="15" Width="15"></Icon:PackIconMaterial>
+                    <Icon:PackIconMaterial Kind="AccountCircle" ></Icon:PackIconMaterial>
                 </MenuItem.Icon>
                 <MenuItem Header="Выход" Command="{Binding ExitCommand}" Background="#5F8BE6" Opacity="80">
                     <MenuItem.Icon>
-                        <Icon:PackIconMaterial Kind="Logout" Width="15" Height="15"></Icon:PackIconMaterial>
+                        <Icon:PackIconMaterial Kind="Logout" ></Icon:PackIconMaterial>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
@@ -123,10 +122,23 @@
                         <ColumnDefinition Width="90*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="От: " HorizontalAlignment="Center" VerticalAlignment="Center" Height="16" Width="20"/>
-                    <TextBox Text="{Binding Filter.StartNummk,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="22,0,0,0"/>
+                    <TextBlock Text="От: " HorizontalAlignment="Center" VerticalAlignment="Center" Height="16" Width="20" ></TextBlock>
+                    <TextBox Text="{Binding Filter.StartNummk,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" VerticalAlignment="Center" Grid.ColumnSpan="2"
+                             Grid.Column="0" Margin="22,0,0,0">
+                        <behaviours:Interaction.Triggers>
+                            <behaviours:EventTrigger EventName="PreviewTextInput"  >
+                                <behaviours:InvokeCommandAction Command="{Binding OnlyNumbersCommand}" PassEventArgsToCommand="True"/>
+                            </behaviours:EventTrigger>
+                        </behaviours:Interaction.Triggers>
+                    </TextBox>
                     <TextBlock Text="До: " Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Height="16" Margin="5,0,0,0" Width="21"/>
-                    <TextBox Grid.Column="2" Text="{Binding Filter.EndNummk,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="26,0,0,0" ></TextBox>
+                    <TextBox Grid.Column="2" Text="{Binding Filter.EndNummk,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="26,0,0,0" >
+                        <behaviours:Interaction.Triggers>
+                            <behaviours:EventTrigger EventName="PreviewTextInput"  >
+                                <behaviours:InvokeCommandAction Command="{Binding OnlyNumbersCommand}" PassEventArgsToCommand="True"/>
+                            </behaviours:EventTrigger>
+                        </behaviours:Interaction.Triggers>
+                    </TextBox>
                 </Grid>
 
                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Дата заключения МК   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
@@ -197,9 +209,21 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="От: " Grid.Column="0" VerticalAlignment="Center" Height="16"></TextBlock>
-                    <TextBox Text="{Binding Filter.StartNumworkorder,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="22,0,0,0"/>
+                    <TextBox Text="{Binding Filter.StartNumworkorder,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="22,0,0,0">
+                        <behaviours:Interaction.Triggers>
+                            <behaviours:EventTrigger EventName="PreviewTextInput"  >
+                                <behaviours:InvokeCommandAction Command="{Binding OnlyNumbersCommand}" PassEventArgsToCommand="True"/>
+                            </behaviours:EventTrigger>
+                        </behaviours:Interaction.Triggers>
+                    </TextBox>
                     <TextBlock Text="До: " Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Height="16" Width="21"></TextBlock>
-                    <TextBox Grid.Column="2" Text="{Binding Filter.EndNumworkorder,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="26,0,0,0" ></TextBox>
+                    <TextBox Grid.Column="2" Text="{Binding Filter.EndNumworkorder,UpdateSourceTrigger=PropertyChanged}" MaxLength="10" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="26,0,0,0" >
+                        <behaviours:Interaction.Triggers>
+                            <behaviours:EventTrigger EventName="PreviewTextInput"  >
+                                <behaviours:InvokeCommandAction Command="{Binding OnlyNumbersCommand}" PassEventArgsToCommand="True"/>
+                            </behaviours:EventTrigger>
+                        </behaviours:Interaction.Triggers>
+                    </TextBox>
                 </Grid>
 
                 <TextBlock Grid.Column="4" Grid.Row="0" Text="Населённый пункт   " TextAlignment="Right" FontSize="14" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
@@ -223,7 +247,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="От: " Grid.Column="0" VerticalAlignment="Center" Height="16"></TextBlock>
-                    <DatePicker SelectedDate="{Binding Filter.StartDateworkorder, Converter={StaticResource ConverterToSymbolDate}}" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="24" Margin="22,0,0,0">
+                    <DatePicker SelectedDate="{Binding Filter.StartDateworkorder}" VerticalAlignment="Center" Grid.ColumnSpan="2" xml:lang="ru-RU" Height="24" Margin="22,0,0,0">
                         <DatePicker.Resources>
                             <Style TargetType="DatePickerTextBox">
                                 <Setter Property="IsReadOnly" Value="True"  />
@@ -231,7 +255,7 @@
                         </DatePicker.Resources>
                     </DatePicker>
                     <TextBlock Text="До: " Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Height="16" Margin="6,0,0,0" Width="21"></TextBlock>
-                    <DatePicker Grid.Column="2" SelectedDate="{Binding Filter.EndDateworkorder, Converter={StaticResource ConverterToSymbolDate}}" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="24" Margin="27,0,0,0">
+                    <DatePicker Grid.Column="2" SelectedDate="{Binding Filter.EndDateworkorder}" VerticalAlignment="Center" xml:lang="ru-RU" Grid.ColumnSpan="2" Height="24" Margin="27,0,0,0">
                         <DatePicker.Resources>
                             <Style TargetType="DatePickerTextBox">
                                 <Setter Property="IsReadOnly" Value="True"  />

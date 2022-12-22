@@ -5,6 +5,7 @@ using System.Windows.Input;
 using PIS8_2.Commands;
 using PIS8_2.Commands.Add;
 using PIS8_2.Commands.Export;
+using PIS8_2.Commands.Others;
 using PIS8_2.MVVM.Model;
 using PIS8_2.Service;
 using PIS8_2.Stores;
@@ -107,6 +108,7 @@ namespace PIS8_2.MVVM.ViewModels
         public ICommand MovePageCommand { get; }
 
         public ICommand SortingCommand { get; }
+        public ICommand OnlyNumbersCommand { get; }
 
 
         public ReestrViewModel(UserStore userStore, NavigationStore navigationStore)
@@ -153,6 +155,7 @@ namespace PIS8_2.MVVM.ViewModels
             MovePageCommand=new MovePageCommand(this);
 
             SortingCommand = new SortingCommand(this);
+            OnlyNumbersCommand = new OnlyNumbersCommand();
         }
     }
 }

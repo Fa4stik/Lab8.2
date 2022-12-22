@@ -13,6 +13,7 @@ public partial class TrappinganimalsContext : DbContext
     {
     }
 
+    [Obsolete("Obsolete")]
     static TrappinganimalsContext()
     {
         NpgsqlConnection.GlobalTypeMapper

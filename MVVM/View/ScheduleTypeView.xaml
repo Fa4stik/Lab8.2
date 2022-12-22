@@ -8,8 +8,11 @@
       xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:con="clr-namespace:PIS8_2.Converters" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       xmlns:my="clr-namespace:Spire.PdfViewer.Wpf;assembly=Spire.PdfViewer.Wpf"
-             mc:Ignorable="d" Height="1080" Width="1920"
-
+      xmlns:df="clr-namespace:Patagames;assembly=Patagames.Pdf.Wpf"
+      xmlns:pdf="clr-namespace:Patagames.Pdf;assembly=Patagames.Pdf"
+      mc:Ignorable="d" d:DesignWidth="1980"
+      xmlns:Wpf="clr-namespace:Patagames.Pdf.Net.Controls.Wpf;assembly=Patagames.Pdf.Wpf"
+      xmlns:toolBars="clr-namespace:Patagames.Pdf.Net.Controls.Wpf.ToolBars;assembly=Patagames.Pdf.Wpf"
       d:DataContext="{d:DesignInstance vm:ScheduleTypeViewModel, IsDesignTimeCreatable=True}"
              
 
@@ -21,6 +24,7 @@
     <!--d:DataContext="{d:DesignInstance vm:ScheduleTypeViewModel, IsDesignTimeCreatable=True}"-->
     <!--Для интелисенса-->
     <Grid>
+        
         <ScrollViewer>
             <DockPanel>
                 <Menu DockPanel.Dock="Top" Background="#FF2196F3" Foreground="White">
@@ -35,6 +39,11 @@
                                Margin="0,20,0,0">
                             </TextBlock>
                             <TextBox Width="300" BorderThickness="0,0,0,2" Text="{Binding Card.Nummk, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Bottom" IsReadOnly="{Binding IsReadOnly}" MaxLength="10" Cursor="Hand">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewTextInput"  >
+                                        <i:InvokeCommandAction Command="{Binding OnlyNumbersCommand}" PassEventArgsToCommand="True"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                             </TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
@@ -163,15 +172,19 @@
                         </Button>
                     </StackPanel>
                 </StackPanel>
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="False">
-                    <my:PdfDocumentViewer Name="pdfDocumentViewer" HorizontalAlignment="Stretch" DockPanel.Dock="Right" Visibility="{Binding CheckModeDeleteVisibility}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Loaded" >
-                            <i:InvokeCommandAction Command="{Binding  LoadPdfFileCommand}" CommandParameter="{Binding ElementName=pdfDocumentViewer}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </my:PdfDocumentViewer>
+                
+                <ScrollViewer CanContentScroll="True"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" DockPanel.Dock="Right">
+
+                    <Wpf:PdfViewer Name="pdfDocumentViewer"   Visibility="{Binding CheckModeDeleteVisibility}" Background="White" SizeMode="FitToSize">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Loaded" >
+                                <i:InvokeCommandAction Command="{Binding  LoadPdfFileCommand}" CommandParameter="{Binding ElementName=pdfDocumentViewer}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Wpf:PdfViewer>
                 </ScrollViewer>
+                    
+
             </DockPanel>
         </ScrollViewer>
     </Grid>
