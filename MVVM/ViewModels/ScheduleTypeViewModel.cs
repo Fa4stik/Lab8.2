@@ -3,6 +3,7 @@ using PIS8_2.Service;
 using PIS8_2.Stores;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 using PIS8_2.MVVM.Model;
 using PIS8_2.MVVM.Model.Data;
@@ -64,12 +65,12 @@ namespace PIS8_2.MVVM.ViewModels
             set => SetField(ref _isReadOnly, value, "IsReadOnly");
         }
 
-        private List<DateTime> _blackOutTrappingDates;
-
-        public List<DateTime> BlackOutTrappingDates
+        private CalendarBlackoutDatesCollection _blackOutTrappingDates;
+        
+        public CalendarBlackoutDatesCollection BlackOutTrappingDates
         {
             get => _blackOutTrappingDates;
-            set => SetField(ref _blackOutTrappingDates, value, "BlackOutTrappingDates");
+            //set => SetField(ref _blackOutTrappingDates, value, "BlackOutTrappingDates");
         }
 
         private CalendarDateRange _dateRange=new CalendarDateRange();
@@ -137,9 +138,19 @@ namespace PIS8_2.MVVM.ViewModels
         public ICommand LoadPdfFileCommand { get; }
         public ICommand OnlyNumbersCommand { get; }
 
+        public ICommand BlackOutDatesCommand { get; }
+
 
         public ScheduleTypeViewModel(NavigationStore navigationStore,UserStore userStore, Card selectedCard = null, ICommand openScheduleCardCommand = null)
         {
+            _conn=new Connection();
+
+            var freeDate=new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            while (_conn.GetBlackOutDates(userStore.CurrentUser.IdOrg).Contains(freeDate))
+            {
+                freeDate=freeDate.AddDays(1);
+            }
+
             if (selectedCard == null) // Добавление карточки
             {
                 ChangeEditMode();
@@ -152,7 +163,7 @@ namespace PIS8_2.MVVM.ViewModels
                     IdMunicipNavigation = new Municip(),
                     IdOmsuNavigation = new Omsu(),
                     IdOrgNavigation = new Organisation(),
-                    Datetrapping = DateTime.Now.AddDays(-3),
+                    Datetrapping = freeDate,
                     Datemk = DateTime.Now,
                     Dateworkorder = DateTime.Now.AddDays(-2),
                 };
@@ -172,6 +183,7 @@ namespace PIS8_2.MVVM.ViewModels
                 BoxesMenuItemsVisibility = Visibility.Visible;
                 _card = selectedCard;
             }
+
 
             IsEditEnabled = (userStore.CurrentUser.Role == Tuser.role_type.operOtl);
 
@@ -197,6 +209,8 @@ namespace PIS8_2.MVVM.ViewModels
             LoadPdfFileCommand=new LoadPdfFileCommand(this);
 
             OnlyNumbersCommand = new OnlyNumbersCommand();
+
+            BlackOutDatesCommand=new BlackOutDatesCommand(userStore,this);
 
             _conn = new Connection();
             Municips = _conn.GetNamesMunicip();

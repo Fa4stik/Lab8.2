@@ -307,6 +307,14 @@ namespace PIS8_2.MVVM.Model.Data
             }
         }
 
+        public List<DateTime>? GetBlackOutDates(int? idOrg)
+        {
+            if (idOrg == null) return null;
+            using (var db=new TrappinganimalsContext())
+            {
+                return db.Cards.Where(c => c.IdOrg == idOrg).Select(c => c.Datetrapping).DefaultIfEmpty().ToList();
+            }
+        }
 
         public void DeleteCards(int[] idCards, Tuser user)
         {

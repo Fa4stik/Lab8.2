@@ -10,6 +10,7 @@
       mc:Ignorable="d" d:DesignWidth="1980"
       xmlns:Wpf="clr-namespace:Patagames.Pdf.Net.Controls.Wpf;assembly=Patagames.Pdf.Wpf"
       xmlns:toolBars="clr-namespace:Patagames.Pdf.Net.Controls.Wpf.ToolBars;assembly=Patagames.Pdf.Wpf"
+      d:DataContext="{d:DesignInstance vm:ScheduleTypeViewModel, IsDesignTimeCreatable=True}"
 >
       <!--d:DataContext="{d:DesignInstance vm:ScheduleTypeViewModel, IsDesignTimeCreatable=True}"-->
     <UserControl.Resources>
@@ -45,8 +46,12 @@
                             <TextBlock Width="250" TextAlignment="Right" Text="Дата отлова:" FontSize="14" Padding="20,0"
                                Margin="0,20,0,0">
                             </TextBlock>
-                            <DatePicker VerticalAlignment="Bottom" xml:lang="ru-RU" Width="200"  SelectedDate="{Binding Card.Datetrapping}" IsEnabled="{Binding IsEditMode}">
-                                <DatePicker.BlackoutDates/>
+                            <DatePicker VerticalAlignment="Bottom" xml:lang="ru-RU" Width="200"  SelectedDate="{Binding Card.Datetrapping}" IsEnabled="{Binding IsEditMode}"   >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Loaded"  >
+                                        <i:InvokeCommandAction Command="{Binding BlackOutDatesCommand}" PassEventArgsToCommand="True"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                                 <DatePicker.Resources>
                                     <Style TargetType="DatePickerTextBox">
                                         <Setter Property="IsReadOnly" Value="True"/>
@@ -158,8 +163,11 @@
                                 <TextBlock Margin="20,-18,0,0">Удалить файл</TextBlock>
                             </StackPanel>
                         </Button>
-                        <Button FontSize="14" Margin="50, 100"
-                        HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Command="{Binding DownloadPdfFileCommand}" Visibility="{Binding CheckModeDeleteVisibility}">
+                        
+                    </StackPanel>
+                    <StackPanel>
+                        <Button FontSize="14" Margin="200,0" 
+                                Cursor="Hand" Command="{Binding DownloadPdfFileCommand}" Visibility="{Binding CheckModeDeleteVisibility}">
                             <StackPanel>
                                 <Icon:PackIconMaterial Kind="Download" Height="15" Width="15"/>
                                 <TextBlock Margin="20,-18,0,0">Скачать файл</TextBlock>
