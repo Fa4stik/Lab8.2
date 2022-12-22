@@ -2,6 +2,7 @@
 using PIS8_2.Commands.Base;
 using PIS8_2.MVVM.Model.Data;
 using PIS8_2.MVVM.ViewModels;
+using System.IO;
 using System.Windows;
 
 namespace PIS8_2.Commands.Load
@@ -19,12 +20,37 @@ namespace PIS8_2.Commands.Load
 
         public override bool CanExecute(object parameter) => true;
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку "Загрузить"
+        /// </summary>
+        /// <param name="parameter">Собитие или кнопка, которая передаётся</param>
         public override void Execute(object parameter)
         {
-            _scheduleTypeViewModel.Card.IdFileNavigation.Name = _conn.AddFile(_scheduleTypeViewModel.Card);
-            _scheduleTypeViewModel.Card = _scheduleTypeViewModel.Card;
+            var openFileDialog = new OpenFileDialog
+            {
+                Filter = "pdf files (*.pdf)|*.pdf",
+                FilterIndex = 2,
+                RestoreDirectory = true
+            };
+            string fileName = null;
 
-            if (_scheduleTypeViewModel.Card.IdFileNavigation.Name != "Файл не найден")
+            if (openFileDialog.ShowDialog() == true)
+            {
+                var filePath = openFileDialog.FileName;
+                fileName = Path.GetFileName(filePath);
+                var file = System.IO.File.ReadAllBytes(filePath);
+                if (file.Length / (8 * 1024 * 1024) > 2)
+                {
+                    MessageBox.Show("Размер превышает 2 МБ. Загрузите другой файл");
+                }
+                else
+                    _conn.AddFile(_scheduleTypeViewModel.Card.IdFile, fileName, file);
+            }
+
+
+            _scheduleTypeViewModel.Card.IdFileNavigation.Name = fileName;
+            _scheduleTypeViewModel.Card = _scheduleTypeViewModel.Card;
+            if (!string.IsNullOrEmpty(_scheduleTypeViewModel.Card.IdFileNavigation.Name))
                 _scheduleTypeViewModel.CheckModeDeleteVisibility = Visibility.Visible;
         }
     }

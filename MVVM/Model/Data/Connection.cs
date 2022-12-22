@@ -60,38 +60,24 @@ namespace PIS8_2.MVVM.Model.Data
         }
 
         /// <summary>
-        /// Закрепляет файл за выбранной карточкий
+        /// Закрепляет файл за выбранной карточкой
         /// </summary>
-        /// <param name="card">Принимает карточку, за которой необходимо закрепить файл</param>
-        /// <returns></returns>
-        public string AddFile(Card card)
+        /// <param name="idFile">Ид файл, который в карточке</param>
+        /// <param name="fileName">Название файл</param>
+        /// <param name="file">Содержимое файла</param>
+        public void AddFile(int idFile, string fileName, byte[] file)
         {
-
-            var openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "pdf files (*.pdf)|*.pdf";
-            openFileDialog.FilterIndex = 2;
-            openFileDialog.RestoreDirectory = true;
-            string fileName = null;
-
-            if (openFileDialog.ShowDialog() == true)
+            using (var db = new TrappinganimalsContext())
             {
-                var filePath = openFileDialog.FileName;
-                fileName = Path.GetFileName(filePath);
-                var file = System.IO.File.ReadAllBytes(filePath);
-
-                using (var db = new TrappinganimalsContext())
+                var newFile = new FilePdf
                 {
-                    var newFile = new FilePdf()
-                    {
-                        Id = (int)card.IdFile,
-                        Name = fileName,
-                        File = file,
-                    };
-                    db.Files.Update(newFile);
-                    db.SaveChanges();
-                }
+                    Id = idFile,
+                    Name = fileName,
+                    File = file
+                };
+                db.Files.Update(newFile);
+                db.SaveChanges();
             }
-            return fileName == null ? "Файл не найден" : fileName;
         }
 
         /// <summary>

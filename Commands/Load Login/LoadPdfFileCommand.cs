@@ -37,27 +37,11 @@ namespace PIS8_2.Commands
             {
                 return;
             }
-            //var memoryStream = new MemoryStream(file);
             b.LoadDocument(file);
             if (_scheduleTypeViewModel.IsEditMode == true)
             {
                 return;
             }
-            //var a = parameter;
-            //var b = (PdfDocumentViewer)a;
-            //var pdfDocumentViewer = (PdfDocumentViewer)parameter;
-
-            ////var v = (PdfDocumentViewer)b.OriginalSource;
-            ////var c = (PdfDocumentViewer)b.Source;
-            ////var file = _conn.GetFile(_scheduleTypeViewModel.Card.IdFile)!;
-            //if (file == null)
-            //{
-            //    return;
-            //}
-            //var memoryStream = new MemoryStream(file);
-            //pdfDocumentViewer.LoadFromStream(memoryStream);
-            //var a = parameter.GetType();
-            //MessageBox.Show("123123123");
         }
     }
 }
