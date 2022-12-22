@@ -39,12 +39,13 @@ namespace PIS8_2.Commands.Load
                 var filePath = openFileDialog.FileName;
                 fileName = Path.GetFileName(filePath);
                 var file = System.IO.File.ReadAllBytes(filePath);
-                if (file.Length / (8 * 1024 * 1024) > 2)
+                MessageBox.Show(file.Length.ToString());
+                if (file.Length / (1024 * 1024) > 5)
                 {
-                    MessageBox.Show("Размер превышает 2 МБ. Загрузите другой файл");
+                    MessageBox.Show("Размер превышает 5 МБ. Загрузите другой файл");
+                    return;
                 }
-                else
-                    _conn.AddFile(_scheduleTypeViewModel.Card.IdFile, fileName, file);
+                _conn.AddFile(_scheduleTypeViewModel.Card.IdFile, fileName, file);
             }
 
 
