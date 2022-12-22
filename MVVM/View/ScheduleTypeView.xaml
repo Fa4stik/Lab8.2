@@ -163,13 +163,15 @@
                         </Button>
                     </StackPanel>
                 </StackPanel>
-                <my:PdfDocumentViewer Name="pdfDocumentViewer" HorizontalAlignment="Stretch" DockPanel.Dock="Right" Visibility="{Binding CheckModeDeleteVisibility}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="False">
+                    <my:PdfDocumentViewer Name="pdfDocumentViewer" HorizontalAlignment="Stretch" DockPanel.Dock="Right" Visibility="{Binding CheckModeDeleteVisibility}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Loaded" >
-                            <i:InvokeCommandAction Command="{Binding  LoadPdfFileCommand}" CommandParameter="{Binding ElementName=pdfDocumentViewer}" />
+                            <i:InvokeCommandAction Command="{Binding  LoadPdfFileCommand}" CommandParameter="{Binding ElementName=pdfDocumentViewer}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </my:PdfDocumentViewer>
+                </ScrollViewer>
             </DockPanel>
         </ScrollViewer>
     </Grid>

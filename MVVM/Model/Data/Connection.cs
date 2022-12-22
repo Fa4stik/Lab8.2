@@ -294,7 +294,7 @@ namespace PIS8_2.MVVM.Model.Data
             }
         }
 
-        public byte[] GetFile(int id)
+        public byte[]? GetFile(int id)
         {
             using (var db = new TrappinganimalsContext())
             {
