@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PIS8_2.MVVM.Model.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -46,10 +47,17 @@ namespace PIS8_2.MVVM.Model
             StateFilterToDefaultState();
         }
 
+        /// <summary>
+        /// Начальные показатели фильтра при его открытии
+        /// </summary>
         public void StateFilterToDefaultState()
         {
+            using (var db = new TrappinganimalsContext())
+            {
+                EndNummk = db.Cards.Max(c => c.Nummk);
+                EndNumworkorder = db.Cards.Max(c => c.Numworkorder);
+            }
             StartNummk = 0;
-            EndNummk = int.MaxValue;
             StartDatemk=DateTime.Now.AddYears(-3);
             EndDatemk= DateTime.Now.AddYears(1);
             StartAdresstrapping = Empty;
@@ -58,7 +66,6 @@ namespace PIS8_2.MVVM.Model
             StartOrgName = Empty;
             StartLocality= Empty;
             StartNumworkorder = 0;
-            EndNumworkorder = int.MaxValue;
             StartDateworkorder= DateTime.Now.AddYears(-3);
             EndDateworkorder= DateTime.Now.AddYears(1);
             StartDatetrapping = DateTime.Now.AddYears(-3);

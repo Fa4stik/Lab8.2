@@ -23,7 +23,8 @@ namespace PIS8_2.Commands.Load
         {
             _scheduleTypeViewModel.Card.IdFileNavigation.Name = _conn.AddFile(_scheduleTypeViewModel.Card);
             _scheduleTypeViewModel.Card = _scheduleTypeViewModel.Card;
-            if (!string.IsNullOrEmpty(_scheduleTypeViewModel.Card.IdFileNavigation.Name))
+
+            if (_scheduleTypeViewModel.Card.IdFileNavigation.Name != "Файл не найден")
                 _scheduleTypeViewModel.CheckModeDeleteVisibility = Visibility.Visible;
         }
     }

@@ -70,10 +70,9 @@ namespace PIS8_2.MVVM.ViewModels
         public CalendarBlackoutDatesCollection BlackOutTrappingDates
         {
             get => _blackOutTrappingDates;
-            //set => SetField(ref _blackOutTrappingDates, value, "BlackOutTrappingDates");
         }
 
-        private CalendarDateRange _dateRange=new CalendarDateRange();
+        private CalendarDateRange _dateRange = new CalendarDateRange();
 
         private Visibility _moreBoxesVisibility;
         public Visibility MoreBoxesVisibility
@@ -103,15 +102,6 @@ namespace PIS8_2.MVVM.ViewModels
             set => SetField(ref _saveModeVisibility, value, nameof(SaveModeVisibility));
         }
 
-        // Кнопка удалить появляется после загрузкиw
-
-        //private Visibility _checkTypeOrderFromWordExport;
-        //public Visibility CheckTypeOrderFromWordExport;
-        //{
-        //    get => _checkTypeOrderFromWordExport;
-        //    set => SetField(ref _checkTypeOrderFromWordExport, value, nameof(CheckTypeOrderFromWordExport));
-        //}
-
         private Visibility _checkTypeOrderFromWordExport;
         public Visibility CheckTypeOrderFromWordExport
         {
@@ -134,12 +124,9 @@ namespace PIS8_2.MVVM.ViewModels
         public ICommand DownloadFileCommand { get; }
         public ICommand DeleteFileCommand { get; }
         public ICommand DownloadPdfFileCommand { get; }
-        
         public ICommand LoadPdfFileCommand { get; }
         public ICommand OnlyNumbersCommand { get; }
-
         public ICommand BlackOutDatesCommand { get; }
-
 
         public ScheduleTypeViewModel(NavigationStore navigationStore,UserStore userStore, Card selectedCard = null, ICommand openScheduleCardCommand = null)
         {
@@ -184,7 +171,6 @@ namespace PIS8_2.MVVM.ViewModels
                 _card = selectedCard;
             }
 
-
             IsEditEnabled = (userStore.CurrentUser.Role == Tuser.role_type.operOtl);
 
             DownloadPdfFileCommand = new UploadPdfFileCommand(this);
@@ -217,6 +203,9 @@ namespace PIS8_2.MVVM.ViewModels
             Omsus = _conn.GetNamesOMSU();
         }
 
+        /// <summary>
+        /// Необходим для отображения кнопок добавить / редактирвать
+        /// </summary>
         public void ChangeEditMode()
         {
             if (IsEditMode)
@@ -232,6 +221,9 @@ namespace PIS8_2.MVVM.ViewModels
             SaveModeVisibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// Метод отвечает за отображения кнопки сохранить
+        /// </summary>
         public void ChangeSaveMode()
         {
             IsEditMode = false;

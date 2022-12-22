@@ -24,7 +24,6 @@ namespace PIS8_2.MVVM.Model
             set => SetField(ref _direction, value, "Direction");
         }
 
-
         public string DisplayState
         {
             get => GetEnumAndNumberTostring(Direction,NumberSorting);
@@ -34,7 +33,6 @@ namespace PIS8_2.MVVM.Model
             }
         }
 
-        //$"{NumberSorting}{PropetryName}{Direction}"
         public Sorter(int numberSorting,string propetryName, Direction direction=Direction.None)
         {
             NumberSorting=numberSorting;
@@ -42,6 +40,12 @@ namespace PIS8_2.MVVM.Model
             Direction=direction;
         }
 
+        /// <summary>
+        /// Графическая часть сортировки. Отвечает за переключение стрелочек-символов
+        /// </summary>
+        /// <param name="direction">Тип сортировки</param>
+        /// <param name="num">Приоритет сортировки. Приоритетнее та, чей номер меньше</param>
+        /// <returns></returns>
         public string GetEnumAndNumberTostring(Direction direction, int num)
         {
             var resultString = string.Empty;
@@ -58,11 +62,6 @@ namespace PIS8_2.MVVM.Model
             }
             return resultString+num;
         }
-
-
-
-
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 

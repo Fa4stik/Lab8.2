@@ -18,6 +18,7 @@ namespace PIS8_2.Commands
             _navigationService = navigationService;
             _conn=new Connection();
         }
+
         public override bool CanExecute(object parameter) => parameter is LimitedCard;
 
         public override void Execute(object parameter)

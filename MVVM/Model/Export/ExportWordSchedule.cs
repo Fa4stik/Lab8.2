@@ -14,6 +14,11 @@ namespace PIS8_2.MVVM.Model.Export
 {
     internal class ExportWordSchedule
     {
+        /// <summary>
+        /// Генирирует документ .doc (MS Word) по текущей карточки в формате план-графика
+        /// </summary>
+        /// <param name="card">Карточка содержащая план-график</param>
+        /// <returns>Возвращает документ в формате .doc (MS Word)</returns>
         public Document GenerateReport(Card card)
         {
             //Create a Document object
@@ -72,6 +77,10 @@ namespace PIS8_2.MVVM.Model.Export
             return doc;
         }
 
+        /// <summary>
+        /// Сохраняет документ на ПК пользователя в формате .doc (MS Word)
+        /// </summary>
+        /// <param name="doc">Сгенерированный документ карточки план-графика</param>
         public void SaveToWord(Document doc)
         {
             var saveDialog = new Microsoft.Win32.SaveFileDialog();

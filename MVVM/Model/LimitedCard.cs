@@ -11,6 +11,22 @@ namespace PIS8_2.MVVM.Model
 {
     public class LimitedCard : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Конструктор, который принимает ограниченную карточку. Даннный класс необходим для экспорта.
+        /// При дальнейшем расширении карточки (добавлении второстепенных полей) экспорт не будет требовать изменений
+        /// </summary>
+        /// <param name="id">Ид карточки</param>
+        /// <param name="nummk">Номер муниципального контракта</param>
+        /// <param name="datemk">Дата заключения муниципального контракта</param>
+        /// <param name="idMunicipNavigationDotNamemunicip">Навагиация к муниципальному образованию</param>
+        /// <param name="idOmsuNavigationDotNameomsu">Навигация к органу местного самоуправления</param>
+        /// <param name="numworkorder">Номер заказ-наряда</param>
+        /// <param name="locality">Населённый пункт</param>
+        /// <param name="dateworkorder">Дата заключения заказ-наряда</param>
+        /// <param name="datetrapping">Дата отлова</param>
+        /// <param name="targetorder">Цель отлова</param>
+        /// <param name="typeOrder">Тип заказ-наряда</param>
+        /// <param name="idOrgNavigationDotNameorg">Навигация к организации</param>
         public LimitedCard(int id, int nummk, DateTime datemk, string idMunicipNavigationDotNamemunicip, string idOmsuNavigationDotNameomsu, int numworkorder, string locality, DateTime dateworkorder, DateTime datetrapping, string targetorder, order_type typeOrder, string idOrgNavigationDotNameorg)
         {
             Id = id;
@@ -40,12 +56,6 @@ namespace PIS8_2.MVVM.Model
 
         public string IdOmsuNavigationDOTNameomsu { get; set; }
         public string IdOrgNavigationDOTNameorg { get; set; }
-
-        //public virtual Municip IdMunicipNavigation { get; set; }
-
-        //public virtual Omsu IdOmsuNavigation { get; set; }
-
-        //public virtual Organisation IdOrgNavigation { get; set; }
         public int Numworkorder { get; set; }
 
         public string Locality { get; set; }
@@ -70,16 +80,5 @@ namespace PIS8_2.MVVM.Model
             OnPropertyChanged(propertyName);
             return true;
         }
-        //<DataGridTextColumn Header = "Номер МК" Binding="{Binding Nummk}" IsReadOnly="True" />
-        //<DataGridTextColumn Header = "Дата заключения МК" Binding="{Binding Datemk}" IsReadOnly="True"/>
-        //<DataGridTextColumn Header = "Мун. обр." Binding="{Binding IdMunicipNavigation.IdMunicipNavigationDOTNamemunicip}"  IsReadOnly="True" />
-        //<DataGridTextColumn Header = "ОМСУ" Binding="{Binding IdOmsuNavigation.IdOmsuNavigationDOTNameomsu}"  IsReadOnly="True" />
-        //<DataGridTextColumn Header = "Исполнитель МК" Binding="{Binding IdOrgNavigation.IdOrgNavigationDOTNameorg}" IsReadOnly="True" />
-        //<DataGridTextColumn Header = "Номер заказ-наряда" Binding="{Binding Numworkorder}" IsReadOnly="True" /> 
-        //<DataGridTextColumn Header = "Населённый пункт" Binding="{Binding Locality}" IsReadOnly="True" />
-        //<DataGridTextColumn Header = "Дата выдачи заказ-наряда" Binding="{Binding Datetrapping}" IsReadOnly="True" />
-        //<DataGridTextColumn Header = "Дата отлова" Binding="{Binding Dateworkorder}" IsReadOnly="True" />
-        //<DataGridTextColumn Header = "Цель отлова" Binding="{Binding Targetorder}" IsReadOnly="True" />
-        //<DataGridTextColumn Header = "Тип отлова" Binding="{Binding TypeOrder}" IsReadOnly="True" />
     }
 }

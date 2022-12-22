@@ -7,6 +7,7 @@
       xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:components="clr-namespace:PasswordBoxMVVM.Components"
       mc:Ignorable="d" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid Margin="0,0,3.6,-2">
@@ -53,7 +54,6 @@
                         <TextBlock x:Name="textBlock" Text="Пароль" FontSize="16" Margin="0,0,0,10"/>
                         <components:BindablePasswordBox x:Name="Password"
                                                         Padding="30,0,0,0"
-                                                        Height="23.28"
                                                         BorderThickness="0,0,0,2"
                                                         BorderBrush="DodgerBlue"
                                                         Width="250"

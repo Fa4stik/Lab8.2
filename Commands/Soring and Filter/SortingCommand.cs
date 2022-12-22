@@ -10,7 +10,10 @@ namespace PIS8_2.Commands
     class SortingCommand:Command
     {
         private readonly ReestrViewModel _viewModel;
-
+        /// <summary>
+        /// Этот конструктор принимает текущую viewModel и инициализирует его
+        /// </summary>
+        /// <param name="viewModel">Текущий реестр</param>
         public SortingCommand(ReestrViewModel viewModel)
         {
             _viewModel = viewModel;
@@ -18,6 +21,10 @@ namespace PIS8_2.Commands
 
         public override bool CanExecute(object parameter)=>true;
 
+        /// <summary>
+        /// Метод отвечает за сортировку выбранного столбца
+        /// </summary>
+        /// <param name="parameter">Выбранный столбец</param>
         public override void Execute(object parameter)
         {
             var dataGridSortingEventArgs = (DataGridSortingEventArgs)parameter;
@@ -49,21 +56,6 @@ namespace PIS8_2.Commands
 
 
             _viewModel.UpdateReestr.Execute(null);
-            //else
-            //{
-            //    var sorter = new Sorter(_viewModel.SortingList.Count + 1, column.SortMemberPath, Direction.Ascending);
-            //    _viewModel.SortingList.Add(sorter);
-            //    //dataGridSortingEventArgs.Column.Header += $" ▲ {_viewModel.SortingList.Count}";
-
-            //}
-            
-            
-
-            //_viewModel.SortingList.Add(c);
-            //var r = c.Column.SortDirection;
-            //var t = c.Column;
-            //var b = parameter.GetType();
-
         }
 
         private void UpdateDisplayState()

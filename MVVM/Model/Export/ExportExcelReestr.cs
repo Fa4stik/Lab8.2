@@ -15,6 +15,13 @@ namespace PIS8_2.MVVM.Model.ExportExcel
 {
     internal class ExportExcelReestr
     {
+        /// <summary>
+        /// Метод генерирует документ в формате .xls (MS Excel) с переданными параметрыми
+        /// </summary>
+        /// <param name="user">Текущий пользователь, необходим для фильра</param>
+        /// <param name="filter">Параметры фильтра реестра</param>
+        /// <param name="sorterParams">Параметры сортировки столбцов реестра</param>
+        /// <returns>Возвращает документ в формате .xls с применёнными фильтрами / сортировкой</returns>
         public byte[] GenerateReport(Tuser user, FilterModel filter, List<Sorter> sorterParams)
         {
             var card = new Connection().ExecuteCardsWithFilter(user, filter, sorterParams);
@@ -66,6 +73,10 @@ namespace PIS8_2.MVVM.Model.ExportExcel
             styleHeader.Border.Right.Style = ExcelBorderStyle.Thin;
         }
 
+        /// <summary>
+        /// Сохраняет сгенерированный документ на ПК текущего пользователя
+        /// </summary>
+        /// <param name="reportExcel">Сгенированный документ в форма .xls (MS Excel)</param>
         public void SaveToExcel(byte[] reportExcel)
         {
             var saveDialog = new Microsoft.Win32.SaveFileDialog();

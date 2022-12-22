@@ -95,7 +95,6 @@ namespace PIS8_2.MVVM.ViewModels
         };
 
         public ICommand ExitCommand { get; }
-        public ICommand AddRequestCommand { get; }
         public ICommand AddScheduleCommand { get; }
         public ICommand UpdateReestr { get; }
         public ICommand OpenScheduleCardCommand { get; }
@@ -134,12 +133,6 @@ namespace PIS8_2.MVVM.ViewModels
             ExitCommand =
                 new ExitCommand(new NavigationService<LoginViewModel>(navigationStore,
                     () => new LoginViewModel(navigationStore, userStore)));
-            //AddScheduleCommand =
-            //    new AddScheduleTypeCommand(new NavigationService<ScheduleTypeViewModel>(navigationStore,
-            //        () => new ScheduleTypeViewModel(navigationStore)));
-            AddRequestCommand =
-                new AddRequestTypeCommand(new NavigationService<RequestTypeViewModel>(navigationStore,
-                    () => new RequestTypeViewModel(navigationStore,userStore)));
 
             ExportExcelCommand = new ExportExcelCommand(this, userStore);
 

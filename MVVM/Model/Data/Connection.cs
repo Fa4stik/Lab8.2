@@ -9,12 +9,20 @@ using System.Windows;
 using Microsoft.Win32;
 using System.IO;
 using Expression = System.Linq.Expressions.Expression;
+using PIS8_2.MVVM.ViewModels;
+using System.Windows.Controls;
 
 namespace PIS8_2.MVVM.Model.Data
 {
     public class Connection
     {
-        //достаем из бд юзера или return null 
+        /// <summary>
+        /// Авторизует пользователя по его логину и паролю
+        /// </summary>
+        /// <param name="login">Логин пользователя</param>
+        /// <param name="password">Пароль пользователя</param>
+        /// <returns>Возвращает все данные пользователя для отображения реестра. 
+        /// Если введён неверный логин / пароль, то возвращает <param name="null"></param></returns>
         public Tuser ExecuteUser(string login, string password)
         {
             var hashPassword = HashPassword(password);
@@ -25,31 +33,21 @@ namespace PIS8_2.MVVM.Model.Data
             }
         }
 
+        /// <summary>
+        /// Хэширует полученный пароль
+        /// </summary>
+        /// <param name="password">Пароль в стороковом формате</param>
+        /// <returns></returns>
         private static string HashPassword(string password)
         {
             byte[] bytes = Encoding.UTF8.GetBytes(password);
             return Convert.ToHexString(SHA256.HashData(bytes)).ToLower();
         }
 
-        //public IEnumerable<Card> ExecuteCards(Tuser user)
-        //{
-        //    //поправить
-        //    //var id = user.IdOrg ?? GetMunicip(user.IdOmsu);
-        //    using (var db = new TrappinganimalsContext())
-        //    {
-               
-        //        return db.Cards
-        //            .Include(c => c.IdOrgNavigation)
-        //            .Include(c => c.IdMunicipNavigation)
-        //            .Include(c => c.IdOmsuNavigation)
-        //            .Where(c => c.IdOrg == user.IdOrg)
-        //            .ToList()
-        //            //.Where(c=>c.AccessRoles.Contains(user.Role))
-        //            .ToList();
-        //    }
-
-        //}
-
+        /// <summary>
+        /// Удаляет содержимое файла и его название из сущности "Файл"
+        /// </summary>
+        /// <param name="card">Карточка, из которой необходимо удалить файл</param>
         public void DeleteFile(Card card)
         {
             using (var db = new TrappinganimalsContext())
@@ -61,6 +59,11 @@ namespace PIS8_2.MVVM.Model.Data
             }
         }
 
+        /// <summary>
+        /// Закрепляет файл за выбранной карточкий
+        /// </summary>
+        /// <param name="card">Принимает карточку, за которой необходимо закрепить файл</param>
+        /// <returns></returns>
         public string AddFile(Card card)
         {
 
@@ -91,6 +94,10 @@ namespace PIS8_2.MVVM.Model.Data
             return fileName == null ? "Файл не найден" : fileName;
         }
 
+        /// <summary>
+        /// Сохраняет на компьютер пользователя pdf-файл, который закреплён за карточкой
+        /// </summary>
+        /// <param name="card">Принимает карточку, для которой необходимо скачать файл</param>
         public void DonwloadFilePdf(Card card)
         {
             var saveDialog = new Microsoft.Win32.SaveFileDialog();
@@ -140,9 +147,6 @@ namespace PIS8_2.MVVM.Model.Data
 
                 }
 
-
-
-
                 var sorteredCards = (IOrderedQueryable<Card>)cards;
                 if (sorterParams != null && sorterParams.All(x => x.NumberSorting == 0)) return sorteredCards.ToList();
                 {
@@ -158,12 +162,17 @@ namespace PIS8_2.MVVM.Model.Data
                         };
                     }
                 }
-
-
                 return sorteredCards.ToList();
             }
         }
 
+        /// <summary>
+        /// Добавляет запись в таблицу "Журналирования" БД, 
+        /// которая соответсвует дествию пользователя
+        /// </summary>
+        /// <param name="user">Текущий пользователь</param>
+        /// <param name="card">Выбранная / текущая карточка</param>
+        /// <param name="operation">Дествие пользователя</param>
         public void Journaling(Tuser user, Card card, Log.operation operation)
         {
             using (var db = new TrappinganimalsContext())
@@ -181,15 +190,12 @@ namespace PIS8_2.MVVM.Model.Data
             }
         }
 
-        public int GetMunicip(int idOmsu)
-        {
-            using (var db = new TrappinganimalsContext())
-            {
-               
-                return db.Municips.First(m => m.Id == idOmsu).Id;
-            }
-        }
-
+        /// <summary>
+        /// Устанавливает навигацию с внешними ключами и находит первую карточку, 
+        /// которая соответсвует полученному id
+        /// </summary>
+        /// <param name="id">Является ключом в сущности "Карточки"</param>
+        /// <returns>Возвращает все данные карточки по полученному id</returns>
         public Card ExecuteCardId(int id)
         {
             using (var db = new TrappinganimalsContext())
@@ -204,17 +210,28 @@ namespace PIS8_2.MVVM.Model.Data
             }
         }
 
+        /// <summary>
+        /// Изменяет полученную карточку, 
+        /// в соответствии с полученными данными
+        /// </summary>
+        /// <param name="newCard">Карточка, которую пользователь изменил</param>
+        /// <param name="user">Текущий пользователь</param>
         public void EditCard(Card newCard, Tuser user)
         {
             using (var db = new TrappinganimalsContext())
             {
                 db.Cards.Update(newCard);
                 db.SaveChanges();
-                
             }
             Journaling(user, newCard, Log.operation.editCard);
         }
 
+        /// <summary>
+        /// Создаёт новую карточку, заполняет её введёнными данными 
+        /// и добавляет в сущность "Карточки"
+        /// </summary>
+        /// <param name="_card">Заполненная карточка</param>
+        /// <param name="_user">Текущий пользователь</param>
         public void AddCard(Card _card, Tuser _user)
         {
             using (var db = new TrappinganimalsContext())
@@ -227,17 +244,13 @@ namespace PIS8_2.MVVM.Model.Data
                     .Select(c => c.Id)
                     .DefaultIfEmpty()
                     .Max() + 1;
-                // Муниципальное образование
-                // _card.IdMunicip = card.FirstOrDefault(c => c.IdMunicipNavigation.Namemunicip == _card.IdMunicipNavigation.Namemunicip).IdMunicipNavigation.Id;
+
                 _card.IdMunicip = municips.FirstOrDefault(c => c.Namemunicip == _card.IdMunicipNavigation.Namemunicip)!.Id;
                 _card.IdMunicipNavigation = municips.FirstOrDefault(c => c.Id == _card.IdMunicip);
 
-                // ОМСУ
-                //_card.IdOmsu = card.FirstOrDefault(c => c.IdOmsuNavigation.Nameomsu == _card.IdOmsuNavigation.Nameomsu).IdOmsuNavigation.Id;
                 _card.IdOmsu = omsu.FirstOrDefault(c => c.Nameomsu == _card.IdOmsuNavigation.Nameomsu)!.Id;
                 _card.IdOmsuNavigation = omsu.FirstOrDefault(c => c.Id == _card.IdOmsu);
 
-                // Организация
                 _card.IdOrg = _user.IdOrg.Value;
                 _card.IdOrgNavigation = orgs.FirstOrDefault(c => c.Id == _card.IdOrg);
 
@@ -245,13 +258,6 @@ namespace PIS8_2.MVVM.Model.Data
                 _card.Numworkorder = numWordOrder;
                 _card.TypeOrder = Card.order_type.schedule;
                 _card.AccessRoles = new role_type[] { _user.Role };
-
-                //string text = "";
-                //foreach (var item in _card.GetType().GetProperties())
-                //{
-                //    text += item.Name + @" \ " + item.GetValue(_card) + "\n";
-                //}
-                //MessageBox.Show(text);
 
                 var id = db.Files
                     .Select(c => c.Id)
@@ -274,6 +280,11 @@ namespace PIS8_2.MVVM.Model.Data
             Journaling(_user, _card, Log.operation.addCardReestr);
         }
 
+        /// <summary>
+        /// Обращается к сущности "Муниципальное образование" и 
+        /// после проходится по всем названиям
+        /// </summary>
+        /// <returns>Возвращает названия всех муниципальных образований</returns>
         public List<string> GetNamesMunicip()
         {
             using (var db = new TrappinganimalsContext())
@@ -284,6 +295,11 @@ namespace PIS8_2.MVVM.Model.Data
             }
         }
 
+        /// <summary>
+        /// Обращается к сущности "Орган местного самоуправления", 
+        /// где проходится по всем названиям
+        /// </summary>
+        /// <returns>Возвращает список всех названий органа местного самоуправления</returns>
         public List<string> GetNamesOMSU()
         {
             using (var db = new TrappinganimalsContext())
@@ -294,6 +310,11 @@ namespace PIS8_2.MVVM.Model.Data
             }
         }
 
+        /// <summary>
+        /// Обращается к сущности "Файлы", где находит соответсвующий файл
+        /// </summary>
+        /// <param name="id">Номер выбранного файла</param>
+        /// <returns>Возвращает выбранный файл (в виде массива байт)</returns>
         public byte[]? GetFile(int id)
         {
             using (var db = new TrappinganimalsContext())
@@ -307,6 +328,11 @@ namespace PIS8_2.MVVM.Model.Data
             }
         }
 
+        /// <summary>
+        /// Метод ищет даты, на которые уже запланирован отлов. Поиск происходит по карточкам
+        /// </summary>
+        /// <param name="idOrg">Принимает id организации текущего пользователя</param>
+        /// <returns>Возвращает список дат, на которые запланирован отлов</returns>
         public List<DateTime>? GetBlackOutDates(int? idOrg)
         {
             if (idOrg == null) return null;
@@ -316,6 +342,11 @@ namespace PIS8_2.MVVM.Model.Data
             }
         }
 
+        /// <summary>
+        /// Удаляет карточки из реестра по полученным id
+        /// </summary>
+        /// <param name="idCards">id удаляемоых карточек</param>
+        /// <param name="user">Пользователь, которые совершает удаление</param>
         public void DeleteCards(int[] idCards, Tuser user)
         {
             using (var db = new TrappinganimalsContext())
@@ -332,8 +363,6 @@ namespace PIS8_2.MVVM.Model.Data
     }
 }
 
-
-//Вынести куда-то
 public static class IQueryableExtensions
 {
     public static IOrderedQueryable<T> OrderBy<T>(this IQueryable<T> query, string propertyName, IComparer<object> comparer = null)
