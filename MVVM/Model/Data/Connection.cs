@@ -309,6 +309,15 @@ namespace PIS8_2.MVVM.Model.Data
             }
         }
 
+        public byte[] GetFile(int id)
+        {
+            using (var db = new TrappinganimalsContext())
+            {
+                return db.Files.FirstOrDefault(c => c.Id == id)!.File;
+            }
+        }
+
+
         public void DeleteCards(int[] idCards, Tuser user)
         {
             using (var db = new TrappinganimalsContext())

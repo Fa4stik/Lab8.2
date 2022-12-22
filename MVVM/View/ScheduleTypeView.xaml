@@ -127,7 +127,13 @@
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,-170, 0, 0">
                         <Button FontSize="14" Margin="50, 100"
-                         Command="{Binding DownloadFileCommand}" Cursor="Hand" Visibility="{Binding BoxesMenuItemsVisibility}">
+                          Cursor="Hand" Visibility="{Binding BoxesMenuItemsVisibility}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click" >
+                                    <i:InvokeCommandAction Command="{Binding DownloadFileCommand}"/>
+                                    <i:InvokeCommandAction Command="{Binding LoadPdfFileCommand}" CommandParameter="{Binding ElementName=pdfDocumentViewer}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                             <StackPanel>
                                 <Icon:PackIconMaterial Kind="Upload" Height="15" Width="15"/>
                                 <TextBlock Margin="20,-18,0,0">Загрузить файл</TextBlock>
@@ -136,7 +142,13 @@
                         <Label Content="{Binding Card.IdFileNavigation.Name, Converter={StaticResource ConverterNullFileToString}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0, 100" Visibility="{Binding BoxesMenuItemsVisibility}">
                         </Label>
                         <Button FontSize="14" Margin="50, 100"
-                        HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Command="{Binding DeleteFileCommand}" Visibility="{Binding CheckModeDeleteVisibility}">
+                        HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand"  Visibility="{Binding CheckModeDeleteVisibility}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click" >
+                                    <i:InvokeCommandAction Command="{Binding DeleteFileCommand}"/>
+                                    <i:InvokeCommandAction Command="{Binding LoadPdfFileCommand}" CommandParameter="{Binding ElementName=pdfDocumentViewer}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                             <StackPanel>
                                 <Icon:PackIconMaterial Kind="Delete" Height="15" Width="15"/>
                                 <TextBlock Margin="20,-18,0,0">Удалить файл</TextBlock>
@@ -151,9 +163,14 @@
                         </Button>
                     </StackPanel>
                 </StackPanel>
-                <my:PdfDocumentViewer Name="pdfDocumentViewer1" HorizontalAlignment="Stretch" DockPanel.Dock="Right"></my:PdfDocumentViewer>
+                <my:PdfDocumentViewer Name="pdfDocumentViewer" HorizontalAlignment="Stretch" DockPanel.Dock="Right" Visibility="{Binding CheckModeDeleteVisibility}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Loaded" >
+                            <i:InvokeCommandAction Command="{Binding  LoadPdfFileCommand}" CommandParameter="{Binding ElementName=pdfDocumentViewer}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </my:PdfDocumentViewer>
             </DockPanel>
-
         </ScrollViewer>
     </Grid>
     
