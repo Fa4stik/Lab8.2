@@ -133,8 +133,9 @@ namespace PIS8_2.MVVM.ViewModels
         public ICommand DownloadFileCommand { get; }
         public ICommand DeleteFileCommand { get; }
         public ICommand DownloadPdfFileCommand { get; }
-
         
+        public ICommand LoadPdfFileCommand { get; }
+
 
         public ScheduleTypeViewModel(NavigationStore navigationStore,UserStore userStore, Card selectedCard = null, ICommand openScheduleCardCommand = null)
         {
@@ -191,6 +192,8 @@ namespace PIS8_2.MVVM.ViewModels
             DownloadFileCommand = new DownloadFileCommand(this);
 
             DeleteFileCommand = new DeleteFileCommand(this);
+
+            LoadPdfFileCommand=new LoadPdfFileCommand(this);
 
             _conn = new Connection();
             Municips = _conn.GetNamesMunicip();
