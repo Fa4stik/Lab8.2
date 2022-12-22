@@ -6,7 +6,18 @@
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove=".vs\PIS8_2\**" />
+    <Compile Remove="obj\**" />
+    <EmbeddedResource Remove=".vs\PIS8_2\**" />
+    <EmbeddedResource Remove="obj\**" />
+    <None Remove=".vs\PIS8_2\**" />
+    <None Remove="obj\**" />
+    <Page Remove=".vs\PIS8_2\**" />
+    <Page Remove="obj\**" />
+  </ItemGroup>
   <ItemGroup>
     <None Remove="MVVM\View\icons\key-icon.png" />
     <None Remove="MVVM\View\icons\user-icon.png" />
@@ -14,6 +25,7 @@
     <None Remove="MVVM\View\user-icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".vs\slnx.sqlite" />
     <None Include="bin\Debug\PIS8_2.exe.config" />
   </ItemGroup>
   <ItemGroup>
@@ -57,5 +69,18 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 </Project>

@@ -7,16 +7,11 @@
       xmlns:vm="clr-namespace:PIS8_2.MVVM.ViewModels" 
       xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:con="clr-namespace:PIS8_2.Converters" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-      xmlns:my="clr-namespace:Spire.PdfViewer.Wpf;assembly=Spire.PdfViewer.Wpf"
-      xmlns:df="clr-namespace:Patagames;assembly=Patagames.Pdf.Wpf"
-      xmlns:pdf="clr-namespace:Patagames.Pdf;assembly=Patagames.Pdf"
       mc:Ignorable="d" d:DesignWidth="1980"
       xmlns:Wpf="clr-namespace:Patagames.Pdf.Net.Controls.Wpf;assembly=Patagames.Pdf.Wpf"
       xmlns:toolBars="clr-namespace:Patagames.Pdf.Net.Controls.Wpf.ToolBars;assembly=Patagames.Pdf.Wpf"
-      d:DataContext="{d:DesignInstance vm:ScheduleTypeViewModel, IsDesignTimeCreatable=True}"
-             
-
-    >
+>
+      <!--d:DataContext="{d:DesignInstance vm:ScheduleTypeViewModel, IsDesignTimeCreatable=True}"-->
     <UserControl.Resources>
         <con:InverseBooleanConverter x:Key="InverseBoolean" />
         <con:ConverterNullFileToString x:Key="ConverterNullFileToString" />

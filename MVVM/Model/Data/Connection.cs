@@ -55,8 +55,8 @@ namespace PIS8_2.MVVM.Model.Data
             using (var db = new TrappinganimalsContext())
             {
                 var file = db.Files.FirstOrDefault(f => f.Id == card.IdFile);
-                file.Name = null;
-                file.File = null;
+                file!.Name = null;
+                file!.File = null;
                 db.SaveChanges();
             }
         }
