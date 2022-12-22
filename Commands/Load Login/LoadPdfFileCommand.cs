@@ -1,23 +1,18 @@
 ﻿using PIS8_2.Commands.Base;
 using PIS8_2.MVVM.Model.Data;
 using PIS8_2.MVVM.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PIS8_2.Commands
+namespace PIS8_2.Commands.Load
 {
-    internal class DownloadPdfFileCommand : Command
+    internal class LoadPdfFileCommand : Command
     {
         private readonly ScheduleTypeViewModel _scheduleTypeViewModel;
         private readonly Connection _conn;
 
-        public DownloadPdfFileCommand(ScheduleTypeViewModel scheduleTypeViewModel)
+        public LoadPdfFileCommand(ScheduleTypeViewModel scheduleTypeViewModel, Connection conn)
         {
             _scheduleTypeViewModel = scheduleTypeViewModel;
-            _conn = new Connection();
+            _conn = conn;
         }
 
         public override bool CanExecute(object parameter)
@@ -27,7 +22,7 @@ namespace PIS8_2.Commands
 
         public override void Execute(object parameter)
         {
-            _conn.DonwloadFilePdf(_scheduleTypeViewModel.Card);
+
         }
     }
 }

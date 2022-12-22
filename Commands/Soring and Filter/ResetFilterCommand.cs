@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PIS8_2.Commands.Base;
+﻿using PIS8_2.Commands.Base;
 using PIS8_2.MVVM.ViewModels;
 
 namespace PIS8_2.Commands

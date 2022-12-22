@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Windows.Documents;
-using System.Windows;
+﻿using System.Windows;
 using HorizontalAlignment = Spire.Doc.Documents.HorizontalAlignment;
 using Spire.Doc;
 using Document = Spire.Doc.Document;

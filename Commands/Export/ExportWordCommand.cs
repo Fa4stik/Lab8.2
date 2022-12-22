@@ -1,14 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Internal;
-using PIS8_2.Commands.Base;
+﻿using PIS8_2.Commands.Base;
 using PIS8_2.MVVM.Model.Export;
 using PIS8_2.MVVM.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PIS8_2.Commands
+namespace PIS8_2.Commands.Export
 {
     internal class ExportWordCommand : Command
     {

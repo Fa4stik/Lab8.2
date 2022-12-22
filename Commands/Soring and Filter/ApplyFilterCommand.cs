@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Logical;
+﻿using System.Windows;
 using PIS8_2.Commands.Base;
 using PIS8_2.MVVM.Model;
-using PIS8_2.MVVM.Model.Data;
 using PIS8_2.MVVM.ViewModels;
 using PIS8_2.Stores;
 

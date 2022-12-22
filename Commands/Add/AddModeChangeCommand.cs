@@ -1,23 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PIS8_2.Commands.Base;
+﻿using PIS8_2.Commands.Base;
 using PIS8_2.Converters;
 using PIS8_2.MVVM.Model;
 using PIS8_2.MVVM.Model.Data;
-using PIS8_2.MVVM.ViewModels;
 using PIS8_2.Stores;
 using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.ServiceModel.Channels;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using static PIS8_2.MVVM.Model.Tuser;
 
-namespace PIS8_2.Commands
+namespace PIS8_2.Commands.Add
 {
     internal class AddModeChangeCommand : Command
     {

@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data.Common;
-using System.Data.Entity.Infrastructure.Interception;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using static PIS8_2.MVVM.Model.Card;

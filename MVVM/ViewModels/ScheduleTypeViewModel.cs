@@ -3,18 +3,18 @@ using PIS8_2.Service;
 using PIS8_2.Stores;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using PIS8_2.MVVM.Model;
-using System.Windows.Data;
 using PIS8_2.MVVM.Model.Data;
 using System.Windows;
 using System.Windows.Controls;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 using Spire.PdfViewer.Wpf;
 using Microsoft.Win32;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
+using PIS8_2.Commands.Load;
+using PIS8_2.Commands.Export;
+using PIS8_2.Commands.Add;
 
 namespace PIS8_2.MVVM.ViewModels
 {
@@ -95,6 +95,29 @@ namespace PIS8_2.MVVM.ViewModels
             set => SetField(ref _checkModeDeleteVisibility, value, nameof(CheckModeDeleteVisibility));
         }
 
+        private Visibility _saveModeVisibility;
+        public Visibility SaveModeVisibility
+        {
+            get => _saveModeVisibility;
+            set => SetField(ref _saveModeVisibility, value, nameof(SaveModeVisibility));
+        }
+
+        // Кнопка удалить появляется после загрузкиw
+
+        //private Visibility _checkTypeOrderFromWordExport;
+        //public Visibility CheckTypeOrderFromWordExport;
+        //{
+        //    get => _checkTypeOrderFromWordExport;
+        //    set => SetField(ref _checkTypeOrderFromWordExport, value, nameof(CheckTypeOrderFromWordExport));
+        //}
+
+        private Visibility _checkTypeOrderFromWordExport;
+        public Visibility CheckTypeOrderFromWordExport
+        {
+            get => _checkTypeOrderFromWordExport;
+            set => SetField(ref _checkTypeOrderFromWordExport, value, nameof(CheckTypeOrderFromWordExport));
+        }
+
         private bool _isEditEnabled;
         public bool IsEditEnabled
         {
@@ -119,7 +142,9 @@ namespace PIS8_2.MVVM.ViewModels
             {
                 ChangeEditMode();
                 MoreBoxesVisibility = Visibility.Visible;
+                SaveModeVisibility = Visibility.Hidden;
                 BoxesMenuItemsVisibility = Visibility.Collapsed;
+                CheckTypeOrderFromWordExport = Visibility.Collapsed;
                 CheckModeDeleteVisibility = Visibility.Collapsed;
                 _card = new Card() {
                     IdMunicipNavigation = new Municip(),
@@ -136,21 +161,26 @@ namespace PIS8_2.MVVM.ViewModels
                     CheckModeDeleteVisibility = Visibility.Collapsed;
                 else
                     CheckModeDeleteVisibility = Visibility.Visible;
-
+                if (selectedCard.TypeOrder == Card.order_type.workOrder)
+                    CheckTypeOrderFromWordExport = Visibility.Collapsed;
+                else
+                    CheckTypeOrderFromWordExport = Visibility.Visible;
                 MoreBoxesVisibility = Visibility.Collapsed;
+                SaveModeVisibility = Visibility.Hidden;
                 BoxesMenuItemsVisibility = Visibility.Visible;
                 _card = selectedCard;
             }
 
             IsEditEnabled = (userStore.CurrentUser.Role == Tuser.role_type.operOtl);
 
-            DownloadPdfFileCommand = new DownloadPdfFileCommand(this);
+            DownloadPdfFileCommand = new UploadPdfFileCommand(this);
 
             BackToReestrCommand =
                 new BackToReestrCommand(new NavigationService<ReestrViewModel>(navigationStore,
                     () => new ReestrViewModel(userStore, navigationStore)));
 
             ExportWordCommand = new ExportWordCommand(this);
+
             EditModeChangeCommand = new EditModeChangeCommand(this);
 
             SaveModeShangeCommand = new SaveModeChangeCommand(this, userStore, new NavigationService<ReestrViewModel>(navigationStore,
@@ -169,8 +199,17 @@ namespace PIS8_2.MVVM.ViewModels
 
         public void ChangeEditMode()
         {
-            IsEditMode = true;
-            IsReadOnly = false;
+            if (IsEditMode)
+            {
+                IsEditMode = false;
+                IsReadOnly = true;
+            }
+            else
+            {
+                IsEditMode = true;
+                IsReadOnly = false;
+            }
+            SaveModeVisibility = Visibility.Visible;
         }
 
         public void ChangeSaveMode()

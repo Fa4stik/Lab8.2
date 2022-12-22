@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using PIS8_2.Commands;
-using PIS8_2.Commands.Base;
+using PIS8_2.Commands.Add;
+using PIS8_2.Commands.Export;
 using PIS8_2.MVVM.Model;
-using PIS8_2.MVVM.Model.Data;
 using PIS8_2.Service;
 using PIS8_2.Stores;
 

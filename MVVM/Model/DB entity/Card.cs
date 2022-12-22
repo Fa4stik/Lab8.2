@@ -1,9 +1,7 @@
 ﻿using NpgsqlTypes;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Windows.Navigation;
 using static PIS8_2.MVVM.Model.Tuser;
 
 namespace PIS8_2.MVVM.Model;
