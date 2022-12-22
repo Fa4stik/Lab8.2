@@ -113,7 +113,7 @@ namespace PIS8_2.MVVM.ViewModels
         public bool IsEditEnabled
         {
             get => _isEditEnabled;
-            set => SetField(ref _isEditEnabled, value, nameof(CheckModeDeleteVisibility));
+            set => SetField(ref _isEditEnabled, value, nameof(IsEditEnabled));
         }
 
         public ICommand BackToReestrCommand { get; }
@@ -133,7 +133,10 @@ namespace PIS8_2.MVVM.ViewModels
         {
             _conn = new Connection();
 
+            
+
             TypeCardVisibility(userStore, selectedCard);
+            
 
             IsEditEnabled = (userStore.CurrentUser.Role == Tuser.role_type.operOtl);
 
@@ -176,10 +179,14 @@ namespace PIS8_2.MVVM.ViewModels
         private void TypeCardVisibility(UserStore userStore, Card selectedCard)
         {
             var freeDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
-            while (_conn.GetBlackOutDates(userStore.CurrentUser.IdOrg).Contains(freeDate))
+            if (userStore.CurrentUser.IdOrg!=null)
             {
-                freeDate = freeDate.AddDays(1);
+                while (_conn.GetBlackOutDates(userStore.CurrentUser.IdOrg).Contains(freeDate))
+                {
+                    freeDate = freeDate.AddDays(1);
+                }
             }
+            
 
             if (selectedCard == null) // Добавление карточки
             {
@@ -213,6 +220,13 @@ namespace PIS8_2.MVVM.ViewModels
                 SaveModeVisibility = Visibility.Hidden;
                 BoxesMenuItemsVisibility = Visibility.Visible;
                 _card = selectedCard;
+            }
+            if (userStore.CurrentUser.IdOrg==null)
+            {
+                BoxesMenuItemsVisibility= Visibility.Collapsed;
+                CheckModeDeleteVisibility = Visibility.Collapsed;
+                MoreBoxesVisibility = Visibility.Collapsed;
+
             }
         }
 

@@ -25,11 +25,12 @@ namespace PIS8_2.MVVM.Model.Data
         /// Если введён неверный логин / пароль, то возвращает <param name="null"></param></returns>
         public Tuser ExecuteUser(string login, string password)
         {
+            if (string.IsNullOrEmpty(password)) return null!;
             var hashPassword = HashPassword(password);
             using (var db = new TrappinganimalsContext())
             {
                 var user = db.Tusers.Include(c => c.IdOrgNavigation).Include(c=>c.IdOmsuNavigation.IdMunicipNavigation).ToList();
-                return user.FirstOrDefault(u => u.Login == login && u.Passwordhash == hashPassword);
+                return user.FirstOrDefault(u => u.Login == login && u.Passwordhash == hashPassword)!;
             }
         }
 
@@ -110,8 +111,16 @@ namespace PIS8_2.MVVM.Model.Data
                     .Include(c => c.IdMunicipNavigation)
                     .Include(c => c.IdOmsuNavigation)
                     .Include(c => c.IdFileNavigation)
-                    .Where(c => c.IdOrg == user.IdOrg)
                     .Where(c => c.AccessRoles.ToList().Contains(user.Role));
+
+                if (user.IdOmsu==null)
+                {
+                    cards = cards.Where(c => c.IdOrg == user.IdOrg);
+                }
+                else if(user.IdOrg==null)
+                {
+                    cards = cards.Where(c => c.IdOmsu == user.IdOmsu);
+                }
                 if (filter != null)
                 {
                     cards = cards

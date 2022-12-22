@@ -16,6 +16,7 @@
     <UserControl.Resources>
         <con:InverseBooleanConverter x:Key="InverseBoolean" />
         <con:ConverterNullFileToString x:Key="ConverterNullFileToString" />
+        <con:ReverseVisibilityConverter x:Key="ReverseVisibilityConverter"/>
     </UserControl.Resources>
     <!--d:DataContext="{d:DesignInstance vm:ScheduleTypeViewModel, IsDesignTimeCreatable=True}"-->
     <!--Для интелисенса-->
@@ -178,7 +179,7 @@
                 
                 <ScrollViewer CanContentScroll="True"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" DockPanel.Dock="Right">
 
-                    <Wpf:PdfViewer Name="pdfDocumentViewer"   Visibility="{Binding CheckModeDeleteVisibility}" Background="White" SizeMode="FitToSize">
+                    <Wpf:PdfViewer Name="pdfDocumentViewer"   Visibility="{Binding BoxesMenuItemsVisibility, Converter={ StaticResource ReverseVisibilityConverter} }" Background="White" SizeMode="FitToSize">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Loaded" >
                                 <i:InvokeCommandAction Command="{Binding  LoadPdfFileCommand}" CommandParameter="{Binding ElementName=pdfDocumentViewer}"/>

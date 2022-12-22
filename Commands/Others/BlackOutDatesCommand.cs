@@ -25,7 +25,7 @@ namespace PIS8_2.Commands.Others
             _viewModel = viewModel;
         }
 
-        public override bool CanExecute(object parameter) => true;
+        public override bool CanExecute(object parameter) => _userStore.CurrentUser.IdOrg!=null;
 
         public override void Execute(object parameter)
         {
