@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -112,6 +112,15 @@ namespace PIS8_2.MVVM.Model.Data
                     .Include(c => c.IdFileNavigation)
                     .Where(c => c.IdOrg == user.IdOrg)
                     .Where(c => c.AccessRoles.ToList().Contains(user.Role));
+
+                if (user.IdOmsu==null)
+                {
+                    cards = cards.Where(c => c.IdOrg == user.IdOrg);
+                }
+                else if(user.IdOrg==null)
+                {
+                    cards = cards.Where(c => c.IdOmsu == user.IdOmsu);
+                }
                 if (filter != null)
                 {
                     cards = cards

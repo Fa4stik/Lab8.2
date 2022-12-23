@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="PIS8_2.MVVM.View.RegistryView"
+<UserControl x:Class="PIS8_2.MVVM.View.RegistryView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -348,6 +348,7 @@
                   AutoGenerateColumns="False"
                   FontSize="14"
                   DockPanel.Dock="Top">
+                  CanUserReorderColumns="False" materialDesign:DataGridAssist.SelectedCellBorderBrush="Transparent">
             <behaviours:Interaction.Triggers>
                 <behaviours:EventTrigger EventName="Sorting">
                     <behaviours:InvokeCommandAction Command="{Binding SortingCommand}" PassEventArgsToCommand="True"/>

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="PIS8_2.MVVM.View.ScheduleTypeView"
+<UserControl x:Class="PIS8_2.MVVM.View.ScheduleTypeView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -16,6 +16,7 @@
     <UserControl.Resources>
         <con:InverseBooleanConverter x:Key="InverseBoolean" />
         <con:ConverterNullFileToString x:Key="ConverterNullFileToString" />
+        <con:ReverseVisibilityConverter x:Key="ReverseVisibilityConverter"/>
     </UserControl.Resources>
     <!--d:DataContext="{d:DesignInstance vm:ScheduleTypeViewModel, IsDesignTimeCreatable=True}"-->
     <!--Для интелисенса-->

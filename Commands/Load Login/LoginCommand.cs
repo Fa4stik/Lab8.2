@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using PIS8_2.Commands.Base;
 using PIS8_2.MVVM.Model.Data;
 using PIS8_2.MVVM.ViewModels;
