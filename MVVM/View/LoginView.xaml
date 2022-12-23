@@ -78,7 +78,7 @@
                     </StackPanel>
                 </StackPanel>
                 <Button  Width="150" Margin="0,10,0,0" Height="30" Content="Войти" FontSize="16"
-                         Command="{Binding LoginCommand}"/>
+                         Command="{Binding LoginCommand}" Cursor="Hand"/>
 
                 <TextBlock Text="{Binding Error}" HorizontalAlignment="Center" Visibility="{Binding VisabilitiError}" d:Visibility="Collapsed"  Margin="0,20,0,0" FontSize="14"  />
             </StackPanel>

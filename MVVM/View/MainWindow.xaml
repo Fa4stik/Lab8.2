@@ -7,11 +7,13 @@
         xmlns:views="clr-namespace:PIS8_2.MVVM.View"
         xmlns:pis82="clr-namespace:PIS8_2"
         xmlns:view="clr-namespace:PIS8_2.MVVM.View"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         MinWidth="900"
         Title="MainWindow" 
         WindowState="Maximized"
-        >
+        Icon="{Icon:MaterialImage Kind=Cat, Brush=CornflowerBlue}"
+>
     <ContentControl Content="{Binding CurrentViewModel}">
         <ContentControl.Resources>
             <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
