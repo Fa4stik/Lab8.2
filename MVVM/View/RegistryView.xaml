@@ -341,13 +341,13 @@
                   HeadersVisibility="Column"
                   CanUserResizeRows="False"
                   CanUserResizeColumns="False"
-                  CanUserReorderColumns="False"
                   CanUserDeleteRows="False"
                   CanUserAddRows="False"
                   SelectionMode="Single"
                   AutoGenerateColumns="False"
                   FontSize="14"
-                  DockPanel.Dock="Top">
+                  DockPanel.Dock="Top" 
+                  CanUserReorderColumns="False" materialDesign:DataGridAssist.SelectedCellBorderBrush="Transparent">
             <behaviours:Interaction.Triggers>
                 <behaviours:EventTrigger EventName="Sorting">
                     <behaviours:InvokeCommandAction Command="{Binding SortingCommand}" PassEventArgsToCommand="True"/>
@@ -357,7 +357,7 @@
                 <DataGridCheckBoxColumn IsReadOnly="False" CanUserReorder="False" CanUserSort="False" Binding="{Binding IsSelectedCard, UpdateSourceTrigger=PropertyChanged}" >
                     <DataGridCheckBoxColumn.HeaderTemplate>
                         <DataTemplate>
-                            <CheckBox FontSize="20" IsChecked="{Binding DataContext.IsAllCheckedItems, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}" />
+                            <CheckBox FontSize="20" IsChecked="{Binding DataContext.IsAllCheckedItems, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"/>
                         </DataTemplate>
                     </DataGridCheckBoxColumn.HeaderTemplate>
                 </DataGridCheckBoxColumn>

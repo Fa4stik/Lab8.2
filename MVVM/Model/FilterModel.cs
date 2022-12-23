@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PIS8_2.Converters;
 using static System.String;
 
 namespace PIS8_2.MVVM.Model
@@ -52,27 +53,54 @@ namespace PIS8_2.MVVM.Model
         /// </summary>
         public void StateFilterToDefaultState()
         {
-            using (var db = new TrappinganimalsContext())
+            try
             {
-                EndNummk = db.Cards.Max(c => c.Nummk);
-                EndNumworkorder = db.Cards.Max(c => c.Numworkorder);
+                using (var db = new TrappinganimalsContext())
+                {
+                    var cards = db.Cards;
+                    EndNummk = cards.Max(c => c.Nummk);
+                    EndNumworkorder = cards.Max(c => c.Numworkorder);
+                    StartNummk = cards.Min(c => c.Nummk);
+                    StartDatemk = cards.Min(c => c.Datemk);
+                    EndDatemk = cards.Max(c => c.Datemk);
+                    StartAdresstrapping = Empty;
+                    StartMunicipName = Empty;
+                    StartOmsuName = Empty;
+                    StartOrgName = Empty;
+                    StartLocality = Empty;
+                    StartNumworkorder = cards.Min(c => c.Numworkorder);
+                    StartDateworkorder = cards.Min(c => c.Dateworkorder);
+                    EndDateworkorder = cards.Max(c => c.Dateworkorder);
+                    StartDatetrapping = cards.Min(c => c.Datetrapping);
+                    EndDatetrapping = cards.Max(c => c.Datetrapping);
+                    StartTargetorder = Empty;
+                    StartTypeOrder = Empty;
+                }
             }
-            StartNummk = 0;
-            StartDatemk=DateTime.Now.AddYears(-3);
-            EndDatemk= DateTime.Now.AddYears(1);
-            StartAdresstrapping = Empty;
-            StartMunicipName = Empty;
-            StartOmsuName = Empty;
-            StartOrgName = Empty;
-            StartLocality= Empty;
-            StartNumworkorder = 0;
-            StartDateworkorder= DateTime.Now.AddYears(-3);
-            EndDateworkorder= DateTime.Now.AddYears(1);
-            StartDatetrapping = DateTime.Now.AddYears(-3);
-            EndDatetrapping= DateTime.Now.AddYears(1);
-            StartTargetorder = Empty;
-            StartTypeOrder= Empty;
-           
+            catch (Exception e)
+            {
+                
+                    EndNummk = int.MaxValue;
+                    EndNumworkorder = int.MaxValue;
+                    StartNummk = 0;
+                    StartDatemk = DateTime.Now.AddYears(-3);
+                    EndDatemk = DateTime.Now.AddYears(1);
+                    StartAdresstrapping = Empty;
+                    StartMunicipName = Empty;
+                    StartOmsuName = Empty;
+                    StartOrgName = Empty;
+                    StartLocality = Empty;
+                    StartNumworkorder = 0;
+                    StartDateworkorder = DateTime.Now.AddYears(-3);
+                    EndDateworkorder = DateTime.Now.AddYears(1);
+                    StartDatetrapping = DateTime.Now.AddYears(-3);
+                    EndDatetrapping = DateTime.Now.AddYears(1);
+                    StartTargetorder = Empty;
+                    StartTypeOrder = Empty;
+                
+            }
+            
+
         }
     }
 }
