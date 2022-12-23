@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using PIS8_2.Commands.Base;
 using PIS8_2.MVVM.Model.Data;
 using PIS8_2.MVVM.ViewModels;
@@ -39,6 +39,7 @@ namespace PIS8_2.Commands.Load
                 var filePath = openFileDialog.FileName;
                 fileName = Path.GetFileName(filePath);
                 var file = System.IO.File.ReadAllBytes(filePath);
+                MessageBox.Show(file.Length.ToString());
                 if (file.Length / (1024 * 1024) > 5)
                 {
                     MessageBox.Show("Размер превышает 5 МБ. Загрузите другой файл");
