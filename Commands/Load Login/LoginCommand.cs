@@ -23,7 +23,7 @@ namespace PIS8_2.Commands
             _conn = new Connection();
         }
 
-        public override bool CanExecute(object parameter) => true;/*_viewModel.Login != null && _viewModel.Password != null && _viewModel.Login != "" && _viewModel.Password != "";*/
+        public override bool CanExecute(object parameter) => string.IsNullOrEmpty(_viewModel.Login)|| string.IsNullOrEmpty(_viewModel.Password);
 
         public override void Execute(object parameter)
         {

@@ -25,7 +25,6 @@ namespace PIS8_2.MVVM.Model.Data
         /// Если введён неверный логин / пароль, то возвращает <param name="null"></param></returns>
         public Tuser ExecuteUser(string login, string password)
         {
-            if (string.IsNullOrEmpty(password)) return null!;
             var hashPassword = HashPassword(password);
             using (var db = new TrappinganimalsContext())
             {
