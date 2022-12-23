@@ -1,4 +1,4 @@
-using System.Windows;
+﻿using System.Windows;
 using PIS8_2.Commands.Base;
 using PIS8_2.MVVM.Model.Data;
 using PIS8_2.MVVM.ViewModels;
@@ -23,12 +23,12 @@ namespace PIS8_2.Commands
             _conn = new Connection();
         }
 
-        public override bool CanExecute(object parameter) => true;/*_viewModel.Login != null && _viewModel.Password != null && _viewModel.Login != "" && _viewModel.Password != "";*/
+        public override bool CanExecute(object parameter) => !string.IsNullOrEmpty(_viewModel.Login)&& !string.IsNullOrEmpty(_viewModel.Password);
 
         public override void Execute(object parameter)
         {
-            //var user = _conn.ExecuteUser(_viewModel.Login, _viewModel.Password);
-            var user= _conn.ExecuteUser("operOtl", "operOtl");
+            var user = _conn.ExecuteUser(_viewModel.Login, _viewModel.Password);
+            //var user= _conn.ExecuteUser("kurVet", "kurVet");
             if (user != null)
             {
                 _userStore.CurrentUser = user;

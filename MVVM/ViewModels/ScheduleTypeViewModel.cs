@@ -1,4 +1,4 @@
-using PIS8_2.Commands;
+﻿using PIS8_2.Commands;
 using PIS8_2.Service;
 using PIS8_2.Stores;
 using System;
@@ -113,7 +113,7 @@ namespace PIS8_2.MVVM.ViewModels
         public bool IsEditEnabled
         {
             get => _isEditEnabled;
-            set => SetField(ref _isEditEnabled, value, nameof(CheckModeDeleteVisibility));
+            set => SetField(ref _isEditEnabled, value, nameof(IsEditEnabled));
         }
 
         public ICommand BackToReestrCommand { get; }
@@ -136,7 +136,7 @@ namespace PIS8_2.MVVM.ViewModels
             
 
             TypeCardVisibility(userStore, selectedCard);
-
+            
 
             IsEditEnabled = (userStore.CurrentUser.Role == Tuser.role_type.operOtl);
 
@@ -181,10 +181,10 @@ namespace PIS8_2.MVVM.ViewModels
             var freeDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
             if (userStore.CurrentUser.IdOrg!=null)
             {
-            while (_conn.GetBlackOutDates(userStore.CurrentUser.IdOrg).Contains(freeDate))
-            {
-                freeDate = freeDate.AddDays(1);
-            }
+                while (_conn.GetBlackOutDates(userStore.CurrentUser.IdOrg).Contains(freeDate))
+                {
+                    freeDate = freeDate.AddDays(1);
+                }
             }
             
 

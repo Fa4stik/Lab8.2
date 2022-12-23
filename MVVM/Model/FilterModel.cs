@@ -1,4 +1,4 @@
-using PIS8_2.MVVM.Model.Data;
+﻿using PIS8_2.MVVM.Model.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,8 +57,8 @@ namespace PIS8_2.MVVM.Model
             {
                 using (var db = new TrappinganimalsContext())
                 {
-                EndNummk = db.Cards.Max(c => c.Nummk);
-                EndNumworkorder = db.Cards.Max(c => c.Numworkorder);
+                    var cards = db.Cards;
+                    EndNummk = cards.Max(c => c.Nummk);
                     EndNumworkorder = cards.Max(c => c.Numworkorder);
                     StartNummk = cards.Min(c => c.Nummk);
                     StartDatemk = cards.Min(c => c.Datemk);
@@ -75,29 +75,29 @@ namespace PIS8_2.MVVM.Model
                     EndDatetrapping = cards.Max(c => c.Datetrapping);
                     StartTargetorder = Empty;
                     StartTypeOrder = Empty;
-            }
+                }
             }
             catch (Exception e)
             {
                 
                     EndNummk = int.MaxValue;
                     EndNumworkorder = int.MaxValue;
-            StartNummk = 0;
-            StartDatemk=DateTime.Now.AddYears(-3);
-            EndDatemk= DateTime.Now.AddYears(1);
-            StartAdresstrapping = Empty;
-            StartMunicipName = Empty;
-            StartOmsuName = Empty;
-            StartOrgName = Empty;
-            StartLocality= Empty;
-            StartNumworkorder = 0;
-            StartDateworkorder= DateTime.Now.AddYears(-3);
-            EndDateworkorder= DateTime.Now.AddYears(1);
-            StartDatetrapping = DateTime.Now.AddYears(-3);
-            EndDatetrapping= DateTime.Now.AddYears(1);
-            StartTargetorder = Empty;
-            StartTypeOrder= Empty;
-           
+                    StartNummk = 0;
+                    StartDatemk = DateTime.Now.AddYears(-3);
+                    EndDatemk = DateTime.Now.AddYears(1);
+                    StartAdresstrapping = Empty;
+                    StartMunicipName = Empty;
+                    StartOmsuName = Empty;
+                    StartOrgName = Empty;
+                    StartLocality = Empty;
+                    StartNumworkorder = 0;
+                    StartDateworkorder = DateTime.Now.AddYears(-3);
+                    EndDateworkorder = DateTime.Now.AddYears(1);
+                    StartDatetrapping = DateTime.Now.AddYears(-3);
+                    EndDatetrapping = DateTime.Now.AddYears(1);
+                    StartTargetorder = Empty;
+                    StartTypeOrder = Empty;
+                
             }
             
 

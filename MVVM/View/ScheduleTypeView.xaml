@@ -1,4 +1,4 @@
-<UserControl x:Class="PIS8_2.MVVM.View.ScheduleTypeView"
+﻿<UserControl x:Class="PIS8_2.MVVM.View.ScheduleTypeView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -179,7 +179,7 @@
                 
                 <ScrollViewer CanContentScroll="True"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" DockPanel.Dock="Right">
 
-                    <Wpf:PdfViewer Name="pdfDocumentViewer"   Visibility="{Binding CheckModeDeleteVisibility}" Background="White" SizeMode="FitToSize">
+                    <Wpf:PdfViewer Name="pdfDocumentViewer"   Visibility="{Binding BoxesMenuItemsVisibility, Converter={ StaticResource ReverseVisibilityConverter} }" Background="White" SizeMode="FitToSize">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Loaded" >
                                 <i:InvokeCommandAction Command="{Binding  LoadPdfFileCommand}" CommandParameter="{Binding ElementName=pdfDocumentViewer}"/>

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,7 +29,7 @@ namespace PIS8_2.MVVM.Model.Data
             using (var db = new TrappinganimalsContext())
             {
                 var user = db.Tusers.Include(c => c.IdOrgNavigation).Include(c=>c.IdOmsuNavigation.IdMunicipNavigation).ToList();
-                return user.FirstOrDefault(u => u.Login == login && u.Passwordhash == hashPassword);
+                return user.FirstOrDefault(u => u.Login == login && u.Passwordhash == hashPassword)!;
             }
         }
 
@@ -101,6 +101,13 @@ namespace PIS8_2.MVVM.Model.Data
             }
         }
 
+        /// <summary>
+        /// Метод сортирует карточки по полученным параметрам
+        /// </summary>
+        /// <param name="user">Текущий пользователь</param>
+        /// <param name="filter">Параметры фильтра</param>
+        /// <param name="sorterParams">Параметры сортировки</param>
+        /// <returns></returns>
         public List<Card> ExecuteCardsWithFilter(Tuser user, FilterModel filter=null,List<Sorter> sorterParams=null)
         {
             using (var db = new TrappinganimalsContext())
@@ -110,7 +117,6 @@ namespace PIS8_2.MVVM.Model.Data
                     .Include(c => c.IdMunicipNavigation)
                     .Include(c => c.IdOmsuNavigation)
                     .Include(c => c.IdFileNavigation)
-                    .Where(c => c.IdOrg == user.IdOrg)
                     .Where(c => c.AccessRoles.ToList().Contains(user.Role));
 
                 if (user.IdOmsu==null)

@@ -1,4 +1,4 @@
-<UserControl x:Class="PIS8_2.MVVM.View.RegistryView"
+﻿<UserControl x:Class="PIS8_2.MVVM.View.RegistryView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -341,13 +341,12 @@
                   HeadersVisibility="Column"
                   CanUserResizeRows="False"
                   CanUserResizeColumns="False"
-                  CanUserReorderColumns="False"
                   CanUserDeleteRows="False"
                   CanUserAddRows="False"
                   SelectionMode="Single"
                   AutoGenerateColumns="False"
                   FontSize="14"
-                  DockPanel.Dock="Top">
+                  DockPanel.Dock="Top" 
                   CanUserReorderColumns="False" materialDesign:DataGridAssist.SelectedCellBorderBrush="Transparent">
             <behaviours:Interaction.Triggers>
                 <behaviours:EventTrigger EventName="Sorting">
@@ -358,7 +357,7 @@
                 <DataGridCheckBoxColumn IsReadOnly="False" CanUserReorder="False" CanUserSort="False" Binding="{Binding IsSelectedCard, UpdateSourceTrigger=PropertyChanged}" >
                     <DataGridCheckBoxColumn.HeaderTemplate>
                         <DataTemplate>
-                            <CheckBox FontSize="20" IsChecked="{Binding DataContext.IsAllCheckedItems, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}" />
+                            <CheckBox FontSize="20" IsChecked="{Binding DataContext.IsAllCheckedItems, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"/>
                         </DataTemplate>
                     </DataGridCheckBoxColumn.HeaderTemplate>
                 </DataGridCheckBoxColumn>
