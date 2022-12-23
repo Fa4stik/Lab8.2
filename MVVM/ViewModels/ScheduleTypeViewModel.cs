@@ -102,6 +102,13 @@ namespace PIS8_2.MVVM.ViewModels
             set => SetField(ref _saveModeVisibility, value, nameof(SaveModeVisibility));
         }
 
+        private Visibility _viewerVisibility;
+        public Visibility ViewerVisibility
+        {
+            get => _viewerVisibility;
+            set => SetField(ref _viewerVisibility, value, nameof(ViewerVisibility));
+        }
+
         private Visibility _checkTypeOrderFromWordExport;
         public Visibility CheckTypeOrderFromWordExport
         {
@@ -221,7 +228,7 @@ namespace PIS8_2.MVVM.ViewModels
                 BoxesMenuItemsVisibility = Visibility.Visible;
                 _card = selectedCard;
             }
-            if (userStore.CurrentUser.IdOrg==null)
+            if (userStore.CurrentUser.Role!=Tuser.role_type.operOtl)
             {
                 BoxesMenuItemsVisibility= Visibility.Collapsed;
                 CheckModeDeleteVisibility = Visibility.Collapsed;
