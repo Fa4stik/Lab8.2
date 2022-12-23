@@ -35,6 +35,7 @@ namespace PIS8_2.Commands
             var file = _conn.GetFile(_scheduleTypeViewModel.Card.IdFile)!;
             if (file == null)
             {
+                _scheduleTypeViewModel.ViewerVisibility = Visibility.Collapsed;
                 return;
             }
             b.LoadDocument(file);
@@ -42,6 +43,7 @@ namespace PIS8_2.Commands
             {
                 return;
             }
+            _scheduleTypeViewModel.ViewerVisibility= Visibility.Visible;
         }
     }
 }

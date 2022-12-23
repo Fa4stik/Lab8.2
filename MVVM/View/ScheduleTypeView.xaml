@@ -179,7 +179,7 @@
                 
                 <ScrollViewer CanContentScroll="True"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" DockPanel.Dock="Right">
 
-                    <Wpf:PdfViewer Name="pdfDocumentViewer"   Visibility="{Binding BoxesMenuItemsVisibility, Converter={ StaticResource ReverseVisibilityConverter} }" Background="White" SizeMode="FitToSize">
+                    <Wpf:PdfViewer Name="pdfDocumentViewer"   Visibility="{Binding ViewerVisibility }" Background="White" SizeMode="FitToSize">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Loaded" >
                                 <i:InvokeCommandAction Command="{Binding  LoadPdfFileCommand}" CommandParameter="{Binding ElementName=pdfDocumentViewer}"/>
