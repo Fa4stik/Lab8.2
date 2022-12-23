@@ -101,6 +101,13 @@ namespace PIS8_2.MVVM.Model.Data
             }
         }
 
+        /// <summary>
+        /// Метод сортирует карточки по полученным параметрам
+        /// </summary>
+        /// <param name="user">Текущий пользователь</param>
+        /// <param name="filter">Параметры фильтра</param>
+        /// <param name="sorterParams">Параметры сортировки</param>
+        /// <returns></returns>
         public List<Card> ExecuteCardsWithFilter(Tuser user, FilterModel filter=null,List<Sorter> sorterParams=null)
         {
             using (var db = new TrappinganimalsContext())
