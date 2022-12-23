@@ -21,10 +21,8 @@ namespace PIS8_2.Commands
             _viewModel = viewModel;
         }
 
-        public override bool CanExecute(object parameter)
-        {
-            return true;
-        }
+        public override bool CanExecute(object parameter) =>
+            _viewModel.Cards.Select(c => c.IsSelectedCard).Any(c => c == true);
 
         public override void Execute(object parameter)
         {
